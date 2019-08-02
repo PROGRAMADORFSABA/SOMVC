@@ -10,11 +10,19 @@ class UsuarioDAO extends BaseDAO
     {
         try {
 
-            $query = $this->select(
-                "SELECT * FROM usuario WHERE email = '$email' "
+            $resultado = $this->select(
+                "SELECT * FROM usuarios WHERE email = '$email' "
             );
 
-            return $query->fetch();
+            $dado = $resultado->fetch();
+
+            if ($dado) {
+
+            $usuario = new Usuario();
+            
+                $usuario->setEmail($dado['email']);
+                return $usuario;
+            }           
         } catch (Exception $e) {
             throw new \Exception("Erro no acesso aos dados.", 500);
         }

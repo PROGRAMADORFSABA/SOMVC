@@ -50,7 +50,7 @@ class UsuarioController extends Controller{
 
         if($usuarioDAO->verificaEmail($_POST['email'])){
             Sessao::gravaMensagem("Email existente");
-            $this->redirect('/usuario/cadastro');
+          //  $this->redirect('/usuario/cadastro');
         }
 
         if($usuarioDAO->salvar($usuario)){

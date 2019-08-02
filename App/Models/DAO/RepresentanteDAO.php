@@ -7,7 +7,7 @@ use App\Models\Entidades\Representante;
 
 class RepresentanteDAO extends BaseDAO
 {
-    public function listarRepresentante($codRepresentante = null)
+    public function listar($codRepresentante = null)
     {
         if($codRepresentante)
         {
@@ -15,13 +15,41 @@ class RepresentanteDAO extends BaseDAO
                 "SELECT * FROM caddRepresentante WHERE codRepresentante = $codRepresentante"
             );
 
-            return $resultado->fetchObject(Representante::class);
-        }else
-        {
+            return $resultado->fetch();
+            if ($dado) {
+
+                $representante = new Representante();
+                
+                $representante->setCodRepresentante($dado['codRepresentante']);
+                $representante->setDataCadastro($dado['dataCadastro']);
+                //date_format($date, 'Y-m-d H:i:s');
+                $representante->setNomeRepresentante($dado['nomeRepresentante']);
+                
+             
+                 return $pedido;
+             }
+        }else {
             $resultado = $this->select(
-                "SELECT * FROM cadRepresentante"
+                "SELECT * FROM cadRepresentante ORDER BY nomeRepresentante"
             );
-            return $resultado->fetchAll(\PDO::FETCH_CLASS. Representante::class);
+            $dados = $resultado->fetchAll();
+            
+            if ($dados) {
+
+                $lista = [];
+
+                foreach ($dados as $dado) {
+                    $representante = new Representante();
+                
+                $representante->setCodRepresentante($dado['codRepresentante']);
+                $representante->setDataCadastro($dado['dataCadastro']);
+                //date_format($date, 'Y-m-d H:i:s');
+                $representante->setNomeRepresentante($dado['nomeRepresentante']);
+                             
+                    $lista[] = $representante;
+                }                
+                return $lista;
+        }
         }
         return false;
     }

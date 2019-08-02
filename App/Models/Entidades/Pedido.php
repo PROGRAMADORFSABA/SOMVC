@@ -4,68 +4,88 @@ namespace App\Models\Entidades;
 
 use DateTime;
 
-class Pedido
-{
-    private $codPedido;
-    private $licitacao;
-    private $pedido;
-    private $valorPedido;
-    private $anexo;
+class Pedido{
+
+    private $codControle;
     private $dataCadastro;
-    private $alteracaoCadastro;
+    private $numeroLicitacao;
+    private $numeroAF;
+    private $valorPedido;
+    private $codStatus;
     private $codCliente;
+    private $anexo;
+    private $observacao;
+    private $codRepresentante;
+    private $fk_instituicao;
+    private $dataFechamento;
+    private $dataAlteracao;
 
-    public function __construct()
+    private $status;
+    private $cliente;
+    private $representante;
+    private $instituicao;
+
+    public function __construct(){
+        $this->cliente = new Cliente();
+        $this->status = new Status();        
+        $this->representante = new Representante();
+        $this->instituicao = new Instituicao();
+    }
+   
+
+    /**
+     * @return mixed
+     */
+    public function getInstituicao()
     {
-        $this->codCliente = new CodCliente();
+        return $this->instituicao;
+    }
+    /**
+     * @return mixed
+     */
+    public function getCodControle()
+    {
+        return $this->codControle;
+    }
+
+    /**
+     * @param mixed $codControle
+     */
+    public function setCodControle($codControle)
+    {
+        $this->codControle = $codControle;
     }
 
     /**
      * @return mixed
      */
-    public function getCodPedido()
+    public function getNumeroLicitacao()
     {
-        return $this->codPedido;
+        return $this->numeroLicitacao;
     }
 
     /**
-     * @param mixed $codPedido
+     * @param mixed $numeroLicitacao
      */
-    public function setCodPedido($codPedido)
+    public function setNumeroLicitacao($numeroLicitacao)
     {
-        $this->codPedido = $codPedido;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLicitacao()
-    {
-        return $this->licitacao;
-    }
-
-    /**
-     * @param mixed $licitacao
-     */
-    public function setLicitacao($licitacao)
-    {
-        $this->licitacao = $licitacao;
+        $this->numeroLicitacao = $numeroLicitacao;
     }
 
     /**
      * @return mixed
      */
-    public function getPedido()
+    public function getNumeroAF()
     {
-        return $this->pedido;
+        return $this->numeroAF;
     }
 
     /**
-     * @param mixed $pedido
+     * @param mixed $numeroAF
      */
-    public function setPedido($pedido)
+    public function setNumeroAF($numeroAF)
     {
-        $this->pedido = $pedido;
+        $this->numeroAF = $numeroAF;
     }
 
     /**
@@ -117,21 +137,168 @@ class Pedido
         $this->dataCadastro = $dataCadastro;
     }
 
+
     /**
-     * @return mixed
-     */
-    public function getAlteracaoCadastro()
+     * Get the value of dataAlteracao
+     */ 
+    public function getDataAlteracao()
     {
-        return $this->alteracaoCadastro;
+        return $this->dataAlteracao;
     }
 
     /**
-     * @param mixed $alteracaoCadastro
-     */
-    public function setAlteracaoCadastro($alteracaoCadastro)
+     * Set the value of dataAlteracao
+     *
+     * @return  self
+     */ 
+    public function setDataAlteracao($dataAlteracao)
     {
-        $this->alteracaoCadastro = $alteracaoCadastro;
+        $this->dataAlteracao = $dataAlteracao;
+
+        return $this;
     }
 
+    /**
+     * Get the value of dataFechamento
+     */ 
+    public function getDataFechamento()
+    {
+        return $this->dataFechamento;
+    }
 
+    /**
+     * Set the value of dataFechamento
+     *
+     * @return  self
+     */ 
+    public function setDataFechamento($dataFechamento)
+    {
+        $this->dataFechamento = $dataFechamento;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codStatus
+     */ 
+    public function getCodStatus()
+    {
+        return $this->codStatus;
+    }
+
+    /**
+     * Set the value of codStatus
+     *
+     * @return  self
+     */ 
+    public function setCodStatus($codStatus)
+    {
+        $this->codStatus = $codStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codRepresentante
+     */ 
+    public function getCodRepresentante()
+    {
+        return $this->codRepresentante;
+    }
+
+    /**
+     * Set the value of codRepresentante
+     *
+     * @return  self
+     */ 
+    public function setCodRepresentante($codRepresentante)
+    {
+        $this->codRepresentante = $codRepresentante;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cliente
+     */ 
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+
+    /**
+     * Get the value of representante
+     */ 
+    public function getRepresentante()
+    {
+        return $this->representante;
+    }
+
+    /**
+     * Get the value of status
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Get the value of codCliente
+     */ 
+    public function getCodCliente()
+    {
+        return $this->codCliente;
+    }
+
+    /**
+     * Set the value of codCliente
+     *
+     * @return  self
+     */ 
+    public function setCodCliente($codCliente)
+    {
+        $this->codCliente = $codCliente;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of observacao
+     */ 
+    public function getObservacao()
+    {
+        return $this->observacao;
+    }
+
+    /**
+     * Set the value of observacao
+     *
+     * @return  self
+     */ 
+    public function setObservacao($observacao)
+    {
+        $this->observacao = $observacao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of fk_instituicao
+     */ 
+    public function getFk_instituicao()
+    {
+        return $this->fk_instituicao;
+    }
+
+    /**
+     * Set the value of fk_instituicao
+     *
+     * @return  self
+     */ 
+    public function setFk_instituicao($fk_instituicao)
+    {
+        $this->fk_instituicao = $fk_instituicao;
+
+        return $this;
+    }
 }

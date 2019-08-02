@@ -14,7 +14,7 @@ class RepresentanteController extends Controller
     {
         $representanteDAO = new RepresentanteDAO();
 
-        self::setViewParam('listarRepresentante,' ,$representanteDAO->listarRepresentante());
+        self::setViewParam('listarRepresentante,' ,$representanteDAO->listar());
 
         $this->render('/representante/index');
 

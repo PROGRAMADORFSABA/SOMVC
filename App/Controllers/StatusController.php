@@ -3,20 +3,20 @@
 namespace App\Controllers;
 
 use App\Lib\Sessao;
-use App\Models\DAO\SlaDAO;
-use App\Models\Entidades\Sla;
-use App\Models\Validacao\SlaValidador;
+use App\Models\DAO\StatusDAO;
+use App\Models\Entidades\Status;
+use App\Models\Validacao\StatusValidador;
 
-class SlaController extends Controller
+class StatusController extends Controller
 {
     public function index()
     {
-        $slaDAO = new SlaDAO();
+        $statusDAO = new StatusDAO();
        
-        self::setViewParam('listaSlas', $slaDAO->listar());
+        self::setViewParam('listaStatus', $statusDAO->listar());
 
 
-        $this->render('/sla/index');
+        $this->render('/status/index');
 
         Sessao::limpaMensagem();
     }
