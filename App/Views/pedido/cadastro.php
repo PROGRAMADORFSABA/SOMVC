@@ -1,7 +1,7 @@
 <!--begin::Portlet-->
 <div class="container">
     <br>
-    <h3>Cadastro de Cliente</h3>
+    <h3>Cadastro de Pedido</h3>
     <?php if ($Sessao::retornaErro()) { ?>
         <div class="alert alert-warning" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

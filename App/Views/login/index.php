@@ -19,7 +19,7 @@
 							<?php } ?>
 							<div class="kt-login__signin">
 								<div class="kt-login__head">
-									<h3 class="kt-login__title">Entrar no Dashbord</h3>
+									<h3 class="kt-login__title">Entrar no sistema</h3>
 								</div>
 								<form class="kt-form" action="http://<?php echo APP_HOST; ?>/login/autenticar" method="post" id="form_cadastro">
 									<div class="input-group">

@@ -16,9 +16,9 @@
                                     Activity
                                 </h3>                                
                                 <label >Codigo</label>                                                             
-                                <input type="text"  class="form-control" name="descricao" id="descricao" placeholder="" value="<?php  echo $_SESSION['andre']; ?>" required>
-                                <label >email</label>                                                             
-                                <input type="text"  class="form-control" name="descricao" id="descricao" placeholder="" value="<?php  echo $_SESSION['email']; ?>" required>
+                                <input type="text"  class="form-control" name="descricao" id="descricao" placeholder="" value="<?php  echo $_SESSION['id']; ?>" required>
+                                <label >Nome</label>                                                             
+                                <input type="text"  class="form-control" name="descricao" id="descricao" placeholder="" value="<?php  echo $_SESSION['nome']; ?>" required>
                                 <label >tempo</label>                                                             
                                 <input type="text"  class="form-control"  placeholder="" value="<?php  echo $_SESSION['limite']; ?>" required>
                                 <label >idInstituicao</label>                                                             

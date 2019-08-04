@@ -43,6 +43,7 @@ class LoginDAO extends BaseDAO
                 $login = new Login();
                 $login->setCodUsuario($dado['id']);
                 $login->setEmailLogin($dado['email']);
+                $login->setNomeLogin($dado['nome']);
                 $login->setPassoword($dado['senha']);
                 $login->setFk_Instituicao($dado['fk_idInstituicao']);
                 

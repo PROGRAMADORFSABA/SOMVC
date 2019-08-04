@@ -17,7 +17,7 @@ abstract class Controller{
 
     public function render($view){              
         session_start();         //A seção deve ser iniciada em todas as páginas
-        if (!isset($_SESSION['andre'])) {                //Verifica se há seções
+        if (!isset($_SESSION['id'])) {                //Verifica se há seções
             
                 session_destroy();                        //Destroi a seção por segurança
                 $this->redirect('/login');   

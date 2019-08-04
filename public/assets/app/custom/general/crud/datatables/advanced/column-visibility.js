@@ -211,7 +211,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 					
 				},
 				{
-					targets:-3,//definindo em qual coluna vai executar esta funcao
+					targets:-2,//definindo em qual coluna vai executar esta funcao
 					render: function(data, type, full, meta) {
 						var status = {
 							11111: {'title': 'Pending', 'class': 'kt-badge--brand'},
@@ -220,7 +220,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 							55555: {'title': 'Info', 'class': ' kt-badge--info'},
 							66666: {'title': 'Negado', 'class': ' kt-badge--danger'},
 							77777: {'title': 'Em Analise', 'class': ' kt-badge--warning'},
-							'ANALISE FINANCEIRO': {'title': 'Analise Financeiro', 'class': ' kt-badge--warning'},
+							'ANALISE FaINANCEIRO': {'title': 'Analise Financeiro', 'class': ' kt-badge--warning'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;
@@ -229,17 +229,19 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 					},
 				},
 				{
-					targets: -2,//definindo em qual coluna vai executar esta funcao
+					targets: -3,//definindo em qual coluna vai executar esta funcao
 					render: function(data, type, full, meta) {
 						var status = {
 							'CANCELADO': {'title': 'CANCELADO', 'state': 'danger'},
 							'NEGADO': {'title': 'NEGADO', 'state': 'danger'},
+							'PENDENTE': {'title': 'PENDENTE', 'state': 'danger'},
 							111111: {'title': 'Desativado', 'state': 'danger'},
 							222222: {'title': 'Retail', 'state': 'primary'},
-							'RECEPICIONADO': {'title': 'RECEPICIONADO', 'state': 'primary'},
+							'RECEPCIONADO': {'title': 'RECEPCIONADO', 'state': 'primary'},
 							333333: {'title': 'Ativo', 'state': 'success'},
 							'ATENDIDO': {'title': 'ATENDIDO', 'state': 'success'},
 							'ANALISE FINANCEIRO': {'title': 'ANALISE FINANCEIRO', 'state': 'warning'},
+							'AUTORIZADO': {'title': 'AUTORIZADO', 'state': 'warning'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;

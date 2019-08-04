@@ -1,7 +1,7 @@
 <!--begin::Portlet-->
 <div class="container">
     <br>
-    <h3>Cadastro de Cliente</h3>
+    <h3>Alteracao de pedido</h3>
     <?php if ($Sessao::retornaErro()) { ?>
         <div class="alert alert-warning" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -15,7 +15,7 @@
         <input type="hidden" class="form-control" name="codControle" id="codControle" value="<?php echo $viewVar['pedido']->getCodControle(); ?>">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
         <div class="kt-portlet__body">
-            <input type="text" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
+            <input type="text" class="form-control" name="dataCadastro" id="dataCadastro" readonly="readonly" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
                 <div class="form-group"><label for="codCliente">Cliente</label>
                     <select class="form-control" name="codCliente" required>
@@ -73,14 +73,15 @@
                     <div class="col-lg-4">
                         <label class="">Anexo:</label>
                         <input type="file" name="anexo" id="anexo" value="<?php echo  $viewVar['pedido']->getAnexo(); ?>">
+                        <input type="text" class="form-control" placeholder="anexoteste" id="anexoteste"  readonly="readonly" name="anexoteste" value="<?php echo $viewVar['pedido']->getAnexo(); ?>">
                         <span class="form-text text-muted">Selecione o arquivo</span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="">Observacao do Pedido:</label>
-                    <textarea class="form-control" rows="3" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao" value="<?php echo $viewVar['pedido']->getObservacao(); ?>"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao"value="<?php echo $viewVar['pedido']->getObservacao(); ?>"></textarea>
                     <span class="form-text text-muted">Digite Observacao do Pedido</span>
-                    <input type="text" class="form-control" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao" value="<?php echo $viewVar['pedido']->getObservacao(); ?>">
+                    <input type="text" class="form-control" placeholder="observacaoteste" id="observacaoteste" name="observacaoteste" value="<?php echo $viewVar['pedido']->getObservacao(); ?>">
 
                 </div>
             </div>

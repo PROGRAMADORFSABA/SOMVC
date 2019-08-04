@@ -19,7 +19,7 @@ class Pedido{
     private $fk_instituicao;
     private $dataFechamento;
     private $dataAlteracao;
-
+    private $somaPedido;
     private $status;
     private $cliente;
     private $representante;
@@ -102,6 +102,17 @@ class Pedido{
     public function setValorPedido($valorPedido)
     {
         $this->valorPedido = $valorPedido;
+    }
+    /**
+     * @param mixed $valorPedido
+     */
+    public function setSomaPedido($somaPedido)
+    {
+        $this->somaPedido = $somaPedido;
+    }
+    public function getSomaPedido()
+    {
+        return $this->somaPedido;
     }
 
     /**
