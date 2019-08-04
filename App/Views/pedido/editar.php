@@ -79,10 +79,8 @@
                 </div>
                 <div class="form-group row">
                     <label class="">Observacao do Pedido:</label>
-                    <textarea class="form-control" rows="3" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao"value="<?php echo $viewVar['pedido']->getObservacao(); ?>"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao" ><?php echo $viewVar['pedido']->getObservacao(); ?></textarea>
                     <span class="form-text text-muted">Digite Observacao do Pedido</span>
-                    <input type="text" class="form-control" placeholder="observacaoteste" id="observacaoteste" name="observacaoteste" value="<?php echo $viewVar['pedido']->getObservacao(); ?>">
-
                 </div>
             </div>
             <div class="kt-portlet__foot">
