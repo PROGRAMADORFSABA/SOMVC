@@ -10,6 +10,12 @@
                 <h3 class="kt-portlet__head-title">
                     Pesquisa de coluna individual
                 </h3>
+                <?php if ($Sessao::retornaMensagem()) { ?>
+                    <div class="alert alert-warning" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <?php echo $Sessao::retornaMensagem(); ?>
+                    </div>
+                <?php } ?>
             </div>
             <div class="kt-portlet__head-toolbar">
                 <div class="kt-portlet__head-wrapper">
@@ -57,9 +63,10 @@
                             </div>
                         </div>
                         &nbsp;
-                        <a href="#" class="btn btn-brand btn-elevate btn-icon-sm">
+                        <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>
                             Novo Cliente
+
                         </a>
                     </div>
                 </div>
@@ -67,51 +74,50 @@
         </div>
         <div class="kt-portlet__body">
             <!--begin: Datatable -->
-            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
+            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_cliente">
                 <thead>
                     <tr>
-                        
-                        <th>Código ID</th>
-                        <th>Nome</th>
-                        <th>Sobre Nome</th>
-                        <th>Tipo</th>
-                        <th>Data Cadastro</th>
-                        <th>Company Name</th>
-                        <th>Teste</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        <th>CÓDIGO</th>
+                        <th>RAZAO SOCIAL</th>
+                        <th>NOME FANTASIA</th>
+                        <th>TROCA DE MARCA</th>
+                        <th>Acoes</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($viewVar['listaClienteLicitacao2'] as $clienteLicitacao) {
+                    foreach ($viewVar['listar'] as $clienteLicitacao) {
                         ?>
                         <tr>
-                            <td><?php echo $clienteLicitacao->getIdCliente(); ?></td>
-                            <td><?php echo $clienteLicitacao->getNome(); ?></td>
+                            <td><?php echo $clienteLicitacao->getCodCliente(); ?></td>
+                            <td><?php echo $clienteLicitacao->getRazaoSocial(); ?></td>
                             <td><?php echo $clienteLicitacao->getNomeFantasia(); ?></td>
-                            <td><?php echo $clienteLicitacao->getTipoCliente()->getNomeTipo(); ?></td>
-                            <td><?php echo $clienteLicitacao->getDataCadastro()->format('d/m/y'); ?></td>
-                            <td>2/12/2018</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td nowrap></td>
-                        <?php
+                            <td><?php echo $clienteLicitacao->getTrocaMarca(); ?></td>
+                            <td>
+                                <span class="dropdown">
+                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
+                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                    </div>
+                                </span>
+                                <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                            </td>
+                            <?php
                         }
                         ?>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Código ID</th>
-                        <th>Nome</th>
-                        <th>Sobre Nome</th>
-                        <th>tipo</th>
-                        <th>Data Cadastro</th>
-                        <th>Company Name</th>
-                        <th>Status</th>
-                        <th>Tipo</th>
-                        <th>Ações</th>
+                        <th>CÓDIGO</th>
+                        <th>RAZAO SOCIAL</th>
+                        <th>NOME FANTASIA</th>
+                        <th>TROCA DE MARCA</th>
+                        <th>Acoes</th>
                     </tr>
                 </tfoot>
             </table>

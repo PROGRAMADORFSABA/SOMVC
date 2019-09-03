@@ -15,7 +15,6 @@ class SlaController extends Controller
        
         self::setViewParam('listaSlas', $slaDAO->listar());
 
-
         $this->render('/sla/index');
 
         Sessao::limpaMensagem();
@@ -62,6 +61,11 @@ class SlaController extends Controller
     public function edicao($params)
     {
         $id = $params[0];
+
+        if (!$id) {
+           Sessao::gravaMensagem("Nenhum Cadastro Selecionado");           
+           $this->redirect('/sla');
+        }
 
         $slaDAO = new SlaDAO();
 

@@ -63,18 +63,22 @@ class StatusController extends Controller
     {
         $id = $params[0];
 
-        $slaDAO = new SlaDAO();
+        if (!$id) {
+            Sessao::gravaMensagem("Nenhum cadastro selcionado");
+            $this->redirect('/status');
+        }
+        $statusDAO = new statusDAO();
 
-        $sla = $slaDAO->listar($id);
+        $status = $statusDAO->listar($id);
 
-        if (!$sla) {
-            Sessao::gravaMensagem("Sla inexistente");
-            $this->redirect('/sla');
+        if (!$status) {
+            Sessao::gravaMensagem("status inexistente");
+            $this->redirect('/status');
         }
 
-        self::setViewParam('Sla', $sla);
+        self::setViewParam('status', $status);
 
-        $this->render('/sla/editar');
+        $this->render('/status/editar');
 
         Sessao::limpaMensagem();
     }
@@ -82,68 +86,71 @@ class StatusController extends Controller
     public function atualizar()
     {
 
-        $sla = new Sla();
-        $sla->setId($_POST['id']);
-        $sla->setDescricao($_POST['descricao']);
-        $sla->setTempo($_POST['tempo']);
-        $sla->setUniTempo($_POST['uniTempo']);
-        $sla->setFk_Instituicao($_POST['fk_instituicao']);
+        $status = new status();
+        $status->setId($_POST['id']);
+        $status->setDescricao($_POST['descricao']);
+        $status->setTempo($_POST['tempo']);
+        $status->setUniTempo($_POST['uniTempo']);
+        $status->setFk_Instituicao($_POST['fk_instituicao']);
 
         Sessao::gravaFormulario($_POST);
 
-        $slaValidador = new SlaValidador();
-        $resultadoValidacao = $slaValidador->validar($sla);
+        $statusValidador = new statusValidador();
+        $resultadoValidacao = $statusValidador->validar($status);
 
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/Sla/edicao/' . $_POST['id']);
+            $this->redirect('/status/edicao/' . $_POST['id']);
         }
 
-        $slaDAO = new SlaDAO();
+        $statusDAO = new statusDAO();
 
-        $slaDAO->atualizar($sla);
+        $statusDAO->atualizar($status);
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/sla');
+        $this->redirect('/status');
     }
 
     public function exclusao($params)
     {
         $id = $params[0];
+        if (!$id) {
+            Sessao::gravaMensagem("Nenhum cadastro selcionado");
+            $this->redirect('/status');
+        }
+        $statusDAO = new statusDAO();
 
-        $slaDAO = new SlaDAO();
+        $status = $statusDAO->listar($id);
 
-        $sla = $slaDAO->listar($id);
-
-        if (!$sla) {
-            Sessao::gravaMensagem("Sla inexistente");
-            $this->redirect('/sla');
+        if (!$status) {
+            Sessao::gravaMensagem("status inexistente");
+            $this->redirect('/status');
         }
 
-        self::setViewParam('Sla', $sla);
+        self::setViewParam('status', $status);
 
-        $this->render('/sla/exclusao');
+        $this->render('/status/exclusao');
 
         Sessao::limpaMensagem();
     }
 
     public function excluir()
     {
-        $sla = new Sla();
-        $sla->setId($_POST['id']);
+        $status = new Status();
+        $status->setId($_POST['id']);
 
-        $slaDAO = new SlaDAO();
+        $statusDAO = new StatusDAO();
 
-        if (!$slaDAO->excluir($sla)) {
-            Sessao::gravaMensagem("Sla inexistente");
-            $this->redirect('/sla');
+        if (!$statusDAO->excluir($status)) {
+            Sessao::gravaMensagem("status inexistente");
+            $this->redirect('/status');
         }
 
-        Sessao::gravaMensagem("Sla excluido com sucesso!");
+        Sessao::gravaMensagem("status excluido com sucesso!");
 
-        $this->redirect('/sla');
+        $this->redirect('/status');
     }
 }

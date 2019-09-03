@@ -4,10 +4,62 @@
     
     
     use App\Models\Entidades\ClienteLicitacao;
+
     use League\Flysystem\Exception;
 
     class ClienteLicitacaoDAO extends  BaseDAO
     {
+
+        public  function listar($codCliente = null)
+        {
+            
+            if ($codCliente) {
+                $resultado = $this->select(
+                    "SELECT * FROM clienteLicitacao WHERE licitacaoCliente_cod = $codCliente"
+                );
+                $dado = $resultado->fetch();
+    
+                if ($dado) {
+                    $clienteLicitacao = new ClienteLicitacao();
+                    $clienteLicitacao->setCodCliente($dado['licitacaoCliente_cod']);
+                    $clienteLicitacao->setRazaoSocial($dado['razaosocial']);
+                    $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
+                    $clienteLicitacao->setCnpj($dado['CNPJ']);
+                    $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                    // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);
+    
+                    return $clienteLicitacao;
+                }
+            } else {
+    
+                $resultado = $this->select(
+                    ' SELECT * FROM clienteLicitacao '
+                );
+                $dados = $resultado->fetchAll();
+    
+                if ($dados) {
+    
+                    $lista = [];
+    
+                    foreach ($dados as $dado) {
+    
+                        $clienteLicitacao = new ClienteLicitacao();
+                        $clienteLicitacao->setCodCliente($dado['licitacaoCliente_cod']);
+                        $clienteLicitacao->setRazaoSocial($dado['razaosocial']);
+                        $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
+                        $clienteLicitacao->setCnpj($dado['CNPJ']);
+                        $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                       // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);
+    
+                        $lista[] = $clienteLicitacao;
+                    }
+                    return $lista;
+                }
+            }
+            return false;
+        }
+
+
         public  function listaClienteLicitacao2() {
             $resultado = $this->select(
                 'SELECT * FROM cliente c INNER JOIN tipoCliente tp ON tp.codTipoCliente = c.idTipoCliente'

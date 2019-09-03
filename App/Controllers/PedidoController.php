@@ -8,7 +8,6 @@ use App\Models\DAO\StatusDAO;
 use App\Models\DAO\ClienteDAO;
 use App\Models\DAO\RepresentanteDAO;
 use App\Models\Entidades\Pedido;
-use App\Models\Validacao\ProdutoValidador;
 use App\Models\Validacao\PedidoValidador;
 
 class PedidoController extends Controller
@@ -18,18 +17,20 @@ class PedidoController extends Controller
     {
 
         $pedidoDAO = new PedidoDAO();
-
+        
         self::setViewParam('listaPedido', $pedidoDAO->listar());
-
+        self::setViewParam('listaPedidos', $pedidoDAO->listarTeste());
+        
         $this->render('/pedido/index');
 
         Sessao::limpaMensagem();
     }
-    public function teste()
+    public function pesquisa()
     {
 
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
+
         $clienteDAO = new ClienteDAO();
         self::setViewParam('listaClientes', $clienteDAO->listar());
         $representanteDAO = new RepresentanteDAO();
@@ -41,15 +42,15 @@ class PedidoController extends Controller
         $pedido->setNumeroLicitacao($_POST['numeroLicitacao']);
         $pedido->setCodControle($_POST['codControle']);
         $pedido->setCodCliente($_POST['codCliente']);
-    
+
         $pedidoDAO = new PedidoDAO();
 
-          self::setViewParam('listaPedido', $pedidoDAO->listarTeste1($pedido));
-          if($pedidoDAO->listarTeste1($pedido) == false){
+        self::setViewParam('listaPedido', $pedidoDAO->listarTeste1($pedido));
+        if ($pedidoDAO->listarTeste1($pedido) == false) {
             Sessao::gravaMensagem("Nenhum Cadastro Localizado!");
-          }
-          $this->render('/pedido/teste');
-       
+        }
+        $this->render('/pedido/teste');
+
         Sessao::limpaMensagem();
         Sessao::limpaFormulario();
     }

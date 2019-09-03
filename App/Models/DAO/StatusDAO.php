@@ -52,17 +52,17 @@ class StatusDAO extends BaseDAO
    
 
 
-    public  function salvar(Sla $sla)
+    public  function salvar(status $status)
     {
         try {
 
-            $tempo          =$sla->getTempo();
-            $descricao      =$sla->getDescricao();
-            $fk_instituicao =$sla->getFk_Instituicao();
-            $uniTempo       =$sla->getUniTempo();
+            $tempo          =$status->getTempo();
+            $descricao      =$status->getDescricao();
+            $fk_instituicao =$status->getFk_Instituicao();
+            $uniTempo       =$status->getUniTempo();
 
             return $this->insert(
-                'tbl_sla',
+                'tbl_status',
                 ":descricao,:unitempo,:tempo",
                 [
                     ':descricao' => $descricao,
@@ -76,17 +76,17 @@ class StatusDAO extends BaseDAO
         }
     }
 
-    public  function atualizar(Sla $sla){
+    public  function atualizar(status $status){
         try {
 
-            $id             =$sla->getId();
-            $tempo          =$sla->getTempo();
-            $descricao      =$sla->getDescricao();
-            $fk_instituicao  =$sla->getFk_Instituicao();
-            $uniTempo        =$sla->getUniTempo();
+            $id             =$status->getId();
+            $tempo          =$status->getTempo();
+            $descricao      =$status->getDescricao();
+            $fk_instituicao  =$status->getFk_Instituicao();
+            $uniTempo        =$status->getUniTempo();
 
             return $this->update(
-                'tbl_sla',
+                'tbl_status',
                 "descricao = :descricao, fk_idInstituicao = :fk_instituicao, tempo = :tempo, unitempo = :uniTempo",
                 [
                     ':id' => $id,
@@ -102,12 +102,12 @@ class StatusDAO extends BaseDAO
         }
     }
 
-    public function excluir(Sla $sla)
+    public function excluir(status $status)
     {
         try {
-            $id =$sla->getId();
+            $id =$status->getId();
 
-            return $this->delete('tbl_sla', "id = $id");
+            return $this->delete('tbl_status', "id = $id");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);

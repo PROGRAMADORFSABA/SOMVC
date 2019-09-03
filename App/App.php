@@ -18,7 +18,8 @@ class App
         /*
          * Constantes do sistema
          */
-
+        //banco local
+          /*    
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
@@ -27,6 +28,18 @@ class App
         define('DB_PASSWORD'    , "root");
         define('DB_NAME'        , "u325780549_fab_dev");
         define('DB_DRIVER'      , "mysql");
+        */
+        //banco hospedagem
+        
+        define('APP_HOST'       , $_SERVER['HTTP_HOST']."/SOMVC");
+        define('PATH'           , realpath('./'));
+        define('TITLE'          , "Aplicação Administrativa ");
+        define('DB_HOST'        , "mysql380.umbler.com:41890");
+        define('DB_USER'        , "fabmed");
+        define('DB_PASSWORD'    , "Bruna2012*");
+        define('DB_NAME'        , "fabmed");
+        define('DB_DRIVER'      , "mysql");
+    
 
         $this->url();
     }

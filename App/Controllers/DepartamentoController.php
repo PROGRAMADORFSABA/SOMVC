@@ -64,6 +64,10 @@ class DepartamentoController extends Controller
     public function edicao($params)
     {
         $id = $params[0];
+        if (!$id) {
+            Sessao::gravaMensagem("Nenhum cadastro selcionado");
+            $this->redirect('/departamento');
+        }
 
         $departamentoDAO = new DepartamentoDAO();
     
@@ -116,7 +120,10 @@ class DepartamentoController extends Controller
     public function exclusao($params)
     {
         $id = $params[0];
-
+        if (!$id) {
+            Sessao::gravaMensagem("Nenhum cadastro selcionado");
+            $this->redirect('/departamento');
+        }
         $departamentoDAO = new DepartamentoDAO();
 
         $departamento = $departamentoDAO->listar($id);

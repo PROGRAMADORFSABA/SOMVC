@@ -8,9 +8,11 @@ use DateTime;
 class ClienteLicitacao
 {
 
-    private $idCliente;
-    private $nome;
+    private $codCliente;
+    private $razaoSocial;
     private $nomeFantasia;
+    private $cnpj;
+    private $trocaMarca;
     private $dataCadastro;
     private $tipoCliente;
     private $idTipoCliente;
@@ -32,17 +34,17 @@ class ClienteLicitacao
     /**
      * @return mixed
      */
-    public function getIdCliente()
+    public function getCodCliente()
     {
-        return $this->idCliente;
+        return $this->codCliente;
     }
 
     /**
-     * @param mixed $idCliente
+     * @param mixed $codCliente
      */
-    public function setIdCliente($idCliente)
+    public function setCodCliente($codCliente)
     {
-        $this->idCliente = $idCliente;
+        $this->codCliente = $codCliente;
     }
     
     public function  getTipoCliente_cod()
@@ -68,17 +70,17 @@ class ClienteLicitacao
     /**
      * @return mixed
      */
-    public function getNome()
+    public function getTrocaMarca()
     {
-        return $this->nome;
+        return $this->trocaMarca;
     }
 
     /**
-     * @param mixed $nome
+     * @param mixed $trocaMarca
      */
-    public function setNome($nome)
+    public function setTrocaMarca($trocaMarca)
     {
-        $this->nome = $nome;
+        $this->trocaMarca = $trocaMarca;
     }
 
     /**
@@ -114,8 +116,43 @@ class ClienteLicitacao
         $this->dataCadastro = $dataCadastro;
     }
     
-   
-    
-    
-    
+    /**
+     * Get the value of razaoSocial
+     */ 
+    public function getRazaoSocial()
+    {
+        return $this->razaoSocial;
+    }
+
+    /**
+     * Set the value of razaoSocial
+     *
+     * @return  self
+     */ 
+    public function setRazaoSocial($razaoSocial)
+    {
+        $this->razaoSocial = $razaoSocial;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cnpj
+     */ 
+    public function getCnpj()
+    {
+        return $this->cnpj;
+    }
+
+    /**
+     * Set the value of cnpj
+     *
+     * @return  self
+     */ 
+    public function setCnpj($cnpj)
+    {
+        $this->cnpj = $cnpj;
+
+        return $this;
+    }
 }

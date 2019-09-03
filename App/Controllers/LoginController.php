@@ -9,8 +9,7 @@ use App\Models\Entidades\Login;
 class LoginController extends Controller
 {
     public function index()
-    {
-        
+    {       
 
         $this->renderLogin('/login/index');
     }

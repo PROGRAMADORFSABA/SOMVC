@@ -1,6 +1,20 @@
 <!-- begin:: Content -->
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-
+	<?php
+	$print = array();
+	$pedido1 = $viewVar['listaPedidos'];
+	foreach ($pedido1 as $pedido2) {
+		//echo $pedido->getCodControle();
+		//	$print = json_encode($pedido->getCliente()->getNomeCliente());
+		$print[] = $pedido2;
+	}
+//	print json_encode($print);
+	$print1 = json_encode($print);
+	//var_dump($pedido2);
+	?>
+	<div class="chart-container">
+		<canvas id="line-chartcanvas"></canvas>
+	</div>
 	<div class="kt-portlet kt-portlet--mobile">
 		<div class="kt-portlet__head kt-portlet__head--lg">
 			<div class="kt-portlet__head-label">
@@ -11,10 +25,10 @@
 					Pesquisa de coluna individual
 				</h3>
 				<?php if ($Sessao::retornaMensagem()) { ?>
-					<div class="alert alert-warning" role="alert">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<?php echo $Sessao::retornaMensagem(); ?>
-					</div>
+				<div class="alert alert-warning" role="alert">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<?php echo $Sessao::retornaMensagem(); ?>
+				</div>
 				<?php } ?>
 			</div>
 			<div class="kt-portlet__head-toolbar">
@@ -62,6 +76,7 @@
 								</ul>
 							</div>
 						</div>
+
 						&nbsp;
 						<a href="http://<?php echo APP_HOST; ?>/pedido/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
 							<i class="la la-plus"></i>Novo pedido</a>
@@ -106,29 +121,34 @@
 				<tbody>
 					<?php
 					foreach ($viewVar['listaPedido'] as $pedido) {
+
+						//$print = json_encode($pedido);
+						//var_dump($pedido);
+						//	echo "teste = ".$print	;
+
 						?>
-						<tr>
-							<td><?php echo $pedido->getCodControle(); ?></td>
-							<td><?php echo $pedido->getCliente()->getNomeCliente(); ?></td>
-							<td><?php echo $pedido->getCliente()->getTipoCliente(); ?></td>
-							<td>R$<?php echo $pedido->getValorPedido(); ?></td>
-							<td><?php echo $pedido->getNumeroAf(); ?></td>
-							<td><?php echo $pedido->getNumeroLicitacao(); ?></td>
-							<td><?php echo $pedido->getStatus()->getNome(); ?></td>
-							<td><?php echo $pedido->getDataCadastro()->format('d/m/Y h:m:s'); ?></td>
-							<td>
-								<span class="dropdown">
-									<a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" title="click aqui para exibir as acoes" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
-									<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Alterar pedido" class="btn btn-info btn-sm"><i class="la la-edit"></i> Alterar</a>
-										<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/exclusao/<?php echo $pedido->getCodControle(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
-										<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle();?>" title="Alterar Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-										<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
-										<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/public/assets/media/anexos/<?php echo $pedido->getAnexo(); ?>"  target="_blank" title="Visualizar Anexo" class="btn btn-info btn-sm"><i class="la la-chain"></i> Anexo</a>
-									</div>
-								</span>
-								<a href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-							</td>
+					<tr>
+						<td><?php echo $pedido->getCodControle(); ?></td>
+						<td><?php echo $pedido->getCliente()->getNomeCliente(); ?></td>
+						<td><?php echo $pedido->getCliente()->getTipoCliente(); ?></td>
+						<td>R$<?php echo $pedido->getValorPedido(); ?></td>
+						<td><?php echo $pedido->getNumeroAf(); ?></td>
+						<td><?php echo $pedido->getNumeroLicitacao(); ?></td>
+						<td><?php echo $pedido->getStatus()->getNome(); ?></td>
+						<td><?php echo $pedido->getDataCadastro()->format('d/m/Y h:m:s'); ?></td>
+						<td>
+							<span class="dropdown">
+								<a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" title="click aqui para exibir as acoes" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Alterar pedido" class="btn btn-info btn-sm"><i class="la la-edit"></i> Alterar</a>
+									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/exclusao/<?php echo $pedido->getCodControle(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
+									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Alterar Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/public/assets/media/anexos/<?php echo $pedido->getAnexo(); ?>" target="_blank" title="Visualizar Anexo" class="btn btn-info btn-sm"><i class="la la-chain"></i> Anexo</a>
+								</div>
+							</span>
+							<a href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+						</td>
 
 						<?php
 						}

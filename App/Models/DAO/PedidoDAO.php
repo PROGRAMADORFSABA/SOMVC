@@ -10,9 +10,7 @@ class PedidoDAO extends BaseDAO
 
     public function listarTeste($codControle = null)
     {
-
-        //  $codControle    = $pedido->getCodControle();
-
+       //  $codControle    = $pedido->getCodControle();
 
         if ($codControle) {
             $resultado = $this->select(
@@ -21,8 +19,8 @@ class PedidoDAO extends BaseDAO
                 ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
                 ,i.inst_id,i.inst_nome,s.codStatus,s.nome
                 FROM controlePedido AS con 
-                 INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-                 INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+                 INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+                 INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                  INNER JOIN cliente AS c on c.codCliente = con.codCliente
                  INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
                  WHERE con.codControle = $codControle "
@@ -61,6 +59,8 @@ class PedidoDAO extends BaseDAO
                     $lista[] = $pedido;
                 }
                 return $lista;
+                print json_encode($lista);
+                var_dump($lista);
             }
         } else {
             $resultado = $this->select(
@@ -69,8 +69,8 @@ class PedidoDAO extends BaseDAO
                ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
                ,i.inst_nome
                FROM controlePedido AS con 
-				INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-                INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+				INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+                INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
                 INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
                 ORDER BY c.nomeCliente ASC"
@@ -163,21 +163,21 @@ class PedidoDAO extends BaseDAO
             ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
             ,i.inst_id,i.inst_nome,s.codStatus,s.nome
             FROM controlePedido AS con 
-             INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-             INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+             INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+             INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
              INNER JOIN cliente AS c on c.codCliente = con.codCliente
              INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao $WHERE ";
 
         $resultado = $this->select(
             $sql
         );
-        
+
         $dados = $resultado->fetchAll();
 
         if ($dados) {
 
             $lista = [];
-//$soma = 0;
+            //$soma = 0;
             foreach ($dados as $dado) {
 
                 $pedido = new Pedido();
@@ -205,11 +205,10 @@ class PedidoDAO extends BaseDAO
                 $pedido->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
                 $pedido->getRepresentante()->setStatusRepresentante($dado['statusRepresentante']);
                 $pedido->getInstituicao()->setInst_Nome($dado['inst_nome']);
-                
+
                 $lista[] = $pedido;
-               
             }
-            
+
             return $lista;
         }
         return false;
@@ -225,8 +224,8 @@ class PedidoDAO extends BaseDAO
                 ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
                 ,i.inst_id,i.inst_nome,s.codStatus,s.nome
                 FROM controlePedido AS con 
-                 INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-                 INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+                 INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+                 INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                  INNER JOIN cliente AS c on c.codCliente = con.codCliente
                  INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
                  WHERE con.codControle = $codControle "
@@ -270,8 +269,8 @@ class PedidoDAO extends BaseDAO
                ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
                ,i.inst_nome
                FROM controlePedido AS con 
-				INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-                INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+				INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+                INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
                 INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
                 ORDER BY c.nomeCliente ASC"
@@ -321,8 +320,8 @@ class PedidoDAO extends BaseDAO
             $resultado = $this->select(
                 "SELECT con.codControle,CON.dataFechamento,con.dataCadastro,con.dataAlteracao,con.valorPedido,s.nome,c.tipoCliente,c.nomeCliente,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
                 FROM controlePedido AS con 
-                 INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-                 INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+                 INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+                 INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                  INNER JOIN cliente AS c on c.codCliente = con.codCliente
                  INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
                  WHERE con.codControle = $codControle "
@@ -361,8 +360,8 @@ class PedidoDAO extends BaseDAO
                ,r.nomeRepresentante,r.statusRepresentante
                ,i.inst_nome
                FROM controlePedido AS con 
-				INNER JOIN statuspedido AS s on s.codStatus = con.codStatus
-                INNER JOIN cadrepresentante AS r on r.codRepresentante = con.codRepresentante
+				INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+                INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
                 INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
                 WHERE s.nome in  ('ATENDIDO')
@@ -441,7 +440,7 @@ class PedidoDAO extends BaseDAO
                 //  echo " teste 02 ".$anexo;
                 $anexo = "sem_anexo.php";
             }
-    
+
 
             return $this->insert(
                 'controlePedido',

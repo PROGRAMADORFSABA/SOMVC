@@ -15,15 +15,7 @@
                                 <h3 class="kt-portlet__head-title">
                                     Activity
                                 </h3>                                
-                                <label >Codigo</label>                                                             
-                                <input type="text"  class="form-control" name="descricao" id="descricao" placeholder="" value="<?php  echo $_SESSION['id']; ?>" required>
-                                <label >Nome</label>                                                             
-                                <input type="text"  class="form-control" name="descricao" id="descricao" placeholder="" value="<?php  echo $_SESSION['nome']; ?>" required>
-                                <label >tempo</label>                                                             
-                                <input type="text"  class="form-control"  placeholder="" value="<?php  echo $_SESSION['limite']; ?>" required>
-                                <label >idInstituicao</label>                                                             
-                                <input type="text"  class="form-control"  placeholder="" value="<?php  echo $_SESSION['idInstituicao']; ?>" required>
-                                <a href="http://<?php echo APP_HOST; ?>/login" class="btn btn-info btn-sm">sair</a>
+                               
                             </div>
                             <div class="kt-portlet__head-toolbar">
                                 <a href="#" class="btn btn-label-light btn-sm btn-bold dropdown-toggle" data-toggle="dropdown">
@@ -2661,7 +2653,7 @@
 																Deb Gibson
 															</a><br>
                                             <span class="kt-widget3__time">
-																3 weeks ago
+																3333 weeks ago
 															</span>
                                         </div>
                                         <span class="kt-widget3__status kt-font-success">
@@ -2670,7 +2662,7 @@
                                     </div>
                                     <div class="kt-widget3__body">
                                         <p class="kt-widget3__text">
-                                            Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.
+                                        aaaaa    Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.
                                         </p>
                                     </div>
                                 </div>
@@ -2686,6 +2678,6 @@
 
             <!--End::Dashboard 1-->
         </div>
-
         <!-- end:: Content -->
     </div>
+    

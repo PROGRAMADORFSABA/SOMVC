@@ -12,7 +12,7 @@ class RepresentanteDAO extends BaseDAO
         if($codRepresentante)
         {
             $resultado = $this->select(
-                "SELECT * FROM caddRepresentante WHERE codRepresentante = $codRepresentante"
+                "SELECT * FROM cadRepresentante WHERE codRepresentante = $codRepresentante"
             );
 
             return $resultado->fetch();

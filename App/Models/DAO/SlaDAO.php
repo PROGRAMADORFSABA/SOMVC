@@ -52,8 +52,6 @@ class SlaDAO extends BaseDAO
 
         return false;
     }
-   
-
 
     public  function salvar(Sla $sla)
     {

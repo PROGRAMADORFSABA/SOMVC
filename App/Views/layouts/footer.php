@@ -416,9 +416,12 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
 
 		<!-- end::Quick Panel -->
+		
+		
 
 		<!-- begin::Scrolltop -->
 		<div id="kt_scrolltop" class="kt-scrolltop">

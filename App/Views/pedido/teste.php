@@ -1,27 +1,26 @@
 <!-- begin:: Content -->
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-<?php if ($Sessao::retornaMensagem()) { ?>
-                    <div class="alert alert-warning" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <?php echo $Sessao::retornaMensagem(); ?>
-                    </div>
-                <?php } ?>
+    <?php if ($Sessao::retornaMensagem()) { ?>
+        <div class="alert alert-warning" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <?php echo $Sessao::retornaMensagem(); ?>
+        </div>
+    <?php } ?>
     <div class="kt-portlet kt-portlet--mobile">
-        <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/teste" method="post" id="form_cadastro" enctype="multipart/form-data">
+        <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/pesquisa" method="post" id="form_cadastro" enctype="multipart/form-data">
             <h3 class="kt-portlet__head-title">
-                    Pesquisa de pedidos registrados
-                </h3>
-                <div class="form-group"><label for="codCliente">Cliente</label>
-                    <select class="form-control" name="codCliente">
-                        <option value="">Selecione o cliente</option>
-                        <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                            <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                                <?php echo $cliente->getNomeCliente(); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    
-                </div>
-             <div class="kt-portlet__body">
+                Pesquisa de pedidos registrados
+            </h3>
+            <div class="form-group"><label for="codCliente">Cliente</label>
+                <select class="form-control" name="codCliente">
+                    <option value="">Selecione o cliente</option>
+                    <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
+                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
+                            <?php echo $cliente->getNomeCliente(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="kt-portlet__body">
                 <div class="form-group row">
                     <div class="col-lg-1">
                         <label>Pedido:</label>
@@ -147,15 +146,17 @@
                     </tr>
                 </tfoot>
                 <tbody>
+			
                     <?php
                     $pedido1 = $viewVar['listaPedido'];
+                   
                     $andre = $pedido1 > 0;
-                    $soma = 0;  
+                    $soma = 0;
                     if ($pedido1 > 0) {
                         foreach ($pedido1 as $pedido) {
                             $soma = $pedido->getSomaPedido();
                             $total += $soma;
-                            $qtdePedido +=1;
+                            $qtdePedido += 1;
                             ?>
                             <tr>
                                 <td><?php echo $pedido->getCodControle(); ?></td>
@@ -181,8 +182,8 @@
                                 </td>
                             <?php
                             }
-                        }else {
-                            
+                        } else {
+
                             echo "<h3 class='kt-portlet__head-title'><p class='text-danger'>Sem Pedidos encontrados!</p></h3>";
                         }
                         ?>
@@ -192,9 +193,9 @@
             <!--end: Datatable -->
         </div>
     </div>
-                <?php 
-                 echo "<h3 class='kt-portlet__head-title'><p class='text-info'>Qtde. de Pedidos ". $qtdePedido ." e Valor Total R$". number_format($total, 2, ',', '.')."</p></h3>";
-                ?>
+    <?php
+    echo "<h3 class='kt-portlet__head-title'><p class='text-info'>Qtde. de Pedidos " . $qtdePedido . " e Valor Total R$" . number_format($total, 2, ',', '.') . "</p></h3>";
+    ?>
 </div>
 <!-- end:: Content -->
 </div>
