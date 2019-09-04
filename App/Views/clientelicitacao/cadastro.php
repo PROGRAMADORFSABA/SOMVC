@@ -1,7 +1,7 @@
 <!--begin::Portlet-->
 <div class="container">
     <br>
-    <h3>Cadastro de Cliente Licitacao</h3>
+    <center><h3>Cadastro de Cliente Licitacao</h3></center>
     <?php if ($Sessao::retornaErro()) { ?>
     <div class="alert alert-warning" role="alert">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -37,12 +37,12 @@
                         <label class="">Troca de Marca:</label>
                         <div class="kt-radio-inline">
                             <label class="kt-radio kt-radio--solid">
-                                <input type="radio" name="trocaMarca" value="1"> Sim
+                                <input type="radio" name="trocaMarca" value="true"> Sim
                                 <span></span>
                             </label>
                         </div>
                         <label class="kt-radio kt-radio--solid">
-                            <input type="radio" name="trocaMarca" value="2"> Nao
+                            <input type="radio" name="trocaMarca" value="false"> Nao
                             <span></span>
                         </label>
                         <span class="form-text text-muted">O Cliente Aceita Troca de Marca</span>
