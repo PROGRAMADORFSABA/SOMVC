@@ -11,10 +11,10 @@
                     Pesquisa de coluna individual
                 </h3>
                 <?php if ($Sessao::retornaMensagem()) { ?>
-                    <div class="alert alert-warning" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <?php echo $Sessao::retornaMensagem(); ?>
-                    </div>
+                <div class="alert alert-warning" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo $Sessao::retornaMensagem(); ?>
+                </div>
                 <?php } ?>
             </div>
             <div class="kt-portlet__head-toolbar">
@@ -74,7 +74,7 @@
         </div>
         <div class="kt-portlet__body">
             <!--begin: Datatable -->
-            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_cliente">
+            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_3">
                 <thead>
                     <tr>
                         <th>CÓDIGO</th>
@@ -87,26 +87,32 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($viewVar['listar'] as $clienteLicitacao) {
-                        ?>
-                        <tr>
-                            <td><?php echo $clienteLicitacao->getCodCliente(); ?></td>
-                            <td><?php echo $clienteLicitacao->getRazaoSocial(); ?></td>
-                            <td><?php echo $clienteLicitacao->getNomeFantasia(); ?></td>
-                            <td><?php echo $clienteLicitacao->getTrocaMarca(); ?></td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
-                                    </div>
-                                </span>
-                                <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                            </td>
-                            <?php
+                    $clienteLicitacao1 = $viewVar['listar'];
+                    if ($clienteLicitacao1 > 0) {
+                        foreach ($clienteLicitacao1 as $clienteLicitacao) {
+                            ?>
+                    <tr>
+                        <td><?php echo $clienteLicitacao->getCodCliente(); ?></td>
+                        <td><?php echo $clienteLicitacao->getRazaoSocial(); ?></td>
+                        <td><?php echo $clienteLicitacao->getNomeFantasia(); ?></td>
+                        <td><?php echo $clienteLicitacao->getTrocaMarca(); ?></td>
+                        <td>
+                            <span class="dropdown">
+                                <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                </div>
+                            </span>
+                            <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                        </td>
+                        <?php
+                            }
+                        }else {
+
+                            echo "<h3 class='kt-portlet__head-title'><p class='text-danger'>Nenhum Dado Encontrado!</p></h3>";
                         }
                         ?>
                     </tr>
