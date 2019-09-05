@@ -116,4 +116,12 @@ class ClienteDAO extends BaseDAO
             throw new \Exception("Erro ao Deletar cliente", 500);
         }
     }
+    
+    public function listarPorNomeFantasia(Cliente $cliente)
+    {
+        $resultado = $this->select(
+            "SELECT * FROM cliente WHERE nomeFantasiaCliente LIKE '%".$cliente->getNomeFantasiaCliente()."%' LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

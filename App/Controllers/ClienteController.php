@@ -6,6 +6,7 @@ use App\Lib\Sessao;
 use App\Models\DAO\ClienteDAO;
 use App\Models\Entidades\Cliente;
 use App\Models\Validacao\ClienteValidador;
+use App\Services\ClienteService;
 
 class ClienteController extends Controller{
 
@@ -18,6 +19,17 @@ class ClienteController extends Controller{
         $this->render('/cliente/index');
 
         Sessao::limpaMensagem();
+    }
+    
+    public function autoComplete($params)
+    {
+        $cliente = new Cliente();
+        $cliente->setNomeFantasiaCliente($params[0]);
+        
+        $clienteService = new ClienteService();
+        $busca = $clienteService->autoComplete($cliente);
+        
+        echo $busca;
     }
 
     public function cadastro(){

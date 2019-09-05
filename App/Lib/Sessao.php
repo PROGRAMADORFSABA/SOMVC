@@ -43,5 +43,8 @@ class Sessao
     public static function limpaErro(){
         unset($_SESSION['erro']);
     }
+    public static function retornaFormulario(){
+        return $_SESSION['form'];
+    }
 
 }

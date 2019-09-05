@@ -1,9 +1,15 @@
 <?php
 
+
+
 namespace App;
 
 use App\Controllers\HomeController;
 use Exception;
+
+//O tipo de caracteres a ser usado
+header('Content-Type: text/html; charset=utf-8');
+
 
 class App
 {
@@ -34,7 +40,7 @@ class App
         define('APP_HOST'       , $_SERVER['HTTP_HOST']."/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
-        define('DB_HOST'        , "mysql380.umbler.com:41890");
+        define('DB_HOST'        , "mysql380.umbler.com:41890;charset=utf8");
         define('DB_USER'        , "fabmed");
         define('DB_PASSWORD'    , "Bruna2012*");
         define('DB_NAME'        , "fabmed");

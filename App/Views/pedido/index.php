@@ -12,9 +12,6 @@
 	$print1 = json_encode($print);
 	//var_dump($pedido2);
 	?>
-	<div class="chart-container">
-		<canvas id="line-chartcanvas"></canvas>
-	</div>
 	<div class="kt-portlet kt-portlet--mobile">
 		<div class="kt-portlet__head kt-portlet__head--lg">
 			<div class="kt-portlet__head-label">
