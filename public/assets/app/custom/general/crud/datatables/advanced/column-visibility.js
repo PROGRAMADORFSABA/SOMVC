@@ -217,6 +217,8 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 							11111: {'title': 'Pending', 'class': 'kt-badge--brand'},
 							D: {'title': 'Dasativado', 'class': ' kt-badge--danger'},
 							A: {'title': 'Ativo', 'class': ' kt-badge--success'},
+							0: {'title': 'Não', 'class': ' kt-badge--danger'},
+							1: {'title': 'Sim', 'class': ' kt-badge--success'},
 							55555: {'title': 'Info', 'class': ' kt-badge--info'},
 							66666: {'title': 'Negado', 'class': ' kt-badge--danger'},
 							77777: {'title': 'Em Analise', 'class': ' kt-badge--warning'},

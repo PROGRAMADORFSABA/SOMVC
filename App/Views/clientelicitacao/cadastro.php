@@ -16,7 +16,8 @@
         <div class="kt-portlet__body">
             <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
-                <div class="form-group"><label for="razaoSocial">Razao do Cliente</label>
+                <div class="form-group">
+                    <label for="razaoSocial">Razao do Cliente</label>
                     <input type="text" class="form-control" placeholder="Digite a Razao Social do Cliente" id="razaoSocial" name="razaoSocial" value="<?php echo $Sessao::retornaValorFormulario('razaoSocial'); ?>" required>
 
                     <span class="form-text text-muted">Por favor insira a Razao Social do Cliente</span>
