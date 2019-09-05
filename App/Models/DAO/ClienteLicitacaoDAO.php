@@ -135,21 +135,24 @@ class ClienteLicitacaoDAO extends  BaseDAO
     {
         try {
 
-            $idCliente        = $clienteLicitacao->getIdCliente();
-            $nome             = $clienteLicitacao->getNome();
-            $nomeFantasia     = $clienteLicitacao->getNomeFantasia();
-            $tipoCliente_cod  = $clienteLicitacao->getTipoCliente()->getCodTipoCliente();
+            $codCliente        = $clienteLicitacao->getCodCliente();
+            $razaoSocial    = $clienteLicitacao->getRazaoSocial();
+            $nomeFantasia   = $clienteLicitacao->getNomeFantasia();
+            $cnpj   = $clienteLicitacao->getCnpj();
+            $trocaMarca     = $clienteLicitacao->getTrocaMarca();
+            
 
             return $this->update(
-                'cliente',
-                ":nome, :nomeFantasia, :idTipoCliente",
+                'clienteLicitacao',
+                "razaoSocial=:razaosocial,cnpj=:CNPJ nomeFantasia=:nomeFantasia,trocamarca=:trocaMarca, licitacaoCliente_cod=:codCliente",
                 [
-                    "idCliente"         => $idCliente,
-                    ":nome"             => $nome,
+                    "codCliente"         => $codCliente,
+                    ":razaoSocial"      => $razaoSocial,
                     ":nomeFantasia"     => $nomeFantasia,
-                    "idTipoCliente"       => $tipoCliente_cod
+                    ":cnpj"             => $cnpj,
+                    ":trocaMarca"       => $trocaMarca
                 ],
-                "idCliente = :idCliente"
+                "codCliente = :licitacaoCliente_cod"
             );
         } catch (\Exception $e) {
             throw new \Exception("Erro ao gravar dados" . $e->getMessage(), 500);
@@ -160,9 +163,9 @@ class ClienteLicitacaoDAO extends  BaseDAO
     {
         try {
 
-            $idCliente = $clienteLicitacao->getIdCliente();
+            $codCliente = $clienteLicitacao->getCodCliente();
 
-            return $this->delete('cliente', ":idcliente = $idCliente");
+            return $this->delete('clienteLicitacao', ":licitacaoCliente_cod = $codCliente");
         } catch (\Exception $e) {
             throw new \Exception("Erro ao deletar" . $e->getMessage(), 500);
         }

@@ -29,7 +29,7 @@ class App
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
-        define('DB_HOST'        , "localhost:3306.");
+        define('DB_HOST'        , "localhost:3306.;charset=utf8");
         define('DB_USER'        , "root");
         define('DB_PASSWORD'    , "root");
         define('DB_NAME'        , "u325780549_fab_dev");
