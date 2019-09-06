@@ -135,27 +135,27 @@ class ClienteLicitacaoDAO extends  BaseDAO
     {
         try {
 
-            $codCliente        = $clienteLicitacao->getCodCliente();
+            $codCliente     = $clienteLicitacao->getCodCliente();
             $razaoSocial    = $clienteLicitacao->getRazaoSocial();
             $nomeFantasia   = $clienteLicitacao->getNomeFantasia();
-            $cnpj   = $clienteLicitacao->getCnpj();
+            $cnpj           = $clienteLicitacao->getCnpj();
             $trocaMarca     = $clienteLicitacao->getTrocaMarca();
-            
 
+//echo " cod ".$codCliente." razao ".$razaoSocial." nome ".$nomeFantasia." cnpj ".$cnpj." marca ".$trocaMarca;
             return $this->update(
                 'clienteLicitacao',
-                "razaoSocial=:razaosocial,cnpj=:CNPJ nomeFantasia=:nomeFantasia,trocamarca=:trocaMarca, licitacaoCliente_cod=:codCliente",
+                "  razaoSocial=:razaoSocial, nomeFantasia=:nomeFantasia, cnpj=:cnpj, trocaMarca=:trocaMarca ",
                 [
-                    "codCliente"         => $codCliente,
-                    ":razaoSocial"      => $razaoSocial,
-                    ":nomeFantasia"     => $nomeFantasia,
-                    ":cnpj"             => $cnpj,
-                    ":trocaMarca"       => $trocaMarca
+                    ':codCliente'       => $codCliente,
+                    ':razaoSocial'      => $razaoSocial,
+                    ':nomeFantasia'     => $nomeFantasia,
+                    ':cnpj'             => $cnpj,
+                    ':trocaMarca'       => $trocaMarca,
                 ],
-                "codCliente = :licitacaoCliente_cod"
+                "licitacaoCliente_cod = :codCliente"
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro ao gravar dados" . $e->getMessage(), 500);
+            throw new \Exception("Erro ao gravar dados " . $e->getMessage(), 500);
         }
     }
 

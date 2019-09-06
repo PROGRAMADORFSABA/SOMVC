@@ -6,6 +6,8 @@ use App\Lib\Sessao;
 use App\Models\DAO\ClienteLicitacaoDAO;
 use App\Models\Entidades\ClienteLicitacao;
 
+use App\Models\Validacao\ClienteLicitacaoValidador;
+
 class ClienteLicitacaoController extends Controller
 {
 
@@ -88,7 +90,7 @@ class ClienteLicitacaoController extends Controller
         $clienteLicitacao->setTrocaMarca($_POST['trocaMarca']);
 
         Sessao::gravaFormulario($_POST);
-        $clienteLicitacaoValidador = new PedidoValidador();
+        $clienteLicitacaoValidador = new ClienteLicitacaoValidador();
         $resultadoValidacao = $clienteLicitacaoValidador->validar($clienteLicitacao);
 
         if ($resultadoValidacao->getErros()) {
@@ -96,16 +98,16 @@ class ClienteLicitacaoController extends Controller
             $this->redirect('/clienteLicitacao/edicao/' . $_POST['codCliente']);
         }
 
-        $clienteLicitacaoDAO = new ClienteLicitacaoDAODAO();
+        $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
 
 
-        $clienteLicitacaoDAO->atualizar($clienteLicitacaoDAO);
+        $clienteLicitacaoDAO->atualizar($clienteLicitacao);
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/clienteLicitacaoDAO');
+        $this->redirect('/clienteLicitacao');
     }
 
     public function exclusao($params)
