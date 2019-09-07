@@ -3,6 +3,7 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Pedido;
+use App\Models\Entidades\Cliente;
 
 class PedidoDAO extends BaseDAO
 {

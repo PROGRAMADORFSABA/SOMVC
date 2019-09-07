@@ -91,11 +91,11 @@ class ClienteDAO extends BaseDAO
                 'cliente',
                 "nomeCliente = :nomeCliente, nomeFantasiaCliente = :nomeFantasiaCliente, tipoCliente = :tipoCliente, status = :status",
                 [
-                    ':codCliente'       => $codCliente,
-                    ':nomeCliente'      => $nomeCliente,
-                    ':nomeFantasiaCliente' => $nomeFantasiaCliente,
-                    ':tipoCliente'              => $tipoCliente,
-                    ':status'              => $status
+                    ':codCliente'           => $codCliente,
+                    ':nomeCliente'          => $nomeCliente,
+                    ':nomeFantasiaCliente'  => $nomeFantasiaCliente,
+                    ':tipoCliente'          => $tipoCliente,
+                    ':status'               => $status
 
                 ],
                 "codCliente = :codCliente"
