@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Lib/Exportar.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Lib/Transacao.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Services/ClienteService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/ClienteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/ClienteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Lib/Sessao.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Lib/Sessao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedido/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedido/cadastro.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedido/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedido/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/ClienteFalta.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/layouts/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/menu.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +161,10 @@
       <workItem from="1563403937296" duration="7035000" />
       <workItem from="1563489048095" duration="1645000" />
       <workItem from="1567637459194" duration="12000" />
-      <workItem from="1567637609841" duration="10329000" />
+      <workItem from="1567637609841" duration="12309000" />
+      <workItem from="1567727115139" duration="8476000" />
+      <workItem from="1567854022415" duration="295000" />
+      <workItem from="1567854337224" duration="11091000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -241,7 +236,21 @@
       <option name="project" value="LOCAL" />
       <updated>1563412629698</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ADD autoComplete em cliente">
+      <created>1567653431717</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1567653431717</updated>
+    </task>
+    <task id="LOCAL-00012" summary="ADD autoComplete em cliente">
+      <created>1567890740704</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1567890740704</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -289,7 +298,8 @@
     <MESSAGE value="Alterações nome de  &lt;th&gt;" />
     <MESSAGE value="adcionando grafico" />
     <MESSAGE value="adcionando grafico - 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="adcionando grafico - 2" />
+    <MESSAGE value="ADD autoComplete em cliente" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD autoComplete em cliente" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
