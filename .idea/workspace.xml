@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Models/Entidades/ClienteFalta.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedido/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedido/cadastro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/ClienteFalta.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/layouts/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/menu.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +164,7 @@
       <workItem from="1567637609841" duration="12309000" />
       <workItem from="1567727115139" duration="8476000" />
       <workItem from="1567854022415" duration="295000" />
-      <workItem from="1567854337224" duration="5406000" />
+      <workItem from="1567854337224" duration="11091000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -245,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567653431717</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="ADD autoComplete em cliente">
+      <created>1567890740704</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1567890740704</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">

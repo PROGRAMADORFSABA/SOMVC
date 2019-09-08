@@ -4,7 +4,7 @@
     namespace App\Models\Entidades;
     
     
-    class ClienteFalta
+    class PedidoFalta
     {
         private $faltaCliente_cod;
         private $proposta;
@@ -84,7 +84,7 @@
          */
         public function getDataFalta()
         {
-            return $this->dataFalta;
+            return new DateTime($this->dataFalta);
         }
     
         /**
