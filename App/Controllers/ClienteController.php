@@ -15,21 +15,42 @@ class ClienteController extends Controller{
         $clienteDAO = new ClienteDAO();
 
         self::setViewParam('listarCliente',$clienteDAO->listar());
+        self::setViewParam('listarCliente',$clienteDAO->listar());
 
         $this->render('/cliente/index');
+
+        Sessao::limpaMensagem();
+    }
+    public function teste(){
+
+        $clienteDAO = new ClienteDAO();
+
+        self::setViewParam('listarCliente',$clienteDAO->listar());
+        self::setViewParam('listarCliente',$clienteDAO->listar());
+
+        $this->render('/cliente/teste');
 
         Sessao::limpaMensagem();
     }
     
     public function autoComplete($params)
     {
+      //  $codControle = $params[0];
+                
         $cliente = new Cliente();
-        $cliente->setNomeFantasiaCliente($params[0]);
-        
-        $clienteService = new ClienteService();
-        $busca = $clienteService->autoComplete($cliente);
-        
-        echo $busca;
+        //$cliente->setCodStatus($_POST['nomeCliente']);
+        $cliente->setNomeFantasiaCliente($_POST['nomeCliente']);        
+        if($cliente){
+
+            $clienteService = new ClienteService();
+            $busca = $clienteService->autoComplete($cliente);
+            var_dump($busca);
+          echo $busca;
+            self::setViewParam('cliente', $busca);
+         $this->render('/cliente/teste');
+        }else{
+            Sessao::gravaMensagem("Nenhum Cadastro informado");
+        }
     }
 
     public function cadastro(){
@@ -76,11 +97,9 @@ class ClienteController extends Controller{
 
         $cliente = $clienteDAO->listar($codCliente);
 
-        if(!$cliente){
-             
+        if(!$cliente){             
             Sessao::gravaMensagem("Cliente inexistente");
-            $this->redirect('/cliente');   
-                 
+            $this->redirect('/cliente');                    
         }
         
         self::setViewParam('cliente', $cliente);

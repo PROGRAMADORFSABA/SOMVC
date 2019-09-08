@@ -6,7 +6,7 @@
     use App\Lib\Sessao;
     use App\Lib\Transacao;
     use App\Lib\Exportar;
-    
+    use App\Models\Entidades\Cliente;
     use App\Models\DAO\ClienteDAO;
     
     
@@ -15,9 +15,12 @@
     {
         public function autoComplete(Cliente $cliente)
         {
+            $cliente->getNomeFantasiaCliente();
             $clienteDAO = new ClienteDAO();
             $busca = $clienteDAO->listarPorNomeFantasia($cliente);
+            return $busca;
             $exportar = new Exportar();
-            return $exportar->exportarJSON($busca);
+            //return $exportar->exportarJSON($busca);
+
         }
     }

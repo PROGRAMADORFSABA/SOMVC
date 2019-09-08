@@ -23,6 +23,8 @@ class ClienteLicitacaoController extends Controller
 
         Sessao::limpaMensagem();
     }
+   
+    
     public function cadastro()
     {
         $this->render('/clientelicitacao/cadastro');

@@ -25,6 +25,12 @@ class PedidoController extends Controller
 
         Sessao::limpaMensagem();
     }
+    public function teste()
+    {        
+        $this->render('/pedido/teste');
+
+        Sessao::limpaMensagem();
+    }
     public function pesquisa()
     {
 
