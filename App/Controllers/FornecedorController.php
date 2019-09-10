@@ -14,9 +14,7 @@ class FornecedorController extends Controller
     {
         $fornecedorDAO = new FornecedorDAO();
 
-        self::setViewParam('listafornecedores',$fornecedorDAO->listar());
-        self::setViewParam('qtdeFornecedores',$fornecedorDAO->qtde());
-        self::setViewParam('qtdeFornecedores1',$fornecedorDAO->qtde1());
+        self::setViewParam('listafornecedores',$fornecedorDAO->listar());      
 
         $this->render('/fornecedor/index');
 

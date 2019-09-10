@@ -11,10 +11,10 @@
                     Pesquisa de coluna individual
                 </h3>
                 <?php if ($Sessao::retornaMensagem()) { ?>
-                    <div class="alert alert-warning" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <?php echo $Sessao::retornaMensagem(); ?>
-                    </div>
+                <div class="alert alert-warning" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo $Sessao::retornaMensagem(); ?>
+                </div>
                 <?php } ?>
             </div>
             <div class="kt-portlet__head-toolbar">
@@ -83,33 +83,38 @@
                         <th>STATUS</th>
                         <th>TIPO</th>
                         <th>Acoes</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($viewVar['listarCliente'] as $cliente) {
-                        ?>
-                        <tr>
-                            <td><?php echo $cliente->getCodCliente(); ?></td>
-                            <td><?php echo $cliente->getNomeCliente(); ?></td>
-                            <td><?php echo $cliente->getNomeFantasiaCliente(); ?></td>
-                            <td><?php echo $cliente->getStatus(); ?></td>
-                            <td><?php echo $cliente->getTipoCliente(); ?></td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/exclusao/<?php echo $cliente->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
-                                    </div>
-                                </span>
-                                <a href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                            </td>
+                    $dados = $viewVar['listarCliente'];
+                    if ($dados > 0) {
+                        foreach ($dados as $cliente) {
+                            ?>
+                    <tr>
+                        <td><?php echo $cliente->getCodCliente(); ?></td>
+                        <td><?php echo $cliente->getNomeCliente(); ?></td>
+                        <td><?php echo $cliente->getNomeFantasiaCliente(); ?></td>
+                        <td><?php echo $cliente->getStatus(); ?></td>
+                        <td><?php echo $cliente->getTipoCliente(); ?></td>
+                        <td>
+                            <span class="dropdown">
+                                <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/exclusao/<?php echo $cliente->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                </div>
+                            </span>
+                            <a href="http://<?php echo APP_HOST; ?>/cliente/edicao/<?php echo $cliente->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                        </td>
 
                         <?php
+                            }
+                        } else {
+
+                            echo "<h3 class='kt-portlet__head-title'><p class='text-danger'>Sem dados encontrados!</p></h3>";
                         }
                         ?>
                     </tr>

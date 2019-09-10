@@ -1,38 +1,60 @@
+<!--begin::Portlet-->
 <div class="container">
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <h3>Cadastro de Fornecedor</h3>
-
-            <?php if ($Sessao::retornaErro()) { ?>
-                <div class="alert alert-warning" role="alert">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <?php foreach ($Sessao::retornaErro() as $key => $mensagem) { ?>
-                        <?php echo $mensagem; ?> <br>
-                    <?php } ?>
-                </div>
-            <?php } ?>
-
-            <form action="http://<?php echo APP_HOST; ?>/fornecedor/salvar" method="post" id="form_cadastro">                
-                <div class="form-group">
-                    <label for="nomeFantasia">Nome Fantasia</label>
-                    <input type="text"  class="form-control" name="nomeFantasia" id="nomeFantasia" placeholder="Nome Fantasia">
-                </div>
-
-                <div class="form-group">
-                    <label for="razaoSocial">Razao Social</label>
-                    <input type="text"  class="form-control"  name="razaoSocial" id="razaoSocial" value="<?php echo $Sessao::retornaValorFormulario('razaoSocial'); ?>" placeholder="Razao Social" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="cnpj">CNPJ</label>
-                    <input type="text"  class="form-control"  name="cnpj" id="cnpj" placeholder="CNPJ" value="<?php echo $Sessao::retornaValorFormulario('cnpj'); ?>" required>
-                </div>     
-                <button type="submit" class="btn btn-success btn-pill btn-elevate btn-elevate-air">Salvar</button>
-                <a href="http://<?php echo APP_HOST; ?>/fornecedor"  class="btn btn-brand btn-elevate btn-pill btn-elevate-air">Listar de Fornecedores</a>
-            </form>
-        </div>
-        <div class=" col-md-3"></div>
+    <br>
+    <center>
+        <h3>Cadastro de Fornecedor</h3>
+    </center>
+    <?php if ($Sessao::retornaErro()) { ?>
+    <div class="alert alert-warning" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php foreach ($Sessao::retornaErro() as $key => $mensagem) { ?>
+        <?php echo $mensagem; ?> <br>
+        <?php } ?>
     </div>
+    <?php } ?>
+    <!--begin::Form-->
+    <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/fornecedor/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
+        <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
+        <div class="kt-portlet__body">
+            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
+            <div class="kt-portlet__body">
+                <div class="form-group">
+                    <label for="razaoSocial">Razao do Fornecedor</label>
+                    <input type="text" class="form-control" placeholder="Digite a Razao Social do Fornecedor" id="razaoSocial" name="razaoSocial" value="<?php echo $Sessao::retornaValorFormulario('razaoSocial'); ?>" required>
+                    <span class="form-text text-muted">Por favor insira a Razao Social do Fornecedor</span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-8">
+                        <label>Nome Fantasia:</label>
+                        <input type="text" class="form-control" placeholder="Digite o Nome Fantasia" id="nomeFantasia" name="nomeFantasia" value="<?php echo $Sessao::retornaValorFormulario('nomeFantasia'); ?>" required>
+                        <span class="form-text text-muted">Por favor insira o Nome Fantasia</span>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="">Numero do CNPJ:</label>
+                        <input type="text" class="form-control" placeholder="Digite o numero do CNPJ" id="cnpj" name="cnpj" value="<?php echo $Sessao::retornaValorFormulario('cnpj'); ?>" required>
+                        <span class="form-text text-muted">Digite o numero do CNPJ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__foot">
+                <div class="kt-form__actions">
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-8">
+                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Gravar</button>
+                            <a href="http://<?php echo APP_HOST; ?>/fornecedor" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+    <!--end::Form-->
 </div>
+
+<!--end::Portlet-->
+
+<!-- footer -->
+
 </div>

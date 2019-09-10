@@ -10,28 +10,28 @@
                         Daily Sales
                     </h3>
                     <span class="kt-widget14__desc">
-                  
-                        <?php                                        
+
+                        <?php
                         $qtde = $viewVar['qtdeFornecedores'];
                         $qtde2 = $viewVar['qtdeFornecedores1'];
 
-                        if (count($qtde2)>0) {                        
-                        $andre = 0;//teste
-                        echo "<br> " . " codigo = " . $qtde2[$andre]['codFornecedor']. "<br> ";                  
-                        echo "<br> " . " nome = " . $qtde2[0]['razaoSocial']. "<br> ";                  
-                        echo "<br> " . " qtde = " . $qtde2[0]['qtdePedidos']. "<br> ";                  
-                        echo "<br> " . " codigo = " . $qtde2[1]['codFornecedor']. "<br> ";                  
-                        echo "<br> " . " nome = " . $qtde2[1]['razaoSocial']. "<br> ";                  
-                        echo "<br> " . " qtde = " . $qtde2[1]['qtdePedidos']. "<br> ";                  
-                        echo "<br> " . " qtde = " . $qtde2[2]['qtdePedidos']. "<br> "; 
-                        }else {
-                            echo "<br> " . " Sem resultados " . "<br> "; 
+                        if (count($qtde2) > 0) {
+                            $andre = 0; //teste
+                            echo "<br> " . " codigo = " . $qtde2[$andre]['codFornecedor'] . "<br> ";
+                            echo "<br> " . " nome = " . $qtde2[0]['razaoSocial'] . "<br> ";
+                            echo "<br> " . " qtde = " . $qtde2[0]['qtdePedidos'] . "<br> ";
+                            echo "<br> " . " codigo = " . $qtde2[1]['codFornecedor'] . "<br> ";
+                            echo "<br> " . " nome = " . $qtde2[1]['razaoSocial'] . "<br> ";
+                            echo "<br> " . " qtde = " . $qtde2[1]['qtdePedidos'] . "<br> ";
+                            echo "<br> " . " qtde = " . $qtde2[2]['qtdePedidos'] . "<br> ";
+                        } else {
+                            echo "<br> " . " Sem resultados " . "<br> ";
                         }
-                        echo "<br> " . " qtde = " . $qtde[0]. "<br> ";                  
+                        echo "<br> " . " qtde = " . $qtde[0] . "<br> ";
                         ?>
                         <input type="hidden" value="<?php echo $qtde2[0]['qtdePedidos']; ?>" name="top1" id="top1">
                         <input type="hidden" value="<?php echo $qtde2[1]['qtdePedidos']; ?>" name="top2" id="top2">
-                        
+
                         <h3 id="andre1">qtde fornecedor = <?php print($qtde[0]); ?></h3>
                         <input type="hidden" value="<?php echo $qtde[0]; ?>" name="teste" id="teste">
                         Check out each collumn for more details
@@ -131,33 +131,39 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach ($viewVar['listafornecedores'] as $fornecedor) {
-                        ?>
-                        <tr>
-                            <td><?php echo $fornecedor->getCodFornecedor(); ?></td>
-                            <td><?php echo $fornecedor->getNomeFantasia(); ?></td>
-                            <td><?php echo $fornecedor->getRazaoSocial(); ?></td>
-                            <td><?php echo $fornecedor->getCnpj(); ?></td>
-                            <td><?php echo $fornecedor->getDataCadastro()->format('d/m/Y'); ?></td>
-                            <td>02/12/2018</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>3</td>
+                    $dados = $viewVar['listafornecedores'];
+                    if ($dados > 0) {
+                        foreach ($dados as $fornecedor) {
+                            ?>
+                    <tr>
+                        <td><?php echo $fornecedor->getFornecedor_Cod(); ?></td>
+                        <td><?php echo $fornecedor->getNomeFantasia(); ?></td>
+                        <td><?php echo $fornecedor->getRazaoSocial(); ?></td>
+                        <td><?php echo $fornecedor->getCnpj(); ?></td>
+                        <td><?php echo $fornecedor->getDataCadastro()->format('d/m/Y'); ?></td>
+                        <td>02/12/2018</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
 
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getCodFornecedor(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/exclusao/<?php echo $fornecedor->getCodFornecedor(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getCodFornecedor(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-                                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getCodFornecedor(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
-                                    </div>
-                                </span>
-                                <a href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getCodFornecedor(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                            </td>
+                        <td>
+                            <span class="dropdown">
+                                <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/exclusao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-edit"></i> Excluir</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                </div>
+                            </span>
+                            <a href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                        </td>
 
                         <?php
+                            }
+                        } else {
+
+                            echo "<h3 class='kt-portlet__head-title'><p class='text-danger'>Nenhum Dado Encontrado!</p></h3>";
                         }
                         ?>
                     </tr>

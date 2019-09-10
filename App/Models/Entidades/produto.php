@@ -6,41 +6,83 @@ use DateTime;
 
 class Produto
 {
-    private $id;
-    private $nome;
-    private $preco;
-    private $quantidade;
-    private $descricao;
-    private $dataCadastro;
-
-    public function getId()
+    private $proCodigo;
+    private $proNome;
+    private $proNomeComercial;
+    private $proDataCadastro;
+    private $proDataAlteracao;
+    private $proPreco;
+    
+    private $proUsuario;
+    private $proFornecedor;
+    private $proMarca;
+    private $marca;
+    private $fornecedor;
+    private $usuario;
+    /*
+ProCodigo - ProNome - ProNomeComercial - ProUsuario - ProMarca - ProFornecedor - ProDataCadastro - ProDataAlteracao
+    */
+    public function __construct(){
+        $this->marca = new Marca();       
+        $this->fornecedor = new Fornecedor();
+        $this->usuario = new Usuario();
+    }
+    public function getMarca()
     {
-        return $this->id;
+        return $this->marca;
+    }
+    public function getFornecedor()
+    {
+        return $this->fornecedor;
+    }
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 
-    public function setId($id)
+
+
+
+
+
+    public function getProCodigo()
     {
-        $this->id = $id;
+        return $this->proCodigo;
     }
 
-    public function getNome()
+    public function setProCodigo($proCodigo)
     {
-        return $this->nome;
+        $this->proCodigo = $proCodigo;
     }
 
-    public function setNome($nome)
+    public function getProNome()
     {
-        $this->nome = $nome;
+        return $this->proNome;
     }
 
-    public function getPreco()
+    public function setProNome($proNome)
     {
-        return $this->preco;
+        $this->proNome = $proNome;
+    }
+    
+    public function getProNomeComercial()
+    {
+        return $this->proNomeComercial;
     }
 
-    public function setPreco($preco)
+    public function setProNomeComercial($proNomeComercial)
     {
-        $this->preco = $preco;
+        $this->proNomeComercial = $proNomeComercial;
+    }
+
+    public function getProPreco()
+    {
+        return $this->proPreco;
+    }
+
+    public function setProPreco($proPreco)
+    {
+        $this->proPreco = $proPreco;
     }
 
     public function getQuantidade()
@@ -52,25 +94,84 @@ class Produto
     {
         $this->quantidade = $quantidade;
     }
-
-    public function getDescricao()
+    
+    public function getProDataCadastro()
     {
-        return $this->descricao;
+        return new DateTime($this->proDataCadastro);
     }
 
-    public function setDescricao($descricao)
+    public function setProDataCadastro($proDataCadastro)
     {
-        $this->descricao = $descricao;
+        $this->proDataCadastro = $proDataCadastro;
     }
 
-    public function getDataCadastro()
+    public function getProDataAlteracao()
     {
-        return new DateTime($this->dataCadastro);
+        return new DateTime($this->proDataAlteracao);
     }
 
-    public function setDataCadastro($dataCadastro)
+    public function setProDataAlteracao($proDataAlteracao)
     {
-        $this->dataCadastro = $dataCadastro;
+        $this->proDataAlteracao = $proDataAlteracao;
     }
 
+    /**
+     * Get the value of proUsuario
+     */ 
+    public function getProUsuario()
+    {
+        return $this->proUsuario;
+    }
+
+    /**
+     * Set the value of proUsuario
+     *
+     * @return  self
+     */ 
+    public function setProUsuario($proUsuario)
+    {
+        $this->proUsuario = $proUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of proFornecedor
+     */ 
+    public function getProFornecedor()
+    {
+        return $this->proFornecedor;
+    }
+
+    /**
+     * Set the value of proFornecedor
+     *
+     * @return  self
+     */ 
+    public function setProFornecedor($proFornecedor)
+    {
+        $this->proFornecedor = $proFornecedor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of proMarca
+     */ 
+    public function getProMarca()
+    {
+        return $this->proMarca;
+    }
+
+    /**
+     * Set the value of proMarca
+     *
+     * @return  self
+     */ 
+    public function setProMarca($proMarca)
+    {
+        $this->proMarca = $proMarca;
+
+        return $this;
+    }
 }

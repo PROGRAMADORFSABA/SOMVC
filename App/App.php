@@ -25,7 +25,7 @@ class App
          * Constantes do sistema
          */
         //banco local
-          /*    
+        /*
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");

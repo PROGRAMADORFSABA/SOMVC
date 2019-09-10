@@ -20,7 +20,7 @@
             $busca = $clienteDAO->listarPorNomeFantasia($cliente);
             return $busca;
             $exportar = new Exportar();
-            //return $exportar->exportarJSON($busca);
+            return $exportar->exportarJSON($busca);
 
         }
     }

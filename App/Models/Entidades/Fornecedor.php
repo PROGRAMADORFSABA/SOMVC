@@ -7,7 +7,7 @@
     
     class Fornecedor
     {
-        private $codFornecedor;
+        private $fornecedor_cod;
         private $razaoSocial;
         private $nomeFantasia;
         private $cnpj;
@@ -16,17 +16,17 @@
         /**
          * @return mixed
          */
-        public function getCodFornecedor()
+        public function getFornecedor_Cod()
         {
-            return $this->codFornecedor;
+            return $this->fornecedor_cod;
         }
     
         /**
-         * @param mixed $codFornecedor
+         * @param mixed $fornecedor_cod
          */
-        public function setCodFornecedor($codFornecedor)
+        public function setFornecedor_Cod($fornecedor_cod)
         {
-            $this->codFornecedor = $codFornecedor;
+            $this->fornecedor_cod = $fornecedor_cod;
         }
     
         /**
