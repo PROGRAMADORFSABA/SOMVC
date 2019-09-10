@@ -38,12 +38,12 @@
                         <label class="">Troca de Marca:</label>
                         <div class="kt-radio-inline">
                             <label class="kt-radio kt-radio--solid">
-                                <input type="radio" name="trocaMarca" value="1"> Sim
+                                <input type="radio" name="trocaMarca" value="true"> Sim
                                 <span></span>
                             </label>
                         </div>
                         <label class="kt-radio kt-radio--solid">
-                            <input type="radio" name="trocaMarca" value="0"> Nao
+                            <input type="radio" name="trocaMarca" value="false"> Nao
                             <span></span>
                         </label>
                         <span class="form-text text-muted">O Cliente Aceita Troca de Marca</span>

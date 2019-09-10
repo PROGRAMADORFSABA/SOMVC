@@ -10,6 +10,7 @@ class ClienteDAO extends BaseDAO
 
     public function listar($codCliente = null)
     {
+
         if ($codCliente) {
 
             $resultado = $this->select(
@@ -24,6 +25,7 @@ class ClienteDAO extends BaseDAO
                 $cliente->setNomeFantasiaCliente($dado['nomeFantasiaCliente']);
                 $cliente->setStatus($dado['status']);
                 $cliente->setTipoCliente($dado['tipoCliente']);
+
                 return $cliente;
             }
         } else {
@@ -41,10 +43,10 @@ class ClienteDAO extends BaseDAO
                     $cliente->setStatus($dado['status']);
                     $cliente->setTipoCliente($dado['tipoCliente']);
                     $lista[] = $cliente;
-                }             
-              
+                }
                 return $lista;
             }
+
             return false;
         }
     }
@@ -89,11 +91,11 @@ class ClienteDAO extends BaseDAO
                 'cliente',
                 "nomeCliente = :nomeCliente, nomeFantasiaCliente = :nomeFantasiaCliente, tipoCliente = :tipoCliente, status = :status",
                 [
-                    ':codCliente'           => $codCliente,
-                    ':nomeCliente'          => $nomeCliente,
-                    ':nomeFantasiaCliente'  => $nomeFantasiaCliente,
-                    ':tipoCliente'          => $tipoCliente,
-                    ':status'               => $status
+                    ':codCliente'       => $codCliente,
+                    ':nomeCliente'      => $nomeCliente,
+                    ':nomeFantasiaCliente' => $nomeFantasiaCliente,
+                    ':tipoCliente'              => $tipoCliente,
+                    ':status'              => $status
 
                 ],
                 "codCliente = :codCliente"
@@ -118,24 +120,8 @@ class ClienteDAO extends BaseDAO
     public function listarPorNomeFantasia(Cliente $cliente)
     {
         $resultado = $this->select(
-            "SELECT * FROM cliente WHERE nomeFantasiaCliente LIKE '%" .$cliente->getNomeFantasiaCliente()."%' LIMIT 0,6"
+            "SELECT * FROM cliente WHERE nomeFantasiaCliente LIKE '%".$cliente->getNomeFantasiaCliente()."%' LIMIT 0,6"
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
-      
-     /* $dados = $resultado->fetchAll();
-      if ($dados) {
-          $lista = [];
-          foreach ($dados  as $dado) {
-              $cliente = new Cliente();
-                $cliente->setCodCliente($dado['codCliente']);
-                $cliente->setNomeCliente($dado['nomeCliente']);
-                $cliente->setNomeFantasiaCliente($dado['nomeFantasiaCliente']);
-                $cliente->setStatus($dado['status']);
-                $cliente->setTipoCliente($dado['tipoCliente']);
-                $lista[] = $cliente;
-            }
-            return $lista;
-      }*/
-
     }
 }

@@ -27,8 +27,6 @@ $dataAtual = date('Y/m/d H:i:s');
 		});
 	</script>
 	<!--end::Fonts -->
-    <link href="http://<?php echo APP_HOST; ?>/public/assets/css/easy-autocomplete.css">
-    <link href="http://<?php echo APP_HOST; ?>/public/assets/css/easy-autocomplete.themes.css">
 
 
 	<!--begin::Page Vendors Styles(used by this page) -->
@@ -39,8 +37,6 @@ $dataAtual = date('Y/m/d H:i:s');
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/login/login-v4.default.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/css/easy-autocomplete.themes.min.css">
-    <link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/css/easy-autocomplete.css">
 
 	<!--end::Page Vendors Styles -->
 

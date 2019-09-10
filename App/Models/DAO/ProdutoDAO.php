@@ -10,13 +10,13 @@ class ProdutoDAO extends BaseDAO
     {
         if($id) {
             $resultado = $this->select(
-                "SELECT * FROM produto WHERE id = $id"
+                "SELECT * FROM Produto WHERE id = $id"
             );
 
             return $resultado->fetchObject(Produto::class);
         }else{
             $resultado = $this->select(
-                'SELECT * FROM produto'
+                'SELECT * FROM Produto'
             );
             return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);
         }
@@ -34,7 +34,7 @@ class ProdutoDAO extends BaseDAO
             $descricao      = $produto->getDescricao();
 
             return $this->insert(
-                'produto',
+                'Produto',
                 ":nome,:preco,:quantidade,:descricao",
                 [
                     ':nome'=>$nome,
@@ -60,7 +60,7 @@ class ProdutoDAO extends BaseDAO
             $descricao      = $produto->getDescricao();
 
             return $this->update(
-                'produto',
+                'Produto',
                 "nome = :nome, preco = :preco, quantidade = :quantidade, descricao = :descricao",
                 [
                     ':id'=>$id,
@@ -82,7 +82,7 @@ class ProdutoDAO extends BaseDAO
         try {
             $id = $produto->getId();
 
-            return $this->delete('produto',"id = $id");
+            return $this->delete('Produto',"id = $id");
 
         }catch (Exception $e){
 

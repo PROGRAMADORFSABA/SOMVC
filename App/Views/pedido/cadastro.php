@@ -14,16 +14,16 @@
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
         <div class="kt-portlet__body">
-            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
+            <input type="text" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
                 <div class="form-group"><label for="codCliente">Cliente</label>
-                    <select class="form-control" name="codCliente" required>
+                    <input class="form-control" name="codCliente" required>
                         <option value="">Selecione o cliente</option>
                         <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
                             <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
                                 <?php echo $cliente->getNomeCliente(); ?></option>
                         <?php endforeach; ?>
-                    </select>
+                    </input>
                     <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>
                 </div>
 

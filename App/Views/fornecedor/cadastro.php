@@ -1,63 +1,38 @@
-  <section id="main-content">
-    <section class="wrapper">
-      <div class="row">
-        <form class="form-horizontal" id="form_cadastro_empresa" method="POST" action="http://<?php echo APP_HOST; ?>/empresa/salvar">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3>Cadastro de Fornecedor</h3>
 
-          <?php if($Sessao::retornaErro()){ ?>
-           <div class="col-lg-12">            
-            <div class="alert alert-danger" role="alert">                
-              <?php foreach($sessao::retornaErro() as $key => $mensagem){ ?>
-                <?php echo $mensagem; ?> <br>
-                <?php } ?>
-              </div>              
-            </div>             
-            <?php } ?>  
-            
-            <div class="col-lg-12">
-              <section class="panel panel-default">
-                <header class="panel-heading">
-                  Cadastro de nova Empresa
-                </header>
-                <div class="panel-body">                
+            <?php if ($Sessao::retornaErro()) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php foreach ($Sessao::retornaErro() as $key => $mensagem) { ?>
+                        <?php echo $mensagem; ?> <br>
+                    <?php } ?>
+                </div>
+            <?php } ?>
 
-                 <div class="form-group">
-                  <label  class="col-lg-3 col-sm-3 control-label">Razão Social</label>
-                  <div class="col-lg-9">
-                    <div class="iconic-input right">
-                      <input type="text" name="razaoSocial" class="form-control" required value=<?php echo $viewVar['empresa']->getRazaoSocial(); ?> >
-                    </div>
-                  </div>
+            <form action="http://<?php echo APP_HOST; ?>/fornecedor/salvar" method="post" id="form_cadastro">                
+                <div class="form-group">
+                    <label for="nomeFantasia">Nome Fantasia</label>
+                    <input type="text"  class="form-control" name="nomeFantasia" id="nomeFantasia" placeholder="Nome Fantasia">
                 </div>
 
                 <div class="form-group">
-                  <label  class="col-lg-3 col-sm-3 control-label">Nome Fantasia</label>
-                  <div class="col-lg-9">
-                    <div class="iconic-input right">
-                      <input type="text" name="nomeFantasia" class="form-control" required value=<?php echo $viewVar['empresa']->getNomeFantasia(); ?>>
-                    </div>
-                  </div>
+                    <label for="razaoSocial">Razao Social</label>
+                    <input type="text"  class="form-control"  name="razaoSocial" id="razaoSocial" value="<?php echo $Sessao::retornaValorFormulario('razaoSocial'); ?>" placeholder="Razao Social" required>
                 </div>
 
                 <div class="form-group">
-                  <label  class="col-lg-3 col-sm-3 control-label">CNPJ</label>
-                  <div class="col-lg-9">
-                    <div class="iconic-input right">
-                      <input type="text" name="CNPJ" id="CNPJ" class="form-control" required value=<?php echo $viewVar['empresa']->getCNPJ(); ?>>                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-
-          <div class="col-md-12">                      
-            <div align="right"> 
-              <a class="btn btn-success" href="http://<?php echo APP_HOST; ?>/empresa/listar">Voltar</a>
-              <button class="btn btn-info">Cadastrar</button>
-            </div>            
-          </div>
-          
-        </form>
-      </div>
-    </section>
-  </section>
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text"  class="form-control"  name="cnpj" id="cnpj" placeholder="CNPJ" value="<?php echo $Sessao::retornaValorFormulario('cnpj'); ?>" required>
+                </div>     
+                <button type="submit" class="btn btn-success btn-pill btn-elevate btn-elevate-air">Salvar</button>
+                <a href="http://<?php echo APP_HOST; ?>/fornecedor"  class="btn btn-brand btn-elevate btn-pill btn-elevate-air">Listar de Fornecedores</a>
+            </form>
+        </div>
+        <div class=" col-md-3"></div>
+    </div>
+</div>
+</div>

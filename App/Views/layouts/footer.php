@@ -454,9 +454,7 @@
 </script>
 
 <!-- end::Global Config -->
-<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/js/jquery.easy-autocomplete.min.js"></script>
-<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/js/autocomplete-empresa.js"></script>
-<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/js/autocomplete-tecnologia.js"></script>
+
 <!--begin:: Global Mandatory Vendors -->
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/jquery/dist/jquery.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/popper.js/dist/umd/popper.js" type="text/javascript"></script>
@@ -466,12 +464,11 @@
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
-<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
-
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/wnumb/wNumb.js" type="text/javascript">
+</script>
 
 <!--end:: Global Mandatory Vendors -->
-<link href="http://<?php echo APP_HOST; ?>/public/assets/js/autocomplete-empresa.js">
-<link href="http://<?php echo APP_HOST; ?>/public/assets/js/autocomplete-tecnologia.js">
+
 <!--begin:: Global Optional Vendors -->
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/block-ui/jquery.blockUI.js" type="text/javascript"></script>
