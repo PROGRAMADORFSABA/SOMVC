@@ -1,60 +1,63 @@
-<!--begin::Portlet-->
-<div class="container">
-    <br>
-    <center>
-        <h3>Cadastro de Fornecedor</h3>
-    </center>
-    <?php if ($Sessao::retornaErro()) { ?>
-    <div class="alert alert-warning" role="alert">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <?php foreach ($Sessao::retornaErro() as $key => $mensagem) { ?>
-        <?php echo $mensagem; ?> <br>
-        <?php } ?>
-    </div>
-    <?php } ?>
-    <!--begin::Form-->
-    <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/fornecedor/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
-        <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
-        <div class="kt-portlet__body">
-            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
-            <div class="kt-portlet__body">
+  <section id="main-content">
+    <section class="wrapper">
+      <div class="row">
+        <form class="form-horizontal" id="form_cadastro_empresa" method="POST" action="http://<?php echo APP_HOST; ?>/empresa/salvar">
+
+          <?php if($Sessao::retornaErro()){ ?>
+           <div class="col-lg-12">            
+            <div class="alert alert-danger" role="alert">                
+              <?php foreach($sessao::retornaErro() as $key => $mensagem){ ?>
+                <?php echo $mensagem; ?> <br>
+                <?php } ?>
+              </div>              
+            </div>             
+            <?php } ?>  
+            
+            <div class="col-lg-12">
+              <section class="panel panel-default">
+                <header class="panel-heading">
+                  Cadastro de nova Empresa
+                </header>
+                <div class="panel-body">                
+
+                 <div class="form-group">
+                  <label  class="col-lg-3 col-sm-3 control-label">Razão Social</label>
+                  <div class="col-lg-9">
+                    <div class="iconic-input right">
+                      <input type="text" name="razaoSocial" class="form-control" required value=<?php echo $viewVar['empresa']->getRazaoSocial(); ?> >
+                    </div>
+                  </div>
+                </div>
+
                 <div class="form-group">
-                    <label for="razaoSocial">Razao do Fornecedor</label>
-                    <input type="text" class="form-control" placeholder="Digite a Razao Social do Fornecedor" id="razaoSocial" name="razaoSocial" value="<?php echo $Sessao::retornaValorFormulario('razaoSocial'); ?>" required>
-                    <span class="form-text text-muted">Por favor insira a Razao Social do Fornecedor</span>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-8">
-                        <label>Nome Fantasia:</label>
-                        <input type="text" class="form-control" placeholder="Digite o Nome Fantasia" id="nomeFantasia" name="nomeFantasia" value="<?php echo $Sessao::retornaValorFormulario('nomeFantasia'); ?>" required>
-                        <span class="form-text text-muted">Por favor insira o Nome Fantasia</span>
+                  <label  class="col-lg-3 col-sm-3 control-label">Nome Fantasia</label>
+                  <div class="col-lg-9">
+                    <div class="iconic-input right">
+                      <input type="text" name="nomeFantasia" class="form-control" required value=<?php echo $viewVar['empresa']->getNomeFantasia(); ?>>
                     </div>
-                    <div class="col-lg-4">
-                        <label class="">Numero do CNPJ:</label>
-                        <input type="text" class="form-control" placeholder="Digite o numero do CNPJ" id="cnpj" name="cnpj" value="<?php echo $Sessao::retornaValorFormulario('cnpj'); ?>" required>
-                        <span class="form-text text-muted">Digite o numero do CNPJ</span>
-                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="kt-portlet__foot">
-                <div class="kt-form__actions">
-                    <div class="row">
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-8">
-                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Gravar</button>
-                            <a href="http://<?php echo APP_HOST; ?>/fornecedor" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
-                        </div>
+
+                <div class="form-group">
+                  <label  class="col-lg-3 col-sm-3 control-label">CNPJ</label>
+                  <div class="col-lg-9">
+                    <div class="iconic-input right">
+                      <input type="text" name="CNPJ" id="CNPJ" class="form-control" required value=<?php echo $viewVar['empresa']->getCNPJ(); ?>>                      
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </form>
-    <br>
-    <!--end::Form-->
-</div>
+              </div>
+            </section>
+          </div>
 
-<!--end::Portlet-->
-
-<!-- footer -->
-
-</div>
+          <div class="col-md-12">                      
+            <div align="right"> 
+              <a class="btn btn-success" href="http://<?php echo APP_HOST; ?>/empresa/listar">Voltar</a>
+              <button class="btn btn-info">Cadastrar</button>
+            </div>            
+          </div>
+          
+        </form>
+      </div>
+    </section>
+  </section>

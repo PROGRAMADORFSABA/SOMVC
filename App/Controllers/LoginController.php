@@ -46,7 +46,7 @@ class LoginController extends Controller
             $tempolimite = 3600;// duracao da sessao 1:00H
             $_SESSION['registro'] = time(); // armazena o momento em que autenticado ou atualiza a pagina//
             $_SESSION['limite'] = $tempolimite; 
-            $this->redirect('/');   
+            $this->redirect('/');
             exit;	
         }
         Sessao::limpaMensagem();

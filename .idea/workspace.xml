@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Services/FornecedorService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/ClienteFalta.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/FornecedorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/FornecedorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/FornecedorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/FornecedorDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/fornecedor/cadastro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/editar.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/fornecedor/editar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/exclusao.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/fornecedor/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -164,7 +169,9 @@
       <workItem from="1567637609841" duration="12309000" />
       <workItem from="1567727115139" duration="8476000" />
       <workItem from="1567854022415" duration="295000" />
-      <workItem from="1567854337224" duration="11091000" />
+      <workItem from="1567854337224" duration="13513000" />
+      <workItem from="1568069651039" duration="620000" />
+      <workItem from="1568070834246" duration="10069000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -250,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567890740704</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Cadastro de falta de pedido">
+      <created>1567903102544</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1567903102544</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -299,18 +313,8 @@
     <MESSAGE value="adcionando grafico" />
     <MESSAGE value="adcionando grafico - 2" />
     <MESSAGE value="ADD autoComplete em cliente" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD autoComplete em cliente" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/App/Controllers/FornecedorController.php</url>
-          <line>4</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Cadastro de falta de pedido" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cadastro de falta de pedido" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
