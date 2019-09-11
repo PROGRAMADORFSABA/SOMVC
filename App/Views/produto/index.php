@@ -173,13 +173,13 @@
                         foreach ($viewVar['listaProdutos'] as $produto) {
                             ?>
                             <tr>
-                                <td><?php echo $produto->getNome(); ?></td>
-                                <td>R$ <?php echo $produto->getPreco(); ?></td>
-                                <td><?php echo $produto->getQuantidade(); ?></td>
-                                <td><?php echo $produto->getDataCadastro()->format('d/m/Y'); ?></td>
+                                <td><?php echo $produto->getProNome(); ?></td>
+                                <td><?php echo $produto->getProNomeComercial(); ?></td>                                
+                                <td><?php echo $produto->getProDataCadastro()->format('d/m/Y'); ?></td>
+                                <td><?php echo $produto->getProDataCadastroAlteracao()->format('d/m/Y'); ?></td>
                                 <td>
-                                    <a href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getId(); ?>" class="btn btn-info btn-sm">Editar</a>
-                                    <a href="http://<?php echo APP_HOST; ?>/produto/exclusao/<?php echo $produto->getId(); ?>" class="btn btn-danger btn-sm">Excluir</a>
+                                    <a href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getProCod(); ?>" class="btn btn-info btn-sm">Editar</a>
+                                    <a href="http://<?php echo APP_HOST; ?>/produto/exclusao/<?php echo $produto->getProCod(); ?>" class="btn btn-danger btn-sm">Excluir</a>
                                 </td>
                             </tr>
                         <?php

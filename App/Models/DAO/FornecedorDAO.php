@@ -11,17 +11,17 @@ class FornecedorDAO extends BaseDAO
 
         if ($codFornecedor) {
             $resultado = $this->select(
-                "SELECT * FROM fornecedor WHERE codFornecedor = $codFornecedor"
+                "SELECT * FROM fornecedor WHERE fornecedor_cod = $codFornecedor"
             );
             $dado = $resultado->fetch();
 
             if ($dado) {
                 $fornecedor = new Fornecedor();
-                $fornecedor->setCodFornecedor($dado['codFornecedor']);
-                $fornecedor->setRazaoSocial($dado['razaoSocial']);
-                $fornecedor->setNomeFantasia($dado['nomeFantasia']);
-                $fornecedor->setCnpj($dado['cnpj']);
-                $fornecedor->setDataCadastro($dado['dataCadastro']);
+                $fornecedor->setCodFornecedor($dado['fornecedor_cod']);
+                $fornecedor->setRazaoSocial($dado['razaosocial']);
+                $fornecedor->setNomeFantasia($dado['nomefantasia']);
+                $fornecedor->setCnpj($dado['CNPJ']);
+                //$fornecedor->setDataCadastro($dado['dataCadastro']);
 
                 return $fornecedor;
             }
@@ -39,21 +39,17 @@ class FornecedorDAO extends BaseDAO
                 foreach ($dados as $dado) {
 
                     $fornecedor = new Fornecedor();
-                    $fornecedor->setCodFornecedor($dado['codFornecedor']);
-                    $fornecedor->setRazaoSocial($dado['razaoSocial']);
-                    $fornecedor->setNomeFantasia($dado['nomeFantasia']);
-                    $fornecedor->setCnpj($dado['cnpj']);
-                    $fornecedor->setDataCadastro($dado['dataCadastro']);
+                    $fornecedor->setCodFornecedor($dado['fornecedor_cod']);
+                    $fornecedor->setRazaoSocial($dado['razaosocial']);
+                    $fornecedor->setNomeFantasia($dado['nomefantasia']);
+                    $fornecedor->setCnpj($dado['CNPJ']);
+                    //$fornecedor->setDataCadastro($dado['dataCadastro']);
 
                     $lista[] = $fornecedor;
                 }
                 return $lista;
             }
-            /*
-        $resultado = $this->select(
-            "SELECT * FROM fornecedor ORDER BY razaoSocial"
-        );
-*/
+           
         }
 
         return false;
@@ -61,7 +57,7 @@ class FornecedorDAO extends BaseDAO
     public  function qtde()
     {
         $resultado = $this->select(
-            "SELECT COUNT(*) FROM fornecedor"            
+            "SELECT COUNT(*) FROM fornecedor"
         );
         $fornecedor = $resultado->fetch();
 
@@ -110,7 +106,7 @@ class FornecedorDAO extends BaseDAO
             
     }*/
         return $dados;
-       // return false;
+        // return false;
     }
 
 

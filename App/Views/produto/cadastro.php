@@ -15,10 +15,10 @@
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/produto/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
+        <input type="hidden" class="form-control" name="proUsuario" id="proUsuario" value="<?php echo $_SESSION['id']; ?>" required>
         <div class="kt-portlet__body">
             <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
             <input type="hidden" class="form-control" name="dataAlteracao" id="dataAlteracao" value="<?php echo $dataAtual; ?>" required>
-            <input type="hidden" class="form-control" name="proUsuario" id="proUsuario" value="<?php echo $codUsuario; ?>" required>
             <div class="kt-portlet__body">
                 <div class="form-group">
                     <label>Nome do Produto:</label>
@@ -36,8 +36,8 @@
                             <select class="form-control" name="proMarca" required>
                                 <option value="">Selecione a Marca</option>
                                 <?php foreach ($viewVar['listaMarcas'] as $marca) : ?>
-                                <option value="<?php echo $marca->getProMarca(); ?>" <?php echo ($Sessao::retornaValorFormulario('ProMarca') == $representante->getProMarca()) ? "selected" : ""; ?>>
-                                    <?php echo $parca->getNomeMarca(); ?></option>
+                                <option value="<?php echo $marca->getMarcaCod(); ?>" <?php echo ($Sessao::retornaValorFormulario('proMarca') == $representante->getMarcaCod()) ? "selected" : ""; ?>>
+                                    <?php echo $parca->getMarcaNome (); ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <span class="form-text text-muted">Por favor insira a Marca</span>
@@ -50,10 +50,10 @@
                             <select class="form-control" name="proFornecedor" required>
                                 <option value="">Selecione o Fornecedor</option>
                                 <?php foreach ($viewVar['listaFornecedores'] as $fornecedor) : ?>
-                                <option value="<?php echo $fornecedor->getProFornecedor(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $fornecedor->getProFornecedor()) ? "selected" : ""; ?>>
-                                    <?php echo $fornecedor->getNomeFornecedor(); ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                                <option value="<?php echo $fornecedor->getFornecedor_Cod(); ?>" <?php echo ($Sessao::retornaValorFormulario('proFornecedor') == $fornecedor->getFornecedor_Cod()) ? "selected" : ""; ?>>
+                                    <?php echo $fornecedor->getRazaoSocial(); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             <span class="form-text text-muted">Por favor insira o Fornecedor</span>
                         </div>
                     </div>

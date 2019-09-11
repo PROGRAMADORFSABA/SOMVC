@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Lib\Sessao;
 use App\Models\DAO\ProdutoDAO;
+use App\Models\DAO\MarcaDAO;
+use App\Models\DAO\FornecedorDAO;
 use App\Models\Entidades\Produto;
 use App\Models\Validacao\ProdutoValidador;
 use App\Models\Entidades\Usuario;
@@ -14,7 +16,7 @@ class ProdutoController extends Controller
     {
         $produtoDAO = new ProdutoDAO();
 
-        self::setViewParam('listaProdutos',$produtoDAO->listar());
+        self::setViewParam('listaProdutos', $produtoDAO->listar());
 
         $this->render('/produto/index');
 
@@ -25,6 +27,13 @@ class ProdutoController extends Controller
     {
         $this->render('/produto/cadastro');
 
+        $marcaDAO = new MarcaDAO();
+        self::setViewParam('listaMarcas', $marcaDAO->listar());
+        $fornecedorDAO = new FornecedorDAO();
+        self::setViewParam('listaFornecedores', $fornecedorDAO->listar());
+
+        $this->render('/produto/cadastro');
+
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
@@ -32,34 +41,36 @@ class ProdutoController extends Controller
 
     public function salvar()
     {
-        $Produto = new Produto();
-        $Produto->setNome($_POST['nome']);
-        $Produto->setPreco($_POST['preco']);
-        $Produto->setQuantidade($_POST['quantidade']);
-        $Produto->setDescricao($_POST['descricao']);
+        $produto = new Produto();
+        $Produto->setNome($_POST['proNome']);
+        $Produto->setProNomeComercial($_POST['proNomeComercial']);
+        $Produto->setProMarca($_POST['proMarca']);
+        $Produto->setProFornecedor($_POST['proFornecedor']);
+        $Produto->setProUsuario($_POST['proUsuario']);
+        $Produto->setProDataAlteracao($_POST['proDataAlteracao']);
+        $Produto->setProDataCadastro($_POST['proDataCadastro']);
 
         Sessao::gravaFormulario($_POST);
 
         $produtoValidador = new ProdutoValidador();
-        $resultadoValidacao = $produtoValidador->validar($Produto);
+        $resultadoValidacao = $produtoValidador->validar($produto);
 
-        if($resultadoValidacao->getErros()){
+        if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
             $this->redirect('/produto/cadastro');
         }
 
         $produtoDAO = new ProdutoDAO();
 
-        $produtoDAO->salvar($Produto);
-        
+        $produtoDAO->salvar($produto);
+
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
         $this->redirect('/produto');
-      
     }
-    
+
     public function edicao($params)
     {
         $id = $params[0];
@@ -68,17 +79,16 @@ class ProdutoController extends Controller
 
         $produto = $produtoDAO->listar($id);
 
-        if(!$produto){
+        if (!$produto) {
             Sessao::gravaMensagem("Produto inexistente");
             $this->redirect('/produto');
         }
 
-        self::setViewParam('produto',$produto);
+        self::setViewParam('produto', $produto);
 
         $this->render('/produto/editar');
 
         Sessao::limpaMensagem();
-
     }
 
     public function atualizar()
@@ -96,9 +106,9 @@ class ProdutoController extends Controller
         $produtoValidador = new ProdutoValidador();
         $resultadoValidacao = $produtoValidador->validar($Produto);
 
-        if($resultadoValidacao->getErros()){
+        if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/produto/edicao/'.$_POST['id']);
+            $this->redirect('/produto/edicao/' . $_POST['id']);
         }
 
         $produtoDAO = new ProdutoDAO();
@@ -110,9 +120,8 @@ class ProdutoController extends Controller
         Sessao::limpaErro();
 
         $this->redirect('/produto');
-
     }
-    
+
     public function exclusao($params)
     {
         $id = $params[0];
@@ -121,17 +130,16 @@ class ProdutoController extends Controller
 
         $produto = $produtoDAO->listar($id);
 
-        if(!$produto){
+        if (!$produto) {
             Sessao::gravaMensagem("Produto inexistente");
             $this->redirect('/produto');
         }
 
-        self::setViewParam('produto',$produto);
+        self::setViewParam('produto', $produto);
 
         $this->render('/produto/exclusao');
 
         Sessao::limpaMensagem();
-
     }
 
     public function excluir()
@@ -141,7 +149,7 @@ class ProdutoController extends Controller
 
         $produtoDAO = new ProdutoDAO();
 
-        if(!$produtoDAO->excluir($Produto)){
+        if (!$produtoDAO->excluir($Produto)) {
             Sessao::gravaMensagem("Produto inexistente");
             $this->redirect('/produto');
         }
@@ -149,6 +157,5 @@ class ProdutoController extends Controller
         Sessao::gravaMensagem("Produto excluido com sucesso!");
 
         $this->redirect('/produto');
-
     }
 }
