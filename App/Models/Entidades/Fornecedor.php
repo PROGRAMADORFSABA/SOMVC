@@ -8,10 +8,10 @@
     class Fornecedor
     {
         private $fornecedor_cod;
-        private $razaoSocial;
-        private $nomeFantasia;
-        private $cnpj;
-        private $dataCadastro;
+        private $forRazaoSocial;
+        private $forNomeFantasia;
+        private $forCnpj;
+        private $forDataCadastro;
     
         /**
          * @return mixed
@@ -32,66 +32,66 @@
         /**
          * @return mixed
          */
-        public function getRazaoSocial()
+        public function getForRazaoSocial()
         {
-            return $this->razaoSocial;
+            return $this->forRazaoSocial;
         }
     
         /**
-         * @param mixed $razaoSocial
+         * @param mixed $forRazaoSocial
          */
-        public function setRazaoSocial($razaoSocial)
+        public function setForRazaoSocial($forRazaoSocial)
         {
-            $this->razaoSocial = $razaoSocial;
-        }
-    
-        /**
-         * @return mixed
-         */
-        public function getNomeFantasia()
-        {
-            return $this->nomeFantasia;
-        }
-    
-        /**
-         * @param mixed $nomeFantasia
-         */
-        public function setNomeFantasia($nomeFantasia)
-        {
-            $this->nomeFantasia = $nomeFantasia;
+            $this->forRazaoSocial = $forRazaoSocial;
         }
     
         /**
          * @return mixed
          */
-        public function getCnpj()
+        public function getForNomeFantasia()
         {
-            return $this->cnpj;
+            return $this->forNomeFantasia;
         }
     
         /**
-         * @param mixed $cnpj
+         * @param mixed $forNomeFantasia
          */
-        public function setCnpj($cnpj)
+        public function setForNomeFantasia($forNomeFantasia)
         {
-            $this->cnpj = $cnpj;
+            $this->forNomeFantasia = $forNomeFantasia;
+        }
+    
+        /**
+         * @return mixed
+         */
+        public function getForCnpj()
+        {
+            return $this->forCnpj;
+        }
+    
+        /**
+         * @param mixed $forCnpj
+         */
+        public function setForCnpj($forCnpj)
+        {
+            $this->forCnpj = $forCnpj;
         }
     
         /**
          * @return mixed
          * @throws \Exception
          */
-        public function getDataCadastro()
+        public function getForDataCadastro()
         {
-            return new DateTime($this->dataCadastro);
+            return new DateTime($this->forDataCadastro);
         }
     
         /**
-         * @param mixed $dataCadastro
+         * @param mixed $forDataCadastro
          */
-        public function setDataCadastro($dataCadastro)
+        public function setForDataCadastro($forDataCadastro)
         {
-            $this->dataCadastro = $dataCadastro;
+            $this->forDataCadastro = $forDataCadastro;
         }
         
     }

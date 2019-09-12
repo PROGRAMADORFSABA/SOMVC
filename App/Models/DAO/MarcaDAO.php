@@ -6,7 +6,8 @@ use App\Models\Entidades\Marca;
 
 class MarcaDAO extends BaseDAO
 {
-    public  function listar($id = null) {
+    public  function listar($id = null)
+    {
 
         if ($id) {
             $resultado = $this->select(
@@ -15,10 +16,10 @@ class MarcaDAO extends BaseDAO
             $dado = $resultado->fetch();
 
             if ($dado) {
-               $marca = new Marca();
-               $marca->setMarcaCod($dado['marcaFalta_cod']);
-               $marca->setMarcaNome($dado['nome_Marca']);
-               
+                $marca = new Marca();
+                $marca->setMarcaCod($dado['marcaFalta_cod']);
+                $marca->setMarcaNome($dado['nome_Marca']);
+
                 return $marca;
             }
         } else {
@@ -35,9 +36,9 @@ class MarcaDAO extends BaseDAO
                 foreach ($dados as $dado) {
 
                     $marca = new Marca();
-               $marca->setMarcaCod($dado['marcaFalta_cod']);
-               $marca->setMarcaNome($dado['nome_Marca']);
-               
+                    $marca->setMarcaCod($dado['marcaFalta_cod']);
+                    $marca->setMarcaNome($dado['nome_Marca']);
+
                     $lista[] = $marca;
                 }
                 return $lista;
@@ -47,7 +48,7 @@ class MarcaDAO extends BaseDAO
         return false;
     }
 
-   /* public  function salvar(Sla $sla)
+    /* public  function salvar(Sla $sla)
     {
         try {
 

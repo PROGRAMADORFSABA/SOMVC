@@ -1,195 +1,145 @@
-						<!-- begin:: Content -->
-						<div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-
-							<!--begin::Portlet-->
-							<div class="kt-portlet">
-								<div class="kt-portlet__head">
-									<div class="kt-portlet__head-label">
-										<h3 class="kt-portlet__head-title">
-											Bootstrap Switch Examples
-										</h3>
-									</div>
-								</div>
-
-								<!--begin::Form-->
-								<form class="kt-form kt-form--label-right">
-									<div class="kt-portlet__body">
-										<div class="form-group row">
-											<label class="col-form-label col-lg-3 col-sm-12">Basic Example</label>
-											<div class="col-lg-9 col-md-9 col-sm-12">
-												<input data-switch="true" type="checkbox" checked="checked" id="kt_switch_1">
-												<input data-switch="true" type="checkbox" id="kt_switch_1">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-form-label col-lg-3 col-sm-12">State Colors</label>
-											<div class="col-lg-9 col-md-9 col-sm-12">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-color="success" data-off-color="warning">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-color="brand">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-color="danger">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-color="info">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-form-label col-lg-3 col-sm-12">Custom Label</label>
-											<div class="col-lg-9 col-md-9 col-sm-12">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-text="True" data-handle-width="50" data-off-text="False" data-on-color="success">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-text="1" data-handle-width="30" data-off-text="0" data-on-color="info">
-												<input data-switch="true" type="checkbox" checked="checked" data-on-text="Enabled" data-handle-width="70" data-off-text="Disabled" data-on-color="brand">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-form-label col-lg-3 col-sm-12">Disabled State</label>
-											<div class="col-lg-9 col-md-9 col-sm-12">
-												<input data-switch="true" type="checkbox" checked="checked" disabled>
-												<input data-switch="true" type="checkbox" disabled>
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-form-label col-lg-3 col-sm-12">Sizing</label>
-											<div class="col-lg-9 col-md-9 col-sm-12">
-												<input data-switch="true" data-size="small" type="checkbox" checked="checked">
-												<input data-switch="true" type="checkbox" checked="checked">
-												<input data-switch="true" data-size="large" type="checkbox" checked="checked">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-form-label col-lg-3 col-sm-12">Modal Demos</label>
-											<div class="col-lg-9 col-md-9 col-sm-12">
-												<a href="" class="btn btn-outline-danger success btn-pill" data-toggle="modal" data-target="#kt_switch_modal">Launch switches on modal</a>
-											</div>
-										</div>
-									</div>
-									<div class="kt-portlet__foot">
-										<div class="kt-form__actions">
-											<div class="row">
-												<div class="col-lg-9 ml-lg-auto">
-													<button type="reset" class="btn btn-brand">Submit</button>
-													<button type="reset" class="btn btn-secondary">Cancel</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</form>
-
-								<!--end::Form-->
-							</div>
-
-							<!--end::Portlet-->
-
-							<!--begin::Modal-->
-							<div class="modal fade" id="kt_switch_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-								<div class="modal-dialog modal-lg" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="">Bootstrap Switch Examples</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true" class="la la-remove"></span>
-											</button>
-										</div>
-										<form class="kt-form kt-form--fit kt-form--label-right">
-											<div class="modal-body">
-												<div class="form-group row kt-margin-t-20">
-													<label class="col-form-label col-lg-3 col-sm-12">Basic Example</label>
-													<div class="col-lg-9 col-md-9 col-sm-12">
-														<input data-switch="true" type="checkbox" checked="checked" id="kt_switch_1">
-														<input data-switch="true" type="checkbox" id="kt_switch_1">
-													</div>
-												</div>
-												<div class="form-group row">
-													<label class="col-form-label col-lg-3 col-sm-12">State Colors</label>
-													<div class="col-lg-9 col-md-9 col-sm-12">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-color="success" data-off-color="warning">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-color="brand">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-color="danger">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-color="info">
-													</div>
-												</div>
-												<div class="form-group row">
-													<label class="col-form-label col-lg-3 col-sm-12">Custom Label</label>
-													<div class="col-lg-9 col-md-9 col-sm-12">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-text="True" data-off-text="False" data-on-color="success">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-text="1" data-off-text="0" data-on-color="info">
-														<input data-switch="true" type="checkbox" checked="checked" data-on-text="Enabled" data-off-text="Disabled" data-on-color="brand">
-													</div>
-												</div>
-												<div class="form-group row kt-margin-b-20">
-													<label class="col-form-label col-lg-3 col-sm-12">Disabled State</label>
-													<div class="col-lg-9 col-md-9 col-sm-12">
-														<input data-switch="true" type="checkbox" checked="checked" disabled>
-														<input data-switch="true" type="checkbox" disabled>
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-brand" data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-secondary">Submit</button>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-
-							<!--end::Modal-->
-
-
-
-
 <!-- begin:: Content -->
+<div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
-<div class="container">
-    <div class="row">
-        <br>
-        <div class="col-md-12">
-            <a href="http://<?php echo APP_HOST; ?>/produto/cadastro" class="btn btn-success btn-sm">Adicionar</a>
-            <hr>
-        </div>
-        <div class="col-md-12">
-            <?php if ($Sessao::retornaMensagem()) { ?>
-                <div  class="alert alert-success" role="alert">
-				<i class="flaticon-warning"></i>
-                    <?php echo $Sessao::retornaMensagem(); ?><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    Pesquisa de coluna individual
+                </h3>
+                <?php if ($Sessao::retornaMensagem()) { ?>
+                    <div class="alert alert-warning" role="alert">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <?php echo $Sessao::retornaMensagem(); ?>
+                    </div>
+                <?php } ?>
+            </div>
+            <div class="kt-portlet__head-toolbar">
+                <div class="kt-portlet__head-wrapper">
+                    <div class="kt-portlet__head-actions">
+                        <div class="dropdown dropdown-inline">
+                            <button type="button" class="btn btn-default btn-icon-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="la la-download"></i> Exportar
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__section kt-nav__section--first">
+                                        <span class="kt-nav__section-text">Escolha uma opção</span>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon la la-print"></i>
+                                            <span class="kt-nav__link-text">Imprimir</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon la la-copy"></i>
+                                            <span class="kt-nav__link-text">copiar</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon la la-file-excel-o"></i>
+                                            <span class="kt-nav__link-text">Excel</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon la la-file-text-o"></i>
+                                            <span class="kt-nav__link-text">CSV</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon la la-file-pdf-o"></i>
+                                            <span class="kt-nav__link-text">PDF</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        &nbsp;
+                        <a href="http://<?php echo APP_HOST; ?>/produto/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                            <i class="la la-plus"></i>
+                            Novo produto
+
+                        </a>
+                    </div>
                 </div>
-            <?php } ?>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <!--begin: Datatable -->
+            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_3">
+                <thead>
+                    <tr>
+                        <th>CÓDIGO</th>
+                        <th>NOME</th>
+                        <th>NOME COMERCIAL</th>
+                        <th>MARCA</th>
+                        <th>FORNECEDOR</th>
+                        <th>CADASTRO</th>
+                        <th>ALTERACAO</th>
+                        <th>Acoes</th>
 
-            <?php
-            if (!count($viewVar['listaProdutos'])) {
-                ?>
-                <div class="alert alert-info" role="alert">Nenhum produto encontrado</div>
-            <?php
-        } else {
-            ?>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <tr>
-                            <td class="info">Nome</td>
-                            <td class="info">Preço</td>
-                            <td class="info">Quantidade</td>
-                            <td class="info">Data Cadastro</td>
-                            <td class="info"></td>
-                        </tr>
-                        <?php
-                        foreach ($viewVar['listaProdutos'] as $produto) {
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>CÓDIGO</th>
+                        <th>Nome</th>
+                        <th>NOME COMERCIAL</th>
+                        <th>MARCA</th>
+                        <th>FORNECEDOR</th>
+                        <th>CADASTRO</th>
+                        <th>ALTERACAO</th>
+                        <th>Acoes</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <?php
+                    $dados = $viewVar['listaProdutos'];
+                    if ($dados > 0) {
+                        foreach ($dados as $produto) {
                             ?>
                             <tr>
+                                <td><?php echo $produto->getProCodigo(); ?></td>
                                 <td><?php echo $produto->getProNome(); ?></td>
-                                <td><?php echo $produto->getProNomeComercial(); ?></td>                                
-                                <td><?php echo $produto->getProDataCadastro()->format('d/m/Y'); ?></td>
-                                <td><?php echo $produto->getProDataCadastroAlteracao()->format('d/m/Y'); ?></td>
+                                <td><?php echo $produto->getProNomeComercial(); ?></td>
+                                <td><?php echo $produto->getMarca()->getMarcaNome(); ?></td>
+                                <td><?php echo $produto->getFornecedor()->getForRazaoSocial(); ?></td>
+                                <td><?php echo $produto->getProDataCadastro()->format('d/m/Y H:m:s'); ?></td>
+                                <td><?php echo $produto->getProDataAlteracao()->format('d/m/Y H:m:s'); ?></td>
                                 <td>
-                                    <a href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getProCod(); ?>" class="btn btn-info btn-sm">Editar</a>
-                                    <a href="http://<?php echo APP_HOST; ?>/produto/exclusao/<?php echo $produto->getProCod(); ?>" class="btn btn-danger btn-sm">Excluir</a>
+                                    <span class="dropdown">
+                                        <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getProCodigo(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/produto/exclusao/<?php echo $produto->getProCodigo(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getProCodigo(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getProCodigo(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                        </div>
+                                    </span>
+                                    <a href="http://<?php echo APP_HOST; ?>/produto/edicao/<?php echo $produto->getProCodigo(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                    <a href="http://<?php echo APP_HOST; ?>/produto/exclusao/<?php echo $produto->getProCodigo(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
                                 </td>
-                            </tr>
                         <?php
-                    }
-                    ?>
-                    </table>
-                </div>
-            <?php
-        }
-        ?>
+                            }
+                        } else {
+
+                            echo "<h3 class='kt-portlet__head-title'><p class='text-danger'>Nenhum Dado Encontrado!</p></h3>";
+                        }
+                        ?>
+                            </tr>
+                </tbody>
+               
+            </table>
+
+            <!--end: Datatable -->
         </div>
     </div>
 </div>

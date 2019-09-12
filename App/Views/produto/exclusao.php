@@ -15,15 +15,15 @@
             <?php } ?>
 
             <form action="http://<?php echo APP_HOST; ?>/produto/excluir" method="post" id="form_cadastro">
-                <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $viewVar['produto']->getId(); ?>">
+                <input type="hidden" class="form-control" name="proCodigo" id="proCodigo" value="<?php echo $viewVar['produto']->getProCodigo(); ?>">
 
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">
-                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o produto: <?php echo $viewVar['produto']->getNome(); ?> ?</h4>
+                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o produto: <?php echo $viewVar['produto']->getProNome(); ?> ?</h4>
                     </div>
                     <div class="panel-footer"> 
                         <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
-                        <a href="http://<?php echo APP_HOST; ?>/produto" class="btn btn-info btn-sm">Voltar</a>
+                        <a href="http://<?php echo APP_HOST; ?>/produto" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                     </div>
                 </div>
             </form>

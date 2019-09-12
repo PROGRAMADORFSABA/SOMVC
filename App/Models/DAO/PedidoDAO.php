@@ -61,7 +61,7 @@ class PedidoDAO extends BaseDAO
                 }
                 return $lista;
                 print json_encode($lista);
-                var_dump($lista);
+          
             }
         } else {
             $resultado = $this->select(

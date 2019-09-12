@@ -11,24 +11,24 @@ class ProdutoValidador{
     {
         $resultadoValidacao = new ResultadoValidacao();
 
-        if(empty($produto->getNome()))
+        if(empty($produto->getProNome()))
         {
-            $resultadoValidacao->addErro('nome',"Nome: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('proNome',"Nome: Este campo não pode ser vazio");
         }
         
-        if(empty($produto->getPreco()))
+        if(empty($produto->getProNomeComercial()))
         {
-            $resultadoValidacao->addErro('preco',"Preço: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('proNomeComercial',"Nome Comercial: Este campo não pode ser vazio");
         }
 
-        if(empty($produto->getQuantidade()))
+        if(empty($produto->getProMarca()))
         {
-            $resultadoValidacao->addErro('quantidade',"Quantidade: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('proMarca',"Marca: Este campo não pode ser vazio");
         }
 
-        if(empty($produto->getDescricao()))
+        if(empty($produto->getProFornecedor()))
         {
-            $resultadoValidacao->addErro('descricao',"Descrição: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('proFornecedor',"Fornecedor: Este campo não pode ser vazio");
         }
 
         return $resultadoValidacao;

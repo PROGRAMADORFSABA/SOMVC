@@ -11,7 +11,6 @@ class Produto
     private $proNomeComercial;
     private $proDataCadastro;
     private $proDataAlteracao;
-    private $proPreco;
     
     private $proUsuario;
     private $proFornecedor;
@@ -39,11 +38,6 @@ ProCodigo - ProNome - ProNomeComercial - ProUsuario - ProMarca - ProFornecedor -
     {
         return $this->usuario;
     }
-
-
-
-
-
 
     public function getProCodigo()
     {
@@ -73,26 +67,6 @@ ProCodigo - ProNome - ProNomeComercial - ProUsuario - ProMarca - ProFornecedor -
     public function setProNomeComercial($proNomeComercial)
     {
         $this->proNomeComercial = $proNomeComercial;
-    }
-
-    public function getProPreco()
-    {
-        return $this->proPreco;
-    }
-
-    public function setProPreco($proPreco)
-    {
-        $this->proPreco = $proPreco;
-    }
-
-    public function getQuantidade()
-    {
-        return $this->quantidade;
-    }
-
-    public function setQuantidade($quantidade)
-    {
-        $this->quantidade = $quantidade;
     }
     
     public function getProDataCadastro()

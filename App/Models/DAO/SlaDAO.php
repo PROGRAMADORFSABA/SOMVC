@@ -46,6 +46,7 @@ class SlaDAO extends BaseDAO
 
                     $lista[] = $sla;
                 }
+                
                 return $lista;
             }
         }

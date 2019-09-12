@@ -1,7 +1,8 @@
 
 <?php
 date_default_timezone_set('America/Bahia');
-$dataAtual = date('Y-m-d H:i:s');
+$dataAtual = date('Y-m-d H:i:s');	
+
 ?>
 
 <!DOCTYPE html>

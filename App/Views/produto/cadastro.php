@@ -36,11 +36,11 @@
                             <select class="form-control" name="proMarca" required>
                                 <option value="">Selecione a Marca</option>
                                 <?php foreach ($viewVar['listaMarcas'] as $marca) : ?>
-                                <option value="<?php echo $marca->getMarcaCod(); ?>" <?php echo ($Sessao::retornaValorFormulario('proMarca') == $representante->getMarcaCod()) ? "selected" : ""; ?>>
-                                    <?php echo $parca->getMarcaNome (); ?></option>
+                                <option value="<?php echo $marca->getMarcaCod(); ?>" <?php echo ($Sessao::retornaValorFormulario('proMarca') == $marca->getMarcaCod()) ? "selected" : ""; ?>>
+                                    <?php echo $marca->getMarcaNome (); ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <span class="form-text text-muted">Por favor insira a Marca</span>
+                            <span class="form-text text-muted">Por Favor Insira a Marca</span>
                         </div>
                     </div>
                 </div>
@@ -51,9 +51,9 @@
                                 <option value="">Selecione o Fornecedor</option>
                                 <?php foreach ($viewVar['listaFornecedores'] as $fornecedor) : ?>
                                 <option value="<?php echo $fornecedor->getFornecedor_Cod(); ?>" <?php echo ($Sessao::retornaValorFormulario('proFornecedor') == $fornecedor->getFornecedor_Cod()) ? "selected" : ""; ?>>
-                                    <?php echo $fornecedor->getRazaoSocial(); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <?php echo $fornecedor->getForRazaoSocial(); ?></option>
+                                <?php endforeach; ?>
+                            </select>                            
                             <span class="form-text text-muted">Por favor insira o Fornecedor</span>
                         </div>
                     </div>
@@ -65,8 +65,8 @@
                     <div class="row">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
-                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Enviar</button>
-                            <a href="http://<?php echo APP_HOST; ?>/pedido" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                            <button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
+                            <a href="http://<?php echo APP_HOST; ?>/produto" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>
                 </div>

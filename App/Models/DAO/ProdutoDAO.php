@@ -6,87 +6,152 @@ use App\Models\Entidades\Produto;
 
 class ProdutoDAO extends BaseDAO
 {
-    public  function listar($id = null)
+    public  function listar($proCodigo = null)
     {
-        if($id) {
+        if ($proCodigo) {
             $resultado = $this->select(
-                "SELECT * FROM Produto WHERE id = $id"
+                "SELECT * FROM Produto p
+                inner join marcaFalta m on m.marcaFalta_cod = p.ProMarca
+                inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
+                inner join usuarios u on u.id = p.ProUsuario WHERE p.ProCodigo = $proCodigo"
             );
 
-            return $resultado->fetchObject(Produto::class);
-        }else{
+            $dado = $resultado->fetch();
+            if ($dado) {
+                $produto = new Produto();
+                $produto->setProCodigo($dado['ProCodigo']);
+                $produto->setProNome($dado['ProNome']);
+                $produto->setProNomeComercial($dado['ProNomeComercial']);
+                $produto->setProDataAlteracao($dado['ProDataAlteracao']);
+                $produto->setProDataCadastro($dado['ProDataCadastro']);
+                $produto->getProMarca($dado['ProMarca']);
+                $produto->getMarca()->setMarcaCod($dado['marcaFalta_cod']);
+                $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
+                $produto->setProFornecedor($dado['ProFornecedor']);
+                $produto->getFornecedor()->setFornecedor_Cod($dado['fornecedor_cod']);
+                $produto->getFornecedor()->setForNomeFantasia($dado['nomefantasia']);
+                $produto->getFornecedor()->setForRazaoSocial($dado['razaosocial']);
+                $produto->getFornecedor()->setForCnpj($dado['CNPJ']);
+                $produto->getUsuario($dado['ProUsuario']);
+                $produto->getUsuario()->setNome($dado['nome']);
+                $produto->getUsuario()->setEmail($dado['email']);
+
+                return $produto;
+
+            }
+        } else {
+
             $resultado = $this->select(
-                'SELECT * FROM Produto'
+                "SELECT * FROM Produto p
+                inner join marcaFalta m on m.marcaFalta_cod = p.ProMarca
+                inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
+                inner join usuarios u on u.id = p.ProUsuario "
             );
-            return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);
+            $dados = $resultado->fetchAll();
+
+            if ($dados) {
+
+                $lista = [];
+                foreach ($dados as $dado) {
+
+                    $produto = new Produto();
+                    $produto->setProCodigo($dado['ProCodigo']);
+                    $produto->setProNome($dado['ProNome']);
+                    $produto->setProNomeComercial($dado['ProNomeComercial']);
+                    $produto->setProDataAlteracao($dado['ProDataAlteracao']);
+                    $produto->setProDataCadastro($dado['ProDataCadastro']);
+                    $produto->setProMarca($dado['ProMarca']);
+                    $produto->getMarca()->setMarcaCod($dado['marcaFalta_cod']);
+                    $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
+                    $produto->setProFornecedor($dado['ProFornecedor']);
+                    $produto->getFornecedor()->setFornecedor_Cod($dado['fornecedor_cod']);
+                    $produto->getFornecedor()->setForNomeFantasia($dado['nomefantasia']);
+                    $produto->getFornecedor()->setForRazaoSocial($dado['razaosocial']);
+                    $produto->getFornecedor()->setForCnpj($dado['CNPJ']);
+
+                    $lista[] = $produto;
+                }
+                return $lista;
+            }
+
+            return false;
         }
-
-        return false;
     }
 
-    public  function salvar(Produto $produto) 
+    public  function salvar(Produto $produto)
     {
         try {
 
-            $nome           = $produto->getNome();
-            $preco          = $produto->getPreco();
-            $quantidade     = $produto->getQuantidade();
-            $descricao      = $produto->getDescricao();
+            $proNome           = $produto->getProNome();
+            $proNomeComercial          = $produto->getProNomeComercial();
+            $proFornecedor          = $produto->getProFornecedor();
+            $proMarca          = $produto->getProMarca();
+            $proUsuario          = $produto->getProUsuario();
+            $date     = $produto->getProDataAlteracao();
+            $date1     = $produto->getProDataCadastro();
+            $proDataCadastro =   date_format($date1, 'Y-m-d H:i:s');
+            $proDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
 
             return $this->insert(
                 'Produto',
-                ":nome,:preco,:quantidade,:descricao",
+                ":proNome,:proNomeComercial,:proFornecedor,:proMarca,:proUsuario,:proDataAlteracao,:proDataCadastro",
                 [
-                    ':nome'=>$nome,
-                    ':preco'=>$preco,
-                    ':quantidade'=>$quantidade,
-                    ':descricao'=>$descricao
+                    ':proNome' => $proNome,
+                    ':proNomeComercial' => $proNomeComercial,
+                    ':proFornecedor' => $proFornecedor,
+                    ':proMarca' => $proMarca,
+                    ':proUsuario' => $proUsuario,
+                    ':proDataAlteracao' => $proDataAlteracao,
+                    ':proDataCadastro' => $proDataCadastro
                 ]
             );
-
-        }catch (\Exception $e){
-            throw new \Exception("Erro na gravação de dados.", 500);
+        } catch (\Exception $e) {
+            throw new \Exception("Erro na gravação de dados. " . $e, 500);
         }
     }
-
-    public  function atualizar(Produto $produto) 
+    
+    public  function atualizar(Produto $produto)
     {
         try {
-
-            $id             = $produto->getId();
-            $nome           = $produto->getNome();
-            $preco          = $produto->getPreco();
-            $quantidade     = $produto->getQuantidade();
-            $descricao      = $produto->getDescricao();
+            
+            $proCodigo         = $produto->getProCodigo();
+            $proNome           = $produto->getProNome();
+            $proNomeComercial          = $produto->getProNomeComercial();
+            $proFornecedor          = $produto->getProFornecedor();
+            $proMarca          = $produto->getProMarca();
+            $proUsuario          = $produto->getProUsuario();
+            $date               = $produto->getProDataAlteracao();
+            $proDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
 
             return $this->update(
                 'Produto',
-                "nome = :nome, preco = :preco, quantidade = :quantidade, descricao = :descricao",
+                "proNome = :proNome, proNomeComercial = :proNomeComercial, proFornecedor = :proFornecedor, proMarca = :proMarca, proUsuario = :proUsuario, proDataAlteracao = :proDataAlteracao",
                 [
-                    ':id'=>$id,
-                    ':nome'=>$nome,
-                    ':preco'=>$preco,
-                    ':quantidade'=>$quantidade,
-                    ':descricao'=>$descricao,
+                    ':proCodigo' => $proCodigo,
+                    ':proNome' => $proNome,
+                    ':proNomeComercial' => $proNomeComercial,
+                    ':proFornecedor' => $proFornecedor,
+                    ':proMarca' => $proMarca,
+                    ':proUsuario' => $proUsuario,
+                    ':proDataAlteracao' => $proDataAlteracao,                    
                 ],
-                "id = :id"
+                "proCodigo = :proCodigo"
             );
-
-        }catch (\Exception $e){
-            throw new \Exception("Erro na gravação de dados.", 500);
+        } catch (\Exception $e) {
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }
 
     public function excluir(Produto $produto)
     {
         try {
-            $id = $produto->getId();
+            $proCodigo = $produto->getProCodigo();
 
-            return $this->delete('Produto',"id = $id");
-
-        }catch (Exception $e){
+            return $this->delete('Produto', "proCodigo = $proCodigo");
+        } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);
         }
     }
+
 }
