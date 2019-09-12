@@ -34,6 +34,7 @@ $dataAtual = date('Y-m-d H:i:s');
 	<link href="//www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" />
 
 	<!--begin::Page Vendors Styles(used by this page) -->
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/error/error-v2.default.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/login/login-v4.default.css" rel="stylesheet" type="text/css" />

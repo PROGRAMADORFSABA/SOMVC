@@ -13,7 +13,7 @@
             <?php } ?>
 
             <form action="http://<?php echo APP_HOST; ?>/fornecedor/excluir" method="post" id="form_cadastro">
-                <input type="hidden" class="form-control" name="codFornecedor" id="codFornecedor" value="<?php echo $viewVar['fornecedor']->getCodFornecedor(); ?>">
+                <input type="hidden" class="form-control" name="codFornecedor" id="codFornecedor" value="<?php echo $viewVar['fornecedor']->getFornecedor_Cod(); ?>">
 
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">
