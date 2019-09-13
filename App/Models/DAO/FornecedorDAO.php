@@ -6,22 +6,22 @@ use App\Models\Entidades\Fornecedor;
 
 class FornecedorDAO extends BaseDAO
 {
-    public  function listar($codFornecedor = null)
+    public  function listar($fornecedor_cod = null)
     {
 
-        if ($codFornecedor) {
+        if ($fornecedor_cod) {
             $resultado = $this->select(
-                "SELECT * FROM fornecedor WHERE fornecedor_cod = $codFornecedor"
+                "SELECT * FROM fornecedor WHERE fornecedor_cod = $fornecedor_cod"
             );
             $dado = $resultado->fetch();
 
             if ($dado) {
                 $fornecedor = new Fornecedor();
-                $fornecedor->setCodFornecedor($dado['fornecedor_cod']);
-                $fornecedor->setForRazaoSocial($dado['razaosocial']);
-                $fornecedor->setForNomeFantasia($dado['nomefantasia']);
-                $fornecedor->setForCnpj($dado['CNPJ']);
-                //$fornecedor->setForDataCadastro($dado['dataCadastro']);
+                $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
+                $fornecedor->setRazaoSocial($dado['razaosocial']);
+                $fornecedor->setNomeFantasia($dado['nomefantasia']);
+                $fornecedor->setCnpj($dado['CNPJ']);
+                //$fornecedor->setDataCadastro($dado['dataCadastro']);
 
                 return $fornecedor;
             }
@@ -39,12 +39,12 @@ class FornecedorDAO extends BaseDAO
                 foreach ($dados as $dado) {
 
                     $fornecedor = new Fornecedor();
-                   $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
-                   $fornecedor->setForRazaoSocial($dado['razaosocial']);
-                   $fornecedor->setForNomeFantasia($dado['nomefantasia']);
-                   $fornecedor->setForCnpj($dado['CNPJ']);
-                   //$fornecedor->setForDataCadastro($dado['dataCadastro']);
-                   
+                    $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
+                    $fornecedor->setRazaoSocial($dado['razaosocial']);
+                    $fornecedor->setNomeFantasia($dado['nomefantasia']);
+                    $fornecedor->setCnpj($dado['CNPJ']);
+                    //$fornecedor->setDataCadastro($dado['dataCadastro']);
+
                     $lista[] = $fornecedor;
                 }
              
