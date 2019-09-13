@@ -135,11 +135,51 @@
 													</ul>
 												</div>
 											</li>
+											
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Produto</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "ProdutoController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Produto/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "ProdutoController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Produto/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+													</ul>
+												</div>
+											</li>
+											
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Usuario</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "UsuarioController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Usuario/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "UsuarioController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Usuario/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+													</ul>
+												</div>
+											</li>
+
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Fornecedor</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "FornecedorController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Fornecedor/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "FornecedorController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Fornecedor/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+													</ul>
+												</div>
+											</li>
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Marca</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "MarcaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Marca/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "MarcaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/Marca/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+													</ul>
+												</div>
+											</li>
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Falta Pedido</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "PedidoFaltaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/PedidoFalta/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "PedidoFaltaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/PedidoFalta/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+													</ul>
+												</div>
+											</li>
 
 
-											<li <?php if ($viewVar['nameController'] == "UsuarioController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/usuario/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro de Usuário</span></a></li>
-											<li <?php if ($viewVar['nameController'] == "FornecedorController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/fornecedor/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro de Fornecedor</span></a></li>
-											<li <?php if ($viewVar['nameController'] == "ProdutoController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/produto/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro de Produto</span></a></li>
 											<li class="kt-menu__item " aria-haspopup="true"><a href="layout_subheader_actions.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Ações Botões</span></a></li>
 											<li class="kt-menu__item " aria-haspopup="true"><a href="layout_subheader_tabbed.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Navegação com guias</span></a></li>
 											<li class="kt-menu__item " aria-haspopup="true"><a href="layout_subheader_classic.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Clássico</span></a></li>

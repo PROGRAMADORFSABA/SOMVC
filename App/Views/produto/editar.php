@@ -16,7 +16,7 @@
 
     <form action="http://<?php echo APP_HOST; ?>/produto/atualizar" method="post" id="form_cadastro">
         <input type="hidden" class="form-control" name="proCodigo" proCodigo="proCodigo" value="<?php echo $viewVar['produto']->getProCodigo(); ?>">
-        <input type="text" class="form-control" name="dataAlteracao" id="dataAlteracao" value="<?php echo $dataAtual; ?>" required>
+        <input type="hidden" class="form-control" name="dataAlteracao" id="dataAlteracao" value="<?php echo $dataAtual; ?>" required>
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
         <input type="hidden" class="form-control" name="proUsuario" id="proUsuario" value="<?php echo $_SESSION['id']; ?>" required>
         

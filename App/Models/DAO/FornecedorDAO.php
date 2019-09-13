@@ -17,11 +17,11 @@ class FornecedorDAO extends BaseDAO
 
             if ($dado) {
                 $fornecedor = new Fornecedor();
-                $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
-                $fornecedor->setRazaoSocial($dado['razaosocial']);
-                $fornecedor->setNomeFantasia($dado['nomefantasia']);
-                $fornecedor->setCnpj($dado['CNPJ']);
-                //$fornecedor->setDataCadastro($dado['dataCadastro']);
+                $fornecedor->setCodFornecedor($dado['fornecedor_cod']);
+                $fornecedor->setForRazaoSocial($dado['razaosocial']);
+                $fornecedor->setForNomeFantasia($dado['nomefantasia']);
+                $fornecedor->setForCnpj($dado['CNPJ']);
+                //$fornecedor->setForDataCadastro($dado['dataCadastro']);
 
                 return $fornecedor;
             }
@@ -39,12 +39,12 @@ class FornecedorDAO extends BaseDAO
                 foreach ($dados as $dado) {
 
                     $fornecedor = new Fornecedor();
-                    $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
-                    $fornecedor->setRazaoSocial($dado['razaosocial']);
-                    $fornecedor->setNomeFantasia($dado['nomefantasia']);
-                    $fornecedor->setCnpj($dado['CNPJ']);
-                    //$fornecedor->setDataCadastro($dado['dataCadastro']);
-
+                   $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
+                   $fornecedor->setForRazaoSocial($dado['razaosocial']);
+                   $fornecedor->setForNomeFantasia($dado['nomefantasia']);
+                   $fornecedor->setForCnpj($dado['CNPJ']);
+                   //$fornecedor->setForDataCadastro($dado['dataCadastro']);
+                   
                     $lista[] = $fornecedor;
                 }
              

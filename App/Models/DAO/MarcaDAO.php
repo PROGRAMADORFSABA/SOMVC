@@ -6,12 +6,12 @@ use App\Models\Entidades\Marca;
 
 class MarcaDAO extends BaseDAO
 {
-    public  function listar($id = null)
+    public  function listar($codMarca = null)
     {
 
-        if ($id) {
+        if ($codMarca) {
             $resultado = $this->select(
-                "SELECT * FROM marcaFalta WHERE marcaFalta_cod = $id"
+                "SELECT * FROM marcaFalta WHERE marcaFalta_cod = $codMarca "
             );
             $dado = $resultado->fetch();
 
@@ -23,9 +23,8 @@ class MarcaDAO extends BaseDAO
                 return $marca;
             }
         } else {
-
             $resultado = $this->select(
-                "SELECT * FROM marcaFalta ORDER BY nome_Marca"
+                "SELECT * FROM marcaFalta ORDER BY nome_Marca " 
             );
             $dados = $resultado->fetchAll();
 
@@ -47,66 +46,55 @@ class MarcaDAO extends BaseDAO
 
         return false;
     }
+    
 
-    /* public  function salvar(Sla $sla)
+     public  function salvar(Marca $marca)
     {
         try {
 
-            $tempo          =$sla->getTempo();
-            $descricao      =$sla->getDescricao();
-            $fk_instituicao =$sla->getFk_Instituicao();
-            $uniTempo       =$sla->getUniTempo();
+            $marcaNome          =$marca->getMarcaNome();
 
             return $this->insert(
                 'marcaFalta',
-                ":descricao,:unitempo,:tempo",
+                ":nome_Marca ",
                 [
-                    ':descricao' => $descricao,
-                    ':tempo' => $tempo,
-                    ':unitempo' => $uniTempo,
-                    ':fk_idInstituicao' => $fk_instituicao
+                    ':nome_Marca' => $marcaNome
                 ]
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados.", 500);
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }
 
-    public  function atualizar(Sla $sla){
+    public  function atualizar(Marca $marca){
         try {
 
-            $id             =$sla->getId();
-            $tempo          =$sla->getTempo();
-            $descricao      =$sla->getDescricao();
-            $fk_instituicao  =$sla->getFk_Instituicao();
-            $uniTempo        =$sla->getUniTempo();
+            $marcaCod             =$marca->getMarcaCod();
+            $marcaNome             =$marca->getMarcaNome();
 
             return $this->update(
-                'tbl_sla',
-                "descricao = :descricao, fk_idInstituicao = :fk_instituicao, tempo = :tempo, unitempo = :uniTempo",
+                'marcaFalta',
+                "nome_Marca = :marcaNome",
                 [
-                    ':id' => $id,
-                    ':descricao' => $descricao,
-                    ':tempo' => $tempo,
-                    ':uniTempo' => $uniTempo,
-                    ':fk_instituicao' => $fk_instituicao,
+                    ':marcaCod' => $marcaCod,
+                    ':marcaNome' => $marcaNome,
                 ],
-                "id = :id"
+                "marcaFalta_cod = :marcaCod"
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados. ", 500);
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }
 
-    public function excluir(Sla $sla)
+    public function excluir(Marca $marca)
     {
         try {
-            $id =$sla->getId();
+            $marcaCod =$marca->getMarcaCod();
 
-            return $this->delete('tbl_sla', "id = $id");
+            return $this->delete('marcaFalta', "marcaFalta_cod = $marcaCod");
         } catch (Exception $e) {
 
-            throw new \Exception("Erro ao deletar", 500);
+            throw new \Exception("Erro ao deletar. ".$e, 500);
         }
-    }*/
+    }
 }

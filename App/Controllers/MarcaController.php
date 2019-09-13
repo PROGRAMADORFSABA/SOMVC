@@ -31,10 +31,8 @@ class MarcaController extends Controller
 
     public function salvar() {
         $marca = new Marca();
-        $marca->setNomeFantasia($_POST['nomeFantasia']);
-        $marca->setRazaoSocial($_POST['razaoSocial']);
-        $marca->setCnpj($_POST['cnpj']);
-
+        $marca->setMarcaNome($_POST['marcaNome']);
+        
         Sessao::gravaFormulario($_POST);
 
         $marcaValidador = new MarcaValidador();
@@ -58,14 +56,14 @@ class MarcaController extends Controller
     }
     
     public function edicao($params){
-        $codmarca = $params[0];
+        $codMarca = $params[0];
 
         $marcaDAO = new marcaDAO();
 
-        $marca = $marcaDAO->listar($codmarca);
+        $marca = $marcaDAO->listar($codMarca);
 
         if(!$marca){
-            Sessao::gravaMensagem("marca inexistente");
+            Sessao::gravaMensagem("Marca inexistente");
             $this->redirect('/marca');
         }
 
@@ -80,10 +78,8 @@ class MarcaController extends Controller
     public function atualizar()   {
 
         $marca = new marca();
-        $marca->setCodmarca($_POST['codmarca']);
-        $marca->setNomeFantasiaFantasia($_POST['nomeFantasia']);
-        $marca->setRazaoSocial($_POST['razaoSocial']);
-        $marca->setCnpj($_POST['cnpj']);
+        $marca->setMarcaCod($_POST['marcaCod']);
+        $marca->setMarcaNome($_POST['marcaNome']);
         
         Sessao::gravaFormulario($_POST);
 
@@ -92,7 +88,7 @@ class MarcaController extends Controller
 
         if($resultadoValidacao->getErros()){
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/marca/edicao/'.$_POST['codmarca']);
+            $this->redirect('/marca/edicao/'.$_POST['marcaCod']);
         }
 
         $marcaDAO = new marcaDAO();
@@ -109,11 +105,11 @@ class MarcaController extends Controller
     
     public function exclusao($params)
     {
-        $codmarca = $params[0];
+        $codMarca = $params[0];
 
         $marcaDAO = new marcaDAO();
 
-        $marca = $marcaDAO->listar($codmarca);
+        $marca = $marcaDAO->listar($codMarca);
 
         if(!$marca){
             Sessao::gravaMensagem("marca inexistente");
@@ -130,8 +126,8 @@ class MarcaController extends Controller
 
     public function excluir()
     {
-        $marca = new marca();
-        $marca->setCodmarca($_POST['codmarca']);
+        $marca = new Marca();
+        $marca->setMarcaCod($_POST['marcaCod']);
 
         $marcaDAO = new marcaDAO();
 
@@ -143,6 +139,8 @@ class MarcaController extends Controller
         Sessao::gravaMensagem("marca excluido com sucesso!");
 
         $this->redirect('/marca');
+ 
+        Sessao::limpaMensagem();
 
     }
 }
