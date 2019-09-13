@@ -7,9 +7,6 @@ namespace App;
 use App\Controllers\HomeController;
 use Exception;
 
-//O tipo de caracteres a ser usado
-header('Content-Type: text/html; charset=utf-8');
-
 
 class App
 {
@@ -56,7 +53,7 @@ class App
             $this->controllerName = ucwords($this->controller) . 'Controller';
             $this->controllerName = preg_replace('/[^a-zA-Z]/i', '', $this->controllerName);
         } else {
-            $this->controllerName = "LoginController";
+            $this->controllerName = "HomeController";
         }
 
         $this->controllerFile   = $this->controllerName . '.php';

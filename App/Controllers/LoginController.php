@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Lib\Sessao;
 use App\Models\DAO\LoginDAO;
 use App\Models\Entidades\Login;
+use App\Models\Entidades\home;
 
 class LoginController extends Controller
 {
