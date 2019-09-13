@@ -58,7 +58,7 @@ class MarcaController extends Controller
     public function edicao($params){
         $codMarca = $params[0];
 
-        $marcaDAO = new marcaDAO();
+        $marcaDAO = new MarcaDAO();
 
         $marca = $marcaDAO->listar($codMarca);
 

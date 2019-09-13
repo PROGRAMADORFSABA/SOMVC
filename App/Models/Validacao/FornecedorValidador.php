@@ -11,14 +11,18 @@ class FornecedorValidador{
     {
         $resultadoValidacao = new ResultadoValidacao();
 
-        if(empty($fornecedor->getRazaoSocial()))
+        if(empty($fornecedor->getForRazaoSocial()))
         {
-            $resultadoValidacao->addErro('razaoSocial',"Razao Social: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('proRazaoSocial',"Razao Social: Este campo não pode ser vazio");
+        }
+        if(empty($fornecedor->getForNomeFantasia()))
+        {
+            $resultadoValidacao->addErro('proNomeFantasia',"Nome Fantasia: Este campo não pode ser vazio");
         }
         
-        if(empty($fornecedor->getCnpj()))
+        if(empty($fornecedor->getForCnpj()))
         {
-            $resultadoValidacao->addErro('cnpj',"CNPJ: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('forCnpj',"CNPJ: Este campo não pode ser vazio");
         }
 
 

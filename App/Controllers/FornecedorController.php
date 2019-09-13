@@ -14,7 +14,7 @@ class FornecedorController extends Controller
     {
         $fornecedorDAO = new FornecedorDAO();
 
-        self::setViewParam('listafornecedores',$fornecedorDAO->listar());      
+        self::setViewParam('listaFornecedores',$fornecedorDAO->listar());      
 
         $this->render('/fornecedor/index');
 
@@ -32,9 +32,9 @@ class FornecedorController extends Controller
 
     public function salvar() {
         $fornecedor = new Fornecedor();
-        $fornecedor->setNomeFantasia($_POST['nomeFantasia']);
-        $fornecedor->setRazaoSocial($_POST['razaoSocial']);
-        $fornecedor->setCnpj($_POST['cnpj']);
+        $fornecedor->setForNomeFantasia($_POST['forNomeFantasia']);
+        $fornecedor->setForRazaoSocial($_POST['forRazaoSocial']);
+        $fornecedor->setForCnpj($_POST['forCnpj']);
 
         Sessao::gravaFormulario($_POST);
 
@@ -81,10 +81,10 @@ class FornecedorController extends Controller
     public function atualizar()   {
 
         $fornecedor = new Fornecedor();
-        $fornecedor->setCodFornecedor($_POST['codFornecedor']);
-        $fornecedor->setNomeFantasiaFantasia($_POST['nomeFantasia']);
-        $fornecedor->setRazaoSocial($_POST['razaoSocial']);
-        $fornecedor->setCnpj($_POST['cnpj']);
+        $fornecedor->setFornecedor_Cod($_POST['codFornecedor']);
+        $fornecedor->setForNomeFantasia($_POST['forNomeFantasia']);
+        $fornecedor->setForRazaoSocial($_POST['forRazaoSocial']);
+        $fornecedor->setForCnpj($_POST['forCnpj']);
         
         Sessao::gravaFormulario($_POST);
 
@@ -132,7 +132,7 @@ class FornecedorController extends Controller
     public function excluir()
     {
         $fornecedor = new Fornecedor();
-        $fornecedor->setCodFornecedor($_POST['codFornecedor']);
+        $fornecedor->setFornecedor_Cod($_POST['codFornecedor']);
 
         $fornecedorDAO = new FornecedorDAO();
 

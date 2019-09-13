@@ -17,7 +17,7 @@ class FornecedorDAO extends BaseDAO
 
             if ($dado) {
                 $fornecedor = new Fornecedor();
-                $fornecedor->setCodFornecedor($dado['fornecedor_cod']);
+                $fornecedor->setFornecedor_Cod($dado['fornecedor_cod']);
                 $fornecedor->setForRazaoSocial($dado['razaosocial']);
                 $fornecedor->setForNomeFantasia($dado['nomefantasia']);
                 $fornecedor->setForCnpj($dado['CNPJ']);
@@ -80,10 +80,9 @@ class FornecedorDAO extends BaseDAO
                 (SELECT COUNT(p.nome) AS qtde
                 FROM produto AS p 
                 WHERE f.codFornecedor = p.fornecedor_id
-                ) as qtdePedidos
-                FROM fornecedor as f ) AS R
+                ) as qtdePedidos FROM fornecedor as f ) AS R
                 WHERE R.qtdePedidos > 0
-                 ORDER BY R.qtdePedidos DESC"
+                 ORDER BY R.qtdePedidos DESC "
         );
         $dados = $resultado->fetchAll();
 
@@ -115,21 +114,22 @@ class FornecedorDAO extends BaseDAO
     {
         try {
 
-            $nomeFantasia   = $fornecedor->getNomeFantasia();
-            $razaoSocial    = $fornecedor->getRazaoSocial();
-            $cnpj           = $fornecedor->getCnpj();
+            $nomeFantasia   = $fornecedor->getForNomeFantasia();
+            $razaoSocial    = $fornecedor->getForRazaoSocial();
+            $cnpj           = $fornecedor->getForCnpj();
 
             return $this->insert(
                 'fornecedor',
-                ":razaoSocial,:nomeFantasia,:cnpj",
+                ":razaosocial,:nomefantasia,:CNPJ",
                 [
-                    ':razaoSocial' => $razaoSocial,
-                    ':nomeFantasia' => $nomeFantasia,
-                    ':cnpj' => $cnpj
+                    ':razaosocial' => $razaoSocial,
+                    ':nomefantasia' => $nomeFantasia,
+                    ':CNPJ' => $cnpj
                 ]
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados.", 500);
+            
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }
 
@@ -137,33 +137,33 @@ class FornecedorDAO extends BaseDAO
     {
         try {
 
-            $codFornecedor  = $fornecedor->getCodFornecedor();
-            $nomeFantasia   = $fornecedor->getNomeFantasia();
-            $razaoSocial    = $fornecedor->getRazaoSocial();
-            $cnpj           = $fornecedor->getCnpj();
+            $codFornecedor  = $fornecedor->getFornecedor_Cod();
+            $nomeFantasia   = $fornecedor->getForNomeFantasia();
+            $razaoSocial    = $fornecedor->getForRazaoSocial();
+            $cnpj           = $fornecedor->getForCnpj();
 
             return $this->update(
                 'fornecedor',
                 "razaoSocial = :razaoSocial, nomeFantasia = :nomeFantasia, cnpj = :cnpj",
                 [
-                    ':codFornecedor' => $codFornecedor,
+                    ':fornecedor_cod' => $codFornecedor,
                     ':razaoSocial' => $nomeFantasia,
                     ':nomeFantasia' => $razaoSocial,
                     ':cnpj' => $cnpj,
                 ],
-                "codFornecedor = :codFornecedor"
+                "fornecedor_cod = :fornecedor_cod"
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados.", 500);
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }
 
     public function excluir(Fornecedor $fornecedor)
     {
         try {
-            $codFornecedor = $fornecedor->getCodFornecedor();
+            $codFornecedor = $fornecedor->getFornecedor_Cod();
 
-            return $this->delete('fornecedor', "codFornecedor = $codFornecedor");
+            return $this->delete('fornecedor', "fornecedor_cod = $codFornecedor");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);

@@ -63,9 +63,9 @@
                             </div>
                         </div>
                         &nbsp;
-                        <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                        <a href="http://<?php echo APP_HOST; ?>/fornecedor/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>
-                            Novo Cliente
+                            Novo Fornecedor
 
                         </a>
                     </div>
@@ -87,28 +87,28 @@
                 </thead>
                 <tbody>
                     <?php
-                    $fornecedor = $viewVar['listafornecedores'];
-                    if ($fornecedor > 0){
-                        foreach ($viewVar['listafornecedores'] as $fornecedor){
+                    $dados = $viewVar['listaFornecedores'];
+                    if ($dados > 0){
+                        foreach ($dados as $fornecedor){
 
                         ?>
                     <tr>
                         <td><?php echo $fornecedor->getFornecedor_Cod(); ?></td>
-                        <td><?php echo $fornecedor->getRazaoSocial(); ?></td>
-                        <td><?php echo $fornecedor->getNomeFantasia(); ?></td>
-                        <td><?php echo $fornecedor->getCNPJ(); ?></td>
+                        <td><?php echo $fornecedor->getForRazaoSocial(); ?></td>
+                        <td><?php echo $fornecedor->getForNomeFantasia(); ?></td>
+                        <td><?php echo $fornecedor->getForCNPJ(); ?></td>
                         <td>
                             <span class="dropdown">
                                 <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/exclusao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
                                 </div>
                             </span>
-                            <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                            <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
+                            <a href="http://<?php echo APP_HOST; ?>/fornecedor/edicao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                            <a href="http://<?php echo APP_HOST; ?>/fornecedor/exclusao/<?php echo $fornecedor->getFornecedor_Cod(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
                         </td>
                         <?php
                             }
