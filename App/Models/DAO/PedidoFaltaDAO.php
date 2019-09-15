@@ -40,9 +40,42 @@
             
             foreach ($dataSetFaltas as $dataSetFalta)
             {
-                $pedidofalta= new PedidoFalta();
-                $
+                $pedidofalta = new PedidoFalta();
+                $pedidofalta->setFaltaClienteCod($dataSetFalta['idfalta']);
+                $pedidofalta->setAFM($pedidofalta['afm']);
+                $pedidofalta->setFkCliente($pedidofalta['fkcliente']);
+                $pedidofalta->setFkMarca($pedidofalta['fkmarca']);
+                $pedidofalta->setProposta($pedidofalta['fkproduto']);
+                $pedidofalta->setProposta($dataSetFalta['propodta']);
+                $listaFaltas[] = $pedidofalta;
+            }
+            return $listaFaltas;
+        }
+        public function salvar(PedidoFalta $pedidoFalta)
+        {
+            try
+            {
+                $cliente        = $pedidoFalta->getFkCliente()->getCodCliente();
+                $produto        = $pedidoFalta->getFkProduto();
+                $marca          = $pedidoFalta->getFkMarca();
+                $status         = $pedidoFalta->getFkStatus();
+                $afm            = $pedidoFalta->setAFM();
                 
+                return $this->insert(
+                    'faltaCliente',
+                    ":faltaCliente_cod,:fk_produto, :fk_marca, :status, afm",
+                    [
+                        ':faltaCliente_cod' => $cliente,
+                        ':fk_produto'       => $produto,
+                        'fk_marca'          => $marca,
+                        'fk_status'         => $status,
+                        'afm'               => $status
+                        
+                    ]
+                );
+            }
+            catch (\Exception $e){
+                throw new \Exception("Erro ao gravar falta! ");
             }
         }
     }
