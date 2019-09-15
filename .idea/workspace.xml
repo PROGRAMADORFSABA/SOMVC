@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Services/FornecedorService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Models/Validacao/PedidoFaltaValidador.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Services/MarcaService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Services/ProdutoService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/FornecedorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/FornecedorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/FornecedorDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/FornecedorDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/fornecedor/cadastro.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/editar.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/fornecedor/editar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/exclusao.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/fornecedor/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/fornecedor/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,6 +65,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1QON07S83E4OTt5VxtedSgX4Y4W" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql.8" />
@@ -172,6 +173,8 @@
       <workItem from="1567854337224" duration="13513000" />
       <workItem from="1568069651039" duration="620000" />
       <workItem from="1568070834246" duration="10069000" />
+      <workItem from="1568460486950" duration="81000" />
+      <workItem from="1568460584692" duration="9710000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>

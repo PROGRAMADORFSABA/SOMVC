@@ -3,6 +3,8 @@
     
     namespace App\Models\Entidades;
     
+    use DateTime;
+    
     
     class PedidoFalta
     {
@@ -11,6 +13,7 @@
         private $AFM;
         private $observacao;
         private $dataFalta;
+        private $fk_produto;
         private $fk_cliente;
         private $fk_marca;
         private $fk_status;
@@ -81,6 +84,7 @@
     
         /**
          * @return mixed
+         * @throws \Exception
          */
         public function getDataFalta()
         {
@@ -98,7 +102,7 @@
         /**
          * @return mixed
          */
-        public function getFkCliente()
+        public function getFkCliente() : Cliente
         {
             return $this->fk_cliente;
         }
@@ -109,6 +113,23 @@
         public function setFkCliente($fk_cliente): void
         {
             $this->fk_cliente = $fk_cliente;
+        }
+    
+    
+        /**
+         * @return mixed
+         */
+        public function getFkProduto() : array
+        {
+            return $this->fk_produto;
+        }
+    
+        /**
+         * @param mixed $fk_produto
+         */
+        public function setFkProduto( array $fk_produto): void
+        {
+            $this->fk_produto = $fk_produto;
         }
     
         /**
