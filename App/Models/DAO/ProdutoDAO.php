@@ -11,7 +11,7 @@ class ProdutoDAO extends BaseDAO
         if ($proCodigo) {
             $resultado = $this->select(
                 "SELECT * FROM Produto p
-                inner join marcaFalta m on m.marcaFalta_cod = p.ProMarca
+                inner join marca m on m.marcacod = p.ProMarca
                 inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
                 inner join usuarios u on u.id = p.ProUsuario WHERE p.ProCodigo = $proCodigo"
             );
@@ -25,7 +25,7 @@ class ProdutoDAO extends BaseDAO
                 $produto->setProDataAlteracao($dado['ProDataAlteracao']);
                 $produto->setProDataCadastro($dado['ProDataCadastro']);
                 $produto->getProMarca($dado['ProMarca']);
-                $produto->getMarca()->setMarcaCod($dado['marcaFalta_cod']);
+                $produto->getMarca()->setMarcaCod($dado['marcacod']);
                 $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
                 $produto->setProFornecedor($dado['ProFornecedor']);
                 $produto->getFornecedor()->setFornecedor_Cod($dado['fornecedor_cod']);
@@ -43,7 +43,7 @@ class ProdutoDAO extends BaseDAO
 
             $resultado = $this->select(
                 "SELECT * FROM Produto p
-                inner join marcaFalta m on m.marcaFalta_cod = p.ProMarca
+                inner join marca m on m.marcacod = p.ProMarca
                 inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
                 inner join usuarios u on u.id = p.ProUsuario "
             );
@@ -61,7 +61,7 @@ class ProdutoDAO extends BaseDAO
                     $produto->setProDataAlteracao($dado['ProDataAlteracao']);
                     $produto->setProDataCadastro($dado['ProDataCadastro']);
                     $produto->setProMarca($dado['ProMarca']);
-                    $produto->getMarca()->setMarcaCod($dado['marcaFalta_cod']);
+                    $produto->getMarca()->setMarcaCod($dado['marcacod']);
                     $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
                     $produto->setProFornecedor($dado['ProFornecedor']);
                     $produto->getFornecedor()->setFornecedor_Cod($dado['fornecedor_cod']);

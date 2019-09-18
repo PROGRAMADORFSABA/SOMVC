@@ -11,20 +11,20 @@ class MarcaDAO extends BaseDAO
 
         if ($codMarca) {
             $resultado = $this->select(
-                "SELECT * FROM marcaFalta WHERE marcaFalta_cod = $codMarca "
+                "SELECT * FROM marca WHERE marcacod = $codMarca "
             );
             $dado = $resultado->fetch();
 
             if ($dado) {
                 $marca = new Marca();
-                $marca->setMarcaCod($dado['marcaFalta_cod']);
-                $marca->setMarcaNome($dado['nome_Marca']);
+                $marca->setMarcaCod($dado['marcacod']);
+                $marca->setMarcaNome($dado['marcanome']);
 
                 return $marca;
             }
         } else {
             $resultado = $this->select(
-                "SELECT * FROM marcaFalta ORDER BY nome_Marca " 
+                "SELECT * FROM marca ORDER BY marcanome " 
             );
             $dados = $resultado->fetchAll();
 
@@ -35,8 +35,8 @@ class MarcaDAO extends BaseDAO
                 foreach ($dados as $dado) {
 
                     $marca = new Marca();
-                    $marca->setMarcaCod($dado['marcaFalta_cod']);
-                    $marca->setMarcaNome($dado['nome_Marca']);
+                    $marca->setMarcaCod($dado['marcacod']);
+                    $marca->setMarcaNome($dado['marcanome']);
 
                     $lista[] = $marca;
                 }
@@ -55,10 +55,10 @@ class MarcaDAO extends BaseDAO
             $marcaNome          =$marca->getMarcaNome();
 
             return $this->insert(
-                'marcaFalta',
-                ":nome_Marca ",
+                'marca',
+                ":marcanome ",
                 [
-                    ':nome_Marca' => $marcaNome
+                    ':marcanome' => $marcaNome
                 ]
             );
         } catch (\Exception $e) {
@@ -73,13 +73,13 @@ class MarcaDAO extends BaseDAO
             $marcaNome             =$marca->getMarcaNome();
 
             return $this->update(
-                'marcaFalta',
-                "nome_Marca = :marcaNome",
+                'marca',
+                "marcanome = :marcaNome",
                 [
                     ':marcaCod' => $marcaCod,
                     ':marcaNome' => $marcaNome,
                 ],
-                "marcaFalta_cod = :marcaCod"
+                "marcacod = :marcaCod"
             );
         } catch (\Exception $e) {
             throw new \Exception("Erro na gravação de dados. ".$e, 500);
@@ -91,7 +91,7 @@ class MarcaDAO extends BaseDAO
         try {
             $marcaCod =$marca->getMarcaCod();
 
-            return $this->delete('marcaFalta', "marcaFalta_cod = $marcaCod");
+            return $this->delete('marca', "marcacod = $marcaCod");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar. ".$e, 500);
