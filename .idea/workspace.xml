@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +32,12 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - u325780549_orcar@sql179.main-hosting.eu." type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="Git.Settings">
@@ -51,7 +59,8 @@
   <component name="PhpDebugGeneral" xdebug_debug_port="8081" listening_started="true" />
   <component name="PhpServers">
     <servers>
-      <server host="localhost" id="0f6e0383-ad69-4c4e-a209-ffe163c0cdcd" name="Unnamed" />
+      <server host="localhost" id="0f6e0383-ad69-4c4e-a209-ffe163c0cdcd" name="Unnamed" use_path_mappings="true" />
+      <server host="localhost" id="bf4c5be7-3f89-4f38-86b2-e50168b2fa43" name="PHP7" use_path_mappings="true" />
     </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
@@ -60,12 +69,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1QON07S83E4OTt5VxtedSgX4Y4W" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="mysql.8" />
+    <property name="DatabaseDriversLRU" value="mysql.8&#10;mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
@@ -79,7 +85,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+    <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -127,6 +133,26 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@70a149d6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@70a149d6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@1818afce" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -168,8 +194,11 @@
       <workItem from="1567854337224" duration="13513000" />
       <workItem from="1568069651039" duration="620000" />
       <workItem from="1568070834246" duration="10069000" />
-      <workItem from="1568460486950" duration="81000" />
-      <workItem from="1568460584692" duration="15372000" />
+      <workItem from="1568657721694" duration="1159000" />
+      <workItem from="1568811844289" duration="128000" />
+      <workItem from="1568812060479" duration="682000" />
+      <workItem from="1568837565587" duration="387000" />
+      <workItem from="1568895191687" duration="6124000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -262,14 +291,7 @@
       <option name="project" value="LOCAL" />
       <updated>1567903102544</updated>
     </task>
-    <task id="LOCAL-00014" summary="Update Controller, DAO, Views, Service Pedido Falta">
-      <created>1568550940933</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1568550940933</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -319,8 +341,7 @@
     <MESSAGE value="adcionando grafico - 2" />
     <MESSAGE value="ADD autoComplete em cliente" />
     <MESSAGE value="Cadastro de falta de pedido" />
-    <MESSAGE value="Update Controller, DAO, Views, Service Pedido Falta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Controller, DAO, Views, Service Pedido Falta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cadastro de falta de pedido" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

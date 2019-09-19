@@ -15,7 +15,7 @@
         public function listar($faltaCliente_cod = null)
         {
             $SQL = $this->select(
-                "SELECT FC.faltaCliente_cod,
+                'SELECT FC.faltaCliente_cod,
                        FC.proposta,
                        FC.AFM,
                        FC.observacao,
@@ -27,11 +27,11 @@
                         FROM faltaCliente FC
                         inner join clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
                         inner join marcaFalta MF on MF.marcaFalta_cod = FC.fk_marca
-                        inner join statusFalta SF on SF.faltaStatus_cod = FC.fk_status "
+                        inner join statusFalta SF on SF.faltaStatus_cod = FC.fk_status '
             );
             if($faltaCliente_cod)
             {
-                $SQL.="WHERE FC.faltaCliente_cod";
+                $SQL.= 'WHERE FC.faltaCliente_cod';
             }
             
             $resultado = $this->select($SQL);
@@ -56,17 +56,15 @@
             try
             {
                 $cliente        = $pedidoFalta->getFkCliente()->getCodCliente();
-                $produto        = $pedidoFalta->getFkProduto();
                 $marca          = $pedidoFalta->getFkMarca();
                 $status         = $pedidoFalta->getFkStatus();
                 $afm            = $pedidoFalta->setAFM();
                 
                 return $this->insert(
                     'faltaCliente',
-                    ":faltaCliente_cod,:fk_produto, :fk_marca, :status, afm",
+                    ':faltaCliente_cod,:fk_marca, :status, afm',
                     [
                         ':faltaCliente_cod' => $cliente,
-                        ':fk_produto'       => $produto,
                         'fk_marca'          => $marca,
                         'fk_status'         => $status,
                         'afm'               => $status
@@ -75,7 +73,31 @@
                 );
             }
             catch (\Exception $e){
-                throw new \Exception("Erro ao gravar falta! ");
+                throw new \Exception('Erro ao gravar falta! ');
             }
         }
+        
+        public function addProduto( PedidoFalta $pedidoFalta)
+            {
+                try
+                {
+                    $produtos = $pedidoFalta->getFkProduto();
+                    if(isset($produtos)){
+                        foreach ($produtos as $produto){
+                            $this->insert(
+                                'prdutofalta',
+                                ":FK_IDPRODUTO, :FK_FALTACLIENTE",
+                                [
+                                    ':FK_IDPRODUTO'     =>$pedidoFalta->getFkProduto(),
+                                    ':FK_FALTACLIENTE'  =>$pedidoFalta->getFaltaClienteCod()
+                                ]
+                            );
+                        }
+                    }
+                    return false;
+                }
+                catch (\Exception $e){
+                    throw new \Exception("Erro na gravação de dados !", 500);
+                }
+            }
     }
