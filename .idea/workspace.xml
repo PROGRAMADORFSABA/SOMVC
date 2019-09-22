@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -140,11 +138,6 @@
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
               <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@58dea1d4" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@58dea1d4" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@36291b70" type="9fbbdea:ServiceModel$ServiceNode" />
-            </path>
           </expand>
           <select />
         </treeState>
@@ -200,7 +193,7 @@
       <workItem from="1568938736981" duration="3331000" />
       <workItem from="1569084405208" duration="2525000" />
       <workItem from="1569091013193" duration="446000" />
-      <workItem from="1569153802460" duration="339000" />
+      <workItem from="1569153802460" duration="977000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -300,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568903456840</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Correção tabela de Cadastro de falta">
+      <created>1569154286954</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1569154286954</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -351,7 +351,8 @@
     <MESSAGE value="ADD autoComplete em cliente" />
     <MESSAGE value="Cadastro de falta de pedido" />
     <MESSAGE value="Mudança na inseração de produto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mudança na inseração de produto" />
+    <MESSAGE value="Correção tabela de Cadastro de falta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correção tabela de Cadastro de falta" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

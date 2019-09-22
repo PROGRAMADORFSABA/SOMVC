@@ -67,7 +67,7 @@
                         ':faltaCliente_cod' => $cliente,
                         'fk_marca'          => $marca,
                         'fk_status'         => $status,
-                        'afm'               => $status
+                        'afm'               => $afm
                         
                     ]
                 );
