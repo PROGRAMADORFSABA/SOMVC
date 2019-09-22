@@ -27,7 +27,7 @@
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
                                             <input type="text" name="titulo" class="form-control" placeholder="Título"
-                                                   required value=<?php echo $viewVar['pedidofalta']->getProposta(); ?>>
+                                                   required value= >
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +36,10 @@
                                     <div class="col-lg-9">
                                         <div>
                                             <input type="text" name="autocompleteEmpresa" id="autocomplete-empresa" class="form-control" required placeholder="Empresa - autocomplete"
-                                                   value=<?php echo $viewVar['vaga']->getEmpresa()->getNomeFantasia(); ?>>
+                                                   value= >
 
                                             <input type="hidden" id="empresa" name="empresa"
-                                                   value=<?php echo $viewVar['vaga']->getEmpresa()->getIdEmpresa(); ?>>
+                                                   value= >
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +48,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">Descrição</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <textarea maxlength="350" class="form-control spinner" placeholder="Descrição da Vaga" rows="5" name="descricao" ><?php echo $viewVar['vaga']->getDescricao(); ?></textarea>
+                                            <textarea maxlength="350" class="form-control spinner" placeholder="Descrição da Vaga" rows="5" name="descricao" > </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -85,8 +85,8 @@
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $tecnologia->getTecnologia(); ?>
-                                                            <input type="hidden" name="tecnologias[]" value=<?php echo $tecnologia->getIdTecnologia(); ?>>
+                                                            <!-- ?php echo $tecnologia->getTecnologia(); ? -->
+                                                            <input type="hidden" name="tecnologias[]" value= >
                                                         </td>
                                                         <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeTecnologia(this,<?php echo $tecnologia->getIdTecnologia(); ?>)">remover</button></td>
                                                     </tr>
