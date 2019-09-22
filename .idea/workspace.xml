@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +73,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/vendors/general/toastr/.jshintrc" />
+    <property name="last_opened_file_path" value="C:/php7/php_xdebug-2.8.0beta2-7.3-vc15-x86_64.dll" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -140,12 +138,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@70a149d6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@58dea1d4" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@70a149d6" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@1818afce" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@58dea1d4" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@36291b70" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -198,7 +196,11 @@
       <workItem from="1568811844289" duration="128000" />
       <workItem from="1568812060479" duration="682000" />
       <workItem from="1568837565587" duration="387000" />
-      <workItem from="1568895191687" duration="6124000" />
+      <workItem from="1568895191687" duration="10598000" />
+      <workItem from="1568938736981" duration="3331000" />
+      <workItem from="1569084405208" duration="2525000" />
+      <workItem from="1569091013193" duration="446000" />
+      <workItem from="1569153802460" duration="339000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -291,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567903102544</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Mudança na inseração de produto">
+      <created>1568903456840</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1568903456840</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -341,7 +350,8 @@
     <MESSAGE value="adcionando grafico - 2" />
     <MESSAGE value="ADD autoComplete em cliente" />
     <MESSAGE value="Cadastro de falta de pedido" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cadastro de falta de pedido" />
+    <MESSAGE value="Mudança na inseração de produto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mudança na inseração de produto" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
