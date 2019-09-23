@@ -80,7 +80,7 @@
                                         </thead>
                                         <tbody id="editar-tabela-tecnologias">
                                         <?php
-                                            if($viewVar['vaga']->getTecnologias()) {
+                                            if($viewVar['pedidofalta']->get()) {
                                                 foreach ($viewVar['vaga']->getTecnologias() as $tecnologia) {
                                                     ?>
                                                     <tr>
