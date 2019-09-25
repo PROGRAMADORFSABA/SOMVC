@@ -3,6 +3,7 @@
     
     namespace App\Models\DAO;
     
+    use App\Models\Entidades\ClienteLicitacao;
     use App\Models\Entidades\PedidoFalta;
     use App\Models\Entidades\Produto;
     use App\Models\Entidades\Marca;

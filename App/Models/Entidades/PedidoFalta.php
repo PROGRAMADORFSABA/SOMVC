@@ -135,7 +135,7 @@
         /**
          * @return mixed
          */
-        public function getFkMarca()
+        public function getFkMarca() :array
         {
             return $this->fk_marca;
         }
@@ -143,7 +143,7 @@
         /**
          * @param mixed $fk_marca
          */
-        public function setFkMarca($fk_marca): void
+        public function setFkMarca( array $fk_marca): void
         {
             $this->fk_marca = $fk_marca;
         }

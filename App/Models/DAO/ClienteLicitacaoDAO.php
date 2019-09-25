@@ -170,4 +170,15 @@ class ClienteLicitacaoDAO extends  BaseDAO
             throw new \Exception("Erro ao deletar" . $e->getMessage(), 500);
         }
     }
+    
+    
+    public function listarPorNomeFantasia(ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            "SELECT * FROM clienteLicitacao WHERE nomefantasia
+                        LIKE '%".$clienteLicitacao->getNomeFantasia()."%' LIMIT 0.6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 }
