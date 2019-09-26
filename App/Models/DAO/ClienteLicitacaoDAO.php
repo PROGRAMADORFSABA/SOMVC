@@ -12,7 +12,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
 
         if ($codCliente) {
             $resultado = $this->select(
-                "SELECT * FROM clienteLicitacao WHERE licitacaoCliente_cod = $codCliente"
+                "SELECT  FROM clienteLicitacao WHERE licitacaoCliente_cod = $codCliente"
             );
             $dado = $resultado->fetch();
 

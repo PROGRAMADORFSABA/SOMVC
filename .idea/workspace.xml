@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +81,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="database.main" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -202,7 +197,12 @@
       <workItem from="1569198699946" duration="5333000" />
       <workItem from="1569206537075" duration="99000" />
       <workItem from="1569279483376" duration="2800000" />
-      <workItem from="1569367784284" duration="5404000" />
+      <workItem from="1569367784284" duration="5545000" />
+      <workItem from="1569426660330" duration="1189000" />
+      <workItem from="1569450955100" duration="2769000" />
+      <workItem from="1569510027209" duration="630000" />
+      <workItem from="1569516831998" duration="179000" />
+      <workItem from="1569517067920" duration="2161000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -316,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569206113401</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO">
+      <created>1569378309654</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1569378309654</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -368,7 +375,8 @@
     <MESSAGE value="Cadastro de falta de pedido" />
     <MESSAGE value="Mudança na inseração de produto" />
     <MESSAGE value="Correção tabela de Cadastro de falta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correção tabela de Cadastro de falta" />
+    <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
