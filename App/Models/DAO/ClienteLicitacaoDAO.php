@@ -3,6 +3,7 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\ClienteLicitacao;
+use App\Models\Entidades\Produto;
 
 class ClienteLicitacaoDAO extends  BaseDAO
 {
@@ -55,8 +56,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
         }
         return false;
     }
-
-
+    
     public  function listaClienteLicitacao2()
     {
         $resultado = $this->select(

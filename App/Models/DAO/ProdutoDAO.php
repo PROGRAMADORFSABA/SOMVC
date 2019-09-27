@@ -77,6 +77,17 @@ class ProdutoDAO extends BaseDAO
             return false;
         }
     }
+    
+    public function listarPorProduto($codCliente = null)
+    {
+        if($codCliente)
+        {
+            $resultado = $this->select(
+                "SELECT P.ProCodigo,P.ProNome FROM faltaporcliente FP INNER JOIN Produto P on FP.FK_IDPRODUTO = P.ProCodigo WHERE FK_ID_FALTACLIENTE = $codCliente"
+            );
+        }
+        return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);
+    }
 
     public  function salvar(Produto $produto)
     {

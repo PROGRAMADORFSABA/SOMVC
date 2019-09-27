@@ -4,6 +4,8 @@
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +31,21 @@
       <set />
     </option>
     <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="fabmed: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="MySQL - u325780549_orcar@sql179.main-hosting.eu." type="feb32156:DbDataSourceImpl" />
@@ -202,7 +219,9 @@
       <workItem from="1569450955100" duration="2769000" />
       <workItem from="1569510027209" duration="630000" />
       <workItem from="1569516831998" duration="179000" />
-      <workItem from="1569517067920" duration="2161000" />
+      <workItem from="1569517067920" duration="2406000" />
+      <workItem from="1569546786941" duration="2560000" />
+      <workItem from="1569552193430" duration="2206000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -323,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569378309654</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO">
+      <created>1569529257895</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1569529257895</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
