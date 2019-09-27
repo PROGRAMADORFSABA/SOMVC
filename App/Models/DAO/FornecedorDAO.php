@@ -166,7 +166,7 @@ class FornecedorDAO extends BaseDAO
             return $this->delete('fornecedor', "fornecedor_cod = $codFornecedor");
         } catch (Exception $e) {
 
-            throw new \Exception("Erro ao deletar", 500);
+            throw new \Exception(" Erro ao deletar ", 500);
         }
     }
 }
