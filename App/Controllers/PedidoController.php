@@ -63,12 +63,18 @@ class PedidoController extends Controller
 
     public function cadastro()
     {
+        $pedido = new Pedido();
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
         $clienteDAO = new ClienteDAO();
         self::setViewParam('listaClientes', $clienteDAO->listar());
         $representanteDAO = new RepresentanteDAO();
         self::setViewParam('listaRepresentantes', $representanteDAO->listar());
+
+        $idCliente = Sessao::retornaValorFormulario('cliente');
+        $clienteDAO1 = new ClienteDAO();
+        $cliente = $clienteDAO1->listar($idCliente)[0];
+        $pedido->getCliente($cliente);
 
         $this->render('/pedido/cadastro');
 

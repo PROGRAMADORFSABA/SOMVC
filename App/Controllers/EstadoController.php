@@ -6,6 +6,7 @@ use App\Lib\Sessao;
 use App\Models\DAO\EstadoDAO;
 use App\Models\Entidades\Estado;
 use App\Models\Validacao\EstadoValidador;
+use App\Services\EstadoService;
 
 class EstadoController extends Controller
 {
@@ -20,6 +21,17 @@ class EstadoController extends Controller
         Sessao::limpaMensagem();
     }
 
+    public function autoComplete($params)
+    {
+        $estado = new Estado();
+        $estado->setEstNome($params[0]);        
+        $estadoService = new EstadoService();
+        $busca = $estadoService->autoComplete($estado);
+        
+        echo $busca;
+    }
+
+
     public function cadastro()
     {
         $this->render('/estado/cadastro');
@@ -31,7 +43,9 @@ class EstadoController extends Controller
 
     public function salvar() {
         $estado = new Estado();
-        $estado->setEstadoNome($_POST['estNome']);
+        $estado->setEstNome($_POST['estNome']);
+        $estado->setEstUf($_POST['estUf']);
+        $estado->setEstUsuario($_POST['estUsuario']);
         
         Sessao::gravaFormulario($_POST);
 
@@ -67,7 +81,7 @@ class EstadoController extends Controller
             $this->redirect('/estado');
         }
 
-        self::setViewParam('Estado',$estado);
+        self::setViewParam('estado',$estado);
 
         $this->render('/estado/editar');
 
@@ -80,6 +94,8 @@ class EstadoController extends Controller
         $estado = new Estado();
         $estado->setEstId($_POST['estId']);
         $estado->setEstNome($_POST['estNome']);
+        $estado->setEstUf($_POST['estUf']);
+        $estado->setEstUsuario($_POST['estUsuario']);
         
         Sessao::gravaFormulario($_POST);
 
@@ -116,7 +132,7 @@ class EstadoController extends Controller
             $this->redirect('/estado');
         }
 
-        self::setViewParam('Estado',$estado);
+        self::setViewParam('estado',$estado);
 
         $this->render('/estado/exclusao');
 

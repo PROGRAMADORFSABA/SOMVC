@@ -9,8 +9,18 @@
     {
         private $estId;
         private $estNome;        
+        private $estUf;        
+        private $estUsuario;        
+        private $usuario;        
         private $dataCadastro;
         
+        public function __construct(){
+            $this->usuario = new Usuario();   
+        }
+        public function getUsuario()
+        {
+            return $this->usuario;
+        }
         /**
          * @return mixed
          */
@@ -25,6 +35,21 @@
         public function setEstId($estId)
         {
             $this->estId = $estId;
+        }
+        /**
+         * @return mixed
+         */
+        public function getEstUsuario()
+        {
+            return $this->estUsuario;
+        }
+    
+        /**
+         * @param mixed $estUsuario
+         */
+        public function setEstUsuario($estUsuario)
+        {
+            $this->estUsuario = $estUsuario;
         }
     
         /**
@@ -41,6 +66,21 @@
         public function setEstNome($estNome)
         {
             $this->estNome = $estNome;
+        }
+        /**
+         * @return mixed
+         */
+        public function getEstUf()
+        {
+            return $this->estUf;
+        }
+    
+        /**
+         * @param mixed $estUf
+         */
+        public function setEstUf($estUf)
+        {
+            $this->estUf = $estUf;
         }
     
         

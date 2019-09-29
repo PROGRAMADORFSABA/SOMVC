@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Lib\Sessao;
 use App\Models\DAO\ClienteDAO;
 use App\Models\Entidades\Cliente;
+use App\Models\Entidades\Pedido;
 use App\Models\Validacao\ClienteValidador;
 use App\Services\ClienteService;
 
@@ -33,6 +34,7 @@ class ClienteController extends Controller{
     }
 
     public function cadastro(){
+   
 
         $this->render('/cliente/cadastro');
 

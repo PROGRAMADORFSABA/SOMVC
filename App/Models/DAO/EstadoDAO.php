@@ -11,20 +11,23 @@ class EstadoDAO extends BaseDAO
 
         if ($estId) {
             $resultado = $this->select(
-                "SELECT * FROM estado WHERE estid = $estId "
+                "SELECT * FROM estado e INNER JOIN usuarios u ON u.id = e.estusuario WHERE e.estid = $estId "
             );
             $dado = $resultado->fetch();
 
             if ($dado) {
-                $est = new Estado();
-                $est->setEstId($dado['estid']);
-                $est->setEstNome($dado['estnome']);
+               $estado = new Estado();
+               $estado->setEstId($dado['estid']);
+               $estado->setEstNome($dado['estnome']);
+               $estado->setEstUf($dado['estuf']);
+               $estado->setEstUsuario($dado['estusuario']);
+               $estado->getUsuario()->setNome($dado['nome']);
 
-                return $est;
+                return $estado;
             }
         } else {
             $resultado = $this->select(
-                "SELECT * FROM estado ORDER BY estnome " 
+                "SELECT * FROM estado e INNER JOIN usuarios u ON u.id = e.estusuario  ORDER BY e.estnome " 
             );
             $dados = $resultado->fetchAll();
 
@@ -34,12 +37,15 @@ class EstadoDAO extends BaseDAO
 
                 foreach ($dados as $dado) {
 
-                    $est = new Estado();
-                    $est->setEstId($dado['estid']);
-                    $est->setEstNome($dado['estnome']);
-
-                    $lista[] = $est;
+                   $estado = new Estado();
+                   $estado->setEstId($dado['estid']);
+                   $estado->setEstNome($dado['estnome']);
+                   $estado->setEstUf($dado['estuf']);
+                   $estado->setEstUsuario($dado['estusuario']);
+                   $estado->getUsuario()->setNome($dado['nome']);
+                    $lista[] = $estado;
                 }
+               
                 return $lista;
             }
         }
@@ -47,54 +53,71 @@ class EstadoDAO extends BaseDAO
         return false;
     }
     
-
-     public  function salvar(Marca $est)
+    public function listaPorNome(Estado $estado)
+    {
+        $resultado = $this->select(
+            "SELECT * FROM estado WHERE estnome 
+            LIKE '%".$estado->getEstNome()."%' LIMIT 0,6"
+        );
+    
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+   
+     public  function salvar(Estado $estado)
     {
         try {
 
-            $estNome          =$est->getEstNome();
+            $estNome          =$estado->getEstNome();
+            $estUf          =$estado->getEstUf();
+            $estUsuario          = $estado->getEstUsuario();
 
             return $this->insert(
                 'estado',
-                ":estnome ",
+                ":estnome, :estuf, :estusuario ",
                 [
-                    ':estnome' => $estNome
+                    ':estnome' => $estNome,
+                    ':estuf' => $estUf,
+                    ':estusuario' => $estUsuario
                 ]
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados. ".$e, 500);
+            throw new \Exception("Erro na gravação de dados. ", 500);
         }
     }
 
-    public  function atualizar(Marca $est){
+    public  function atualizar(Estado $estado){
         try {
 
-            $estId             =$est->getEstId();
-            $estNome             =$est->getEstNome();
+            $estId             =$estado->getEstId();
+            $estNome             =$estado->getEstNome();
+            $estUf             =$estado->getEstUf();
+            $estUsuario             =$estado->getEstUsuario();
 
             return $this->update(
                 'estado',
-                "estnome = :estNome",
+                "estnome = :estNome, estuf = :estUf, estusuario = :estUsuario " ,
                 [
                     ':estId' => $estId,
                     ':estNome' => $estNome,
+                    ':estUf' => $estUf,
+                    ':estUsuario' => $estUsuario,
                 ],
                 "estid = :estId"
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados. ".$e, 500);
+            throw new \Exception("Erro na gravação de dados. ", 500);
         }
     }
 
-    public function excluir(Marca $est)
+    public function excluir(Estado $estado)
     {
         try {
-            $estId =$est->getEstId();
+            $estId =$estado->getEstId();
 
             return $this->delete('estado', "estid = $estId");
         } catch (Exception $e) {
 
-            throw new \Exception("Erro ao deletar. ".$e, 500);
+            throw new \Exception("Erro ao deletar. ", 500);
         }
     }
 }

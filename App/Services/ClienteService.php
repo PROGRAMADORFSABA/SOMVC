@@ -15,12 +15,11 @@
     {
         public function autoComplete(Cliente $cliente)
         {
-            $cliente->getNomeFantasiaCliente();
             $clienteDAO = new ClienteDAO();
-            $busca = $clienteDAO->listarPorNomeFantasia($cliente);
-            return $busca;
+            $busca = $clienteDAO->listarPorNomeFantasia($cliente);           
             $exportar = new Exportar();
             return $exportar->exportarJSON($busca);
 
         }
+       
     }

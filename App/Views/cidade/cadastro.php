@@ -24,20 +24,7 @@
                     <label>Nome da Estado:</label>
                     <input type="text" class="form-control" placeholder="Digite Nome do Estado" id="estNome" name="estNome" value="<?php echo $Sessao::retornaValorFormulario('estNome'); ?>" required>
                     <span class="form-text text-muted">Digite o Nome do Marca</span>
-            </div>   
-            <div class="form-group">
-                    <label  class="col-lg-3 col-sm-3 control-label">teste</label>
-                    <div class="col-lg-9">
-                      <div>    
-                        <input type="text" name="estadoAutocomplete" id="estado-autocomplete" class="form-control" required placeholder="Empresa - autocomplete"
-                        >  
-
-                        <input type="hidden" id="estado" name="estado"
-                        value="">
-                      </div>
-                    </div>
-                  </div>
-            
+            </div>               
             <div class="col-lg-2">                
                     <label>UF:</label>
                     <input type="text" class="form-control" placeholder="Digite a UF" id="estUf" name="estUf" value="<?php echo $Sessao::retornaValorFormulario('estUf'); ?>" required>

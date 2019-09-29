@@ -16,6 +16,17 @@
         <div class="kt-portlet__body">
             <input type="text" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
+            <div class="form-group">
+                    <label  class="col-lg-3 col-sm-3 control-label">TESTANDO AUTO COMPLETE DO CLIENTE</label>
+                    <div class="col-lg-9">
+                      <div>    
+                      <?php $cliente = $viewVar['listaClientes'] ?>
+                        <input type="text" name="clienteAutocomplete" id="cliente-autocomplete" class="form-control" required placeholder="Cliente - autocomplete">
+                      </div>
+                    </div>
+                  </div>
+
+
                 <div class="form-group"><label for="codCliente">Cliente</label>
                     <input class="form-control" name="codCliente" required>
                         <option value="">Selecione o cliente</option>

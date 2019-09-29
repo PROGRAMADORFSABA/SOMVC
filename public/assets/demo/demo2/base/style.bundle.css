@@ -21215,7 +21215,8 @@ strong {
     -ms-flex-direction: column;
     flex-direction: column;
     padding: 25px;
-    border-radius: 4px; }
+    border-radius: 4px;
+   }
     .kt-portlet .kt-portlet__body .kt-portlet__content {
       padding: 0;
       margin: 0; }

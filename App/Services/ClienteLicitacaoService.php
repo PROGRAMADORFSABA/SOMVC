@@ -29,7 +29,7 @@
         public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
         {
             $clienteLicitacaoDAO =  new ClienteLicitacaoDAO();
-            $clienteLicitacao = $clienteLicitacaoDAO->
+            return $clienteLicitacaoDAO->listaClienteLicitacao($clienteLicitacao);
         }
         
         public function autoComplete(ClienteLicitacao $clienteLicitacao)

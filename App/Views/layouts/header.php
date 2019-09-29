@@ -41,6 +41,9 @@ $dataAtual = date('Y-m-d H:i:s');
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/login/login-v4.default.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
 
+	<link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.min.css"> 	
+	<link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.themes.min.css"> 
+
 	<!--end::Page Vendors Styles -->
 
 	<!--begin:: Global Mandatory Vendors -->
