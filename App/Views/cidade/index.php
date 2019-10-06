@@ -63,10 +63,9 @@
                             </div>
                         </div>
                         &nbsp;
-                        <a href="http://<?php echo APP_HOST; ?>/estado/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                        <a href="http://<?php echo APP_HOST; ?>/cidade/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>
-                            Nova estado
-
+                            Novo cidade
                         </a>
                     </div>
                 </div>
@@ -95,27 +94,27 @@
                 </tfoot>
                 <tbody>
                     <?php
-                    $dados = $viewVar['listaEstados'];
+                    $dados = $viewVar['listaCidades'];
                     if ($dados > 0) {
-                        foreach ($dados as $estado) {
+                        foreach ($dados as $cidade) {
                             ?>
                             <tr>
-                                <td><?php echo $estado->getEstId(); ?></td>
-                                <td><?php echo $estado->getEstNome(); ?></td>
-                                <td><?php echo $estado->getEstUf(); ?></td>
-                                <td><?php echo $estado->getUsuario()->getNome(); ?></td>
+                                <td><?php echo $cidade->getCidId(); ?></td>
+                                <td><?php echo $cidade->getCidNome(); ?></td>
+                                <td><?php echo $cidade->getEstado()->getEstUf(); ?></td>
+                                <td><?php echo $cidade->getUsuario()->getNome(); ?></td>
                                 <td>
                                     <span class="dropdown">
                                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/estado/edicao/<?php echo $estado->getEstId(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
-                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/estado/exclusao/<?php echo $estado->getEstId(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
-                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/estado/edicao/<?php echo $estado->getEstId(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/estado/edicao/<?php echo $estado->getEstId(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cidade/edicao/<?php echo $cidade->getCidId(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cidade/exclusao/<?php echo $cidade->getCidId(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cidade/edicao/<?php echo $cidade->getCidId(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                            <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/cidade/edicao/<?php echo $cidade->getCidId(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
                                         </div>
                                     </span>
-                                    <a href="http://<?php echo APP_HOST; ?>/estado/edicao/<?php echo $estado->getEstId(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                                    <a href="http://<?php echo APP_HOST; ?>/estado/exclusao/<?php echo $estado->getEstId(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
+                                    <a href="http://<?php echo APP_HOST; ?>/cidade/edicao/<?php echo $cidade->getCidId(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                                    <a href="http://<?php echo APP_HOST; ?>/cidade/exclusao/<?php echo $cidade->getCidId(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
                                 </td>
                         <?php
                             }

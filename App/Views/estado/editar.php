@@ -2,7 +2,7 @@
 <div class="container">
     <br>
     <center>
-        <h3>Alteracao de Marca</h3>
+        <h3>Alteracao de Estado</h3>
     </center>
     <?php if ($Sessao::retornaErro()) { ?>
         <div class="alert alert-warning" role="alert">

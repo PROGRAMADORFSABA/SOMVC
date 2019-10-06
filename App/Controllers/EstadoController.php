@@ -10,11 +10,12 @@ use App\Services\EstadoService;
 
 class EstadoController extends Controller
 {
-    public function index()
+    public function index($params)
     {
-        $estadoDAO = new EstadoDAO();
+        $estId = $params[0];
+        $estadoService = new EstadoService();
 
-        self::setViewParam('listaEstados',$estadoDAO->listar());      
+        self::setViewParam('listaEstados',$estadoService->listar($estId));      
 
         $this->render('/estado/index');
 
@@ -25,6 +26,16 @@ class EstadoController extends Controller
     {
         $estado = new Estado();
         $estado->setEstNome($params[0]);        
+        $estadoService = new EstadoService();
+        $busca = $estadoService->autoComplete($estado);
+        
+        echo $busca;
+    }
+
+    public function autoComplete1($params)
+    {
+        $estado = new Estado();
+        $estado->setEstUf($params[0]);        
         $estadoService = new EstadoService();
         $busca = $estadoService->autoComplete($estado);
         
@@ -122,41 +133,38 @@ class EstadoController extends Controller
     public function exclusao($params)
     {
         $estId = $params[0];
-
-        $estadoDAO = new EstadoDAO();
-
-        $estado = $estadoDAO->listar($estId);
-
+    if($estId){
+        $estadoService = new EstadoService();
+      
+        $estado = $estadoService->listar($estId); 
         if(!$estado){
             Sessao::gravaMensagem("Estado inexistente");
             $this->redirect('/estado');
-        }
-
-        self::setViewParam('estado',$estado);
-
-        $this->render('/estado/exclusao');
-
+        }else{
+            self::setViewParam('estado',$estado);
+            $this->render('/estado/exclusao');            
         Sessao::limpaMensagem();
-
+        }
+    }else{
+        Sessao::gravaMensagem("Estado inexistente");
     }
-
+    }
+    
     public function excluir()
     {
-        $estado = new Estado();
-        $estado->setEstId($_POST['estId']);
+     if(empty($_POST['estId'])){
 
-        $estadoDAO = new EstadoDAO();
-
-        if(!$estadoDAO->excluir($estado)){
-            Sessao::gravaMensagem("Estado inexistente");
-            $this->redirect('/estado');
-        }
-
-        Sessao::gravaMensagem("Estado excluido com sucesso!");
-
-        $this->redirect('/estado');
- 
+         Sessao::gravaMensagem("Estado inexistente");
+     }else{
+         $estado = new Estado();
+         $estado->setEstId($_POST['estId']);
+         $estadoService = new EstadoService();
+            if($estadoService->excluir($estado)){
+                $this->redirect('/estado');                
+            }else{
+                $this->redirect('/estado/exclusao'.$estado->getEstId());
+            }
+     }
         Sessao::limpaMensagem();
-
     }
 }

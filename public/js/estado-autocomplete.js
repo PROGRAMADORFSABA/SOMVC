@@ -6,7 +6,7 @@ var optionsEstado = {
 	},
 
 	getValue: function(element) {
-		return element.estnome;
+		return element.estnome  + " - " + element.estuf;
 	},
 
 	list: {		

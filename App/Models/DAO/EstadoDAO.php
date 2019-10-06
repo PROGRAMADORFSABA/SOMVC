@@ -9,20 +9,19 @@ class EstadoDAO extends BaseDAO
     public  function listar($estId = null)
     {
 
-        if ($estId) {
+        if ($estId) {         
             $resultado = $this->select(
-                "SELECT * FROM estado e INNER JOIN usuarios u ON u.id = e.estusuario WHERE e.estid = $estId "
+                " SELECT * FROM estado e INNER JOIN usuarios u ON u.id = e.estusuario WHERE e.estid = $estId "
             );
             $dado = $resultado->fetch();
-
             if ($dado) {
-               $estado = new Estado();
-               $estado->setEstId($dado['estid']);
-               $estado->setEstNome($dado['estnome']);
-               $estado->setEstUf($dado['estuf']);
-               $estado->setEstUsuario($dado['estusuario']);
-               $estado->getUsuario()->setNome($dado['nome']);
-
+                $estado = new Estado();
+                $estado->setEstId($dado['estid']);
+                $estado->setEstNome($dado['estnome']);
+                $estado->setEstUf($dado['estuf']);
+                $estado->setEstUsuario($dado['estusuario']);
+                $estado->getUsuario()->setNome($dado['nome']);
+                
                 return $estado;
             }
         } else {
@@ -44,8 +43,7 @@ class EstadoDAO extends BaseDAO
                    $estado->setEstUsuario($dado['estusuario']);
                    $estado->getUsuario()->setNome($dado['nome']);
                     $lista[] = $estado;
-                }
-               
+                }               
                 return $lista;
             }
         }
@@ -58,6 +56,16 @@ class EstadoDAO extends BaseDAO
         $resultado = $this->select(
             "SELECT * FROM estado WHERE estnome 
             LIKE '%".$estado->getEstNome()."%' LIMIT 0,6"
+        );
+    
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+   
+    public function listaPorUf(Estado $estado)
+    {
+        $resultado = $this->select(
+            "SELECT * FROM estado WHERE estnome 
+            LIKE '%".$estado->getEstUf()."%' LIMIT 0,6"
         );
     
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);

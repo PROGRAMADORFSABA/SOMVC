@@ -3,17 +3,18 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Cidade;
+use App\Models\Entidades\Estado;
+use App\Models\Entidades\Usuario;
 
 class CidadeDAO extends BaseDAO
 {
     public  function listar($cidId = null)
-    {
-        
-            $SQL = " SELECT * 
+    {        
+        $SQL = " SELECT * 
                 FROM cidade c
                 INNER JOIN estado e ON e.estid = cidestado 
-                INNER JOIN usuarios u ON u.id = cidusuario ";
-            if($id) 
+                INNER JOIN usuarios u ON u.id = c.cidusuario ";
+            if($cidId) 
             {    
                 $SQL.= " WHERE c.cidid = $cidId";
             }         
@@ -21,24 +22,25 @@ class CidadeDAO extends BaseDAO
             $resultado = $this->select($SQL);
             
             $dados = $resultado->fetchAll();
-
                 $lista = [];
                 foreach ($dados as $dado) {
 
                     $cidade = new Cidade();
                     $cidade->setCidId($dado['cidid']);
                     $cidade->setCidNome($dado['cidnome']);
-                    $cidade->setCidEstado($dado['cidestado']);
                     $cidade->setCidDataAlteracao($dado['ciddataalteracao']);
-                    $cidade->setCidDataCadastro($dado['ciddataaldastro']);
+                    $cidade->setCidDataCadastro($dado['ciddatacadastro']);
+                    $cidade->setEstado(new Estado());
                     $cidade->getEstado()->setEstId($dado['estid']);
                     $cidade->getEstado()->setEstNome($dado['estnome']);
                     $cidade->getEstado()->setEstUf($dado['estuf']);
+                    $cidade->setUsuario(new Usuario());
                     $cidade->getUsuario()->setId($dado['id']);
                     $cidade->getUsuario()->setNome($dado['nome']);
 
                     $lista[] = $cidade;
                 }
+
                 return $lista;        
     }
     
@@ -60,27 +62,23 @@ class CidadeDAO extends BaseDAO
     {
         try {
 
-            $proNome           = $cidade->getCidNome();
-            $proNomeComercial          = $cidade->getCidEstado();
-            $proUsuario          = $cidade->getProUsuario();
-            $proEstado          = $cidade->getProEstado();
-            $proUsuario          = $cidade->getProUsuario();
-            $date     = $cidade->getCidDataAlteracao();
-            $date1     = $cidade->getCidDataCadastro();
-            $proDataCadastro =   date_format($date1, 'Y-m-d H:i:s');
-            $proDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
+            $cidNome            = $cidade->getCidNome();
+            $cidUsuario         = $cidade->getUsuario()->getId();
+            $cidEstado          = $cidade->getEstado()->getEstId();
+            $date               = $cidade->getCidDataAlteracao();
+            $date1              = $cidade->getCidDataCadastro();
+            $cidDataCadastro    =   date_format($date1, 'Y-m-d H:i:s');
+            $cidDataAlteracao    =   date_format($date, 'Y-m-d H:i:s');
 
             return $this->insert(
-                'Cidade',
-                ":proNome,:proNomeComercial,:proUsuario,:proEstado,:proUsuario,:proDataAlteracao,:proDataCadastro",
+                'cidade',
+                ":cidnome,:cidusuario,:cidestado,:ciddataalteracao,:ciddatacadastro",
                 [
-                    ':proNome' => $proNome,
-                    ':proNomeComercial' => $proNomeComercial,
-                    ':proUsuario' => $proUsuario,
-                    ':proEstado' => $proEstado,
-                    ':proUsuario' => $proUsuario,
-                    ':proDataAlteracao' => $proDataAlteracao,
-                    ':proDataCadastro' => $proDataCadastro
+                    ':cidnome' => $cidNome,
+                    ':cidusuario' => $cidUsuario,
+                    ':cidestado' => $cidEstado,
+                    ':ciddataalteracao' => $cidDataAlteracao,
+                    ':ciddatacadastro' => $cidDataCadastro
                 ]
             );
         } catch (\Exception $e) {
@@ -101,28 +99,26 @@ class CidadeDAO extends BaseDAO
     {
         try {
             
-            $proCodigo         = $cidade->getCidId();
-            $proNome           = $cidade->getCidNome();
-            $proNomeComercial          = $cidade->getCidEstado();
-            $proUsuario          = $cidade->getProUsuario();
-            $proEstado          = $cidade->getProEstado();
-            $proUsuario          = $cidade->getProUsuario();
+            $cidId         = $cidade->getCidId();
+            $cidNome           = $cidade->getCidNome();
+            $cidUsuario          = $cidade->getUsuario()->getId();
+            $cidEstado          = $cidade->getEstado()->getEstId();
             $date               = $cidade->getCidDataAlteracao();
-            $proDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
-
+            $cidDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
+            var_dump($cidDataAlteracao);
             return $this->update(
-                'Cidade',
-                "proNome = :proNome, proNomeComercial = :proNomeComercial, proUsuario = :proUsuario, proEstado = :proEstado, proUsuario = :proUsuario, proDataAlteracao = :proDataAlteracao",
+                'cidade',
+                "cidnome = :cidNome, cidusuario = :cidUsuario, 
+                cidestado = :cidEstado, 
+                ciddataalteracao = :cidDataAlteracao",
                 [
-                    ':proCodigo' => $proCodigo,
-                    ':proNome' => $proNome,
-                    ':proNomeComercial' => $proNomeComercial,
-                    ':proUsuario' => $proUsuario,
-                    ':proEstado' => $proEstado,
-                    ':proUsuario' => $proUsuario,
-                    ':proDataAlteracao' => $proDataAlteracao,                    
+                    ':cidId' => $cidId,
+                    ':cidNome' => $cidNome,
+                    ':cidUsuario' => $cidUsuario,
+                    ':cidEstado' => $cidEstado,
+                    ':cidDataAlteracao' => $cidDataAlteracao, 
                 ],
-                "proCodigo = :proCodigo"
+                "cidid = :cidId"
             );
         } catch (\Exception $e) {
             throw new \Exception("Erro na gravação de dados. ".$e, 500);
@@ -132,9 +128,9 @@ class CidadeDAO extends BaseDAO
     public function excluir(Cidade $cidade)
     {
         try {
-            $proCodigo = $cidade->getCidId();
+            $cidId = $cidade->getCidId();
 
-            return $this->delete('Cidade', "proCodigo = $proCodigo");
+            return $this->delete('cidade', "cidid = $cidId");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);

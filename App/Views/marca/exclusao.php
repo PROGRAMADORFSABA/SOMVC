@@ -15,7 +15,7 @@
             <?php } ?>
 
             <form action="http://<?php echo APP_HOST; ?>/marca/excluir" method="post" id="form_cadastro">
-                <input type="hidden" class="form-control" name="marcaCod" id="v" value="<?php echo $viewVar['marca']->getMarcaCod(); ?>">
+                <input type="hidden" class="form-control" name="marcaCod" id="marcaCod" value="<?php echo $viewVar['marca']->getMarcaCod(); ?>">
 
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">

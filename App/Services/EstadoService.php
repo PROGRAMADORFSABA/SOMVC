@@ -30,6 +30,15 @@ class EstadoService
         
         return $exportar->exportarJSON($busca);
     }
+
+    public function autoComplete1(Estado $estado)
+    { 
+        $estadoDAO = new EstadoDAO();
+        $busca = $estadoDAO->listaPorUf($estado);          
+        $exportar = new Exportar();
+        
+        return $exportar->exportarJSON($busca);
+    }
     
     public function listarEstadosVinculadas(Estado $estado)
     {
@@ -84,24 +93,16 @@ class EstadoService
             $transacao->beginTransaction();
             
             $estadoDAO = new EstadoDAO();
-            $vagas = $estadoDAO->listarEstadosVinculadas($estado);
-
-            if (isset($vagas)) {                
-                $vagaDAO = new EstadoDAO();
-                foreach ($vagas as $vaga) {                    
-                    $vagaDAO->excluirComRelacionamentos($vaga);          
-                }
-            }
             
             $estadoDAO->excluir($estado);
             $transacao->commit();            
             
             Sessao::limpaMensagem();
-            Sessao::gravaMensagem("Estado Excluida com Sucesso!");
+            Sessao::gravaMensagem("Estado Excluido com Sucesso!");
             return true;
         } catch (\Exception $e) {
             $transacao->rollBack();
-            throw new \Exception(["Erro ao excluir a empresa"]);            
+            throw new \Exception(["Erro ao excluir cadastro"]);            
             return false;
         }
     }

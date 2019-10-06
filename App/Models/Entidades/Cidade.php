@@ -92,11 +92,11 @@ cidid,cidnome,ciddatacadastro,ciddataalteracao,cidusuario,cidestado
         }
     
     public function getUsuario() {
-        return $this->$usuario;
+        return $this->usuario;
     }
     
     public function setUsuario(Usuario $usuario) {
-        $this->$usuario = $usuario;
+        $this->usuario = $usuario;
     }
  }
 

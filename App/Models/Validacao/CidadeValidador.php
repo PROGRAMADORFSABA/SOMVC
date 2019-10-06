@@ -15,9 +15,9 @@ class CidadeValidador{
         {
             $resultadoValidacao->addErro('cidNome',"Nome: Cide campo não pode ser vazio");
         }
-        if(empty($cidade->getCidEstado()))
+        if(empty($cidade->getEstado()))
         {
-            $resultadoValidacao->addErro('cidEstado',"UF: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('estado',"UF: Este campo não pode ser vazio");
         }
         
         return $resultadoValidacao;

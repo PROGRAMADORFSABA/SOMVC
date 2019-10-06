@@ -14,14 +14,14 @@ use App\Models\Validacao\CidadeValidador;
 use App\Models\Validacao\ResultadoValidacao;
 use App\Models\Entidades\Cidade;
 
-use App\Services\TecnologiaService;
 
 class CidadeService
 {
-    public function listar($idCidade = null)
+    public function listar($cidId = null)
     {
+        
         $cidadeDAO = new CidadeDAO();
-        return $cidadeDAO->listar($idCidade);
+        return $cidadeDAO->listar($cidId);
     }
 
     public function autoComplete(Cidade $cidade)
@@ -40,29 +40,37 @@ class CidadeService
 
     public function salvar(Cidade $cidade)
     {
-        $cidadeValidadorInserir = new CidadeValidadorInserir();
-        $resultadoValidacao = $cidadeValidadorInserir->validar($cidade);
+        $transacao = new Transacao();
+        $cidadeValidador = new CidadeValidador();
+        $resultadoValidacao = $cidadeValidador->validar($cidade);
 
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
             Sessao::gravaErro($resultadoValidacao->getErros());
         } else {
-            $cidadeDAO = new empresaDAO();            
-            $cidadeDAO->salvar($cidade);
-            Sessao::gravaMensagem("Nova empresa cadastrada com sucesso.");
-            Sessao::limpaFormulario();
-            return true;
+            try{
+                $transacao->beginTransaction();
+                $cidadeDAO = new CidadeDAO();            
+                $cidadeDAO->salvar($cidade);
+                $transacao->commit(); 
+                Sessao::gravaMensagem("cadastro realizado com sucesso!.");
+                Sessao::limpaFormulario();
+                return true;
+            }catch(\Exception $e){
+                Sessao::gravaMensagem("Erro ao tentar cadastrar.");
+                $transacao->rollBack(); 
+                return false;
+            }
         }
-        return false;
     }
 
-    public function Editar(Cidade $novaCidade)
+    public function Editar(Cidade $cidade)
     {        
-        $cidadeDAO = new CidadeDAO();
-        $cidadeCadastrada = $cidadeDAO->listar($novaCidade->getIdCidade())[0];
+        //$cidadeDAO = new CidadeDAO();
+       // $cidade = $cidadeDAO->listar($cidade->getCidId())[0];
 
-        $cidadeValidadorEditar = new CidadeValidadorEditar();
-        $resultadoValidacao = $cidadeValidadorEditar->validar($novaCidade, $cidadeCadastrada);
+        $cidadeValidador = new CidadeValidador();
+        $resultadoValidacao = $cidadeValidador->validar($cidade);
 
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
@@ -70,9 +78,9 @@ class CidadeService
         } else {
             Sessao::limpaFormulario(); 
             Sessao::limpaMensagem();           
-            Sessao::gravaMensagem("Cidade atualizada com sucesso!");
+            Sessao::gravaMensagem("Cadastro atualizado com sucesso! ");
             $cidadeDAO = new CidadeDAO();
-            return $cidadeDAO->editar($novaCidade);
+            return $cidadeDAO->atualizar($cidade);
         }
         return false;
     }
@@ -85,15 +93,8 @@ class CidadeService
             $transacao->beginTransaction();
             
             $cidadeDAO = new CidadeDAO();
-            $vagas = $cidadeDAO->listarEstadosVinculadas($cidade);
-
-            if (isset($vagas)) {                
-                $vagaDAO = new EstadoDAO();
-                foreach ($vagas as $vaga) {                    
-                    $vagaDAO->excluirComRelacionamentos($vaga);          
-                }
-            }
-            
+           // $vagas = $cidadeDAO->listarEstadosVinculadas($cidade);
+                        
             $cidadeDAO->excluir($cidade);
             $transacao->commit();            
             

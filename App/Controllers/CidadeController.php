@@ -9,28 +9,49 @@ use App\Models\DAO\UsuarioDAO;
 use App\Models\Entidades\Cidade;
 use App\Models\Validacao\CidadeValidador;
 use App\Models\Entidades\Usuario;
+use App\Models\Entidades\Estado;
+use App\Services\CidadeService;
+use App\Services\EstadoService;
+use App\Services\UsuarioService;
+
 
 class CidadeController extends Controller
 {
-    public function index()
+    public function index($params)
     {
-        $cidadeDAO = new CidadeDAO();
+        $cidId = $params[0];
+        $cidadeService = new CidadeService();
 
-        self::setViewParam('listaCidades', $cidadeDAO->listar());
+        self::setViewParam('listaCidades', $cidadeService->listar($cidId));
 
         $this->render('/cidade/index');
 
         Sessao::limpaMensagem();
     }
 
+    public function autoComplete($params)
+    {
+        $cidade = new Cidade();
+        $cidade->CidNome($params[0]);        
+        $cidadeService = new CidadeService();
+        $busca = $cidadeService->autoComplete($cidade);
+        
+        echo $busca;
+    }
+
     public function cadastro()
     {
-        $usuarioDAO = new UsuarioDAO();
-        self::setViewParam('listaUsuarios', $usuarioDAO->listar());
-
-        $estadoDAO = new EstadoDAO();
-        self::setViewParam('listaEstados', $estadoDAO->listar());
-
+        if(Sessao::existeFormulario()) { 
+        $cidade = new Cidade();
+        $estadoService = new EstadoService();
+        $estId = Sessao::retornaValorFormulario('estado');
+        $estado = $estadoService->listar($estId);
+        $cidade->setEstado($estado);
+        }else{
+            $cidade = new Cidade();
+            $cidade->setEstado(new Estado());
+        }
+        $this->setViewParam('cidade',$cidade);        
         $this->render('/cidade/cadastro');
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
@@ -39,18 +60,19 @@ class CidadeController extends Controller
 
     public function salvar()
     {
+        $estadoService  = new EstadoService();        
+        $usuarioService = new UsuarioService();        
+        $estado         = $estadoService->listar($_POST['estado']);
+        $usuario        = $usuarioService->listar($_POST['cidUsuario']);
+        
         $cidade = new Cidade();
-        $cidade->setProNome($_POST['proNome']);
-        $cidade->setProNomeComercial($_POST['proNomeComercial']);
-        $cidade->setProEstado($_POST['proEstado']);
-        $cidade->setProUsuario($_POST['proUsuario']);
-        $cidade->setProUsuario($_POST['proUsuario']);
-        $cidade->setProDataAlteracao($_POST['proDataAlteracao']);
-        $cidade->setProDataCadastro($_POST['proDataCadastro']);
+        $cidade->setCidNome($_POST['cidNome']);        
+        $cidade->setEstado($estado);
+        $cidade->setUsuario($usuario);
 
         Sessao::gravaFormulario($_POST);
 
-        $cidadeValidador = new CidadeValidador();
+        $cidadeValidador    = new CidadeValidador();
         $resultadoValidacao = $cidadeValidador->validar($cidade);
 
         if ($resultadoValidacao->getErros()) {
@@ -58,36 +80,49 @@ class CidadeController extends Controller
             $this->redirect('/cidade/cadastro');
         }
 
-        $cidadeDAO = new CidadeDAO();
-
-        $cidadeDAO->salvar($cidade);
+        $cidadeService = new CidadeService();
+    
+        if($cidadeService->salvar($cidade)){
+            $this->redirect('/cidade');
+        }else{
+            $this->redirect('/cidade/cadastro');
+        }
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
-
-        $this->redirect('/cidade');
     }
 
     public function edicao($params)
     {
-        $proCodigo = $params[0];
-
-        $cidadeDAO = new CidadeDAO();
-        $cidade = $cidadeDAO->listar($proCodigo);
+        $cidId = $params[0];
         
-        $usuarioDAO = new UsuarioDAO();
-        self::setViewParam('listaUsuarios', $usuarioDAO->listar());
-
-        $estadoDAO = new EstadoDAO();
-        self::setViewParam('listaEstados', $estadoDAO->listar());
+        if(Sessao::existeFormulario()) { 
+            $cidade = new Cidade();
+            $cidade->setCidId(Sessao::retornaValorFormulario('cidId'));
+            $cidade->setCidNome(Sessao::retornaValorFormulario('cidNome'));
+            $cidade->setCidDataAlteracao(Sessao::retornaValorFormulario('dataAlteracao'));
+            $estadoService = new EstadoService();
+            $usuarioService = new UsuarioService();
+            $estId = Sessao::retornaValorFormulario('estado');
+            $id = Sessao::retornaValorFormulario('cidUsuario');
+            $estado = $estadoService->listar($estId);
+            $usuario = $usuarioService->listar($id);
+            $cidade->setEstado($estado);
+            $cidade->setUsuario($usuario);
+            
+        }else{           
+            $cidadeService = new CidadeService();
+            $cidade = $cidadeService->listar($cidId)[0]; 
+        }
+       
         if (!$cidade) {
-            Sessao::gravaMensagem("Cidade inexistente");
+            Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/cidade');
         }
-
-        self::setViewParam('produto', $cidade);
-
+            
+       $this->setViewParam('cidade', $cidade);
+       
         $this->render('/cidade/editar');
 
         Sessao::limpaMensagem();
@@ -95,52 +130,57 @@ class CidadeController extends Controller
 
     public function atualizar()
     {
-
-        $cidade = new Cidade();
-        $cidade->setProCodigo($_POST['proCodigo']);
-        $cidade->setProNome($_POST['proNome']);
-        $cidade->setProNomeComercial($_POST['proNomeComercial']);
-        $cidade->setProEstado($_POST['proEstado']);
-        $cidade->setProUsuario($_POST['proUsuario']);
-        $cidade->setProUsuario($_POST['proUsuario']);
-        $cidade->setProDataAlteracao($_POST['proDataAlteracao']);
+        $estadoService  = new EstadoService();        
+        $usuarioService = new UsuarioService();        
+        $estado         = $estadoService->listar($_POST['estado']);
+        $usuario        = $usuarioService->listar($_POST['cidUsuario']);
         
-
-        Sessao::gravaFormulario($_POST);
-
+        $cidade = new Cidade();
+        $cidade->setCidId($_POST['cidId']);
+        $cidade->setCidNome($_POST['cidNome']);
+        $cidade->setEstado($estado);
+        $cidade->setUsuario($usuario);
+        $cidade->setCidDataAlteracao($_POST['dataAlteracao']);
+        
+        
         $cidadeValidador = new CidadeValidador();
         $resultadoValidacao = $cidadeValidador->validar($cidade);
-
+        
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/cidade/edicao/' . $_POST['proCodigo']);
+            Sessao::gravaMensagem("erro na atualizacao");
+            Sessao::gravaFormulario($_POST);
+            $this->redirect('/cidade/edicao/' . $_POST['cidId']);
+        }
+        
+        $cidadeService = new CidadeService();        
+        if ($cidadeService->Editar($cidade)) {
+            $this->redirect('/cidade');
+            Sessao::limpaFormulario();
+            Sessao::limpaMensagem();
+            Sessao::limpaErro();
+        }else{
+            Sessao::gravaFormulario($_POST);            
+            Sessao::gravaMensagem("erro na atualizacao");
+          $this->redirect('/cidade/edicao/' . $_POST['cidId']);
         }
 
-        $cidadeDAO = new CidadeDAO();
-
-        $cidadeDAO->atualizar($cidade);
-
-        Sessao::limpaFormulario();
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
-
-        $this->redirect('/cidade');
     }
     
     public function exclusao($params)
     {
-        $proCodigo = $params[0];
+        $cidId = $params[0];
 
-        $cidadeDAO = new CidadeDAO();
+        $cidadeService = new CidadeService();
 
-        $cidade = $cidadeDAO->listar($proCodigo);
+        $cidade = $cidadeService->listar($cidId)[0];
 
         if (!$cidade) {
-            Sessao::gravaMensagem("Cidade inexistente");
+        Sessao::gravaMensagem("Cidade inexistente");
             $this->redirect('/cidade');
         }
 
-        self::setViewParam('produto', $cidade);
+        self::setViewParam('cidade', $cidade);
 
         $this->render('/cidade/exclusao');
 
@@ -150,13 +190,13 @@ class CidadeController extends Controller
     public function excluir()
     {
         $cidade = new Cidade();
-        $cidade->setProCodigo($_POST['proCodigo']);
+        $cidade->setCidId($_POST['cidId']);
 
-        $cidadeDAO = new CidadeDAO();
+        $cidadeService= new CidadeService();
 
-        if (!$cidadeDAO->excluir($cidade)) {
+        if (!$cidadeService->excluir($cidade)) {
             Sessao::gravaMensagem("Cidade inexistente");
-            $this->redirect('/cidade');
+            $this->redirect('/cidade/exclusao'.$cidade->getCidId());
         }
 
         Sessao::gravaMensagem("Cidade excluido com sucesso!");
