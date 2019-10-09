@@ -5,40 +5,60 @@ namespace App\Controllers;
 use App\Lib\Sessao;
 use App\Models\DAO\PedidoDAO;
 use App\Models\DAO\StatusDAO;
+use App\Models\DAO\TesteDAO;
 use App\Models\DAO\ClienteDAO;
 use App\Models\DAO\RepresentanteDAO;
 use App\Models\Entidades\Pedido;
+use App\Models\Entidades\Teste;
+use App\Services\TesteService;
 use App\Models\Validacao\PedidoValidador;
 
-class PedidoController extends Controller
+class TesteController extends Controller
 {
 
-    public function index()
+    public function index($params)
     {
+        $id = $params[0];
 
-        $pedidoDAO = new PedidoDAO();
+        $testeService = new TesteService();
+        $teste = $testeService->listar($id);
+        $this->setViewParam('teste', $teste);        
         
-        self::setViewParam('listaPedido', $pedidoDAO->listar());
-        self::setViewParam('listaPedidos', $pedidoDAO->listarTeste());
-        
-        $this->render('/pedido/index');
+        $pedidoDAO = new ClienteDAO();
+       // self::setViewParam('teste', $pedidoDAO->listar());
+       
+
+        $this->render('/teste/index');
 
         Sessao::limpaMensagem();
     }
     public function teste()
     {        
-        $this->render('/pedido/teste');
+     //   $this->render('/pedido/teste');
 
         Sessao::limpaMensagem();
     }
+
+
+    public function autoComplete($params)
+    {
+        $teste = new Teste();
+        $teste->setNomeFantasiaCliente($params[0]);
+        
+        $testeService = new TesteService();
+        $busca = $testeService->autoComplete($teste);
+        
+        echo $busca;
+    }
+
     public function pesquisa()
     {
 
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
 
-        $clienteDAO = new ClienteDAO();
-        self::setViewParam('listaClientes', $clienteDAO->listar());
+        $testeDAO = new TesteDAO();
+        self::setViewParam('listaClientes', $testeDAO->listar());
         $representanteDAO = new RepresentanteDAO();
         self::setViewParam('listaRepresentantes', $representanteDAO->listar());
 
@@ -64,19 +84,34 @@ class PedidoController extends Controller
     public function cadastro()
     {
         $pedido = new Pedido();
+        $teste = new Teste();
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
-        $clienteDAO = new ClienteDAO();
-        self::setViewParam('listaClientes', $clienteDAO->listar());
+        $testeDAO = new ClienteDAO();
+        self::setViewParam('listaClientes', $testeDAO->listar());
         $representanteDAO = new RepresentanteDAO();
         self::setViewParam('listaRepresentantes', $representanteDAO->listar());
 
-        $idCliente = Sessao::retornaValorFormulario('cliente');
-        $clienteDAO1 = new ClienteDAO();
-        $cliente = $clienteDAO1->listar($idCliente)[0];
-        $pedido->getCliente($cliente);
+        $id = Sessao::retornaValorFormulario('clientes');
+            
+        if(empty($id)) {
+            $teste->setClientes(array());    
+        } else {
+            $testeService = new testeService(); 
+            $id = $testeService->listaClientes($id);
+            $teste->setClientes($id); 
+        }
 
-        $this->render('/pedido/cadastro');
+
+
+        $idCliente = Sessao::retornaValorFormulario('clientes');
+        $testeDAO1 = new TesteDAO();
+        $cliente = $testeDAO1->listar($idCliente)[0];
+        $pedido->getCliente($cliente);
+       
+
+        $this->setViewParam('teste',$teste);
+       $this->render('/teste/cadastro');
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
@@ -108,7 +143,7 @@ class PedidoController extends Controller
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();
-            $this->redirect('/pedido');
+        //    $this->redirect('/pedido');
         } else {
             Sessao::gravaMensagem("Erro ao gravar");
         }
@@ -129,8 +164,8 @@ class PedidoController extends Controller
             $this->redirect('/pedido');
         }
 
-        $clienteDAO = new ClienteDAO();
-        self::setViewParam('listaClientes', $clienteDAO->listar());
+        $testeDAO = new TesteDAO();
+        self::setViewParam('listaClientes', $testeDAO->listar());
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
         $representanteDAO = new RepresentanteDAO();

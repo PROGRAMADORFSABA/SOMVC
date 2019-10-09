@@ -3,7 +3,7 @@
         <div class="kt-portlet__head"></div>
         <div class="col-md-6">
         <center>
-            <h3>Excluir Estado</h3>
+            <h3>Excluir Cidade</h3>
             </center>
             <?php if($Sessao::retornaErro()){ ?>
                 <div class="alert alert-warning" role="alert">
@@ -14,16 +14,16 @@
                 </div>
             <?php } ?>
 
-            <form action="http://<?php echo APP_HOST; ?>/estado/excluir" method="post" id="form_cadastro">
-                <input type="hidden" class="form-control" name="estId" id="estId" value="<?php echo $viewVar['estado']->getEstId(); ?>">
+            <form action="http://<?php echo APP_HOST; ?>/cidade/excluir" method="post" id="form_cadastro">
+                <input type="hidden" class="form-control" name="cidId" id="cidId" value="<?php echo $viewVar['cidade']->getCidId(); ?>">
 
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">
-                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o estado: <?php echo $viewVar['estado']->getEstNome(); ?> ?</h4>
+                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir a cidade: <?php echo $viewVar['cidade']->getCidNome() ." UF ". $viewVar['cidade']->getEstado()->getEstUf(); ?> ?</h4>
                     </div>
                     <div class="panel-footer"> 
                         <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
-                        <a href="http://<?php echo APP_HOST; ?>/estado" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                        <a href="http://<?php echo APP_HOST; ?>/cidade" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                     </div>
                 </div>
             </form>

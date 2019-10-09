@@ -19,22 +19,45 @@
             <div class="form-group">
                     <label  class="col-lg-3 col-sm-3 control-label">TESTANDO AUTO COMPLETE DO CLIENTE</label>
                     <div class="col-lg-9">
-                      <div>    
-                      <?php $cliente = $viewVar['listaClientes'] ?>
-                        <input type="text" name="clienteAutocomplete" id="cliente-autocomplete" class="form-control" required placeholder="Cliente - autocomplete">
+                      <div>                         
+                        <input type="text" name="testeAutocomplete" id="teste-autocomplete" class="form-control" required placeholder="Cliente - autocomplete">
                       </div>
                     </div>
                   </div>
-
+                  <table class="table table-striped">
+                      <thead>
+                        <th>Codigo</th>
+                        <th>Tecnologia</th>
+                        <th>Remover</th>
+                      </thead>
+                      <tbody id="editar-tabela-clientes"> 
+                        <?php
+                       if($viewVar['teste']->getClientes()) {
+                         foreach ($viewVar['teste']->getClientes() as $tecnologia) {
+                          ?>
+                          <tr>
+                            <td>
+                              <?php echo $tecnologia->getClientes(); ?>
+                              <input type="hidden" name="clientes[]" value=<?php echo $tecnologia->getCodCliente(); ?>>
+                            </td>
+                            <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeTecnologia(this,<?php echo $tecnologia->getCodCliente(); ?>)">remover</button></td>
+                          </tr>
+                          <?php                    
+                        }
+                        var_dump(" teste ".$tecnologia);
+                      }
+                      ?>                  
+                    </tbody>
+                  </table>
 
                 <div class="form-group"><label for="codCliente">Cliente</label>
-                    <input class="form-control" name="codCliente" required>
+                    <select class="form-control" name="codCliente" required>
                         <option value="">Selecione o cliente</option>
                         <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
                             <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
                                 <?php echo $cliente->getNomeCliente(); ?></option>
                         <?php endforeach; ?>
-                    </input>
+                    </select>
                     <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>
                 </div>
 

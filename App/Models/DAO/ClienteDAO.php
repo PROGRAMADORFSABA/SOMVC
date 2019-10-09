@@ -120,7 +120,8 @@ class ClienteDAO extends BaseDAO
     public function listarPorNomeFantasia(Cliente $cliente)
     {
         $resultado = $this->select(
-            "SELECT * FROM cliente WHERE nomeFantasiaCliente LIKE '%".$cliente->getNomeFantasiaCliente()."%' LIMIT 0,6"
+            "SELECT * FROM cliente WHERE nomeFantasiaCliente 
+            LIKE '%".$cliente->getNomeFantasiaCliente()."%' LIMIT 0,6"
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }

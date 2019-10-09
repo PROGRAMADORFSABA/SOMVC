@@ -568,6 +568,13 @@
 <!--begin::Global App Bundle(used by all pages) -->
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/bundle/app.bundle.js" type="text/javascript"></script>
 
+<script src="http://<?php echo APP_HOST; ?>/public/js/common-scripts.js"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/js/jquery.easy-autocomplete.min.js"></script> 
+<script src="http://<?php echo APP_HOST; ?>/public/js/cidade-autocomplete.js"></script> 
+<script src="http://<?php echo APP_HOST; ?>/public/js/estado-autocomplete.js"></script> 
+<script src="http://<?php echo APP_HOST; ?>/public/js/cliente-autocomplete.js"></script> 
+<script src="http://<?php echo APP_HOST; ?>/public/js/teste-autocomplete.js"></script> 
+
 <!--end::Global App Bundle -->
 </body>
 

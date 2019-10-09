@@ -5,7 +5,7 @@ namespace App\Models\Validacao;
 use \App\Models\Validacao\ResultadoValidacao;
 use \App\Models\Entidades\Estado;
 
-class MarcaValidador{
+class EstadoValidador{
 
     public function validar(Estado $estado)
     {
@@ -13,7 +13,11 @@ class MarcaValidador{
 
         if(empty($estado->getEstNome()))
         {
-            $resultadoValidacao->addErro('marcaNome',"Nome: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('estNome',"Nome: Este campo não pode ser vazio");
+        }
+        if(empty($estado->getEstUf()))
+        {
+            $resultadoValidacao->addErro('estUf',"UF: Este campo não pode ser vazio");
         }
         
         return $resultadoValidacao;

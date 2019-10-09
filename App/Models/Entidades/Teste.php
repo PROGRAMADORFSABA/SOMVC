@@ -4,12 +4,13 @@
 
     use DateTime;
 
-    class Cliente{
+    class Teste{
 
         private $codCliente;
         private $nomeCliente;
         private $nomeFantasiaCliente;
         private $status;
+        private $clientes;
         private $tipoCliente;
         private $dataCadastroCliente;
 
@@ -121,4 +122,13 @@
 
                 return $this;
         }
+        public function getClientes()  {
+            return $this->clientes;
+        }
+    
+        public function setClientes(array $clientes){
+            $this->clientes = $clientes;
+        }
+    
+
 }

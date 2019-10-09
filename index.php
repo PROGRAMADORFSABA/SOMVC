@@ -23,7 +23,6 @@ try {
     $oError->render();
 }
 
-
 $registro = $_SESSION['registro'];
 $limite = $_SESSION['limite'];
 
