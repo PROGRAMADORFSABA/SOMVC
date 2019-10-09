@@ -56,7 +56,17 @@ class ClienteLicitacaoDAO extends  BaseDAO
         }
         return false;
     }
-    
+    public function listarporCliente($clienteLicitacao = null)
+    {
+        if($clienteLicitacao)
+        {
+            $resultado = $this->select(
+                "SELECT * FROM faltaporcliente fp INNER JOIN clienteLicitacao cl  ON fp.FK_ID_FALTACLIENTE = cl.licitacaoCliente_cod WHERE FK_ID_FALTACLIENTE = $clienteLicitacao"
+            );
+            return $resultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
+        }
+        
+    }
     public  function listaClienteLicitacao2()
     {
         $resultado = $this->select(

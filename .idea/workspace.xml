@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/App/Models/Validacao/ClienteLicitacaoValidacaoInserir.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Validacao/PedidoFaltaValidador.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Validacao/PedidoFaltaValidador.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/ProdutoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ProdutoService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +52,13 @@
         <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="fabmed: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="fabmed: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="faltaporcliente: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -98,7 +112,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="Docker" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -153,7 +167,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@58dea1d4" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@7ff7c419" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@7ff7c419" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@63b1f809" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -222,6 +241,16 @@
       <workItem from="1569517067920" duration="2406000" />
       <workItem from="1569546786941" duration="2560000" />
       <workItem from="1569552193430" duration="2206000" />
+      <workItem from="1569581597253" duration="6653000" />
+      <workItem from="1569620782759" duration="2109000" />
+      <workItem from="1569678051298" duration="6941000" />
+      <workItem from="1569757401463" duration="7505000" />
+      <workItem from="1569857964188" duration="2616000" />
+      <workItem from="1569862651669" duration="1157000" />
+      <workItem from="1570107548108" duration="661000" />
+      <workItem from="1570108752433" duration="4897000" />
+      <workItem from="1570576805248" duration="2511000" />
+      <workItem from="1570584193294" duration="1358000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>

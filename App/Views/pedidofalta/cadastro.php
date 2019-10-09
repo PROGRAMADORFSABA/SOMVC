@@ -19,26 +19,26 @@
                     <div class="col-lg-12">
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                Cadastro de nova Vaga
+                                Cadastro de Falta
                             </header>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label  class="col-lg-3 col-sm-3 control-label">Título</label>
+                                    <label  class="col-lg-3 col-sm-3 control-label">Proposta</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <input type="text" name="titulo" class="form-control" placeholder="Título"
-                                                   required value= >
+                                            <input type="text" name="proposta" class="form-control" placeholder="Proposta"
+                                                   required value= <?php echo $viewVar['pedidofalta']->getProsposta(); ?>>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label  class="col-lg-3 col-sm-3 control-label">Empresa</label>
+                                    <label  class="col-lg-3 col-sm-3 control-label">Cliente</label>
                                     <div class="col-lg-9">
                                         <div>
-                                            <input type="text" name="autocompleteEmpresa" id="autocomplete-empresa" class="form-control" required placeholder="Empresa - autocomplete"
-                                                   value= >
+                                            <input type="text" name="autocompleteEmpresa" id="autocomplete-cliente" class="form-control" required placeholder="Cliente - autocomplete"
+                                                   value=<?php echo $viewVar[''] ?>>
 
-                                            <input type="hidden" id="empresa" name="empresa"
+                                            <input type="hidden" id="cliente" name="cliente"
                                                    value= >
                                         </div>
                                     </div>
@@ -80,8 +80,8 @@
                                         </thead>
                                         <tbody id="editar-tabela-tecnologias">
                                         <?php
-                                            if($viewVar['pedidofalta']->get()) {
-                                                foreach ($viewVar['vaga']->getTecnologias() as $tecnologia) {
+                                            if($viewVar['pedidofalta']->getProposta()) {
+                                                foreach ($viewVar['pedidofalta']->getTecnologias() as $tecnologia) {
                                                     ?>
                                                     <tr>
                                                         <td>

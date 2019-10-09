@@ -48,11 +48,18 @@
                 $clienteLicitacao = $clienteLicitacaoServices->listar($codCliente)[0];
                 $pedidoFalta->setFkCliente($clienteLicitacao);
                 
+                $produto = Sessao::retornaValorFormulario('produto');
+                
+                if(empty($produto)){
+                    $pedidoFalta->setFkProduto(array());
+                }else{
+                    $produtoService = new ProdutoService();
+                    $produto = $produtoService->p
+                }
+                
             }else{
                 
                 $pedidoFalta = new PedidoFalta();
-                
-                
                 $this->render('/pedidofalta/cadastro');
             }
 

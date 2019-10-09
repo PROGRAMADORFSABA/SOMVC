@@ -21,15 +21,17 @@
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
             return $clienteLicitacaoDAO->listaClienteLicitacao($codCliente);
         }
+        
         public function listarPorProduto(Produto $produto)
         {
             $produtoDAO =  new ProdutoDAO();
             return $produtoDAO->listarPorProduto($produto->getProCodigo());
         }
+        
         public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
         {
             $clienteLicitacaoDAO =  new ClienteLicitacaoDAO();
-            $clienteLicitacao = $clienteLicitacaoDAO->
+            $clienteLicitacao = $clienteLicitacaoDAO->listarporCliente($clienteLicitacao);
         }
         
         public function autoComplete(ClienteLicitacao $clienteLicitacao)
@@ -41,4 +43,11 @@
             echo $exportar->exportarJSON($busca);
         
         }
+        
+        public function salvar(Produto $produto)
+        {
+        
+        
+        }
+        
     }
