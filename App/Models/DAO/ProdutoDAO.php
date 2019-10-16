@@ -3,6 +3,8 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Produto;
+use App\Models\Entidades\PedidoFalta;
+use App\Models\Entidades\ClienteLicitacao;
 
 class ProdutoDAO extends BaseDAO
 {
@@ -88,7 +90,33 @@ class ProdutoDAO extends BaseDAO
         }
         return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);
     }
-
+    
+    public function listarPorFalta($faltaCliente_cod = null)
+    {
+        if($faltaCliente_cod)
+        {
+            $resultado = $this->select(
+                "SELECT p.ProCodigo,
+                       p.ProNome
+                       FROM faltaporcliente fp
+                        inner join Produto p on p.ProCodigo = fp.FK_IDPRODUTO
+                         WHERE FK_ID_FALTACLIENTE = $faltaCliente_cod"
+            );
+            return $resultado->fetchAll(\PDO::FETCH_CLASS, PedidoFalta::class);
+        }
+    }
+    
+    public function listarPorCliente($clienteLicitacao = null)
+    {
+        if($clienteLicitacao)
+        {
+            $reultado = $this->select(
+                "SELECT
+                        FROM
+                        "
+            )
+        }
+    }
     public  function salvar(Produto $produto)
     {
         try {

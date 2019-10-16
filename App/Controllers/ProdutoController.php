@@ -3,12 +3,17 @@
 namespace App\Controllers;
 
 use App\Lib\Sessao;
+
 use App\Models\DAO\ProdutoDAO;
 use App\Models\DAO\MarcaDAO;
 use App\Models\DAO\FornecedorDAO;
+
 use App\Models\Entidades\Produto;
-use App\Models\Validacao\ProdutoValidador;
 use App\Models\Entidades\Usuario;
+
+use App\Models\Validacao\ProdutoValidador;
+
+use App\Services\ProdutoService;
 
 class ProdutoController extends Controller
 {
@@ -162,6 +167,18 @@ class ProdutoController extends Controller
         Sessao::gravaMensagem("Produto excluido com sucesso!");
 
         $this->redirect('/produto');
+    }
+    
+    public function autoComplete($params)
+    {
+        $produtoService = new ProdutoService();
+        
+        $produto = new Produto();
+        $produto->setProNome($params[0]);
+        
+        $busca = $produtoService->autoComplete($produto);
+        
+        echo $busca;
     }
 
 }
