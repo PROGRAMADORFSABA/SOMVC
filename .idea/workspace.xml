@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/ProdutoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/ProdutoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Services/ProdutoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ProdutoService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -241,7 +239,15 @@
       <workItem from="1570712519129" duration="1199000" />
       <workItem from="1570979695345" duration="2983000" />
       <workItem from="1571180117105" duration="68000" />
-      <workItem from="1571180479511" duration="6596000" />
+      <workItem from="1571180479511" duration="6729000" />
+      <workItem from="1571277857620" duration="38000" />
+      <workItem from="1571277947003" duration="22000" />
+      <workItem from="1571319418694" duration="3065000" />
+      <workItem from="1571405132728" duration="978000" />
+      <workItem from="1571434422246" duration="1121000" />
+      <workItem from="1571482866388" duration="1707000" />
+      <workItem from="1571517101774" duration="680000" />
+      <workItem from="1571661346971" duration="2166000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -376,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570588562025</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO">
+      <created>1571187269692</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1571187269692</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">

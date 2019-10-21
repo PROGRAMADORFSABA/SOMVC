@@ -12,7 +12,7 @@
     
     use App\Models\Entidades\PedidoFalta;
     use App\Models\Entidades\Produto;
-    use App\Models\Entidades\Cliente;
+    use App\Models\Entidades\ClienteLicitacao;
     
     use App\Models\Validacao\PedidoValidador;
     use App\Models\Validacao\ProdutoValidador;
@@ -43,10 +43,11 @@
             
         }
         
-        public function listarPorCliente($cliente)
+        public function listarPorCliente($clienteLicitacao)
         {
             $prdutoDAO = new ProdutoDAO();
-            $produto = $prdutoDAO->
+            $produto = $prdutoDAO->listarPorCliente($clienteLicitacao);
+            return $clienteLicitacao;
         }
         
     }

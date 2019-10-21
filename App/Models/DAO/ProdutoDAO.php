@@ -111,25 +111,31 @@ class ProdutoDAO extends BaseDAO
         if($clienteLicitacao)
         {
             $reultado = $this->select(
-                "SELECT
-                        FROM
+                "SELECT cl.nomefantasia,
+                            p.ProNome,
+                            p.ProMarca
+                            FROM clienteLicitacao cl
+                            inner join faltaporcliente fc on cl.licitacaoCliente_cod = fc.FK_CLIENTE
+                            inner join Produto p on p.ProCodigo = fc.FK_ID_FALTACLIENTE
                         "
-            )
+            );
+            
+            return $reultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
         }
     }
     public  function salvar(Produto $produto)
     {
         try {
 
-            $proNome           = $produto->getProNome();
+            $proNome                   = $produto->getProNome();
             $proNomeComercial          = $produto->getProNomeComercial();
-            $proFornecedor          = $produto->getProFornecedor();
-            $proMarca          = $produto->getProMarca();
-            $proUsuario          = $produto->getProUsuario();
-            $date     = $produto->getProDataAlteracao();
-            $date1     = $produto->getProDataCadastro();
-            $proDataCadastro =   date_format($date1, 'Y-m-d H:i:s');
-            $proDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
+            $proFornecedor             = $produto->getProFornecedor();
+            $proMarca                  = $produto->getProMarca();
+            $proUsuario                = $produto->getProUsuario();
+            $date                      = $produto->getProDataAlteracao();
+            $date1                     = $produto->getProDataCadastro();
+            $proDataCadastro           = date_format($date1, 'Y-m-d H:i:s');
+            $proDataAlteracao          = date_format($date, 'Y-m-d H:i:s');
 
             return $this->insert(
                 'Produto',
@@ -153,13 +159,13 @@ class ProdutoDAO extends BaseDAO
     {
         try {
             
-            $proCodigo         = $produto->getProCodigo();
-            $proNome           = $produto->getProNome();
-            $proNomeComercial          = $produto->getProNomeComercial();
-            $proFornecedor          = $produto->getProFornecedor();
-            $proMarca          = $produto->getProMarca();
+            $proCodigo           = $produto->getProCodigo();
+            $proNome             = $produto->getProNome();
+            $proNomeComercial    = $produto->getProNomeComercial();
+            $proFornecedor       = $produto->getProFornecedor();
+            $proMarca            = $produto->getProMarca();
             $proUsuario          = $produto->getProUsuario();
-            $date               = $produto->getProDataAlteracao();
+            $date                = $produto->getProDataAlteracao();
             $proDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
 
             return $this->update(
