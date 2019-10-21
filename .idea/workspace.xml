@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Services/ProdutoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ProdutoService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,17 +33,6 @@
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - fabmed@mysql380.umbler.com" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="fabmed: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -152,12 +141,12 @@
           <expand>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@fc9a572d" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@7ff7c419" type="7427dc5b:ServiceModel$ServiceGroupNode" />
             </path>
             <path>
               <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@fc9a572d" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@1e29b6e6" type="9fbbdea:ServiceModel$ServiceNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@7ff7c419" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@63b1f809" type="9fbbdea:ServiceModel$ServiceNode" />
             </path>
           </expand>
           <select />
@@ -236,18 +225,6 @@
       <workItem from="1570108752433" duration="4897000" />
       <workItem from="1570576805248" duration="2511000" />
       <workItem from="1570584193294" duration="2848000" />
-      <workItem from="1570712519129" duration="1199000" />
-      <workItem from="1570979695345" duration="2983000" />
-      <workItem from="1571180117105" duration="68000" />
-      <workItem from="1571180479511" duration="6729000" />
-      <workItem from="1571277857620" duration="38000" />
-      <workItem from="1571277947003" duration="22000" />
-      <workItem from="1571319418694" duration="3065000" />
-      <workItem from="1571405132728" duration="978000" />
-      <workItem from="1571434422246" duration="1121000" />
-      <workItem from="1571482866388" duration="1707000" />
-      <workItem from="1571517101774" duration="680000" />
-      <workItem from="1571661346971" duration="2166000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -382,14 +359,7 @@
       <option name="project" value="LOCAL" />
       <updated>1570588562025</updated>
     </task>
-    <task id="LOCAL-00020" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO">
-      <created>1571187269692</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1571187269692</updated>
-    </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">

@@ -15,21 +15,20 @@
     {
         public function listar($faltaCliente_cod = null)
         {
-            $SQL = $this->select(
+            $SQL =
                 'SELECT FC.faltaCliente_cod,
                        FC.proposta,
                        FC.AFM,
                        FC.observacao,
                        FC.dataFalta,
                        CL.nomefantasia,
-                       MF.nome_Marca,
+                       MF.marcanome,
                        SF.nomeStatus
                 
                         FROM faltaCliente FC
                         inner join clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
-                        inner join marcaFalta MF on MF.marcaFalta_cod = FC.fk_marca
-                        inner join statusFalta SF on SF.faltaStatus_cod = FC.fk_status '
-            );
+                        inner join marca MF on MF.marcacod = FC.fk_marca
+                        inner join statusFalta SF on SF.faltaStatus_cod = FC.fk_status ';
             if ($faltaCliente_cod) {
                 $SQL .= 'WHERE FC.faltaCliente_cod';
             }

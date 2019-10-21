@@ -19,7 +19,7 @@
     
     class PedidoFaltaController extends Controller
     {
-        public function  index($params, $pedidofalta)
+        public function  index($params)
         {
             $faltaCliente_cod = $params[0];
             $pedidoFaltaService = new PedidoFaltaService();
@@ -54,7 +54,7 @@
                     $pedidoFalta->setFkProduto(array());
                 }else{
                     $produtoService = new ProdutoService();
-                    $produto = $produtoService->p
+                    $produto = $produtoService->listar($produto);
                 }
                 
             }else{
