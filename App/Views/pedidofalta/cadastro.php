@@ -27,7 +27,8 @@
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
                                             <input type="text" name="proposta" class="form-control" placeholder="Proposta"
-                                                   required value= <?php echo $viewVar['pedidofalta']->getProsposta(); ?>>
+                                                   required value= <?php $viewVar = null;
+                                                echo $viewVar['pedidofalta']->get(); ?>>
                                         </div>
                                     </div>
                                 </div>

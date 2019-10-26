@@ -3,27 +3,28 @@
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
     <interpreters>
-      <interpreter id="498015ad-be5d-470f-8c68-2adcdc8d9de7" name="PHP" home="C:\php7\php.exe" debugger_id="php.debugger.XDebug" debugger_extension="C:\php7\php_xdebug-2.8.0beta2-7.3-vc15-x86_64.dll" />
+      <interpreter id="498015ad-be5d-470f-8c68-2adcdc8d9de7" name="PHP" home="C:\xampp-7.3.8\php\php.exe" debugger_id="php.debugger.XDebug" debugger_extension="C:\php7\php_xdebug-2.8.0beta2-7.3-vc15-x86_64.dll" />
     </interpreters>
   </component>
   <component name="PhpInterpretersPhpInfoCache">
     <phpInfoCache>
       <interpreter name="PHP">
-        <phpinfo binary_type="PHP" php_cgi="C:\php7\php-cgi.exe" php_cli="C:\php7\php.exe" path_separator=";" version="7.3.8">
+        <phpinfo binary_type="PHP" php_cgi="C:\xampp-7.3.8\php\php-cgi.exe" php_cli="C:\xampp-7.3.8\php\php.exe" path_separator=";" version="7.3.8">
           <additional_php_ini />
-          <configuration_file>C:\php7\php.ini</configuration_file>
+          <configuration_file>C:\xampp-7.3.8\php\php.ini</configuration_file>
           <configuration_options>
-            <configuration_option name="include_path" value=".;C:\php\pear" />
+            <configuration_option name="include_path" value="C:\xampp-7.3.8\php\PEAR" />
           </configuration_options>
-          <debuggers>
-            <debugger_info debugger="xdebug" debugger_version="2.8.0beta2">
-              <debug_extensions />
-            </debugger_info>
-          </debuggers>
+          <debuggers />
           <loaded_extensions>
             <extension name="Core" />
             <extension name="PDO" />
@@ -32,25 +33,34 @@
             <extension name="SPL" />
             <extension name="SimpleXML" />
             <extension name="bcmath" />
+            <extension name="bz2" />
             <extension name="calendar" />
             <extension name="ctype" />
+            <extension name="curl" />
             <extension name="date" />
             <extension name="dom" />
+            <extension name="exif" />
+            <extension name="fileinfo" />
             <extension name="filter" />
+            <extension name="ftp" />
+            <extension name="gd" />
+            <extension name="gettext" />
             <extension name="hash" />
             <extension name="iconv" />
             <extension name="json" />
             <extension name="libxml" />
             <extension name="mbstring" />
+            <extension name="mysqli" />
             <extension name="mysqlnd" />
             <extension name="openssl" />
             <extension name="pcre" />
+            <extension name="pdo_mysql" />
+            <extension name="pdo_sqlite" />
             <extension name="readline" />
             <extension name="session" />
             <extension name="standard" />
             <extension name="tokenizer" />
             <extension name="wddx" />
-            <extension name="xdebug" />
             <extension name="xml" />
             <extension name="xmlreader" />
             <extension name="xmlwriter" />
@@ -61,7 +71,7 @@
       </interpreter>
     </phpInfoCache>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />
@@ -72,16 +82,24 @@
       <extension name="ZendUtils" enabled="false" />
       <extension name="amqp" enabled="false" />
       <extension name="apache" enabled="false" />
-      <extension name="apc" enabled="false" />
       <extension name="apcu" enabled="false" />
+      <extension name="bz2" enabled="false" />
+      <extension name="cassandra" enabled="false" />
       <extension name="couchbase" enabled="false" />
       <extension name="cubrid" enabled="false" />
+      <extension name="curl" enabled="false" />
       <extension name="dba" enabled="false" />
       <extension name="enchant" enabled="false" />
+      <extension name="exif" enabled="false" />
       <extension name="fann" enabled="false" />
       <extension name="ffmpeg" enabled="false" />
+      <extension name="fileinfo" enabled="false" />
+      <extension name="ftp" enabled="false" />
+      <extension name="gd" enabled="false" />
       <extension name="gearman" enabled="false" />
       <extension name="geoip" enabled="false" />
+      <extension name="geos" enabled="false" />
+      <extension name="gettext" enabled="false" />
       <extension name="gmagick" enabled="false" />
       <extension name="gmp" enabled="false" />
       <extension name="gnupg" enabled="false" />
@@ -109,6 +127,7 @@
       <extension name="mssql" enabled="false" />
       <extension name="mysql" enabled="false" />
       <extension name="mysql_xdevapi" enabled="false" />
+      <extension name="mysqli" enabled="false" />
       <extension name="ncurses" enabled="false" />
       <extension name="newrelic" enabled="false" />
       <extension name="oauth" enabled="false" />
@@ -117,7 +136,9 @@
       <extension name="pcntl" enabled="false" />
       <extension name="pdflib" enabled="false" />
       <extension name="pdo_ibm" enabled="false" />
+      <extension name="pdo_mysql" enabled="false" />
       <extension name="pdo_pgsql" enabled="false" />
+      <extension name="pdo_sqlite" enabled="false" />
       <extension name="pgsql" enabled="false" />
       <extension name="posix" enabled="false" />
       <extension name="pspell" enabled="false" />

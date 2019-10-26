@@ -117,7 +117,7 @@
                 
                 return $this->update(
                     'produtofalta',
-                    ":proposta, :AFM, :observacao, :",
+                    ":proposta, :AFM, :observacao, :FK_CLIENTE, :FK_PRODUTO, FK_MARCA",
                     [
                         'proposta'      => $proposta,
                         'AFM'           => $AFM,
