@@ -24,11 +24,11 @@
                     <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>Novo Cliente</a>
                       <div>    
-                        <input type="text" name="clienteAutocomplete" id="cliente-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
-                        value=<?php echo $viewVar['edital']->getCliente()->getNomeCliente(); ?>> 
+                        <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
+                        value=<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?>> 
                         
                         <input type="hidden" id="cliente" name="cliente" 
-                        value=<?php echo $viewVar['edital']->getCliente()->getCodCliente(); ?>>  
+                        value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
                     </div>
                       <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>
 
