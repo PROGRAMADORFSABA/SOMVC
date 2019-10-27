@@ -3,6 +3,7 @@
     
     namespace App\Models\Entidades;
     
+    use App\Models\DAO\ClienteLicitacao;
     use DateTime;
     
     
@@ -102,7 +103,7 @@
         /**
          * @return mixed
          */
-        public function getFkCliente() : Cliente
+        public function getFkCliente() : ClienteLicitacao
         {
             return $this->fk_cliente;
         }
@@ -110,7 +111,7 @@
         /**
          * @param mixed $fk_cliente
          */
-        public function setFkCliente($fk_cliente): void
+        public function setFkCliente(FK_cliente $fk_cliente): void
         {
             $this->fk_cliente = $fk_cliente;
         }
@@ -127,7 +128,7 @@
         /**
          * @param mixed $fk_produto
          */
-        public function setFkProduto( array $fk_produto): void
+        public function setFkProduto($fk_produto)
         {
             $this->fk_produto = $fk_produto;
         }
@@ -135,7 +136,7 @@
         /**
          * @return mixed
          */
-        public function getFkMarca() :array
+        public function getFkMarca() : Marca
         {
             return $this->fk_marca;
         }
@@ -143,7 +144,7 @@
         /**
          * @param mixed $fk_marca
          */
-        public function setFkMarca( array $fk_marca): void
+        public function setFkMarca(Fk_marca $fk_marca): void
         {
             $this->fk_marca = $fk_marca;
         }
@@ -151,7 +152,7 @@
         /**
          * @return mixed
          */
-        public function getFkStatus()
+        public function getFkStatus() : Status
         {
             return $this->fk_status;
         }
@@ -159,7 +160,7 @@
         /**
          * @param mixed $fk_status
          */
-        public function setFkStatus($fk_status): void
+        public function setFkStatus( Fk_status $fk_status): void
         {
             $this->fk_status = $fk_status;
         }

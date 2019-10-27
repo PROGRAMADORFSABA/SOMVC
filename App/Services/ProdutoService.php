@@ -46,8 +46,24 @@
         public function listarPorCliente($clienteLicitacao)
         {
             $prdutoDAO = new ProdutoDAO();
-            $produto = $prdutoDAO->listarPorCliente($clienteLicitacao);
-            return $clienteLicitacao;
+            $produtos = $prdutoDAO->listarPorCliente($clienteLicitacao);
+            return $produtos;
+        }
+        
+        public function preencheProduto($arryProdutos)
+        {
+            $produtoDAO = new ProdutoDAO();
+            $produtos = [];
+            
+            if (isset($arryProdutos)){
+                foreach ($arryProdutos as $proCodigo){
+                    
+                    $produtos[] = $produtoDAO->listar($proCodigo)[0];
+                }
+                
+                return $produtos;
+            }
+        
         }
         
     }

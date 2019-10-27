@@ -5,11 +5,12 @@
     
     use App\Lib\Sessao;
     use App\Models\Entidades\PedidoFalta;
-    use App\Models\Entidades\Cliente;
+    use App\Models\Entidades\ClienteLicitacao;
     
     use App\Models\DAO\PedidoFaltaDAO;
-    use App\Models\DAO\ClienteDAO;
-    
+    use App\Models\DAO\ClienteLicitacaoDAO;
+
+    use App\Models\Entidades\Produto;
     use App\Services\ClienteLicitacaoService;
     use App\Services\PedidoFaltaService;
     use App\Services\FornecedorService;
@@ -48,21 +49,39 @@
                 $clienteLicitacao = $clienteLicitacaoServices->listar($codCliente)[0];
                 $pedidoFalta->setFkCliente($clienteLicitacao);
                 
-                $produto = Sessao::retornaValorFormulario('produto');
+                $produtos = Sessao::retornaValorFormulario('produtos');
                 
-                if(empty($produto)){
+                if(empty($produtos)){
                     $pedidoFalta->setFkProduto(array());
                 }else{
                     $produtoService = new ProdutoService();
-                    $produto = $produtoService->listar($produto);
+                    $produtos = $produtoService->preencheProduto($produtos);
+                    $pedidoFalta->setFkProduto($produtos);
                 }
                 
             }else{
                 
-                $pedidoFalta = new PedidoFalta();
-                $this->render('/pedidofalta/cadastro');
+                $pedidofalta = new PedidoFalta();
+                $pedidofalta->setFkProduto(new Produto());
+                $pedidofalta->setFkProduto(array());
+                
             }
+            $this->setViewParam('pedidofalta', $pedidofalta);
+            $this->render('/pedidofalta/cadastro');
+            
+            Sessao::limpaErro();
+            Sessao::limpaFormulario();
 
+        }
+        
+        public function salvar()
+        {
+            $pedidoFalta =  new PedidoFalta();
+            $pedidoFalta->setProposta(trim($_POST['proposta']));
+            $pedidoFalta->setAFM(trim($_POST['afm']));
+            $pedidoFalta->setObservacao(trim($_POST['observacao']));
+        
+        
         }
         
         public function editar()

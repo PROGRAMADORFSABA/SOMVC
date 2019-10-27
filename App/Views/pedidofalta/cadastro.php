@@ -5,10 +5,12 @@
         <section class="wrapper">
             <div class="row">
                 
-                <?php if($Sessao::retornaErro()){ ?>
+                <?php
+                    if($Sessao::retornaErro()){ ?>
                     <div class="col-lg-12">
                         <div class="alert alert-danger" role="alert">
-                            <?php foreach($sessao::retornaErro() as $key => $mensagem){ ?>
+                            <?php $sessao =null;
+                                foreach($sessao::retornaErro() as $key => $mensagem){ ?>
                                 <?php echo $mensagem; ?> <br>
                             <?php } ?>
                         </div>
@@ -27,8 +29,8 @@
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
                                             <input type="text" name="proposta" class="form-control" placeholder="Proposta"
-                                                   required value= <?php $viewVar = null;
-                                                echo $viewVar['pedidofalta']->get(); ?>>
+                                                   required value= <?php
+                                                echo $viewVar['pedidofalta']->getProposta(); ?>>
                                         </div>
                                     </div>
                                 </div>

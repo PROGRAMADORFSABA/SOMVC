@@ -7,7 +7,7 @@
     use App\Models\Entidades\PedidoFalta;
     use App\Models\Entidades\Produto;
     use App\Models\Entidades\Marca;
-    use App\Models\Entidades\Cliente;
+
     
     
     
@@ -17,13 +17,14 @@
         {
             $SQL =
                 'SELECT FC.faltaCliente_cod,
-                       FC.proposta,
-                       FC.AFM,
-                       FC.observacao,
-                       FC.dataFalta,
-                       CL.nomefantasia,
-                       MF.marcanome,
-                       SF.nomeStatus
+                        CL.nomefantasia,
+                        FC.proposta,
+                        FC.AFM,
+                        FC.observacao,
+                        FC.dataFalta,
+                        CL.nomefantasia,
+                        MF.marcanome,
+                        SF.nomeStatus
                 
                         FROM faltaCliente FC
                         inner join clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
@@ -38,13 +39,25 @@
             $listaFaltas = [];
         
             foreach ($dataSetFaltas as $dataSetFalta) {
-                $pedidofalta = new PedidoFalta();
-                $pedidofalta->setFaltaClienteCod($dataSetFalta['idfalta']);
-                $pedidofalta->setAFM($pedidofalta['afm']);
-                $pedidofalta->setFkCliente($pedidofalta['fkcliente']);
-                $pedidofalta->setFkMarca($pedidofalta['fkmarca']);
-                $pedidofalta->setProposta($pedidofalta['fkproduto']);
-                $pedidofalta->setProposta($dataSetFalta['propodta']);
+                    $pedidofalta = new PedidoFalta();
+                    $pedidofalta->setFaltaClienteCod($dataSetFalta['idfalta']);
+                    $pedidofalta->setAFM($pedidofalta['afm']);
+                    $pedidofalta->setProposta($dataSetFalta['proposta']);
+                    $pedidofalta->setObservacao($pedidofalta['observacao']);
+                    
+                    $pedidofalta->setFkCliente( new FkCLiente);
+                    $pedidofalta->getFkCliente()->getNomeFantasia($dataSetFalta['nomefantasia']);
+                    
+                    $pedidofalta->getFkMarca(new Marca());
+                    $pedidofalta->getFkMarca()->setMarcaNome($dataSetFalta['marca']);
+                    
+                    $pedidofalta->getFkProduto(new Produto());
+                    $pedidofalta->getFkProduto()->setProNome($dataSetFalta['produto']);
+                
+                
+       
+                
+                
                 $listaFaltas[] = $pedidofalta;
             }
             return $listaFaltas;
