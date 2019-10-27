@@ -20,6 +20,7 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            
             <div class="kt-portlet__body">
                 <div class="form-group row">
                     <div class="col-lg-1">
@@ -197,5 +198,6 @@
     echo "<h3 class='kt-portlet__head-title'><p class='text-info'>Qtde. de Pedidos " . $qtdePedido . " e Valor Total R$" . number_format($total, 2, ',', '.') . "</p></h3>";
     ?>
 </div>
+
 <!-- end:: Content -->
 </div>

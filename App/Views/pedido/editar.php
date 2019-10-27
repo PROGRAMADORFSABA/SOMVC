@@ -15,7 +15,7 @@
         <input type="hidden" class="form-control" name="codControle" id="codControle" value="<?php echo $viewVar['pedido']->getCodControle(); ?>">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
         <div class="kt-portlet__body">
-            <input type="text" class="form-control" name="dataCadastro" id="dataCadastro" readonly="readonly" value="<?php echo $dataAtual; ?>" required>
+            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" readonly="readonly" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
                 <div class="form-group"><label for="codCliente">Cliente</label>
                     <select class="form-control" name="codCliente" required>

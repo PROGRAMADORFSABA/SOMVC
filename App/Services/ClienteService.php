@@ -15,10 +15,21 @@
     {
         public function autoComplete(Cliente $cliente)
         {
+          
             $clienteDAO = new ClienteDAO();
             $busca = $clienteDAO->listarPorNomeFantasia($cliente);           
             $exportar = new Exportar();
             return $exportar->exportarJSON($busca);
+
+        }
+        
+        public function pesquisarCliente(Cliente $cliente)
+        {        
+           
+            $clienteDAO = new ClienteDAO();
+            $busca = $clienteDAO->listarPorRazaoSocial($cliente);    
+                            
+            return json_encode($busca,JSON_UNESCAPED_UNICODE);
 
         }
        

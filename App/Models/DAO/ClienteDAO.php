@@ -125,4 +125,12 @@ class ClienteDAO extends BaseDAO
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function listarPorRazaoSocial(Cliente $cliente)
+    {      
+        $resultado = $this->select(
+            "SELECT * FROM cliente WHERE nomeCliente 
+            LIKE '%".$cliente->getNomeCliente()."%' ORDER BY nomeCliente LIMIT 0,6"
+        );       
+            return $resultado->fetchAll(\PDO::FETCH_ASSOC);                                
+    }
 }

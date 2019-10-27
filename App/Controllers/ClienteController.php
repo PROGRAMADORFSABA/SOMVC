@@ -24,6 +24,7 @@ class ClienteController extends Controller{
     
     public function autoComplete($params)
     {
+        
         $cliente = new Cliente();
         $cliente->setNomeFantasiaCliente($params[0]);
         
@@ -31,6 +32,23 @@ class ClienteController extends Controller{
         $busca = $clienteService->autoComplete($cliente);
         
         echo $busca;
+    }
+    public function PesquisarCliente()
+    {
+        if(!empty($_POST['cliente'])){
+        $nomeCliente = $_POST['cliente'];
+        $cliente = new Cliente();
+        $cliente->setNomeCliente($nomeCliente);
+        
+        $clienteService = new ClienteService();
+        $busca = $clienteService->pesquisarCliente($cliente);  
+        
+        if($busca !=''){
+
+            echo $busca;       
+        }
+         echo false; 
+    }
     }
 
     public function cadastro(){

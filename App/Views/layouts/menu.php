@@ -144,6 +144,24 @@
 													</ul>
 												</div>
 											</li>
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Estado</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "EstadoController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/estado/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "EstadoController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/estado/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+
+													</ul>
+												</div>
+											</li>
+											
+											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cidade</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+													<ul class="kt-menu__subnav">
+														<li <?php if ($viewVar['nameController'] == "CidadeController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/cidade/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "CidadeController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/cidade/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+													</ul>
+												</div>
+											</li>
 											
 											<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Usuario</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
 												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
