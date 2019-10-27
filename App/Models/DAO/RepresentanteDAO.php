@@ -7,39 +7,20 @@ use App\Models\Entidades\Representante;
 
 class RepresentanteDAO extends BaseDAO
 {
-    public function listar($codRepresentante = null)
+    public function listar($representanteiD = null)
     {
-        if($codRepresentante)
-        {
-            $resultado = $this->select(
-                "SELECT * FROM cadRepresentante WHERE codRepresentante = $codRepresentante"
-            );
-
-            return $resultado->fetch();
-            if ($dado) {
-
-                $representante = new Representante();
-                
-                $representante->setCodRepresentante($dado['codRepresentante']);
-                $representante->setDataCadastro($dado['dataCadastro']);
-                //date_format($date, 'Y-m-d H:i:s');
-                $representante->setNomeRepresentante($dado['nomeRepresentante']);
-                
-             
-                 return $pedido;
-             }
-        }else {
-            $resultado = $this->select(
-                "SELECT * FROM cadRepresentante ORDER BY nomeRepresentante"
-            );
-            $dados = $resultado->fetchAll();
+        $SQL = "SELECT * FROM cadRepresentante ";
+        if($representanteiD){
+            $SQL.= " WHERE codRepresentante = $representanteiD";
+        }
+            $resultado = $this->select($SQL);
             
-            if ($dados) {
-
+            $dados = $resultado->fetchAll();            
                 $lista = [];
 
                 foreach ($dados as $dado) {
-                    $representante = new Representante();
+                    
+                $representante = new Representante();
                 
                 $representante->setCodRepresentante($dado['codRepresentante']);
                 $representante->setDataCadastro($dado['dataCadastro']);
@@ -49,9 +30,6 @@ class RepresentanteDAO extends BaseDAO
                     $lista[] = $representante;
                 }                
                 return $lista;
-        }
-        }
-        return false;
     }
 
     public function salvarRepresentante(Representante $representante)

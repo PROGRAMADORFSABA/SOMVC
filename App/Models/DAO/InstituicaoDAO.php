@@ -10,11 +10,10 @@ class InstituicaoDAO extends BaseDAO
 
     public function listar($inst_id = null)
     {
-
-        if ($codCliente) {
+        if ($inst_id) {
 
             $resultado = $this->select(
-                "SELECT * FROM instituicao WHERE inst_id = $inst_id"
+                "SELECT * FROM instituicao "
             );
             $dado = $resultado->fetch();
 

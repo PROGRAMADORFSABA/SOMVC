@@ -25,8 +25,6 @@
                       </div>
                     </div>
                   </div>
-
-
                 <div class="form-group"><label for="codCliente">Cliente</label>
                     <input class="form-control" name="codCliente" required>
                         <option value="">Selecione o cliente</option>
@@ -61,7 +59,7 @@
                         <div class="form-group"><label for="codRepresentante">Representante</label>
                             <select class="form-control" name="codRepresentante" required>
                                 <option value="">Selecione o Representante</option>
-                                <?php foreach ($viewVar['listaRepresentantes'] as $representante) : ?>
+                                <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
                                     <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
                                         <?php echo $representante->getNomeRepresentante(); ?></option>
                                 <?php endforeach; ?>

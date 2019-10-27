@@ -14,6 +14,7 @@ class Login
     private $passoword;
     private $dataCadastro;
     private $fk_instituicao;
+    private $instituicao;
     
 
     /**
@@ -43,7 +44,18 @@ class Login
     {
         return $this->fk_instituicao;
     }
-
+    /**
+         * Set the value of Instituicao
+         *
+         * @return  self
+         */ 
+        public function getInstituicao() {
+            return $this->instituicao;
+        }
+    
+        public function setInstituicao(Instituicao $instituicao) {
+            $this->instituicao = $instituicao;
+        }
     /**
      * Set the value of fk_instituicao
      *

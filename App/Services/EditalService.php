@@ -6,9 +6,7 @@ use App\Lib\Sessao;
 use App\Lib\Transacao;
 use App\Lib\Exportar;
 
-//use App\Models\DAO\EditalDAO;
-use App\Models\DAO\EstadoDAO;
-
+use App\Models\DAO\EditalDAO;
 
 use App\Models\Validacao\EditalValidador;
 use App\Models\Validacao\ResultadoValidacao;
@@ -17,85 +15,96 @@ use App\Models\Entidades\Edital;
 
 class EditalService
 {
-    public function listar($cidId = null)
+    public function listar($edtId = null)
     {
-        
-        $cidadeDAO = new EditalDAO();
-        return $cidadeDAO->listar($cidId);
+        $editalDAO = new EditalDAO();
+        return $editalDAO->listar($edtId);
+    }
+    public function listarDinamico(Edital $edital)
+    {
+        $editalDAO = new EditalDAO();
+        return $editalDAO->listarDinamico($edital);
     }
 
-    public function autoComplete(Edital $cidade)
+    public function autoComplete(Edital $edital)
     { 
-        $cidadeDAO = new EditalDAO();
-        $busca = $cidadeDAO->listaPorNome($cidade);          
+        $editalDAO = new EditalDAO();
+        $busca = $editalDAO->listaPorNome($edital);          
         $exportar = new Exportar();
         return $exportar->exportarJSON($busca);
     }
     
-    public function listarEstadosVinculadas(Edital $cidade)
+    public function listarEstadosVinculadas(Edital $edital)
     {
-        $cidadeDAO = new EditalDAO();
-        return $cidadeDAO->listarEstadosVinculadas($cidade);
+        $editalDAO = new EditalDAO();
+        return $editalDAO->listarEstadosVinculadas($edital);
     }
 
-    public function salvar(Edital $cidade)
+    public function salvar(Edital $edital)
     {
         $transacao = new Transacao();
-        $cidadeValidador = new EditalValidador();
-        $resultadoValidacao = $cidadeValidador->validar($cidade);
-
+        $editalValidador = new EditalValidador();
+        $resultadoValidacao = $editalValidador->validar($edital);
+        
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
             Sessao::gravaErro($resultadoValidacao->getErros());
         } else {
             try{
-                $transacao->beginTransaction();
-                $cidadeDAO = new EditalDAO();            
-                $cidadeDAO->salvar($cidade);
+               $transacao->beginTransaction();
+                $editalDAO = new EditalDAO();            
+                $editalDAO->salvar($edital);
                 $transacao->commit(); 
                 Sessao::gravaMensagem("cadastro realizado com sucesso!.");
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
-                Sessao::gravaMensagem("Erro ao tentar cadastrar.");
                 $transacao->rollBack(); 
-                return false;
+                //var_dump($e);
+                Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
+               return false;
             }
         }
     }
 
-    public function Editar(Edital $cidade)
-    {        
-        //$cidadeDAO = new EditalDAO();
-       // $cidade = $cidadeDAO->listar($cidade->getCidId())[0];
-
-        $cidadeValidador = new EditalValidador();
-        $resultadoValidacao = $cidadeValidador->validar($cidade);
-
+    public function Editar(Edital $edital)
+    {   
+        $transacao = new Transacao();
+        $editalValidador = new EditalValidador();
+        $resultadoValidacao = $editalValidador->validar($edital);
+        
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
             Sessao::gravaErro($resultadoValidacao->getErros());
         } else {
-            Sessao::limpaFormulario(); 
-            Sessao::limpaMensagem();           
-            Sessao::gravaMensagem("Cadastro atualizado com sucesso! ");
-            $cidadeDAO = new EditalDAO();
-            return $cidadeDAO->atualizar($cidade);
+            try{
+               $transacao->beginTransaction();
+                $editalDAO = new EditalDAO();            
+                $editalDAO->atualizar($edital);
+                $transacao->commit(); 
+                Sessao::gravaMensagem("cadastro alterado com sucesso!.");
+                Sessao::limpaFormulario();
+                return true;
+            }catch(\Exception $e){
+                $transacao->rollBack(); 
+                //var_dump($e);
+                Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
+               return false;
+            }
         }
-        return false;
+
     }
 
-    public function excluir(Edital $cidade)
+    public function excluir(Edital $edital)
     {
         try {
 
             $transacao = new Transacao();
             $transacao->beginTransaction();
             
-            $cidadeDAO = new EditalDAO();
-           // $vagas = $cidadeDAO->listarEstadosVinculadas($cidade);
-                        
-            $cidadeDAO->excluir($cidade);
+            $editalDAO = new EditalDAO();
+                                   
+            $editalDAO->excluir($edital);
             $transacao->commit();            
             
             Sessao::limpaMensagem();

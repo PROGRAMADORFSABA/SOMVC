@@ -40,6 +40,7 @@ class LoginController extends Controller
             $_SESSION['nome'] = $login->getNomeLogin();
             $_SESSION['senha'] = $login->getPassoword();
             $_SESSION['idInstituicao'] = $login->getFk_Instituicao();
+            $_SESSION['inst_id'] = $login->getInstituicao()->getInst_Id();
          
            echo $_SESSION['id']." - " . $_SESSION['nome']. " - ". $_SESSION['email']." - ".$_SESSION['senha']." - ". $_SESSION['idInstituicao'] ; 
 

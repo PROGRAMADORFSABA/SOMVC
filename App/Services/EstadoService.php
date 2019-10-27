@@ -55,7 +55,7 @@ class EstadoService
             Sessao::limpaErro();
             Sessao::gravaErro($resultadoValidacao->getErros());
         } else {
-            $estadoDAO = new empresaDAO();            
+            $estadoDAO = new EstadoDAO();            
             $estadoDAO->salvar($estado);
             Sessao::gravaMensagem("cadastrado com sucesso.");
             Sessao::limpaFormulario();

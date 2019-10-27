@@ -3,6 +3,7 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Login;
+use App\Models\Entidades\Instituicao;
 
 class LoginDAO extends BaseDAO
 {
@@ -38,14 +39,15 @@ class LoginDAO extends BaseDAO
                 "SELECT * FROM usuarios AS u INNER JOIN instituicao AS i on i.inst_codigo = u.fk_idInstituicao where u.email ='" . $email . "' AND u.senha ='" . $pwd . "'"
             );
             $dado = $resultado->fetch();
-           
-           if ($dado) {               
+            if ($dado) {               
                 $login = new Login();
+                $login->setInstituicao(new Instituicao());
                 $login->setCodUsuario($dado['id']);
                 $login->setEmailLogin($dado['email']);
                 $login->setNomeLogin($dado['nome']);
                 $login->setPassoword($dado['senha']);
                 $login->setFk_Instituicao($dado['fk_idInstituicao']);
+                $login->getInstituicao()->setInst_Id($dado['inst_id']);   
                 
                 return $login;      
             }           

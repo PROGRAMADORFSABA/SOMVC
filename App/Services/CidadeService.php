@@ -7,8 +7,6 @@ use App\Lib\Transacao;
 use App\Lib\Exportar;
 
 use App\Models\DAO\CidadeDAO;
-use App\Models\DAO\EstadoDAO;
-
 
 use App\Models\Validacao\CidadeValidador;
 use App\Models\Validacao\ResultadoValidacao;

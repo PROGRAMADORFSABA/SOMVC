@@ -6,15 +6,17 @@ namespace App\Controllers;
 use App\Lib\Sessao;
 use App\Models\DAO\RepresentanteDAO;
 use App\Models\Entidades\Representante;
+use App\Services\RepresentanteService;
 
 
 class RepresentanteController extends Controller
 {
-    public function index()
+    public function index($params)
     {
-        $representanteDAO = new RepresentanteDAO();
+       $representanteId = $params[0];
+        $representanteService = new RepresentanteService();
 
-        self::setViewParam('listarRepresentante,' ,$representanteDAO->listar());
+        self::setViewParam('listarRepresentantes,' ,$representanteService->listar($representanteId));
 
         $this->render('/representante/index');
 

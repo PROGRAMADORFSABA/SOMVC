@@ -7,6 +7,7 @@ use App\Models\DAO\PedidoDAO;
 use App\Models\DAO\StatusDAO;
 use App\Models\DAO\ClienteDAO;
 use App\Models\DAO\RepresentanteDAO;
+use App\Services\RepresentanteService;
 use App\Models\Entidades\Pedido;
 use App\Models\Validacao\PedidoValidador;
 
@@ -68,9 +69,9 @@ class PedidoController extends Controller
         self::setViewParam('listaStatus', $statusDAO->listar());
         $clienteDAO = new ClienteDAO();
         self::setViewParam('listaClientes', $clienteDAO->listar());
-        $representanteDAO = new RepresentanteDAO();
-        self::setViewParam('listaRepresentantes', $representanteDAO->listar());
-
+        $representanteService = new RepresentanteService();
+    
+        self::setViewParam('listarRepresentantes', $representanteService->listar()); 
         $idCliente = Sessao::retornaValorFormulario('cliente');
         $clienteDAO1 = new ClienteDAO();
         $cliente = $clienteDAO1->listar($idCliente)[0];

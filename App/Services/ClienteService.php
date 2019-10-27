@@ -13,6 +13,13 @@
     
     class ClienteService
     {
+        public function listar($clienteId = null)
+    {
+        
+        $clienteDAO = new ClienteDAO();
+        return $clienteDAO->listar($clienteId);
+    }
+
         public function autoComplete(Cliente $cliente)
         {
           
