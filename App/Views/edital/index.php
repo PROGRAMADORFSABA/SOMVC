@@ -40,9 +40,11 @@
                         <div class="form-group"><label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option value="">Selecione o Status</option>
+                            <option value="Em Analise">Em Analise</option>
                                 <option value="Ganha">Ganha</option>
-                                <option value="Perdida">Perdida</option>
                                 <option value="Concorrendo">Concorrendo</option>
+                                <option value="Em Montagem">Em Montagem</option>
+                                <option value="Perdida">Perdida</option>
                         </select>
                             <span class="form-text text-muted">Por favor insira o Status</span>
                         </div>

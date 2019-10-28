@@ -19,7 +19,7 @@
 
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">
-                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o edital: <?php echo $viewVar['edital']->getEdtNumero() ." Cliente ". $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?> ?</h4>
+                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o edital: <?php echo $viewVar['edital']->getEdtNumero() ." Cliente ". $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?> </h4>
                     </div>
                     <div class="panel-footer"> 
                         <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>

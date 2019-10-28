@@ -1,7 +1,7 @@
 <!--begin::Portlet-->
 <div class="container">
     <br>
-    <center><h3>Cadastro de Contrato</h3></center>
+    <center><h3>Alteracao de Edital</h3></center>
     <?php if ($Sessao::retornaErro()) { ?>
         <div class="alert alert-warning" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -20,31 +20,17 @@
             <input type="hidden" class="form-control" name="idCliente" id="idCliente" required>
             <div class="kt-portlet__body">
             
-                <div class="form-group">
+                <div class="form-group row">
+                    <div class="col-lg-12">
                     <label  class="">CADASTRO DO CLIENTE</label>                    
                     <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
-                            <i class="la la-plus"></i>Novo Cliente</a>
-                      <div>    
-                        <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
-                        value=<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?>> 
-                        
-                        <input type="hidden" id="cliente" name="cliente" 
-                        value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
-                    </div>
-                      <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>                      
-                </div>
-            <div class="kt-portlet__body">            
-                <div class="form-group">
-                    <label  class="">CADASTRO DO CLIENTE</label>                    
-                    <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="clienteCad"  name="clienteCad" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
-                            <i class="la la-plus"></i>Novo Cliente</a>
-                      <div>    
-                      <?php $cliente = $viewVar['listaClientes'] ?>
-                        <input type="text" name="clientePesquisa" id="clientePesquisa" class="form-control" required placeholder="Cliente - autocomplete">
-                      </div>
-                      <input type="text" class="form-control" name="andreteste" id="andreteste" value="" required>
-                      <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>
-            </div>
+                            <i class="la la-plus"></i>Novo Cliente</a>                     
+                        <input type="text" class="form-control" placeholder="Cliente - autocomplete" id="clienteLicitacao-autocomplete" name="clienteLicitacao-autocomplete" value="<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial()  ." - ". $viewVar['edital']->getClienteLicitacao()->getNomeFantasia(); ?>" required>
+                        <input type="hidden" id="cliente" name="cliente" value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
+
+                      <span class="form-text text-muted">Por favor insira o cliente do Edital</span>  
+                      </div>                    
+                </div>            
             <div class="form-group row">
                     <div class="col-lg-2">
                         <label for="modalidade">Modalidade</label>
@@ -81,9 +67,11 @@
                             <option value="">Selecione o Status</option>
                             <option value="<?php echo $viewVar['edital']->getEdtStatus(); ?>" <?php echo ($viewVar['edital']->getEdtStatus() == $viewVar['edital']->getEdtStatus()) ? "selected" : ""; ?>>
                                     <?php echo $viewVar['edital']->getEdtStatus(); ?> </option>
+                                <option value="Em Analise">Em Analise</option>
                                 <option value="Ganha">Ganha</option>
-                                <option value="Perdida">Perdida</option>
                                 <option value="Concorrendo">Concorrendo</option>
+                                <option value="Em Montagem">Em Montagem</option>
+                                <option value="Perdida">Perdida</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>
@@ -112,12 +100,12 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="valor" class="">Valor da Proposta:</label>
-                        <input type="text" class="form-control" placeholder="Digite o valor da Proposta" id="valor" name="valor" value="<?php echo $viewVar['edital']->getEdtValor(); ?>" required>
+                        <input type="text" class="form-control" placeholder="Digite o valor da Proposta" id="valor" name="valor" value="<?php echo $viewVar['edital']->getEdtValor(); ?>">
                         <span class="form-text text-muted">Digite o valor da Proposta</span>
                     </div>
                     <div class="col-lg-2">
                             <label for="dataResultado" class="">Data de Resultado:</label>
-                            <input type="date" class="form-control" placeholder="Digite a Data de Resultado" id="dataResultado" name="dataResultado" value="<?php echo $viewVar['edital']->getEdtDataResultado()->format('Y-m-d'); ?>" required>
+                            <input type="date" class="form-control" placeholder="Digite a Data de Resultado" id="dataResultado" name="dataResultado" value="<?php echo $viewVar['edital']->getEdtDataResultado()->format('Y-m-d'); ?>" >
                             <span class="form-text text-muted">Digite Resultado</span>
                     </div>
                     <div class="col-lg-2">
@@ -141,7 +129,7 @@
                     <div class="col-lg-2">
                         <label for="anexo" class="">Anexo:</label>
                         <input type="file" name="anexo" id="anexo" value="<?php echo $Sessao::retornaValorFormulario('anexo'); ?>">
-                        <input type="text" name="anexoalt" id="anexoalt" value="<?php echo $viewVar['edital']->getEdtAnexo(); ?>">
+                        <input type="hidden" name="anexoAlt" id="anexoAlt" value="<?php echo $viewVar['edital']->getEdtAnexo(); ?>">
                         <span class="form-text text-muted">Selecione o arquivo</span>
                     </div>
                 </div>
@@ -153,7 +141,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label for="analise" class="">Analise do Edital:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Analise do Edital" id="analise" name="analise"  required><?php echo $viewVar['edital']->getEdtAnalise(); ?></textarea>
+                        <textarea class="form-control" rows="3" placeholder="Digite Analise do Edital" id="analise" name="analise"  ><?php echo $viewVar['edital']->getEdtAnalise(); ?></textarea>
                         <span class="form-text text-muted">Digite Analise do Edital</span>
                     </div>
                 </div>

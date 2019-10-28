@@ -1,7 +1,7 @@
 <!--begin::Portlet-->
 <div class="container">
     <br>
-    <center><h3>Cadastro de Contrato</h3></center>
+    <center><h3>Cadastro de Edital</h3></center>
     <?php if ($Sessao::retornaErro()) { ?>
         <div class="alert alert-warning" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -25,7 +25,7 @@
                             <i class="la la-plus"></i>Novo Cliente</a>
                       <div>    
                         <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
-                        value=<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?>> 
+                        value="<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
                         
                         <input type="hidden" id="cliente" name="cliente" 
                         value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
@@ -34,18 +34,7 @@
 
                        
             </div>
-            <div class="kt-portlet__body">            
-                <div class="form-group">
-                    <label for="clienteCad" class="">CADASTRO DO CLIENTE</label>                    
-                    <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="clienteCad"  name="clienteCad" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
-                            <i class="la la-plus"></i>Novo Cliente</a>
-                      <div>    
-                      <?php $cliente = $viewVar['listaClientes'] ?>
-                        <input type="text" name="clientePesquisa" id="clientePesquisa" class="form-control" required placeholder="Cliente - autocomplete">
-                      </div>
-                      <input type="text" class="form-control" name="andreteste" id="andreteste" value="" required>
-                      <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>
-            </div>
+            
             <div class="form-group row">
                     <div class="col-lg-2">
                         <label for="modalidade">Modalidade</label>
@@ -76,9 +65,11 @@
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status" required>
                             <option value="">Selecione o Status</option>
+                            <option value="Em Analise">Em Analise</option>
                                 <option value="Ganha">Ganha</option>
-                                <option value="Perdida">Perdida</option>
                                 <option value="Concorrendo">Concorrendo</option>
+                                <option value="Em Montagem">Em Montagem</option>
+                                <option value="Perdida">Perdida</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>
@@ -107,12 +98,12 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="valor" class="">Valor da Proposta:</label>
-                        <input type="text" class="form-control" placeholder="Digite o valor da Proposta" id="valor" name="valor" value="<?php echo $Sessao::retornaValorFormulario('valor'); ?>" required>
+                        <input type="text" class="form-control" placeholder="Digite o valor da Proposta" id="valor" name="valor" value="<?php echo $Sessao::retornaValorFormulario('valor'); ?>" >
                         <span class="form-text text-muted">Digite o valor da Proposta</span>
                     </div>
                     <div class="col-lg-2">
                             <label for="dataResultado" class="">Data de Resultado:</label>
-                            <input type="date" class="form-control" placeholder="Digite a Data de Resultado" id="dataResultado" name="dataResultado" value="<?php echo $Sessao::retornaValorFormulario('dataResultado'); ?>" required>
+                            <input type="date" class="form-control" placeholder="Digite a Data de Resultado" id="dataResultado" name="dataResultado" value="<?php echo $Sessao::retornaValorFormulario('dataResultado'); ?>" >
                             <span class="form-text text-muted">Digite Resultado</span>
                     </div>
                     <div class="col-lg-2">
@@ -126,7 +117,7 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="proposta" class="">Proposta:</label>
-                        <input type="text" class="form-control" placeholder="Digite a Proposta" id="proposta" name="proposta" value="<?php echo $Sessao::retornaValorFormulario('proposta'); ?>" required>
+                        <input type="text" class="form-control" placeholder="Digite a Proposta" id="proposta" name="proposta" value="<?php echo $Sessao::retornaValorFormulario('proposta'); ?>" >
                         <span class="form-text text-muted">Digite o numero da Proposta</span>
                     </div>
                 </div>
@@ -140,12 +131,12 @@
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label for="observacao" class="">Observacao do Edital:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Edital" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" required></textarea>
+                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Edital" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
                         <span class="form-text text-muted">Digite Observacao do Edital</span>
                     </div>
                     <div class="col-lg-6">
                         <label for="analise" class="">Analise do Edital:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Analise do Edital" id="analise" name="analise" value="<?php echo $Sessao::retornaValorFormulario('analise'); ?>" required></textarea>
+                        <textarea class="form-control" rows="3" placeholder="Digite Analise do Edital" id="analise" name="analise" value="<?php echo $Sessao::retornaValorFormulario('analise'); ?>" ></textarea>
                         <span class="form-text text-muted">Digite Analise do Edital</span>
                     </div>
                 </div>

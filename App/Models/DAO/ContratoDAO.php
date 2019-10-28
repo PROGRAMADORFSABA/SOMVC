@@ -3,21 +3,19 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Edital;
+use App\Models\Entidades\Contrato;
 use App\Models\Entidades\Usuario;
 use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\Representante;
 use App\Models\Entidades\ClienteLicitacao;
-/*
-edt_id, edt_numero, edt_dataabertura, edt_hora, edt_dataresultado,  edt_proposta, edt_modalidade, 
-edt_tipo, edt_garantia, edt_valor, edt_tatus, edt_analise, edt_observacao, edt_anexo, 
-edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, edt_dataalteracao
-*/
-class EditalDAO extends BaseDAO
+
+class ContratoDAO extends BaseDAO
 {
     public  function listar($edtId = null)
     {        
         $SQL = " SELECT * 
-		FROM edital edt
+		FROM contrato ctr
+		INNER JOIN edital edt ON edt.edt_id = ctr.ctr_edital
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
@@ -30,55 +28,74 @@ class EditalDAO extends BaseDAO
             $resultado = $this->select($SQL);
             $dados = $resultado->fetchAll();
             $lista = [];
-            foreach ($dados as $dado) {                
-                $edital = new Edital();
-                $edital->setEdtId($dado['edt_id']);;
-                $edital->setEdtNumero($dado['edt_numero']);
-                $edital->setEdtDataAbertura($dado['edt_dataabertura']);
-                $edital->setEdtHora($dado['edt_hora']);
-                $edital->setEdtDataResultado($dado['edt_dataresultado']);
-                $edital->setEdtProposta($dado['edt_proposta']);
-                $edital->setEdtModalidade($dado['edt_modalidade']);
-                $edital->setEdtTipo($dado['edt_tipo']);
-                $edital->setEdtGarantia($dado['edt_garantia']);
-                $edital->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
-                $edital->setEdtStatus($dado['edt_status']);
-                $edital->setEdtAnalise($dado['edt_analise']);
-                $edital->setEdtObservacao($dado['edt_observacao']);
-                $edital->setEdtAnexo($dado['edt_anexo']);
-                $edital->setEdtDataAlteracao($dado['edt_dataabertura']);
-                $edital->setEdtDataCadastro($dado['edt_datacadastro']);
-                $edital->setEdtDataAlteracao($dado['edt_dataalteracao']);
-                $edital->setRepresentante(new Representante());
-                $edital->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
-                $edital->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
-                $edital->setClienteLicitacao(new ClienteLicitacao());
-                $edital->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
-                $edital->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
-                $edital->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
-                $edital->getClienteLicitacao()->setCnpj($dado['CNPJ']);
-                $edital->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
-                $edital->setInstituicao(new Instituicao());
-                $edital->getInstituicao()->setInst_Id($dado['inst_id']);                    
-                $edital->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
-                $edital->setUsuario(new Usuario());
-                $edital->getUsuario()->setId($dado['id']);
-                $edital->getUsuario()->setNome($dado['nome']);
+            foreach ($dados as $dado) {  
+                /*
+ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
+ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
+*/
+                $contrato = new Contrato();
+                $contrato->setCtrId($dado['ctr_id']);
+                $contrato->getEdital(new Edital());
+                $contrato->getEdital()->setEdtId($dado['edt_id']);
+                $contrato->getEdital()->setEdtNumero($dado['ctr_numero']);
+                $contrato->getEdital()->setEdtDataInicio($dado['ctr_datainicio']);
+                $contrato->getEdital()->setEdtDataVencimento($dado['ctr_datavencimento']);
+                $contrato->getEdital()->setEdtValor(number_format($dado['ctr_valor'], 2, ',', '.'));
+                $contrato->getEdital()->setEdtStatus($dado['ctr_status']);
+                $contrato->getEdital()->setEdtObservacao($dado['ctr_observacao']);
+                $contrato->getEdital()->setEdtDataVencimento($dado['ctr_anexo']);
+                $contrato->getEdital()->setEdtUsuario($dado['ctr_usuario']);
+                $contrato->getEdital()->setEdtPrazoEntrega($dado['ctr_prazoentrega']);
+                $contrato->getEdital()->setEdtPrazoPagamento($dado['ctr_prazopagamento']);
+                $contrato->getEdital()->setEdtInstituicao($dado['ctr_instituicao']);
+                $contrato->getEdital()->setEdtDataCadastro($dado['ctr_datacadastro']);
+                $contrato->getEdital()->setEdtDataAlteracao($dado['ctr_dataalteracao']);
+                $contrato->getEdital()->setEdtNumero($dado['edt_numero']);
+                $contrato->getEdital()->setEdtDataAbertura($dado['edt_dataabertura']);
+                $contrato->getEdital()->setEdtHora($dado['edt_hora']);
+                $contrato->getEdital()->setEdtDataResultado($dado['edt_dataresultado']);
+                $contrato->getEdital()->setEdtProposta($dado['edt_proposta']);
+                $contrato->getEdital()->setEdtModalidade($dado['edt_modalidade']);
+                $contrato->getEdital()->setEdtTipo($dado['edt_tipo']);
+                $contrato->getEdital()->setEdtGarantia($dado['edt_garantia']);
+                $contrato->getEdital()->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
+                $contrato->getEdital()->setEdtStatus($dado['edt_status']);
+                $contrato->getEdital()->setEdtAnalise($dado['edt_analise']);
+                $contrato->getEdital()->setEdtObservacao($dado['edt_observacao']);
+                $contrato->getEdital()->setEdtAnexo($dado['edt_anexo']);
+                $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataabertura']);
+                $contrato->getEdital()->setEdtDataCadastro($dado['edt_datacadastro']);
+                $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataalteracao']);
+                $contrato->setRepresentante(new Representante());
+                $contrato->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
+                $contrato->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
+                $contrato->setClienteLicitacao(new ClienteLicitacao());
+                $contrato->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+                $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
+                $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+                $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+                $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+                $contrato->setInstituicao(new Instituicao());
+                $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
+                $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
+                $contrato->setUsuario(new Usuario());
+                $contrato->getUsuario()->setId($dado['id']);
+                $contrato->getUsuario()->setNome($dado['nome']);
                 
-                $lista[] = $edital;
+                $lista[] = $contrato;
             }
             return $lista;        
                 
     }
-    public  function listarDinamico(Edital $edital)
+    public  function listarDinamico(Edital $contrato)
     {     
         
-        $codCliente         = $edital->getEdtCliente();      
-        $codEdital          = $edital->getEdtId();
-        $proposta           = $edital->getEdtProposta();
-        $numeroLicitacao    = $edital->getEdtNumero();
-        $status             = $edital->getEdtStatus();
-        $modalidade         = $edital->getEdtModalidade();
+        $codCliente         = $contrato->getEdtCliente();      
+        $codEdital          = $contrato->getEdtId();
+        $proposta           = $contrato->getEdtProposta();
+        $numeroLicitacao    = $contrato->getEdtNumero();
+        $status             = $contrato->getEdtStatus();
+        $modalidade         = $contrato->getEdtModalidade();
 
         if ($codEdital && $numeroLicitacao && $status && $proposta && $codCliente && $modalidade) {
             $WHERE = "  WHERE edt.edt_id = $codEdital AND edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "' AND edt.edt_modalidade = '" . $modalidade . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
@@ -128,41 +145,41 @@ class EditalDAO extends BaseDAO
             $dados = $resultado->fetchAll();
             $lista = [];
             foreach ($dados as $dado) {                
-                $edital = new Edital();
-                $edital->setEdtId($dado['edt_id']);;
-                $edital->setEdtNumero($dado['edt_numero']);
-                $edital->setEdtDataAbertura($dado['edt_dataabertura']);
-                $edital->setEdtHora($dado['edt_hora']);
-                $edital->setEdtDataResultado($dado['edt_dataresultado']);
-                $edital->setEdtProposta($dado['edt_proposta']);
-                $edital->setEdtModalidade($dado['edt_modalidade']);
-                $edital->setEdtTipo($dado['edt_tipo']);
-                $edital->setEdtGarantia($dado['edt_garantia']);
-                $edital->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
-                $edital->setEdtStatus($dado['edt_status']);
-                $edital->setEdtAnalise($dado['edt_analise']);
-                $edital->setEdtObservacao($dado['edt_observacao']);
-                $edital->setEdtAnexo($dado['edt_anexo']);
-                $edital->setEdtDataAlteracao($dado['edt_dataabertura']);
-                $edital->setEdtDataCadastro($dado['edt_datacadastro']);
-                $edital->setEdtDataAlteracao($dado['edt_dataalteracao']);
-                $edital->setRepresentante(new Representante());
-                $edital->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
-                $edital->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
-                $edital->setClienteLicitacao(new ClienteLicitacao());
-                $edital->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
-                $edital->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
-                $edital->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
-                $edital->getClienteLicitacao()->setCnpj($dado['CNPJ']);
-                $edital->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
-                $edital->setInstituicao(new Instituicao());
-                $edital->getInstituicao()->setInst_Id($dado['inst_id']);                    
-                $edital->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
-                $edital->setUsuario(new Usuario());
-                $edital->getUsuario()->setId($dado['id']);
-                $edital->getUsuario()->setNome($dado['nome']);
+                $contrato = new Edital();
+                $contrato->setEdtId($dado['edt_id']);;
+                $contrato->setEdtNumero($dado['edt_numero']);
+                $contrato->setEdtDataAbertura($dado['edt_dataabertura']);
+                $contrato->setEdtHora($dado['edt_hora']);
+                $contrato->setEdtDataResultado($dado['edt_dataresultado']);
+                $contrato->setEdtProposta($dado['edt_proposta']);
+                $contrato->setEdtModalidade($dado['edt_modalidade']);
+                $contrato->setEdtTipo($dado['edt_tipo']);
+                $contrato->setEdtGarantia($dado['edt_garantia']);
+                $contrato->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
+                $contrato->setEdtStatus($dado['edt_status']);
+                $contrato->setEdtAnalise($dado['edt_analise']);
+                $contrato->setEdtObservacao($dado['edt_observacao']);
+                $contrato->setEdtAnexo($dado['edt_anexo']);
+                $contrato->setEdtDataAlteracao($dado['edt_dataabertura']);
+                $contrato->setEdtDataCadastro($dado['edt_datacadastro']);
+                $contrato->setEdtDataAlteracao($dado['edt_dataalteracao']);
+                $contrato->setRepresentante(new Representante());
+                $contrato->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
+                $contrato->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
+                $contrato->setClienteLicitacao(new ClienteLicitacao());
+                $contrato->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+                $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
+                $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+                $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+                $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+                $contrato->setInstituicao(new Instituicao());
+                $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
+                $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
+                $contrato->setUsuario(new Usuario());
+                $contrato->getUsuario()->setId($dado['id']);
+                $contrato->getUsuario()->setNome($dado['nome']);
                 
-                $lista[] = $edital;
+                $lista[] = $contrato;
             }
             return $lista;        
                 
@@ -182,30 +199,30 @@ class EditalDAO extends BaseDAO
         return $resultado->fetchAll(\PDO::FETCH_CLASS, Edital::class);
     }*/
 
-    public  function salvar(Edital $edital)
+    public  function salvar(Edital $contrato)
     {
       
         try {
-            $edtNumero                     = $edital->getEdtNumero();
-            $edtDataAbertura               = $edital->getEdtDataAbertura()->format('Y-m-d');
-            $edtHora                       = $edital->getEdtHora()->format('h:m:s');
-            $edtDataResultado              = $edital->getEdtDataResultado()->format('Y-m-d h:m:s');
-            $edtProposta                   = $edital->getEdtProposta();
-            $edtModalidade                 = $edital->getEdtModalidade();
-            $edtTipo                       = $edital->getEdtTipo();
-            $edtGarantia                   = $edital->getEdtGarantia();
-            $valorAtual                    = $edital->getEdtValor();
+            $edtNumero                     = $contrato->getEdtNumero();
+            $edtDataAbertura               = $contrato->getEdtDataAbertura()->format('Y-m-d');
+            $edtHora                       = $contrato->getEdtHora()->format('h:m:s');
+            $edtDataResultado              = $contrato->getEdtDataResultado()->format('Y-m-d h:m:s');
+            $edtProposta                   = $contrato->getEdtProposta();
+            $edtModalidade                 = $contrato->getEdtModalidade();
+            $edtTipo                       = $contrato->getEdtTipo();
+            $edtGarantia                   = $contrato->getEdtGarantia();
+            $valorAtual                    = $contrato->getEdtValor();
             $edtValor                      = str_replace(",", ".", $valorAtual);
-            $edtStatus                     = $edital->getEdtStatus();
-            $edtAnalise                    = $edital->getEdtAnalise();
-            $edtObservacao                 = $edital->getEdtObservacao();
-            $edtAnexo                      = $edital->getEdtAnexo();
-            $edtRepresentante              = $edital->getRepresentante()->getCodRepresentante();
-            $edtCliente                    = $edital->getClienteLicitacao()->getCodCliente();
-            $edtUsuario                    = $edital->getUsuario()->getId();           
-            $edtInstituicao                = $edital->getInstituicao()->getInst_Id();
-            $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d h:m:s');
-            $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d h:m:s');
+            $edtStatus                     = $contrato->getEdtStatus();
+            $edtAnalise                    = $contrato->getEdtAnalise();
+            $edtObservacao                 = $contrato->getEdtObservacao();
+            $edtAnexo                      = $contrato->getEdtAnexo();
+            $edtRepresentante              = $contrato->getRepresentante()->getCodRepresentante();
+            $edtCliente                    = $contrato->getClienteLicitacao()->getCodCliente();
+            $edtUsuario                    = $contrato->getUsuario()->getId();           
+            $edtInstituicao                = $contrato->getInstituicao()->getInst_Id();
+            $edtDataCadastro               = $contrato->getEdtDataCadastro()->format('Y-m-d h:m:s');
+            $edtDataAlteracao              = $contrato->getEdtDataAlteracao()->format('Y-m-d h:m:s');
             $nomeanexo = date('Y-m-d-h:m:s');
           
             if (!$_FILES['anexo']['name'] == "") {
@@ -255,40 +272,40 @@ class EditalDAO extends BaseDAO
             }
     }
         
-    /*public  function listaPorNome(Edital $edital)
+    /*public  function listaPorNome(Edital $contrato)
     {       
         $resultado = $this->select(
             "SELECT * FROM cidade WHERE cidnome 
-             like '%".$edital->getCidNome()."%' LIMIT 0,6 "
+             like '%".$contrato->getCidNome()."%' LIMIT 0,6 "
         );        
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);        
     }*/
 
-    public  function atualizar(Edital $edital)
+    public  function atualizar(Edital $contrato)
     {
         try {
             
-            $edtId                         = $edital->getEdtId();
-            $edtNumero                     = $edital->getEdtNumero();
-            $edtDataAbertura               = $edital->getEdtDataAbertura()->format('Y-m-d');
-            $edtHora                       = $edital->getEdtHora()->format('h:m:s');
-            $edtDataResultado              = $edital->getEdtDataResultado()->format('Y-m-d h:m:s');
-            $edtProposta                   = $edital->getEdtProposta();
-            $edtModalidade                 = $edital->getEdtModalidade();
-            $edtTipo                       = $edital->getEdtTipo();
-            $edtGarantia                   = $edital->getEdtGarantia();
-            $valorAtual                    = $edital->getEdtValor();
+            $edtId                         = $contrato->getEdtId();
+            $edtNumero                     = $contrato->getEdtNumero();
+            $edtDataAbertura               = $contrato->getEdtDataAbertura()->format('Y-m-d');
+            $edtHora                       = $contrato->getEdtHora()->format('h:m:s');
+            $edtDataResultado              = $contrato->getEdtDataResultado()->format('Y-m-d h:m:s');
+            $edtProposta                   = $contrato->getEdtProposta();
+            $edtModalidade                 = $contrato->getEdtModalidade();
+            $edtTipo                       = $contrato->getEdtTipo();
+            $edtGarantia                   = $contrato->getEdtGarantia();
+            $valorAtual                    = $contrato->getEdtValor();
             $edtValor                      = str_replace(",", ".", $valorAtual);
-            $edtStatus                     = $edital->getEdtStatus();
-            $edtAnalise                    = $edital->getEdtAnalise();
-            $edtObservacao                 = $edital->getEdtObservacao();
-            $edtAnexo                      = $edital->getEdtAnexo();
-            $edtRepresentante              = $edital->getRepresentante()->getCodRepresentante();
-            $edtCliente                    = $edital->getClienteLicitacao()->getCodCliente();
-            $edtUsuario                    = $edital->getUsuario()->getId();           
-            $edtInstituicao                = $edital->getInstituicao()->getInst_Id();
-            $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d h:m:s');
-            $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d h:m:s');
+            $edtStatus                     = $contrato->getEdtStatus();
+            $edtAnalise                    = $contrato->getEdtAnalise();
+            $edtObservacao                 = $contrato->getEdtObservacao();
+            $edtAnexo                      = $contrato->getEdtAnexo();
+            $edtRepresentante              = $contrato->getRepresentante()->getCodRepresentante();
+            $edtCliente                    = $contrato->getClienteLicitacao()->getCodCliente();
+            $edtUsuario                    = $contrato->getUsuario()->getId();           
+            $edtInstituicao                = $contrato->getInstituicao()->getInst_Id();
+            $edtDataCadastro               = $contrato->getEdtDataCadastro()->format('Y-m-d h:m:s');
+            $edtDataAlteracao              = $contrato->getEdtDataAlteracao()->format('Y-m-d h:m:s');
             $nomeanexo = date('Y-m-d-h:m:s');
            
             if (!$_FILES['anexo']['name'] == "") {
@@ -349,10 +366,10 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
         }
     }
 
-    public function excluir(Edital $edital)
+    public function excluir(Edital $contrato)
     {
         try {
-            $edtId = $edital->getEdtId();
+            $edtId = $contrato->getEdtId();
 
             return $this->delete('edital', "edt_id = $edtId");
         } catch (Exception $e) {
