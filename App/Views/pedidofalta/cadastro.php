@@ -84,14 +84,14 @@
                                         <tbody id="editar-tabela-tecnologias">
                                         <?php
                                             if($viewVar['pedidofalta']->getProposta()) {
-                                                foreach ($viewVar['pedidofalta']->getTecnologias() as $tecnologia) {
+                                                foreach ($viewVar['pedidofalta']->getProduto() as $prodduto) {
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <!-- ?php echo $tecnologia->getTecnologia(); ? -->
+                                                            <?php echo $prodduto->getProduto(); ?>
                                                             <input type="hidden" name="tecnologias[]" value= >
                                                         </td>
-                                                        <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeTecnologia(this,<?php echo $tecnologia->getIdTecnologia(); ?>)">remover</button></td>
+                                                        <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeTecnologia(this,<?php echo $prodduto->getProCodigo(); ?>)">remover</button></td>
                                                     </tr>
                                                     <?php
                                                 }
