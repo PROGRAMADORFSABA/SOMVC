@@ -10,7 +10,6 @@ class ClienteLicitacaoDAO extends  BaseDAO
 
     public  function listar($codCliente = null)
     {
-
         if ($codCliente) {
             $resultado = $this->select(
                 
@@ -18,7 +17,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                 "SELECT * FROM clienteLicitacao WHERE licitacaoCliente_cod = $codCliente"
             );
             $dado = $resultado->fetch();
-
+            
             if ($dado) {
                 $clienteLicitacao = new ClienteLicitacao();
                 $clienteLicitacao->setCodCliente($dado['licitacaoCliente_cod']);
@@ -26,8 +25,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                 $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
                 $clienteLicitacao->setCnpj($dado['CNPJ']);
                 $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
-                // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);
-
+                // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);                             
                 return $clienteLicitacao;
             }
         } else {
@@ -99,25 +97,49 @@ class ClienteLicitacaoDAO extends  BaseDAO
 
     public function listaClienteLicitacao($idCliente = null)
     {
-
+        
         if ($idCliente) {
 
             $resultado = $this->select(
-                "SELECT * FROM cliente c INNER JOIN tipoCliente tp ON tp.codTipoCliente = c.tipoCliente WHERE c.idTipoCliente = $idCliente"
+                "SELECT * FROM clienteLicitacao  WHERE licitacaoCliente_cod = $idCliente"
+               // "SELECT * FROM cliente c INNER JOIN tipoCliente tp ON tp.codTipoCliente = c.tipoCliente WHERE c.idTipoCliente = $idCliente"
             );
 
             return $resultado->fetchObject(ClienteLicitacao::class);
         } else {
             $resultado = $this->select(
-                'SELECT * FROM cliente c INNER JOIN tipoCliente tp ON tp.codTipoCliente = c.idTipoCliente '
+                "SELECT * FROM clienteLicitacao "
+                //'SELECT * FROM cliente c INNER JOIN tipoCliente tp ON tp.codTipoCliente = c.idTipoCliente '
             );
-
             return  $resultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
         }
 
         return false;
     }
+    public function listarTeste($idCliente = null)
+    {
+        $SQL = "SELECT * FROM clienteLicitacao ";
+        if($idCliente){
+            $SQL.= " WHERE licitacaoCliente_cod = $idCliente";
+        }
+            $resultado = $this->select($SQL);
+            
+            $dados = $resultado->fetchAll();            
+                $lista = [];
 
+                foreach ($dados as $dado) {
+                    
+                $clienteLicitacao = new ClienteLicitacao();
+                
+                $clienteLicitacao->setCodCliente($dado['clienteLicitacao_cod']);
+                $clienteLicitacao->setRazaoSocial($dado['razaosocial']);
+                //date_format($date, 'Y-m-d H:i:s');
+                $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
+                             
+                    $lista[] = $clienteLicitacao;
+                }                
+                return $lista;
+    }
     public function salvar(ClienteLicitacao $clienteLicitacao)
     {
 
@@ -184,13 +206,13 @@ class ClienteLicitacaoDAO extends  BaseDAO
     }
     
     
-    public function listarPorNomeFantasia(ClienteLicitacao $clienteLicitacao)
+    public function listarPorRazaoSocial(ClienteLicitacao $clienteLicitacao)
     {
         $resultado = $this->select(
-            "SELECT * FROM clienteLicitacao WHERE nomefantasia
-                        LIKE '%".$clienteLicitacao->getNomeFantasia()."%' LIMIT 0.6"
+            "SELECT * FROM clienteLicitacao WHERE razaosocial
+                        LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY razaosocial LIMIT 0,6"
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
-    
+ 
 }

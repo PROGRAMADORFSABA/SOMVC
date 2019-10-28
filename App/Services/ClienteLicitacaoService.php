@@ -18,8 +18,10 @@
     {
         public function listar($codCliente = null)
         {
+           
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
-            return $clienteLicitacaoDAO->listaClienteLicitacao($codCliente);
+            return $clienteLicitacaoDAO->listar($codCliente);
+           // return $clienteLicitacaoDAO->listarTeste($codCliente);
         }
         public function listarPorProduto(Produto $produto)
         {
@@ -29,14 +31,14 @@
         public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
         {
             $clienteLicitacaoDAO =  new ClienteLicitacaoDAO();
-            $clienteLicitacao = $clienteLicitacaoDAO->
+            $clienteLicitacao = $clienteLicitacaoDAO->listarPorNomeFantasia($clienteLicitacao);
         }
         
         public function autoComplete(ClienteLicitacao $clienteLicitacao)
         {
-            $clienteLicitacao->getNomeFantasia();
+            $clienteLicitacao->getRazaoSocial();
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
-            $busca = $clienteLicitacaoDAO->listarPorNomeFantasia($clienteLicitacao);
+            $busca = $clienteLicitacaoDAO->listarPorRazaoSocial($clienteLicitacao);
             $exportar = new Exportar();
             echo $exportar->exportarJSON($busca);
         

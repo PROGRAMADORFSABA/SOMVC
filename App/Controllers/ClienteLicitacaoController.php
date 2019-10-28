@@ -7,6 +7,7 @@ use App\Models\DAO\ClienteLicitacaoDAO;
 use App\Models\Entidades\ClienteLicitacao;
 
 use App\Models\Validacao\ClienteLicitacaoValidador;
+use App\Services\ClienteLicitacaoService;
 
 class ClienteLicitacaoController extends Controller
 {
@@ -57,7 +58,18 @@ class ClienteLicitacaoController extends Controller
             Sessao::gravaMensagem("Erro ao gravar");
         }
     }
-
+    public function autoComplete($params)
+    {
+        
+        $clienteLicitacao = new ClienteLicitacao();
+        $clienteLicitacao->setRazaoSocial($params[0]);
+        
+        $clienteService = new ClienteLicitacaoService();
+        $busca = $clienteService->autoComplete($clienteLicitacao);
+        
+        echo $busca;
+    }
+   
     public function edicao($params)
     {
         $codCliente = $params[0];

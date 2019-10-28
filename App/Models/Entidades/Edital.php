@@ -29,7 +29,7 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
     private $instituicao;
     private $edtInstituicao;
     private $representante;
-    private $cliente;
+    private $clienteLicitacao;
     private $edtCliente;
 
          /**
@@ -321,16 +321,16 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
             $this->instituicao = $instituicao;
         }
         /**
-         * Set the value of Cliente
+         * Set the value of ClienteLicitacao
          *
          * @return  self
          */ 
-        public function getCliente() {
-                return $this->cliente;
+        public function getClienteLicitacao() {
+                return $this->clienteLicitacao;
         }
         
-        public function setCliente(Cliente $cliente) {
-                $this->cliente = $cliente;
+        public function setClienteLicitacao(ClienteLicitacao $clienteLicitacao) {
+                $this->clienteLicitacao = $clienteLicitacao;
         }
         /**
          * Set the value of Usuario

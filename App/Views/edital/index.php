@@ -2,20 +2,30 @@
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
 
     <div class="kt-portlet kt-portlet--mobile">
-    <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/edital/index" method="post" id="form_cadastro" enctype="multipart/form-data">
+    <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/edital/" method="post" id="form_cadastro" enctype="multipart/form-data">
             <h3 class="kt-portlet__head-title">
-                Pesquisa de pedidos registrados
+                Pesquisa de editais registrados
             </h3>
             <div class="form-group"><label for="codCliente">Cliente</label>
                 <select class="form-control" name="codCliente">
                     <option value="">Selecione o cliente</option>
                     <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
                         <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                            <?php echo $cliente->getNomeCliente(); ?></option>
+                            <?php echo $cliente->getRazaoSocial(); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            
+            <div class="col-lg-3">
+                        <label for="codRepresentante">Representante</label>
+                        <select class="form-control" id="codRepresentante" name="codRepresentante" >
+                                <option value="">Selecione o Representante</option>
+                                <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
+                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
+                                        <?php echo $representante->getNomeRepresentante(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        <span class="form-text text-muted">Por favor insira o Representante</span>
+                    </div>   
             <div class="kt-portlet__body">
                 <div class="form-group row">
                     <div class="col-lg-1">
@@ -175,7 +185,7 @@
                                 <td><?php echo $edital->getEdtTipo(); ?></td>
                                 <td><?php echo $edital->getEdtGarantia(); ?></td>
                                 <td><?php echo $edital->getEdtStatus(); ?></td>
-                                <td><?php echo $edital->getCliente()->getNomeCliente(); ?></td>
+                                <td><?php echo $edital->getClienteLicitacao()->getNomeFantasia(); ?></td>
                                 <td><?php echo $edital->getUsuario()->getNome(); ?></td>
                                 <td><?php echo $edital->getEdtDataCadastro()->format('d/m/Y'); ?></td>
                                 <td><?php echo $edital->getEdtHora()->format('H:m:s'); ?></td>
