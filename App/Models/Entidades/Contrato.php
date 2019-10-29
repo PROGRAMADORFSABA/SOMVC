@@ -20,12 +20,14 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
     private $ctrDataAlteracao;
     private $usuario;
     private $instituicao;
+    private $representante;
     private $edital;
     private $ctrInstituicao;
     private $ctrPrazoEntrega;
     private $ctrPrazoPagamento; 
     private $clienteLicitacao;
     private $ctrCliente;
+    private $ctrUsuario;
     
          /**
          * Set the value of ctrPrazoEntrega
@@ -258,6 +260,19 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
                 $this->usuario = $usuario;
         }
         /**
+         * Set the value of Representante
+         *
+         * @return  self
+         */ 
+
+        public function getRepresentante() {
+                return $this->representante;
+        }
+        
+        public function setRepresentante(Representante $representante) {
+                $this->representante = $representante;
+        }
+        /**
          * Set the value of Edital
          *
          * @return  self
@@ -270,6 +285,66 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
         public function setEdital(Edital $edital) {
                 $this->edital = $edital;
         }
+
+    /**
+     * Get the value of ctrCliente
+     */ 
+    public function getCtrCliente()
+    {
+        return $this->ctrCliente;
+    }
+
+    /**
+     * Set the value of ctrCliente
+     *
+     * @return  self
+     */ 
+    public function setCtrCliente($ctrCliente)
+    {
+        $this->ctrCliente = $ctrCliente;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ctrDataVencimento
+     */ 
+    public function getCtrDataVencimento()
+    {
+        return new DateTime($this->ctrDataVencimento);
+    }
+
+    /**
+     * Set the value of ctrDataVencimento
+     *
+     * @return  self
+     */ 
+    public function setCtrDataVencimento($ctrDataVencimento)
+    {
+        $this->ctrDataVencimento = $ctrDataVencimento;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ctrUsuario
+     */ 
+    public function getCtrUsuario()
+    {
+        return $this->ctrUsuario;
+    }
+
+    /**
+     * Set the value of ctrUsuario
+     *
+     * @return  self
+     */ 
+    public function setCtrUsuario($ctrUsuario)
+    {
+        $this->ctrUsuario = $ctrUsuario;
+
+        return $this;
+    }
  }
 
 ?>

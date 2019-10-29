@@ -3,19 +3,19 @@
 namespace App\Models\Validacao;
 
 use \App\Models\Validacao\ResultadoValidacao;
-use \App\Models\Entidades\Edital;
+use \App\Models\Entidades\Contrato;
 
-class EditalValidador{
+class ContratoValidador{
 
-    public function validar(Edital $edital)
+    public function validar(Contrato $contrato)
     {
         $resultadoValidacao = new ResultadoValidacao();
 
-       /* if(empty($edital->getCidNome()))
+       /* if(empty($contrato->getCidNome()))
         {
             $resultadoValidacao->addErro('cidNome',"Nome: Cide campo não pode ser vazio");
         }
-        if(empty($edital->getEstado()))
+        if(empty($contrato->getEstado()))
         {
             $resultadoValidacao->addErro('estado',"UF: Este campo não pode ser vazio");
         }

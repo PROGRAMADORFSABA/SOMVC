@@ -28,7 +28,7 @@
                         value="<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
                         
                         <input type="hidden" id="cliente" name="cliente" 
-                        value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
+                        value="<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>">  
                     </div>
                       <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>
 

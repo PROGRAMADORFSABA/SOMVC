@@ -189,7 +189,7 @@
                                 <td><?php echo $edital->getEdtStatus(); ?></td>
                                 <td><?php echo $edital->getClienteLicitacao()->getNomeFantasia(); ?></td>
                                 <td><?php echo $edital->getUsuario()->getNome(); ?></td>
-                                <td><?php echo $edital->getEdtDataCadastro()->format('d/m/Y'); ?></td>
+                                <td><?php echo $edital->getEdtDataCadastro()->format('d-m-Y'); ?></td>
                                 <td><?php echo $edital->getEdtHora()->format('H:m:s'); ?></td>
                                 <td>
                                     <span class="dropdown">
