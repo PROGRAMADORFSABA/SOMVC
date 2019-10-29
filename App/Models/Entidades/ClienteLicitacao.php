@@ -18,10 +18,10 @@ class ClienteLicitacao
     private $idTipoCliente;
     
     
-    public  function  __construct()
+   /* public  function  __construct()
     {
         $this->tipoCliente = new TipoCliente();
-    }
+    }*/
 
     /**
      * @return TipoCliente
@@ -152,6 +152,18 @@ class ClienteLicitacao
     public function setCnpj($cnpj)
     {
         $this->cnpj = $cnpj;
+
+        return $this;
+    }
+
+    /**
+     * Set the value of tipoCliente
+     *
+     * @return  self
+     */ 
+    public function setTipoCliente($tipoCliente)
+    {
+        $this->tipoCliente = $tipoCliente;
 
         return $this;
     }
