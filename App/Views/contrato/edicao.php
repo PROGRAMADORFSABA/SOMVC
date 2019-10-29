@@ -66,7 +66,11 @@
                         <select class="form-control" id="representante" name="representante" required>
                                 <option value="">Selecione o Representante</option>
                                 <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
+<<<<<<< HEAD
                                     <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($viewVar['contrato']->getRepresentante()->getCodRepresentante() == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
+=======
+                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($viewVar['edital']->getRepresentante()->getCodRepresentante() == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
+>>>>>>> 1a47315455e30236948c5d2a0b990bb3dc988dbb
                                         <?php echo $representante->getNomeRepresentante(); ?></option>
                                 <?php endforeach; ?>
                             </select>

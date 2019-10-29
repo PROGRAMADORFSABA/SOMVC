@@ -31,8 +31,7 @@
                         <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
                             <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
                                 <?php echo $cliente->getNomeCliente(); ?></option>
-                        <?php endforeach; ?>
-                    </input>
+                        <?php endforeach; ?>>
                     <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>
                 </div>
 

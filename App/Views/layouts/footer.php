@@ -468,6 +468,12 @@
 </script>
 
 <!--end:: Global Mandatory Vendors -->
+<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/forms/widgets/select2.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/forms/widgets/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/components/vendors/bootstrap-datepicker/init.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
 
 <!--begin:: Global Optional Vendors -->
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
@@ -506,10 +512,8 @@
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/jquery-validation/dist/additional-methods.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/components/vendors/jquery-validation/init.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/toastr/build/toastr.min.js" type="text/javascript"></script>
-<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/raphael/raphael.js" type="text/javascript">
-</script>
-<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/morris.js/morris.js" type="text/javascript">
-</script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/raphael/raphael.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/morris.js/morris.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/vendors/jquery-idletimer/idle-timer.min.js" type="text/javascript"></script>
@@ -522,6 +526,7 @@
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/jquery.repeater/src/jquery.input.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/jquery.repeater/src/repeater.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/dompurify/dist/purify.js" type="text/javascript"></script>
+
 
 <!--end:: Global Optional Vendors -->
 

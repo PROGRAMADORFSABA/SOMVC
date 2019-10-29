@@ -19,7 +19,7 @@ class App
          * Constantes do sistema
          */
         //banco maquina local
-    /*
+    
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
@@ -28,9 +28,9 @@ class App
         define('DB_PASSWORD'    , "root");
         define('DB_NAME'        , "fabmed");
         define('DB_DRIVER'      , "mysql");
-        */
+        
         //banco hospedagem local
-       
+       /*
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");

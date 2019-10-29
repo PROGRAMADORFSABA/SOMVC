@@ -37,9 +37,14 @@ $dataAtual = date('Y-m-d H:i:s');
 	<!--begin::Page Vendors Styles(used by this page) -->
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/error/error-v2.default.css" rel="stylesheet" type="text/css" />
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/app/custom/login/login-v4.default.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
 
 	<link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.min.css"> 	
 	<link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.themes.min.css"> 

@@ -125,7 +125,7 @@ ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dat
 
         Sessao::gravaFormulario($_POST);
 
-        $contratoValidador    = new ContratoValidador();
+        $contratoValidador    = new EditalValidador();
         $resultadoValidacao = $contratoValidador->validar($contrato);
 
         if ($resultadoValidacao->getErros()) {
