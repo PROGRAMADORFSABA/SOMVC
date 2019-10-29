@@ -3,7 +3,8 @@
 	$('#cadastroCliente').slideUp();
 		var optionscliente = {
 			url: function (cliente) {
-				return "http://localhost/SOMVC/cliente/autoComplete/" + cliente;
+					//return "http://coisavirtual.com.br/cliente/autoComplete/" + cliente; //hospedagem
+				return "http://localhost:81/SOMVC/cliente/autoComplete/" + cliente;
 			},
 
 			getValue: function (element) {

@@ -1,12 +1,9 @@
 <?php
 
-
-
 namespace App;
 
 use App\Controllers\HomeController;
 use Exception;
-
 
 class App
 {
@@ -21,8 +18,19 @@ class App
         /*
          * Constantes do sistema
          */
-        //banco local
+        //banco maquina local
+    
+        define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
+        define('PATH'           , realpath('./'));
+        define('TITLE'          , "Aplicação Administrativa ");
+        define('DB_HOST'        , "localhost:3306;charset=utf8");
+        define('DB_USER'        , "root");
+        define('DB_PASSWORD'    , "root");
+        define('DB_NAME'        , "fabmed");
+        define('DB_DRIVER'      , "mysql");
         
+        //banco hospedagem local
+       /*
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
@@ -34,7 +42,7 @@ class App
         
         //banco hospedagem
        /* 
-        define('APP_HOST'       , $_SERVER['HTTP_HOST']."/SOMVC");
+        define('APP_HOST'       , $_SERVER['HTTP_HOST']);
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
         define('DB_HOST'        , "mysql380.umbler.com:41890;charset=utf8");

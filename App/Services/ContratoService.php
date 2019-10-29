@@ -6,9 +6,7 @@ use App\Lib\Sessao;
 use App\Lib\Transacao;
 use App\Lib\Exportar;
 
-//use App\Models\DAO\ContratoDAO;
-use App\Models\DAO\EstadoDAO;
-
+use App\Models\DAO\ContratoDAO;
 
 use App\Models\Validacao\ContratoValidador;
 use App\Models\Validacao\ResultadoValidacao;
@@ -17,85 +15,96 @@ use App\Models\Entidades\Contrato;
 
 class ContratoService
 {
-    public function listar($cidId = null)
+    public function listar($contratoId = null)
     {
-        
-        $cidadeDAO = new ContratoDAO();
-        return $cidadeDAO->listar($cidId);
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->listar($contratoId);
+    }
+    public function listarDinamico(Contrato $contrato)
+    {
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->listarDinamico($contrato);
     }
 
-    public function autoComplete(Contrato $cidade)
+    public function autoComplete(Contrato $contrato)
     { 
-        $cidadeDAO = new ContratoDAO();
-        $busca = $cidadeDAO->listaPorNome($cidade);          
+        $contratoDAO = new ContratoDAO();
+        $busca = $contratoDAO->listaPorNome($contrato);          
         $exportar = new Exportar();
         return $exportar->exportarJSON($busca);
     }
     
-    public function listarEstadosVinculadas(Contrato $cidade)
+    public function listarEstadosVinculadas(Contrato $contrato)
     {
-        $cidadeDAO = new ContratoDAO();
-        return $cidadeDAO->listarEstadosVinculadas($cidade);
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->listarEstadosVinculadas($contrato);
     }
 
-    public function salvar(Contrato $cidade)
+    public function salvar(Contrato $contrato)
     {
         $transacao = new Transacao();
-        $cidadeValidador = new ContratoValidador();
-        $resultadoValidacao = $cidadeValidador->validar($cidade);
-
+        $contratoValidador = new ContratoValidador();
+        $resultadoValidacao = $contratoValidador->validar($contrato);
+        
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
             Sessao::gravaErro($resultadoValidacao->getErros());
         } else {
             try{
-                $transacao->beginTransaction();
-                $cidadeDAO = new ContratoDAO();            
-                $cidadeDAO->salvar($cidade);
+               $transacao->beginTransaction();
+                $contratoDAO = new ContratoDAO();            
+                $contratoDAO->salvar($contrato);
                 $transacao->commit(); 
                 Sessao::gravaMensagem("cadastro realizado com sucesso!.");
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
-                Sessao::gravaMensagem("Erro ao tentar cadastrar.");
                 $transacao->rollBack(); 
-                return false;
+                //var_dump($e);
+                Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
+               return false;
             }
         }
     }
 
-    public function Editar(Contrato $cidade)
-    {        
-        //$cidadeDAO = new ContratoDAO();
-       // $cidade = $cidadeDAO->listar($cidade->getCidId())[0];
-
-        $cidadeValidador = new ContratoValidador();
-        $resultadoValidacao = $cidadeValidador->validar($cidade);
-
+    public function Editar(Contrato $contrato)
+    {   
+        $transacao = new Transacao();
+        $contratoValidador = new ContratoValidador();
+        $resultadoValidacao = $contratoValidador->validar($contrato);
+        
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
             Sessao::gravaErro($resultadoValidacao->getErros());
         } else {
-            Sessao::limpaFormulario(); 
-            Sessao::limpaMensagem();           
-            Sessao::gravaMensagem("Cadastro atualizado com sucesso! ");
-            $cidadeDAO = new ContratoDAO();
-            return $cidadeDAO->atualizar($cidade);
+            try{
+               $transacao->beginTransaction();
+                $contratoDAO = new ContratoDAO();            
+                $contratoDAO->atualizar($contrato);
+                $transacao->commit(); 
+                Sessao::gravaMensagem("cadastro alterado com sucesso!.");
+                Sessao::limpaFormulario();
+                return true;
+            }catch(\Exception $e){
+                $transacao->rollBack(); 
+                //var_dump($e);
+                Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
+               return false;
+            }
         }
-        return false;
+
     }
 
-    public function excluir(Contrato $cidade)
+    public function excluir(Contrato $contrato)
     {
         try {
 
             $transacao = new Transacao();
             $transacao->beginTransaction();
             
-            $cidadeDAO = new ContratoDAO();
-           // $vagas = $cidadeDAO->listarEstadosVinculadas($cidade);
-                        
-            $cidadeDAO->excluir($cidade);
+            $contratoDAO = new ContratoDAO();
+                                   
+            $contratoDAO->excluir($contrato);
             $transacao->commit();            
             
             Sessao::limpaMensagem();

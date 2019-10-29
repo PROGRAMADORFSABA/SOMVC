@@ -205,7 +205,7 @@ class EditalController extends Controller
         $edital->setEdtAnalise($_POST['analise']); 
         $anexo =  $_POST['anexo'];
         if($anexo == ""){
-            $edital->setEdtAnexo($_POST['anexoAlt']);        
+            $edital->setEdtAnexo($_POST['anexoAlt']);                    
         } else{
             $edital->setEdtAnexo($_POST['anexo']);        
         }

@@ -19,7 +19,7 @@ class EditalDAO extends BaseDAO
         $SQL = " SELECT * 
 		FROM edital edt
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
-        INNER JOIN clientelicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
 		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";
             if($edtId) 
@@ -120,7 +120,7 @@ class EditalDAO extends BaseDAO
         $SQL = " SELECT * 
 		FROM edital edt
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
-        INNER JOIN clientelicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
 		INNER JOIN usuarios u ON u.id = edt.edt_usuario $WHERE ";                 
             
@@ -207,22 +207,20 @@ class EditalDAO extends BaseDAO
             $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d h:m:s');
             $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d h:m:s');
             $nomeanexo = date('Y-m-d-h:m:s');
-           
+          
             if (!$_FILES['anexo']['name'] == "") {
                 $validextensions = array("jpeg", "jpg", "png", "PNG", "JPG", "JPEG", "pdf", "PDF", "docx");
                 $temporary = explode(".", $_FILES["anexo"]["name"]);
                 $file_extension = end($temporary);
                 $edtAnexo = md5($nomeanexo) . "." . $file_extension;
                 //var_dump($file_extension);
-
                 if (in_array($file_extension, $validextensions)) {
                     $sourcePath = $_FILES['anexo']['tmp_name'];
                     $targetPath = "public/assets/media/anexos/" . md5($nomeanexo) . "." . $file_extension;
                     move_uploaded_file($sourcePath, $targetPath); // Move arquivo                    
                 }
             } else {
-                //  echo " teste 02 ".$anexo;
-                $edtAnexo = "sem_anexo1.png";
+                    $edtAnexo = "sem_anexo1.png";
             }
             return $this->insert(
                 'edital',
@@ -306,8 +304,9 @@ class EditalDAO extends BaseDAO
                     move_uploaded_file($sourcePath, $targetPath); // Move arquivo                    
                 }
             } else {
-                //  echo " teste 02 ".$anexo;
+                if($edtAnexo == ""){
                 $edtAnexo = "sem_anexo1.png";
+                }
             }
 
             return $this->update(
