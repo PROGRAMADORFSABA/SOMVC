@@ -6,6 +6,7 @@
   },
   "require": {
     "ext-json": "*",
-    "maximebf/debugbar": "1.*"
+    "maximebf/debugbar": "1.*",
+    "koolreport/core":    "*"
   }
 }

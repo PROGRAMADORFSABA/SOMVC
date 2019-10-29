@@ -9,12 +9,12 @@ var KTSelect2 = function() {
 
         // nested
         $('#kt_select2_2, #kt_select2_2_validate').select2({
-            placeholder: "Select a state"
+            placeholder: "Selecione um ou mais produtos"
         });
 
         // multi select
         $('#kt_select2_3, #kt_select2_3_validate').select2({
-            placeholder: "Select a state",
+            placeholder: "Selecione um ou mais produtos",
         });
 
         // basic
@@ -161,7 +161,7 @@ var KTSelect2 = function() {
 
             // multi select
             $('#kt_select2_3_modal').select2({
-                placeholder: "Select a state",
+                placeholder: "Selecione um ou mais produtos",
             });
 
             // basic
