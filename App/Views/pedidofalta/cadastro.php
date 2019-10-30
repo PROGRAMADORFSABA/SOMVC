@@ -215,11 +215,11 @@
                                         <tbody id="editar-tabela-tecnologias">
                                         <?php
                                             if($viewVar['pedidofalta']->getProposta()) {
-                                                foreach ($viewVar['pedidofalta']->getProduto() as $prodduto) {
+                                                foreach ($viewVar['pedidofalta']->getProduto() as $produto) {
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $prodduto->getProduto(); ?>
+                                                            <?php echo $prodduto->getProNome(); ?>
                                                             <input type="hidden" name="produtos[]" value= >
                                                         </td>
                                                         <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeProduto(this,<?php echo $prodduto->getProCodigo(); ?>)">remover</button></td>
@@ -263,10 +263,3 @@
         </div>
     </div>
 </div>
-
-<script>
-function pegarDataAtual(){
-   data = new Date();
-   document.getElementById('data').value = data.getDay()+'/'+data.getMonth()+'/'+data.getFullYear();
-}
-</script>

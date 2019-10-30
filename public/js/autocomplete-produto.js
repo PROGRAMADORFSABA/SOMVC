@@ -2,9 +2,9 @@ var item = null;
 
 var app = {	
 	num_maximo_produto: 10,
-	arrayTecnologias: [],	
+	arrayProdutos: [],	
 
-	adicionaProduto: function(Produto)
+	adicionaProduto: function(produto)
 	{
 		if($('tr').length >10)
 		{
@@ -15,7 +15,7 @@ var app = {
 				this.exibeMensagem('O Produto <b>'+ produto.produto +'</b> já foi selecionada.');
 			}else{
 				$('#editar-tabela-produto').append('<tr>'+
-					'<td>'+produto.produto+'<input type="hidden" value="'+produto.idproduto+'" name="produto[]"></td>'+
+					'<td>'+produto.produto+'<input type="hidden" value="'+produto.idproduto+'" name="produtos[]"></td>'+
 					'<td><a class="btn btn-danger btn-sm" onClick="app.removeProduto(this,'+ produto.idproduto +')">remover</td>'+
 					'</tr>');			
 				$("#autocomplete-produto").val('');
@@ -30,7 +30,7 @@ var app = {
 		tr.remove();  	
 
 		var index = app.arrayProdutos.indexOf(String(produto));	
-		app.arrayTecnologias.splice(index,1);
+		app.arrayProdutos.splice(index,1);
 	},
 
 	exibeMensagem: function(mensagem)
@@ -46,7 +46,7 @@ var app = {
 var optionsProdutos = {
 
 	url: function(produto) {
-		return "http://localhost/mvc-mestre-detalhe/produto/autoComplete/" + produto;
+		return "http://localhost/SOMVC/produto/autocomplete/" + produto;
 	},
 
 	getValue: function(element) {
@@ -57,24 +57,24 @@ var optionsProdutos = {
 		onChooseEvent: function() {		
 			item = $("#autocomplete-produto").getSelectedItemData();
 
-			if(app.arrayTecnologias.length < app.num_maximo_tecnologias){				
-				if(app.arrayTecnologias.indexOf(item.idtecnologia) < 0){	
-					app.adicionaTecnologia(item);
+			if(app.arrayProdutos.length < app.num_maximo_produto){				
+				if(app.arrayProdutos.indexOf(item.idproduto) < 0){	
+					app.adicionaProduto(item);
 				}else{					
-					app.exibeMensagem('A tecnologia <b>'+ item.tecnologia +'</b> já foi selecionada.');
-					$("#autocomplete-tecnologia").val('');
+					app.exibeMensagem('O produto <b>'+ item.produto +'</b> já foi selecionada.');
+					$("#autocomplete-produto").val('');
 				}
 			}else{
-				app.exibeMensagem('O número máximo <b>('+ app.num_maximo_tecnologias +')</b> de tecnologias foi atingido.');
-				$("#autocomplete-tecnologia").val('');			
+				app.exibeMensagem('O número máximo <b>('+ app.num_maximo_produto +')</b> de produto foi atingido.');
+				$("#autocomplete-produto").val('');			
 			}
 		},
 
 		onHideListEvent: function(){			
-			$("#autocomplete-tecnologia").val('');	
+			$("#autocomplete-produto").val('');	
 			item = null;
 		}
 	}
 };
 
-$("#autocomplete-tecnologia").easyAutocomplete(optionsTecnologias);
+$("#autocomplete-produto").easyAutocomplete(optionsProdutos);
