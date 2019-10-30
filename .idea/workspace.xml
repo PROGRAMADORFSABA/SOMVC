@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Dashbord.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dashbord.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/autocomplete-produto.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/autocomplete-produto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -260,7 +255,7 @@
       <workItem from="1572390483748" duration="3309000" />
       <workItem from="1572445737047" duration="1350000" />
       <workItem from="1572447127831" duration="347000" />
-      <workItem from="1572447516342" duration="1918000" />
+      <workItem from="1572447516342" duration="2734000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -402,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571701939261</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete">
+      <created>1572452504476</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1572452504476</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -456,7 +458,8 @@
     <MESSAGE value="Mudança na inseração de produto" />
     <MESSAGE value="Correção tabela de Cadastro de falta" />
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
+    <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">

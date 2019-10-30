@@ -102,8 +102,8 @@ class ProdutoDAO extends BaseDAO
                         inner join Produto p on p.ProCodigo = fp.FK_IDPRODUTO
                          WHERE FK_ID_FALTACLIENTE = $faltaCliente_cod"
             );
-            return $resultado->fetchAll(\PDO::FETCH_CLASS, PedidoFalta::class);
         }
+        return $resultado->fetchAll(\PDO::FETCH_CLASS, PedidoFalta::class);
     }
     
     public function listarPorCliente($clienteLicitacao = null)
@@ -119,9 +119,8 @@ class ProdutoDAO extends BaseDAO
                             inner join Produto p on p.ProCodigo = fc.FK_ID_FALTACLIENTE
                         "
             );
-            
-            return $reultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
         }
+        return $reultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
     }
     public  function salvar(Produto $produto)
     {
