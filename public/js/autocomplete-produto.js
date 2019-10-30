@@ -24,7 +24,7 @@ var app = {
 		}		
 	},
 
-	removeTecnologia: function(tr,produto)
+	removeProduto: function(tr,produto)
 	{
 		var tr = $(tr).closest('tr');	
 		tr.remove();  	
@@ -46,7 +46,7 @@ var app = {
 var optionsProdutos = {
 
 	url: function(produto) {
-		return "http://localhost/mvc-mestre-detalhe/tecnologia/autoComplete/" + produto;
+		return "http://localhost/mvc-mestre-detalhe/produto/autoComplete/" + produto;
 	},
 
 	getValue: function(element) {
@@ -55,7 +55,7 @@ var optionsProdutos = {
 
 	list: {
 		onChooseEvent: function() {		
-			item = $("#autocomplete-tecnologia").getSelectedItemData();		
+			item = $("#autocomplete-produto").getSelectedItemData();
 
 			if(app.arrayTecnologias.length < app.num_maximo_tecnologias){				
 				if(app.arrayTecnologias.indexOf(item.idtecnologia) < 0){	

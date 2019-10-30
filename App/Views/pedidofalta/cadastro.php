@@ -198,12 +198,12 @@
                                 Produtos
                             </header>
                             <div class="panel-body">
-                                <div id="tecnologias-selecionadas">
+                                <div id="produto-selecionadas">
                                     <div class="form-group">
                                         <label  class="col-lg-3 col-sm-3 control-label">Adicionar</label>
                                         <div class="col-lg-9">
                                             <div class="iconic-input right">
-                                                <input type="text" id="autocomplete-tecnologia" class="form-control " placeholder="Produto">
+                                                <input type="text" id="autocomplete-produto" class="form-control " placeholder="Produto">
                                             </div>
                                         </div>
                                     </div>
@@ -220,9 +220,9 @@
                                                     <tr>
                                                         <td>
                                                             <?php echo $prodduto->getProduto(); ?>
-                                                            <input type="hidden" name="tecnologias[]" value= >
+                                                            <input type="hidden" name="produtos[]" value= >
                                                         </td>
-                                                        <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeTecnologia(this,<?php echo $prodduto->getProCodigo(); ?>)">remover</button></td>
+                                                        <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeProduto(this,<?php echo $prodduto->getProCodigo(); ?>)">remover</button></td>
                                                     </tr>
                                                     <?php
                                                 }
