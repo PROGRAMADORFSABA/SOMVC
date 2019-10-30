@@ -52,7 +52,7 @@
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status" required>
                             <option value="">Selecione o Status</option>
-                                    <option value="Pendente">Pendente</option>
+                                <option value="Pendente">Pendente</option>
                                 <option value="Lancado">Lancado</option>
                                 <option value="Vencido">Vencido</option>
                         </select>
@@ -106,18 +106,6 @@
                         <span class="form-text text-muted">Selecione o arquivo</span>
                     </div>                  
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label for="observacao" class="">Observacao do Contrato:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Edital" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
-                        <span class="form-text text-muted">Digite Observacao do Edital</span>
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="analise" class="">Analise do Edital:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Analise do Edital" id="analise" name="analise" value="<?php echo $Sessao::retornaValorFormulario('analise'); ?>" ></textarea>
-                        <span class="form-text text-muted">Digite Analise do Edital</span>
-                    </div>
-                </div>
             </div>
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions">
@@ -125,11 +113,7 @@
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
                             <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Salvar</button>
-<<<<<<< HEAD
                             <a href="http://<?php echo APP_HOST; ?>/contrato" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
-=======
-                            <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
->>>>>>> 1a47315455e30236948c5d2a0b990bb3dc988dbb
                         </div>
                     </div>
                 </div>

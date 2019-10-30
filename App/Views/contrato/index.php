@@ -4,7 +4,7 @@
     <div class="kt-portlet kt-portlet--mobile">
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/contrato/" method="post" id="form_cadastro" enctype="multipart/form-data">
             <h3 class="kt-portlet__head-title">
-                Pesquisa de editais registrados
+                Pesquisa de editais registrados 
             </h3>
             <div class="form-group"><label for="codCliente">Cliente</label>
                 <select class="form-control" name="codCliente">

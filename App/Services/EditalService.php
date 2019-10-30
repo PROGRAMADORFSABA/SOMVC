@@ -7,7 +7,7 @@ use App\Lib\Transacao;
 use App\Lib\Exportar;
 
 use App\Models\DAO\EditalDAO;
-
+use App\Models\Entidades\Contrato;
 use App\Models\Validacao\EditalValidador;
 use App\Models\Validacao\ResultadoValidacao;
 use App\Models\Entidades\Edital;
@@ -40,11 +40,11 @@ class EditalService
         return $editalDAO->listarEstadosVinculadas($edital);
     }
 
-    public function salvar(Edital $edital)
+    public function salvar(Contrato $contrato)
     {
         $transacao = new Transacao();
-        $editalValidador = new EditalValidador();
-        $resultadoValidacao = $editalValidador->validar($edital);
+        $contratoValidador = new ContratoValidador();
+        $resultadoValidacao = $contratoValidador->validar($contrato);
         
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
@@ -52,8 +52,8 @@ class EditalService
         } else {
             try{
                $transacao->beginTransaction();
-                $editalDAO = new EditalDAO();            
-                $editalDAO->salvar($edital);
+                $contratoDAO = new ContratoDAO();            
+                $contratoDAO->salvar($contrato);
                 $transacao->commit(); 
                 Sessao::gravaMensagem("cadastro realizado com sucesso!.");
                 Sessao::limpaFormulario();

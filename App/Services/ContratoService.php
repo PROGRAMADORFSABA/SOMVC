@@ -60,7 +60,6 @@ class ContratoService
                 return true;
             }catch(\Exception $e){
                 $transacao->rollBack(); 
-                //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
                return false;
             }

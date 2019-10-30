@@ -10,9 +10,10 @@ use App\Models\Entidades\Edital;
 use App\Models\Entidades\Representante;
 use App\Models\Entidades\ClienteLicitacao;
 use App\Services\ContratoService;
-use App\Services\ClienteLicitacaoService;
 use App\Services\UsuarioService;
 use App\Services\EditalService;
+use App\Services\InstituicaoService;
+use App\Services\ClienteLicitacaoService;
 use App\Services\RepresentanteService;
 
 class ContratoController extends Controller
@@ -49,9 +50,18 @@ class ContratoController extends Controller
 
     }
 
+  /*  public function autoComplete($params)
+    {
+        
+        $clienteLicitacao = new ClienteLicitacao();
+        $clienteLicitacao->setRazaoSocial($params[0]);
+        
+        $clienteService = new ClienteLicitacaoService();
+        $busca = $clienteService->autoComplete($clienteLicitacao);      
+        echo $busca;
+    }
 
-
-    public function autoComplete($params)
+    *//*public function autoComplete($params)
     {
         $contrato = new Contrato();
         $contrato->CidNome($params[0]);        
@@ -59,7 +69,7 @@ class ContratoController extends Controller
         $busca = $contratoService->autoComplete($contrato);
         
         echo $busca;
-    }
+    }*/
 
     public function cadastro()
     {
@@ -71,12 +81,12 @@ class ContratoController extends Controller
         if(Sessao::existeFormulario()) { 
      
         $clienteId = Sessao::retornaValorFormulario('cliente');
-        $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];
+        $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
         $contrato->setClienteLicitacao($clienteLicitacao);
        
         $representanteId = Sessao::retornaValorFormulario('representante');
         $representante = $representanteService->listar($representanteId)[0];
-        $contrato->getEdital()->setRepresentante($representante);
+        $contrato->setRepresentante($representante);
         }else{    
         self::setViewParam('listarRepresentantes', $representanteService->listar());                 
             $contrato->setClienteLicitacao(new ClienteLicitacao());
@@ -109,35 +119,32 @@ ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dat
         $contrato->setCtrDataVencimento($_POST['dataVencimento']);        
         $contrato->setCtrValor($_POST['valor']);        
         $contrato->setCtrStatus($_POST['status']);        
-        $contrato->setCtrObservacao($_POST['observacao']);        
+        $contrato->setCtrObservacao($_POST['observacao']);
         $contrato->setCtrAnexo($_POST['anexo']);        
         $contrato->setCtrNumero($_POST['numeroLicitacao']);        
         $contrato->setCtrPrazoPagamento($_POST['prazoPagamento']);        
         $contrato->setCtrPrazoEntrega($_POST['prazoEntrega']);             
         $contrato->setCtrDataAlteracao($_POST['dataCadastro']);        
         $contrato->setCtrDataCadastro($_POST['dataCadastro']);        
-        $contrato->setCtrGarantia($_POST['garantia']);        
-        $contrato->setCtrAnalise($_POST['analise']);        
         $contrato->setClienteLicitacao($clienteLicitacao);
         $contrato->setInstituicao($instituicao);
         $contrato->setRepresentante($representante);
         $contrato->setUsuario($usuario);
-
         Sessao::gravaFormulario($_POST);
 
-        $contratoValidador    = new EditalValidador();
+        $contratoValidador  = new ContratoValidador();
         $resultadoValidacao = $contratoValidador->validar($contrato);
-
-        if ($resultadoValidacao->getErros()) {
+        //var_dump($contrato);
+       if ($resultadoValidacao->getErros()) {
            $this->redirect('/contrato/cadastro');
         }
 
-        $contratoService = new EditalService();
+        $contratoService = new ContratoService();
     
        if($contratoService->salvar($contrato)){
-            $this->redirect('/  contrato');
+            $this->redirect('/contrato');
         }else{
-            $this->redirect('/  contrato/cadastro');
+            $this->redirect('/contrato/cadastro');
         }
 
         Sessao::limpaFormulario();
