@@ -93,8 +93,6 @@ class ProdutoDAO extends BaseDAO
     
     public function listarPorFalta($faltaCliente_cod = null)
     {
-        if($faltaCliente_cod)
-        {
             $resultado = $this->select(
                 "SELECT p.ProCodigo,
                        p.ProNome
@@ -102,7 +100,7 @@ class ProdutoDAO extends BaseDAO
                         inner join Produto p on p.ProCodigo = fp.FK_IDPRODUTO
                          WHERE FK_ID_FALTACLIENTE = $faltaCliente_cod"
             );
-        }
+            
         return $resultado->fetchAll(\PDO::FETCH_CLASS, PedidoFalta::class);
     }
     
