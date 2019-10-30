@@ -9,16 +9,16 @@ var app = {
 		if($('tr').length >10)
 		{
 			app.exibeMensagem('O número máximo <b>('+ app.num_maximo_produto +')</b> de produto foi atingido.');
-			$("#autocomplete-tecnologia").val('');			
+			$("#autocomplete-produto").val('');
 		}else{
 			if($('td:contains('+ produto.produto +')').length > 0){
 				this.exibeMensagem('O Produto <b>'+ produto.produto +'</b> já foi selecionada.');
 			}else{
-				$('#editar-tabela-tecnologias').append('<tr>'+
+				$('#editar-tabela-produto').append('<tr>'+
 					'<td>'+produto.produto+'<input type="hidden" value="'+produto.idproduto+'" name="produto[]"></td>'+
 					'<td><a class="btn btn-danger btn-sm" onClick="app.removeProduto(this,'+ produto.idproduto +')">remover</td>'+
 					'</tr>');			
-				$("#autocomplete-tecnologia").val('');		
+				$("#autocomplete-produto").val('');
 				app.arrayProdutos.push(produto.idproduto);
 			}
 		}		
