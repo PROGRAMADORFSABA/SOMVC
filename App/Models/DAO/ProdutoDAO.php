@@ -80,12 +80,12 @@ class ProdutoDAO extends BaseDAO
         }
     }
     
-    public function listarPorProduto($codCliente = null)
+    public function listarPorProduto(Produto $produto)
     {
-        if($codCliente)
+        if($$produto)
         {
             $resultado = $this->select(
-                "SELECT P.ProCodigo,P.ProNome FROM faltaporcliente FP INNER JOIN Produto P on FP.FK_IDPRODUTO = P.ProCodigo WHERE FK_ID_FALTACLIENTE = $codCliente"
+                "SELECT * FROM fabmed.Produto WHERE ProNome LIKE '%".$produto->getProNome()."%' LIMIT 0.6 "
             );
         }
         return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);
