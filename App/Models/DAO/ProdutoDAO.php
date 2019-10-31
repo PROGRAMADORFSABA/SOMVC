@@ -84,7 +84,7 @@ class ProdutoDAO extends BaseDAO
     {
 
             $resultado = $this->select(
-                "SELECT * FROM fabmed.Produto WHERE ProNome LIKE '%".$produto->getProNome()."%' LIMIT 0,6 "
+                "SELECT ProNome FROM fabmed.Produto WHERE ProNome LIKE '%".$produto->getProNome()."%' LIMIT 0,6 "
             );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }

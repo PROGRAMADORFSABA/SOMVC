@@ -14,7 +14,7 @@ var app = {
 			if($('td:contains('+ produto.produto +')').length > 0){
 				this.exibeMensagem('O Produto <b>'+ produto.produto +'</b> já foi selecionada.');
 			}else{
-				$('#editar-tabela-produto').append('<tr>'+
+				$('#editar-tabela-produtos').append('<tr>'+
 					'<td>'+produto.produto+'<input type="hidden" value="'+produto.idproduto+'" name="produtos[]"></td>'+
 					'<td><a class="btn btn-danger btn-sm" onClick="app.removeProduto(this,'+ produto.idproduto +')">remover</td>'+
 					'</tr>');			
