@@ -104,8 +104,8 @@
                             ":FK_ID_FALTACLIENTE,:FK_IDPRODUTO, :FK_MARCA",
                             [
                                 ':FK_ID_FALATACLIENTE'  => $pedidoFalta->getFaltaClienteCod(),
-                                ':FK_IDPRODUTO'         => $pedidoFalta->getFkProduto(),
-                                ':FK_MARCA'             => $pedidoFalta->getFkMarca()
+                                ':FK_IDPRODUTO'         => $produto->getProCodigo(),
+                                ':FK_MARCA'             => $produto->getFkMarca()
                             ]
                         );
                     }

@@ -82,13 +82,11 @@ class ProdutoDAO extends BaseDAO
     
     public function listarPorProduto(Produto $produto)
     {
-        if($$produto)
-        {
+
             $resultado = $this->select(
-                "SELECT * FROM fabmed.Produto WHERE ProNome LIKE '%".$produto->getProNome()."%' LIMIT 0.6 "
+                "SELECT ProNome FROM fabmed.Produto WHERE ProNome LIKE '%".$produto->getProNome()."%' LIMIT 0,6 "
             );
-        }
-        return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
     
     public function listarPorFalta($faltaCliente_cod = null)

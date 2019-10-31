@@ -29,9 +29,9 @@ abstract class BaseDAO
             $colunas       = str_replace(":", "", $cols);
             
             $stmt = $this->conexao->prepare("INSERT INTO $table ($colunas) VALUES ($parametros)");
-            var_dump($values);
-            $stmt->execute($values);
-
+             $stmt->execute($values);
+            
+         //  var_dump($values);
             return $stmt->rowCount();
         }else{
             return false;

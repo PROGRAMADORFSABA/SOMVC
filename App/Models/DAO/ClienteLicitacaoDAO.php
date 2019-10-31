@@ -28,6 +28,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                 // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);                             
                 return $clienteLicitacao;
             }
+            var_dump($clienteLicitacao);
         } else {
 
             $resultado = $this->select(

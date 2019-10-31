@@ -3,7 +3,7 @@
     
     namespace App\Models\Entidades;
     
-    
+    use App\Models\DAO\ClienteLicitacao;
     use DateTime;
     
     
@@ -111,7 +111,7 @@
         /**
          * @param mixed $fk_cliente
          */
-        public function setFkCliente(Cliente $fk_cliente): void
+        public function setFkCliente(FK_cliente $fk_cliente): void
         {
             $this->fk_cliente = $fk_cliente;
         }

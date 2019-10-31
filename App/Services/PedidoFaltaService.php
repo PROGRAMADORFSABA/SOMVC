@@ -58,7 +58,7 @@
                         
                         $pedidofaltaDAO = new PedidoFaltaDAO();
                         $pedidofaltaDAO->addProduto($pedidoFalta);
-                        $pedidoFalta->
+                        $pedidoFalta->editar($pedidoFalta);
                         
                         
                         

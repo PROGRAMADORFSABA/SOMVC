@@ -218,7 +218,7 @@ $contrato->getUsuario()->setNome($dado['nome']);
 
     public  function salvar(Contrato $contrato)
     {
-      
+      var_dump($contrato);
         try {
             $ctrNumero                     = $contrato->getCtrNumero();
             $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
@@ -231,6 +231,7 @@ $contrato->getUsuario()->setNome($dado['nome']);
             $ctrClienteLicitacao           = $contrato->getClienteLicitacao()->getCodCliente();
             $ctrUsuario                    = $contrato->getUsuario()->getId();           
             $ctrRepresentante              = $contrato->getRepresentante()->getCodRepresentante();           
+            $ctrEdital                     = $contrato->getEdital()->getEdtId();           
             $ctrPrazoEntrega               = $contrato->getCtrPrazoEntrega();
             $ctrPrazoPagamento             = $contrato->getCtrPrazoPagamento();
             $ctrInstituicao                = $contrato->getInstituicao()->getInst_Id();
@@ -254,12 +255,12 @@ $contrato->getUsuario()->setNome($dado['nome']);
             }
             /*
             ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
-            ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
+            ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_edital, ctr_datacadastro, ctr_dataalteracao
             */          
             return $this->insert(
                 'contrato',
                 ":ctr_numero, :ctr_datainicio, :ctr_datavencimento, :ctr_valor, :ctr_status, :ctr_observacao, :ctr_anexo, :ctr_clientelicitacao, :ctr_usuario, 
-                :ctr_prazoentrega, :ctr_prazopagamento, :ctr_instituicao, :ctr_datacadastro, :ctr_dataalteracao, :ctr_representante",
+                :ctr_prazoentrega, :ctr_prazopagamento, :ctr_instituicao, :ctr_datacadastro, :ctr_dataalteracao, :ctr_representante, :ctr_edital",
                 [
                     ':ctr_numero' => $ctrNumero,
                     ':ctr_datainicio' => $ctrDataInicio,
@@ -277,11 +278,11 @@ $contrato->getUsuario()->setNome($dado['nome']);
                     ':ctr_dataalteracao' => $ctrDataAlteracao,
                     ':ctr_representante' => $ctrRepresentante,
                     ':ctr_datacadastro' => $ctrDataCadastro,
+                    ':ctr_edital' => $ctrEdital,
                     ':ctr_dataalteracao' =>$ctrDataAlteracao
                     ]
-                );
+                ); 
             } catch (\Exception $e) {        
-               // var_dump($e);       
                 throw new \Exception("Erro na gravação de dados. " . $e, 500);
             }
     }
