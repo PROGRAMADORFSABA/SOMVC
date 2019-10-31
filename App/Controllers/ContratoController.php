@@ -50,18 +50,16 @@ class ContratoController extends Controller
 
     }
 
-  /*  public function autoComplete($params)
-    {
-        
+    public function editalPorCliente($params)
+    {        
         $clienteLicitacao = new ClienteLicitacao();
-        $clienteLicitacao->setRazaoSocial($params[0]);
-        
-        $clienteService = new ClienteLicitacaoService();
-        $busca = $clienteService->autoComplete($clienteLicitacao);      
+        $clienteLicitacao->setRazaoSocial($params[0]);        
+        $editalService = new EditalService();
+        $busca = $editalService->editalPorCliente($clienteLicitacao);      
         echo $busca;
     }
 
-    *//*public function autoComplete($params)
+    /*public function autoComplete($params)
     {
         $contrato = new Contrato();
         $contrato->CidNome($params[0]);        
@@ -73,29 +71,32 @@ class ContratoController extends Controller
 
     public function cadastro()
     {
-        
         $representanteService = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $editalService = new EditalService();   
         $contrato = new Contrato();
-
-        if(Sessao::existeFormulario()) { 
-     
-        $clienteId = Sessao::retornaValorFormulario('cliente');
-        $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
-        $contrato->setClienteLicitacao($clienteLicitacao);
         
-        $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
-        $edital = $clienteLicitacaoService->listar($editalId);
-        $contrato->setEdital($edital);
-
-        $representanteId = Sessao::retornaValorFormulario('representante');
-        $representante = $representanteService->listar($representanteId)[0];
-        $contrato->setRepresentante($representante);
+        if(Sessao::existeFormulario()) { 
+            
+            $clienteId = Sessao::retornaValorFormulario('cliente');
+            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
+            $contrato->setClienteLicitacao($clienteLicitacao);
+            
+            $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
+            $edital = $clienteLicitacaoService->listar($editalId);
+            $contrato->setEdital($edital);
+            
+            $representanteId = Sessao::retornaValorFormulario('representante');
+            $representante = $representanteService->listar($representanteId)[0];
+            $contrato->setRepresentante($representante);
         }else{    
-        self::setViewParam('listarRepresentantes', $representanteService->listar());                 
+            self::setViewParam('listarRepresentantes', $representanteService->listar());                 
             $contrato->setClienteLicitacao(new ClienteLicitacao());
             $contrato->setRepresentante(new Representante());
+        }
+       if( $teste = Sessao::retornaValorFormulario('teste')){
+           var_dump($teste);
+           self::setViewParam('listarTestes', $clienteLicitacaoService->listar($teste)); 
         }
         $this->setViewParam('contrato',$contrato);        
         $this->render('/contrato/cadastro');
@@ -106,6 +107,7 @@ class ContratoController extends Controller
 
     public function salvar()
     {
+        
         $clienteLicitacaoService  = new ClienteLicitacaoService();        
         $usuarioService = new UsuarioService();        
         $representanteService = new RepresentanteService();        
@@ -116,6 +118,7 @@ class ContratoController extends Controller
         $instituicao     =   $instituicaoService->listar($_POST['fk_instituicao']);
         $representante    = $representanteService->listar($_POST['representante'])[0];
         $edital    = $editalService->listar($_POST['numeroLicitacao'])[0];
+        
  /*
 ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
 ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao

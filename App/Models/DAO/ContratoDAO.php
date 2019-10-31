@@ -218,7 +218,7 @@ $contrato->getUsuario()->setNome($dado['nome']);
 
     public  function salvar(Contrato $contrato)
     {
-      
+      var_dump($contrato);
         try {
             $ctrNumero                     = $contrato->getCtrNumero();
             $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');

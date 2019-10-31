@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-lg-3">
                         <label for="numeroLicitacao" >Numero da Licitacao:</label>
-                        <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroLicitacao" name="numeroLicitacao" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>" required>
+                        <input type="text" class="form-control" placeholder="Digite numero da licitacao"  id="numeroLicitacao" name="numeroLicitacao" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
                     </div>
                     <div class="col-lg-2">

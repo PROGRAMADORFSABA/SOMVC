@@ -31,7 +31,7 @@ abstract class BaseDAO
             $stmt = $this->conexao->prepare("INSERT INTO $table ($colunas) VALUES ($parametros)");
              $stmt->execute($values);
             
-           // var_dump($values);
+         //  var_dump($values);
             return $stmt->rowCount();
         }else{
             return false;

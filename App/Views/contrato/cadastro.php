@@ -21,12 +21,11 @@
             
                 <div class="form-group">
                     <label for="cadastroCliente" class="">CADASTRO DO CLIENTE</label>                    
-                    <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
-                            <i class="la la-plus"></i>Novo Cliente</a>
+                    <a href="http://<?php echo APP_HOST; ?>/edital/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                            <i class="la la-plus"></i>Novo Edital</a>
                       <div>    
-                        <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
+                        <input type="text" name="contratoCliente-Autocomplete" id="contratoCliente-Autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
                         value="<?php echo $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
-                        
                         <input type="hidden" id="cliente" name="cliente" 
                         value=<?php echo $viewVar['contrato']->getClienteLicitacao()->getCodCliente(); ?>>  
                     </div>
@@ -58,11 +57,12 @@
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>
-                </div>
+            </div>
                 <div class="form-group row">
                 <div class="col-lg-2">
-                        <label for="numeroLicitacao" >Numero da Licitacao:</label>
-                        <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroLicitacao" name="numeroLicitacao" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>" required>
+                        <label for="numeroLicitacao-AutoComplete" >Numero da Licitacao:</label>
+                        <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroLicitacao-AutoComplete" name="numeroLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao-AutoComplete'); ?>" required>
+                        <input type="text" id="numeroLicitacao" name="numeroLicitacao" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
                     </div>
                                         
@@ -97,8 +97,8 @@
                
                     <div class="col-lg-7">
                         <label for="observacao" class="">Observacao do Contrato:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Edital" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
-                        <span class="form-text text-muted">Digite Observacao do Edital</span>
+                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Contrato" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
+                        <span class="form-text text-muted">Digite Observacao do Contrato</span>
                     </div>  
                     <div class="col-lg-3">
                         <label for="anexo" class="">Anexo:</label>

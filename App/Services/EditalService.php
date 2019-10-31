@@ -8,6 +8,7 @@ use App\Lib\Exportar;
 
 use App\Models\DAO\EditalDAO;
 use App\Models\Entidades\Contrato;
+use App\Models\Entidades\ClienteLicitacao;
 use App\Models\Validacao\EditalValidador;
 use App\Models\Validacao\ResultadoValidacao;
 use App\Models\Entidades\Edital;
@@ -34,6 +35,17 @@ class EditalService
         return $exportar->exportarJSON($busca);
     }
     
+    public function editalPorCliente(ClienteLicitacao $clienteLicitacao)
+    {
+        
+        $clienteLicitacao->getRazaoSocial();
+       $editalDAO = new EditalDAO();
+        $busca = $editalDAO->editalPorClienteRazaoSocial($clienteLicitacao);
+        $exportar = new Exportar();
+        echo $exportar->exportarJSON($busca);
+    
+    }
+
     public function listarEstadosVinculadas(Edital $edital)
     {
         $editalDAO = new EditalDAO();

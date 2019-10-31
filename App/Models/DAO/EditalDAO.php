@@ -254,7 +254,20 @@ class EditalDAO extends BaseDAO
                 throw new \Exception("Erro na gravação de dados. " . $e, 500);
             }
     }
-        
+    public function editalPorClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            " SELECT * 
+            FROM edital edt
+            INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
+            INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+            INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
+            INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+            WHERE c.razaosocial
+                        LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY edt.edt_numero LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
     /*public  function listaPorNome(Edital $edital)
     {       
         $resultado = $this->select(
