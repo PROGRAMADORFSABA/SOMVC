@@ -6,11 +6,11 @@
     use App\Lib\Sessao;
     use App\Models\Entidades\PedidoFalta;
     use App\Models\Entidades\ClienteLicitacao;
-    
+    use App\Models\Entidades\Produto;
+
     use App\Models\DAO\PedidoFaltaDAO;
     use App\Models\DAO\ClienteLicitacaoDAO;
 
-    use App\Models\Entidades\Produto;
     use App\Services\ClienteLicitacaoService;
     use App\Services\PedidoFaltaService;
     use App\Services\FornecedorService;
@@ -62,7 +62,7 @@
             }else{
                 
                 $pedidofalta = new PedidoFalta();
-                $pedidofalta->setFkProduto(new Produto());
+                $pedidofalta->setFkCliente(new ClienteLicitacao());
                 $pedidofalta->setFkProduto(array());
                 
             }

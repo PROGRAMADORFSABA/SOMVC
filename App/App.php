@@ -30,7 +30,7 @@ class App
         define('DB_DRIVER'      , "mysql");
        
         //banco hospedagem local
-      
+      *//*
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");

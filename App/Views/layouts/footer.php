@@ -581,6 +581,8 @@
 <script src="http://<?php echo APP_HOST; ?>/public/js/teste-autocomplete.js"></script> 
 <script src="http://<?php echo APP_HOST; ?>/public/js/contrato-autocomplete.js"></script> 
 <script src="http://<?php echo APP_HOST; ?>/public/js/clienteLicitacao-autocomplete.js"></script> 
+<script src="http://<?php echo APP_HOST; ?>/public/js/clienteLicitacao-autocomplete.js"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/js/autocomplete-produto.js"></script>
 
 <!--end::Global App Bundle -->
 </body>

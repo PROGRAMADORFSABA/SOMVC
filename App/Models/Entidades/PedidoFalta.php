@@ -3,7 +3,7 @@
     
     namespace App\Models\Entidades;
     
-    use App\Models\DAO\ClienteLicitacao;
+
     use DateTime;
     
     
@@ -103,7 +103,7 @@
         /**
          * @return mixed
          */
-        public function getFkCliente() : ClienteLicitacao
+        public function getFkCliente() : ClienteLicitcao
         {
             return $this->fk_cliente;
         }
@@ -111,7 +111,7 @@
         /**
          * @param mixed $fk_cliente
          */
-        public function setFkCliente(FK_cliente $fk_cliente): void
+        public function setFkCliente(Fk_Cliente $fk_cliente): void
         {
             $this->fk_cliente = $fk_cliente;
         }
@@ -128,7 +128,7 @@
         /**
          * @param mixed $fk_produto
          */
-        public function setFkProduto($fk_produto)
+        public function setFkProduto(array $fk_produto)
         {
             $this->fk_produto = $fk_produto;
         }

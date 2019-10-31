@@ -212,17 +212,17 @@
                                         <th>Produto</th>
                                         <th>Remover</th>
                                         </thead>
-                                        <tbody id="editar-tabela-tecnologias">
+                                        <tbody id="editar-tabela-produtos">
                                         <?php
-                                            if($viewVar['pedidofalta']->getProposta()) {
-                                                foreach ($viewVar['pedidofalta']->getProduto() as $produto) {
+                                            if($viewVar['pedidofalta']->getFkProduto()) {
+                                                foreach ($viewVar['pedidofalta']->getFkProduto() as $produto) {
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $prodduto->getProNome(); ?>
-                                                            <input type="hidden" name="produtos[]" value= >
+                                                            <?php echo $produto->getProNome(); ?>
+                                                            <input type="hidden" name="produtos[]" value=<?php echo $produto->getProCodigo(); ?> >
                                                         </td>
-                                                        <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeProduto(this,<?php echo $prodduto->getProCodigo(); ?>)">remover</button></td>
+                                                        <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeProduto(this,<?php echo $produto->getProCodigo(); ?>)">remover</button></td>
                                                     </tr>
                                                     <?php
                                                 }

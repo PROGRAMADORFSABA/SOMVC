@@ -1,9 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="alexa">
     <words>
+      <w>busca</w>
       <w>cliente</w>
       <w>correção</w>
       <w>editar</w>
+      <w>exportar</w>
       <w>falta</w>
       <w>licitacao</w>
       <w>marca</w>
@@ -11,6 +13,7 @@
       <w>pedido</w>
       <w>pedidofalta</w>
       <w>produto</w>
+      <w>produtos</w>
       <w>proposta</w>
       <w>resultado</w>
       <w>transacao</w>
