@@ -579,7 +579,8 @@
 <script src="http://<?php echo APP_HOST; ?>/public/js/estado-autocomplete.js"></script> 
 <script src="http://<?php echo APP_HOST; ?>/public/js/cliente-autocomplete.js"></script> 
 <script src="http://<?php echo APP_HOST; ?>/public/js/teste-autocomplete.js"></script> 
-<script src="http://<?php echo APP_HOST; ?>/public/js/clienteLicitacao-autocomplete.js"></script> 
+<script src="http://<?php echo APP_HOST; ?>/public/js/clienteLicitacao-autocomplete.js"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/js/autocomplete-produto.js"></script>
 
 <!--end::Global App Bundle -->
 </body>
