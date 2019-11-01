@@ -62,7 +62,7 @@
                 <div class="col-lg-2">
                         <label for="numeroLicitacao-AutoComplete" >Numero da Licitacao:</label>
                         <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroLicitacao-AutoComplete" name="numeroLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao-AutoComplete'); ?>" required>
-                        <input type="text" id="numeroLicitacao" name="numeroLicitacao" required>
+                        <input type="hidden" id="numeroLicitacao" name="numeroLicitacao" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
                     </div>
                                         

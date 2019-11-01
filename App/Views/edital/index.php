@@ -3,10 +3,14 @@
 
     <div class="kt-portlet kt-portlet--mobile">
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/edital/" method="post" id="form_cadastro" enctype="multipart/form-data">
-            <h3 class="kt-portlet__head-title">
+        <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
                 Pesquisa de editais registrados
             </h3>
-            <div class="form-group"><label for="codCliente">Cliente</label>
+            <div class="col-lg-12">
+            <label for="codCliente">Cliente</label>
                 <select class="form-control" name="codCliente">
                     <option value="">Selecione o cliente</option>
                     <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
@@ -25,7 +29,7 @@
                                 <?php endforeach; ?>
                             </select>
                         <span class="form-text text-muted">Por favor insira o Representante</span>
-                    </div>   
+            </div>   
             <div class="kt-portlet__body">
                 <div class="form-group row">
                     <div class="col-lg-1">

@@ -3,10 +3,18 @@
 
     <div class="kt-portlet kt-portlet--mobile">
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/contrato/" method="post" id="form_cadastro" enctype="multipart/form-data">
-            <h3 class="kt-portlet__head-title">
-                Pesquisa de editais registrados 
-            </h3>
-            <div class="form-group"><label for="codCliente">Cliente</label>
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                        </span>
+                    <h3 class="kt-portlet__head-title">
+                    Pesquisa de editais registrados 
+                    </h3>                   
+            </div>
+        </div>        
+        <div class="col-lg-12">
+            <label for="codCliente">Cliente</label>
                 <select class="form-control" name="codCliente">
                     <option value="">Selecione o cliente</option>
                     <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
@@ -69,12 +77,7 @@
         </form>
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
-                <span class="kt-portlet__head-icon">
-                    <i class="kt-font-brand flaticon2-line-chart"></i>
-                </span>
-                <h3 class="kt-portlet__head-title">
-                    Pesquisa de coluna individual
-                </h3>
+                
                 <?php if ($Sessao::retornaMensagem()) { ?>
                     <div class="alert alert-warning" role="alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

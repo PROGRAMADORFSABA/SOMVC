@@ -1,11 +1,12 @@
 
 	var licitacaoCliente_cod = null;
+	document.getElementById("numeroLicitacao").disabled = false;
 	$('#cadastroCliente').slideUp();
 	
 		var optionscliente = {
 			url: function (cliente) {
-				return "http://coisavirtual.com.br/clienteLicitacao/autoComplete/" + cliente; //hospedagem
-				//return "http://localhost:81/SOMVC/clienteLicitacao/autoComplete/" + cliente;
+				//return "http://coisavirtual.com.br/clienteLicitacao/autoComplete/" + cliente; //hospedagem
+				return "http://localhost:81/SOMVC/clienteLicitacao/autoComplete/" + cliente;
 				//return "http://localhost/SOMVC/clienteLicitacao/autoComplete/" + cliente;
 			},
 

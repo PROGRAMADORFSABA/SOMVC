@@ -11,7 +11,7 @@ use App\Models\Entidades\ClienteLicitacao;
 
 class ContratoDAO extends BaseDAO
 {
-    public  function listar($edtId = null)
+    public  function listar($ctrId = null)
     {        
         $SQL = " SELECT * 
 		FROM contrato ctr
@@ -20,9 +20,9 @@ class ContratoDAO extends BaseDAO
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
 		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";
-            if($edtId) 
+            if($ctrId) 
             {    
-                $SQL.= " WHERE edt.edt_id = $edtId";
+                $SQL.= " WHERE ctr.ctr_id = $ctrId";
             }         
             
             $resultado = $this->select($SQL);
@@ -251,7 +251,9 @@ $contrato->getUsuario()->setNome($dado['nome']);
                     move_uploaded_file($sourcePath, $targetPath); // Move arquivo                    
                 }
             } else {
-                $ctrAnexo = "sem_anexo1.png";
+                if($ctrAnexo == ""){
+                    $ctrAnexo = "sem_anexo1.png";
+                    }
             }
             /*
             ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
@@ -298,36 +300,33 @@ $contrato->getUsuario()->setNome($dado['nome']);
 
     public  function atualizar(Contrato $contrato)
     {
-       /* try {
+        try {          
             
-            $edtId                         = $contrato->getCtrId();
-            $edtNumero                     = $contrato->getEdtNumero();
-            $edtDataAbertura               = $contrato->getEdtDataAbertura()->format('Y-m-d');
-            $edtHora                       = $contrato->getEdtHora()->format('h:m:s');
-            $edtDataResultado              = $contrato->getEdtDataResultado()->format('Y-m-d h:m:s');
-            $edtProposta                   = $contrato->getEdtProposta();
-            $edtModalidade                 = $contrato->getEdtModalidade();
-            $edtTipo                       = $contrato->getEdtTipo();
-            $edtGarantia                   = $contrato->getEdtGarantia();
-            $valorAtual                    = $contrato->getEdtValor();
-            $edtValor                      = str_replace(",", ".", $valorAtual);
-            $edtStatus                     = $contrato->getEdtStatus();
-            $edtAnalise                    = $contrato->getEdtAnalise();
-            $edtObservacao                 = $contrato->getEdtObservacao();
-            $edtAnexo                      = $contrato->getEdtAnexo();
-            $edtRepresentante              = $contrato->getRepresentante()->getCodRepresentante();
-            $edtCliente                    = $contrato->getClienteLicitacao()->getCodCliente();
-            $edtUsuario                    = $contrato->getUsuario()->getId();           
-            $edtInstituicao                = $contrato->getInstituicao()->getInst_Id();
-            $edtDataCadastro               = $contrato->getEdtDataCadastro()->format('Y-m-d h:m:s');
-            $edtDataAlteracao              = $contrato->getEdtDataAlteracao()->format('Y-m-d h:m:s');
+            $ctrId                         = $contrato->getCtrId();
+            $ctrNumero                     = $contrato->getCtrNumero();
+            $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
+            $ctrDataVencimento             = $contrato->getCtrDataVencimento()->format('Y-m-d');
+            $valorAtual                    = $contrato->getCtrValor();
+            $ctrValor                      = str_replace(",", ".", $valorAtual);
+            $ctrStatus                     = $contrato->getCtrStatus();
+            $ctrObservacao                 = $contrato->getCtrObservacao();
+            $ctrAnexo                      = $contrato->getCtrAnexo();
+            $ctrClienteLicitacao           = $contrato->getClienteLicitacao()->getCodCliente();
+            $ctrUsuario                    = $contrato->getUsuario()->getId();           
+            $ctrRepresentante              = $contrato->getRepresentante()->getCodRepresentante();           
+            $ctrEdital                     = $contrato->getEdital()->getEdtId();           
+            $ctrPrazoEntrega               = $contrato->getCtrPrazoEntrega();
+            $ctrPrazoPagamento             = $contrato->getCtrPrazoPagamento();
+            $ctrInstituicao                = $contrato->getInstituicao()->getInst_Id();
+           // $ctrDataCadastro               = $contrato->getCtrDataCadastro()->format('Y-m-d h:m:s');
+            $ctrDataAlteracao              = $contrato->getCtrDataAlteracao()->format('Y-m-d h:m:s');
             $nomeanexo = date('Y-m-d-h:m:s');
            
             if (!$_FILES['anexo']['name'] == "") {
                 $validextensions = array("jpeg", "jpg", "png", "PNG", "JPG", "JPEG", "pdf", "PDF", "docx");
                 $temporary = explode(".", $_FILES["anexo"]["name"]);
                 $file_extension = end($temporary);
-                $edtAnexo = md5($nomeanexo) . "." . $file_extension;
+                $ctrAnexo = md5($nomeanexo) . "." . $file_extension;
                 //var_dump($file_extension);
 
                 if (in_array($file_extension, $validextensions)) {
@@ -336,57 +335,51 @@ $contrato->getUsuario()->setNome($dado['nome']);
                     move_uploaded_file($sourcePath, $targetPath); // Move arquivo                    
                 }
             } else {
-                if($edtAnexo == ""){
-                $edtAnexo = "sem_anexo1.png";
+                if($ctrAnexo == ""){
+                $ctrAnexo = "sem_anexo1.png";
                 }
             }
-
+        /*
+        ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
+        ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao, ctr_representante, ctr_edital
+        */
             return $this->update(
-                'edital',
-                "edt_numero= :edtNumero, edt_dataabertura= :edtDataAbertura, edt_hora= :edtHora, edt_dataresultado= :edtDataAbertura,  edt_proposta= :edtProposta, edt_modalidade= :edtModalidade, 
-edt_tipo= :edtTipo, edt_garantia= :edtGarantia, edt_valor= :edtValor, edt_status= :edtStatus, edt_analise= :edtAnalise, edt_observacao= :edtObservacao, edt_anexo= :edtAnexo, 
-edt_representante= :edtRepresentante, edt_cliente= :edtCliente, edt_usuario= :edtUsuario, edt_instituicao= :edtInstituicao, edt_datacadastro= :edtDataCadastro, edt_dataalteracao=:edtDataAlteracao",
-                [
-                    ':edtId' => $edtId,
-                    ':edtNumero' => $edtNumero,
-                    ':edtDataAbertura' => $edtDataAbertura,
-                    ':edtHora' => $edtHora,
-                    ':edtDataResultado' => $edtDataResultado,
-                    ':edtProposta' => $edtProposta,
-                    ':edtModalidade' => $edtModalidade,
-                    ':edtTipo' => $edtTipo,
-                    ':edtGarantia' => $edtGarantia,
-                    ':edtValor' => $edtValor,
-                    ':edtStatus' => $edtStatus,
-                    ':edtAnalise' => $edtAnalise,
-                    ':edtObservacao' => $edtObservacao,
-                    ':edtAnexo' => $edtAnexo,
-                    ':edtRepresentante' => $edtRepresentante,
-                    ':edtCliente' => $edtCliente,
-                    ':edtUsuario' => $edtUsuario,
-                    ':edtInstituicao' => $edtInstituicao,
-                    ':edtDataCadastro' => $edtDataCadastro,
-                    ':edtDataAlteracao' => $edtDataAlteracao, 
+                'contrato',               
+                "ctr_numero= :ctrNumero, ctr_datainicio= :ctrDataInicio, ctr_datavencimento= :ctrDataVencimento, ctr_valor= :ctrValor, ctr_status= :ctrStatus, 
+                 ctr_observacao= :ctrObservacao, ctr_anexo= :ctrAnexo, ctr_clientelicitacao= :ctrClienteLicitacao,ctr_usuario =:ctrUsuario, 
+                 ctr_prazoentrega= :ctrPrazoEntrega, ctr_prazopagamento= :ctrPrazoPagamento, ctr_instituicao= :ctrInstituicao, ctr_dataalteracao= :ctrDataAlteracao, 
+                 ctr_representante= :ctrRepresentante, ctr_edital=:ctrEdital",
+               [
+                    ':ctrId' => $ctrId,
+                    ':ctrNumero' => $ctrNumero,
+                    ':ctrDataInicio' => $ctrDataInicio,
+                    ':ctrDataVencimento' => $ctrDataVencimento,
+                    ':ctrValor' => $ctrValor,
+                    ':ctrStatus' => $ctrStatus,
+                    ':ctrObservacao' => $ctrObservacao,
+                    ':ctrAnexo' => $ctrAnexo,
+                    ':ctrClienteLicitacao' => $ctrClienteLicitacao,
+                    ':ctrUsuario' => $ctrUsuario,
+                    ':ctrPrazoEntrega' => $ctrPrazoEntrega,
+                    ':ctrPrazoPagamento' => $ctrPrazoPagamento,
+                    ':ctrInstituicao' => $ctrInstituicao,
+                    ':ctrDataAlteracao' => $ctrDataAlteracao, 
+                    ':ctrRepresentante' => $ctrRepresentante,
+                    ':ctrEdital' => $ctrEdital,
                 ],
-                "edt_id = :edtId"
-    /*
-        edt_id, edt_numero, edt_dataabertura, edt_hora, edt_dataresultado,  edt_proposta, edt_modalidade, 
-edt_tipo, edt_garantia, edt_valor, edt_status, edt_analise, edt_observacao, edt_anexo, 
-edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, edt_dataalteracao
-*/
-    
-           /* );
+                "ctr_id = :ctrId"
+  );
         } catch (\Exception $e) {
             throw new \Exception("Erro na gravação de dados. ".$e, 500);
-        }*/
+        }
     }
 
     public function excluir(Contrato $contrato)
     {
         try {
-            $edtId = $contrato->getEdtId();
+            $ctrId = $contrato->getCtrId();
 
-            return $this->delete('edital', "edt_id = $edtId");
+            return $this->delete('contrato', "ctr_id = ctrId");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);

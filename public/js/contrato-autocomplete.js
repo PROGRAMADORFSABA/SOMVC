@@ -1,12 +1,12 @@
-document.getElementById("numeroLicitacao").disabled = true;
+//document.getElementById("numeroLicitacao").disabled = true;
 	var licitacaoCliente_cod = null;
 	//$('#cadastroCliente').slideUp();
 //	$('#cadastroCliente').slideDown();
 		var optionscliente = {
 			url: function (cliente) {
-				//return "http://coisavirtual.com.br/numeroLicitacao/autoComplete/" + cliente; //hospedagem
+				//return "http://coisavirtual.com.br/contrato/editalPorCliente/" + cliente; //hospedagem
 				return "http://localhost:81/SOMVC/contrato/editalPorCliente/" + cliente;
-				//return "http://localhost/SOMVC/numeroLicitacao/autoComplete/" + cliente;
+				//return "http://localhost/SOMVC/contrato/editalPorCliente/" + cliente;
 			},
 			getValue: function (element) {
 					return element.razaosocial;
@@ -33,8 +33,8 @@ document.getElementById("numeroLicitacao").disabled = true;
 	
 		var optionsedital = {
 			url: function (cliente) {
-				return "http://coisavirtual.com.br/contrato/editalPorCliente/" + cliente; //hospedagem
-				//return "http://localhost:81/SOMVC/contrato/editalPorCliente/" + cliente;
+				//return "http://coisavirtual.com.br/contrato/editalPorCliente/" + cliente; //hospedagem
+				return "http://localhost:81/SOMVC/contrato/editalPorCliente/" + cliente;
 				//return "http://localhost/SOMVC/contrato/editalPorCliente/" + cliente;
 			},
 
@@ -46,16 +46,15 @@ document.getElementById("numeroLicitacao").disabled = true;
 				onChooseEvent: function () {
 					numeroEdital = $("#numeroLicitacao-AutoComplete").getSelectedItemData().edt_id;
 					razaoSocial = $("#numeroLicitacao-AutoComplete").getSelectedItemData().razaosocial;
-					$('#numeroLicitacao').val(numeroEdital);
-					$('#cadastroCliente').slideUp();
+					$('#numeroLicitacao').val(numeroEdital);			
 			
 					document.getElementById("numeroLicitacao-AutoComplete").disabled = false;									
 				},
 				onHideListEvent: function () {
-					if (licitacaoCliente_cod == null) {
-						$('#numeroLicitacao').val('Nao encontrato');
-						$('#cadastroCliente').slideDown();
-						document.getElementById("numeroLicitacao").disabled = true;
+					if (licitacaoCliente_cod == null || edt_id == null) {
+						$('##numeroLicitacao-AutoComplete').val('Nao encontrato');
+						$('#numeroLicitacao').val('');					
+						document.getElementById("numeroLicitacao-AutoComplete").disabled = true;
 					}
 				}
 			}

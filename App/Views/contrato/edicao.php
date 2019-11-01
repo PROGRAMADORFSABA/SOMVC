@@ -13,43 +13,41 @@
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/contrato/atualizar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
-        <input type="hidden" class="form-control" id="codigo" name="codigo" value="<?php echo $viewVar['contrato']->getCtrId(); ?>"  required>
         <input type="hidden" class="form-control" name="ctrUsuario" id="ctrUsuario" value="<?php echo $_SESSION['id']; ?>" required>
+        <input type="hidden" class="form-control" id="codigo" name="codigo" value="<?php echo $viewVar['contrato']->getCtrId(); ?>"  required>
             <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
-        <div class="kt-portlet__body">
-            <input type="hidden" class="form-control" name="idCliente" id="idCliente" required>
-            <div class="kt-portlet__body">
+        <div class="kt-portlet__body">           
             
                 <div class="form-group row">
                     <div class="col-lg-12">
                     <label  class="">CADASTRO DO CLIENTE</label>                    
                     <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
-                            <i class="la la-plus"></i>Novo Cliente</a>                     
-                        <input type="text" class="form-control" placeholder="Cliente - autocomplete" id="clienteLicitacao-autocomplete" name="clienteLicitacao-autocomplete" value="<?php echo $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial()  ." - ". $viewVar['contrato']->getClienteLicitacao()->getNomeFantasia(); ?>" required>
+                    <i class="la la-plus"></i>Novo Cliente</a>                     
+                        <input type="text" class="form-control" placeholder="Cliente - autocomplete" id="contratoCliente-Autocomplete" name="contratoCliente-Autocomplete" value="<?php echo $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial()  ." - ". $viewVar['contrato']->getClienteLicitacao()->getNomeFantasia(); ?>" required>
                         <input type="hidden" id="cliente" name="cliente" value=<?php echo $viewVar['contrato']->getClienteLicitacao()->getCodCliente(); ?>>  
 
                       <span class="form-text text-muted">Por favor insira o cliente do Edital</span>  
                       </div>                    
                 </div>            
             <div class="form-group row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
+                        <label for="numeroContrato" >Numero da Contrato:</label>
+                        <input type="text" class="form-control" placeholder="Digite numero da Contrato" id="numeroContrato" name="numeroContrato" value="<?php echo $viewVar['contrato']->getCtrNumero(); ?>" required>
+                        <span class="form-text text-muted">Digite o numero da Contrato</span>
+                    </div>
+                    <div class="col-lg-3">
                         <label for="prazoEntrega">Prazo de Entrega</label>
                         <input type="text" class="form-control" placeholder="Digite o Prazo de Entrega" id="prazoEntrega" name="prazoEntrega" value="<?php echo $viewVar['contrato']->getCtrPrazoEntrega(); ?>" required>
                             </select>
                             <span class="form-text text-muted">Por favor insira o Prazo de Entrega</span>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <label for="prazoPagamento">Prazo de Pagamento</label>
                         <input type="text" class="form-control" placeholder="Digite o Prazo de Pagamento" id="prazoPagamento" name="prazoPagamento" value="<?php echo $viewVar['contrato']->getCtrPrazoPagamento(); ?>" required>
                             </select>
                             <span class="form-text text-muted">Por favor insira o Prazo de Pagamento</span>
-                    </div>
+                    </div>                    
                     <div class="col-lg-3">
-                        <label for="numeroContrato" >Numero da Contrato:</label>
-                        <input type="text" class="form-control" placeholder="Digite numero da Contrato" id="numeroContrato" name="numeroContrato" value="<?php echo $viewVar['contrato']->getCtrPrazoEntrega(); ?>" required>
-                        <span class="form-text text-muted">Digite o numero da Contrato</span>
-                    </div>
-                    <div class="col-lg-2">
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status" required>
                             <option value="">Selecione o Status</option>
@@ -61,48 +59,56 @@
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>
-                    <div class="col-lg-3">
+                                         
+            </div>
+                <div class="form-group row"> 
+                <div class="col-lg-2">
+                        <label for="numeroLicitacao-AutoComplete" >Numero da Licitacao:</label>
+                        <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroLicitacao-AutoComplete" name="numeroLicitacao-AutoComplete" value="<?php echo $viewVar['contrato']->getEdital()->getEdtNumero() ; ?>" required>
+                        <input type="hidden" id="numeroLicitacao" name="numeroLicitacao" value="<?php echo $viewVar['contrato']->getEdital()->getEdtId() ; ?>" required>
+                        <span class="form-text text-muted">Digite o numero da licitacao</span>
+                    </div>
+                <div class="col-lg-3">
                         <label for="representante">Representante</label>
                         <select class="form-control" id="representante" name="representante" required>
                                 <option value="">Selecione o Representante</option>
                                 <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
-<<<<<<< HEAD
                                     <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($viewVar['contrato']->getRepresentante()->getCodRepresentante() == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
-=======
-                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($viewVar['edital']->getRepresentante()->getCodRepresentante() == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
->>>>>>> 1a47315455e30236948c5d2a0b990bb3dc988dbb
                                         <?php echo $representante->getNomeRepresentante(); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         <span class="form-text text-muted">Por favor insira o Representante</span>
-                    </div>                     
-                </div>
-                <div class="form-group row"> 
+                    </div>
                     <div class="col-lg-2">
                             <label for="dataInicio" class="">Data de Inicio:</label>
-                            <input type="date" class="form-control" placeholder="Digite a Data Inicial" id="dataInicio" name="dataInicio" value="<?php echo $viewVar['contrato']->getEdtDataInicio()->format('Y-m-d'); ?>" required>
+                            <input type="date" class="form-control" placeholder="Digite a Data Inicial" id="dataInicio" name="dataInicio" value="<?php echo $viewVar['contrato']->getCtrDataInicio()->format('Y-m-d'); ?>" required>
                             <span class="form-text text-muted">Digite a Data Inicial</span>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                             <label for="dataVencimento" class="">Data de Vencimento:</label>
-                            <input type="date" class="form-control" placeholder="Digite a Data Vencimento" id="dataVencimento" name="dataVencimento" value="<?php echo $viewVar['contrato']->getEdtDataVencimento()->format('Y-m-d'); ?>" required>
+                            <input type="date" class="form-control" placeholder="Digite a Data Vencimento" id="dataVencimento" name="dataVencimento" value="<?php echo $viewVar['contrato']->getCtrDataVencimento()->format('Y-m-d'); ?>" required>
                             <span class="form-text text-muted">Digite a Data Vencimento</span>
                     </div>
-                </div>
-                <div class="form-group row">
                     <div class="col-lg-2">
+                            <label for="valor" class="">Valor:</label>
+                            <input type="text" class="form-control" placeholder="Digite o valor" id="valor" name="valor" value="<?php echo $viewVar['contrato']->getCtrValor(); ?>" required>
+                            <span class="form-text text-muted">Digite o valor</span>
+                    </div>
+                </div>
+              
+                <div class="form-group row">
+                
+                    <div class="col-lg-8">
+                        <label for="observacao" class="">Observacao do Contrato:</label>
+                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Contrato" id="observacao" name="observacao" ><?php echo $viewVar['contrato']->getCtrObservacao(); ?></textarea>
+                        <span class="form-text text-muted">Digite Observacao do Contrato</span>
+                    </div> 
+                    <div class="col-lg-4">
                         <label for="anexo" class="">Anexo:</label>
                         <input type="file" name="anexo" id="anexo" value="<?php echo $Sessao::retornaValorFormulario('anexo'); ?>">
                         <input type="hidden" name="anexoAlt" id="anexoAlt" value="<?php echo $viewVar['contrato']->getCtrAnexo(); ?>">
                         <span class="form-text text-muted">Selecione o arquivo</span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-6">
-                        <label for="observacao" class="">Observacao do Contrato:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Contrato" id="observacao" name="observacao" ><?php echo $viewVar['contrato']->getCtrObservacao(); ?></textarea>
-                        <span class="form-text text-muted">Digite Observacao do Contrato</span>
-                    </div>                    
+                    </div>              
                 </div>
             </div>
             <div class="kt-portlet__foot">
@@ -122,6 +128,7 @@
     <!--end::Form-->
 </div>
 
+</div>
 <!--end::Portlet-->
 
 <!-- footer -->
