@@ -11,15 +11,15 @@ var app = {
 			app.exibeMensagem('O número máximo <b>('+ app.num_maximo_produto +')</b> de produto foi atingido.');
 			$("#autocomplete-produto").val('');
 		}else{
-			if($('td:contains('+ produto.produto +')').length > 0){
-				this.exibeMensagem('O Produto <b>'+ produto.produto +'</b> já foi selecionada.');
+			if($('td:contains('+ produto.ProNome +')').length > 0){
+				this.exibeMensagem('O Produto <b>'+ produto.ProNome +'</b> já foi selecionada.');
 			}else{
 				$('#editar-tabela-produtos').append('<tr>'+
-					'<td>'+produto.produto+'<input type="hidden" value="'+produto.idproduto+'" name="produtos[]"></td>'+
-					'<td><a class="btn btn-danger btn-sm" onClick="app.removeProduto(this,'+ produto.idproduto +')">remover</td>'+
+					'<td>'+produto.ProNome+'<input type="hidden" value="'+produto.ProCodigo+'" name="produtos[]"></td>'+
+					'<td><a class="btn btn-danger btn-sm" onClick="app.removeProduto(this,'+ produto.ProCodigo +')">remover</td>'+
 					'</tr>');			
 				$("#autocomplete-produto").val('');
-				app.arrayProdutos.push(produto.idproduto);
+				app.arrayProdutos.push(produto.ProCodigo);
 			}
 		}		
 	},
@@ -46,22 +46,23 @@ var app = {
 var optionsProdutos = {
 
 	url: function(produto) {
-		return "http://localhost/SOMVC/produto/autocomplete/" + produto;
+		return "http://localhost/SOMVC/produto/autoComplete/" + produto;
 	},
 
 	getValue: function(element) {
-		return element.produto;
+		return element.ProNome;
+		
 	},
 
 	list: {
 		onChooseEvent: function() {		
 			item = $("#autocomplete-produto").getSelectedItemData();
-
+			
 			if(app.arrayProdutos.length < app.num_maximo_produto){				
-				if(app.arrayProdutos.indexOf(item.idproduto) < 0){	
+				if(app.arrayProdutos.indexOf(item.ProCodigo) < 0){	
 					app.adicionaProduto(item);
 				}else{					
-					app.exibeMensagem('O produto <b>'+ item.produto +'</b> já foi selecionada.');
+					app.exibeMensagem('O produto <b>'+ item.ProNome +'</b> já foi selecionada.');
 					$("#autocomplete-produto").val('');
 				}
 			}else{

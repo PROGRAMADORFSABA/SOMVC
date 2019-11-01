@@ -198,7 +198,7 @@
                                 Produtos
                             </header>
                             <div class="panel-body">
-                                <div id="produto-selecionadas">
+                                <div id="produto-selecionados">
                                     <div class="form-group">
                                         <label  class="col-lg-3 col-sm-3 control-label">Adicionar</label>
                                         <div class="col-lg-9">
@@ -245,7 +245,7 @@
             </div>
         </section>
     </section>
-    <div id="modal-tecnologias" class="modal fade" role="dialog">
+    <div id="modal-produtos" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
