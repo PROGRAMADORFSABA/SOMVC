@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ec0aff2-021c-42e5-a75e-248e394692bd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/js/validacao-produto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/PedidoFalta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +41,13 @@
       </path>
     </expand>
     <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -180,7 +189,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="" />
+      <changelist id="9ec0aff2-021c-42e5-a75e-248e394692bd" name="Default Changelist" comment="" />
       <created>1561084680149</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -256,6 +265,8 @@
       <workItem from="1572445737047" duration="1350000" />
       <workItem from="1572447127831" duration="347000" />
       <workItem from="1572447516342" duration="5416000" />
+      <workItem from="1572614496247" duration="4511000" />
+      <workItem from="1572627336845" duration="3063000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -425,7 +436,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572463231652</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete">
+      <created>1572565348366</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1572565348366</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView">

@@ -220,7 +220,7 @@
                                                     <tr>
                                                         <td>
                                                             <?php echo $produto->getProNome(); ?>
-                                                            <input type="hidden" name="produtos[]" value=<?php echo $produto->getProCodigo(); ?> >
+                                                            <input type="hidden" name="produtos[]" value=<?php echo $produto->getIdProduto(); ?> >
                                                         </td>
                                                         <td><button class="btn btn-danger btn-sm" type="button" onClick="app.removeProduto(this,<?php echo $produto->getProCodigo(); ?>)">remover</button></td>
                                                     </tr>
