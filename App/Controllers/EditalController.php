@@ -6,6 +6,7 @@ use App\Lib\Sessao;
 use App\Models\Entidades\Edital;
 use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\ClienteLicitacao;
+use App\Models\Entidades\Contrato;
 use App\Models\Entidades\Representante;
 use App\Models\Validacao\EditalValidador;
 use App\Models\Entidades\Usuario;
@@ -13,6 +14,7 @@ use App\Models\Entidades\Estado;
 use App\Services\EditalService;
 use App\Services\RepresentanteService;
 use App\Services\ClienteLicitacaoService;
+use App\Services\ContratoService;
 use App\Services\UsuarioService;
 use App\Services\InstituicaoService;
 
@@ -27,20 +29,20 @@ class EditalController extends Controller
         $representanteService = new RepresentanteService();
         $edital = new Edital();
 
-        //self::setViewParam('listaEditais', $editalService->listar($editalId));
+        self::setViewParam('listaClientes', $editalService->listar($editalId));
         
-        self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
-        self::setViewParam('listarRepresentantes', $representanteService->listar());
+        //self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
+        self::setViewParam('listarRepresentantes', $editalService->listarRepresentanteEdital());
         
        if($_POST){
+           $edital->setEdtCliente($_POST['codCliente']);           
            $edital->setEdtId($_POST['codigo']);        
            $edital->setEdtProposta($_POST['proposta']);        
            $edital->setEdtNumero($_POST['numeroLicitacao']);              
            $edital->setEdtModalidade($_POST['modalidade']);        
            $edital->setEdtStatus($_POST['status']);        
            $edital->setEdtTipo($_POST['tipo']);  
-           $edital->setEdtCliente($_POST['codCliente']);
-           //var_dump(  $edital->setEdtProposta($_POST['proposta']));
+           $edital->setEdtRepresentante($_POST['codRepresentante']); 
         }
         
         self::setViewParam('listaEditais', $editalService->listarDinamico($edital));
@@ -102,7 +104,7 @@ class EditalController extends Controller
         $edital = new Edital();
         $edital->setEdtProposta($_POST['proposta']);        
         $edital->setEdtNumero($_POST['numeroLicitacao']);        
-        $edital->setEdtValor($_POST['valor']);        
+        $edital->setEdtValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));      
         $edital->setEdtModalidade($_POST['modalidade']);        
         $edital->setEdtStatus($_POST['status']);        
         $edital->setEdtTipo($_POST['tipo']);        
@@ -192,7 +194,7 @@ class EditalController extends Controller
         $edital->setEdtId($_POST['codigo']);        
         $edital->setEdtProposta($_POST['proposta']);        
         $edital->setEdtNumero($_POST['numeroLicitacao']);        
-        $edital->setEdtValor($_POST['valor']);        
+        $edital->setEdtValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));      
         $edital->setEdtModalidade($_POST['modalidade']);        
         $edital->setEdtStatus($_POST['status']);        
         $edital->setEdtTipo($_POST['tipo']);        
@@ -244,20 +246,28 @@ class EditalController extends Controller
     
     public function exclusao($params)
     {
-        $cidId = $params[0];
+        $editalId = $params[0];
 
         $editalService = new EditalService();
+        $contratoService = new ContratoService();
 
-        $edital = $editalService->listar($cidId)[0];
+        $edital = $editalService->listar($editalId)[0];
+        $contrato = $contratoService->listarPorEdital($editalId)[0];
 
         if (!$edital) {
         Sessao::gravaMensagem("Edital inexistente");
             $this->redirect('/edital');
         }
+        if($contrato){
+            $contrato = $contrato->getCtrNumero();
+            self::setViewParam('contrato', $contrato);               
+        }else{
+            $contrato = "";               
+            self::setViewParam('contrato', $contrato);               
+        }
+        self::setViewParam('edital', $edital);           
 
-        self::setViewParam('edital', $edital);
-
-        $this->render('/edital/exclusao');
+       $this->render('/edital/exclusao');
 
         Sessao::limpaMensagem();
     }
@@ -267,7 +277,7 @@ class EditalController extends Controller
         $edital = new Edital();
         $edital->setEdtId($_POST['codigo']);
 
-        $editalService= new EditalService();
+        $editalService = new EditalService();        
 
         if (!$editalService->excluir($edital)) {
             Sessao::gravaMensagem("Edital inexistente");

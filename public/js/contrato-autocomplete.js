@@ -1,12 +1,12 @@
-//document.getElementById("numeroLicitacao").disabled = true;
+//document.getElementById("numeroLicitacao-AutoComplete").disabled = true;
 	var licitacaoCliente_cod = null;
 	//$('#cadastroCliente').slideUp();
 //	$('#cadastroCliente').slideDown();
-		var optionscliente = {
+		var optionsclientecontrato = {
 			url: function (cliente) {
-				//return "http://coisavirtual.com.br/contrato/editalPorCliente/" + cliente; //hospedagem
-				return "http://localhost:81/SOMVC/contrato/editalPorCliente/" + cliente;
-				//return "http://localhost/SOMVC/contrato/editalPorCliente/" + cliente;
+				//return "http://coisavirtual.com.br/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente; //hospedagem
+				//return "http://localhost:81/SOMVC/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente;
+				return "http://localhost/SOMVC/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente;
 			},
 			getValue: function (element) {
 					return element.razaosocial;
@@ -18,24 +18,57 @@
 					$('#cliente').val(licitacaoCliente_cod);
 					$('#cadastroCliente').slideUp();
 					$('#numeroContrato').disabled = false;
-					document.getElementById("numeroLicitacao").disabled = false;									
+					document.getElementById("numeroLicitacao-AutoComplete").disabled = false;									
 				},
 				onHideListEvent: function () {
 					if (licitacaoCliente_cod == null) {
 						$('#contratoCliente-Autocomplete').val('Nao encontrato');
 						$('#cadastroCliente').slideDown();
-						document.getElementById("numeroLicitacao").disabled = true;
+						document.getElementById("numeroLicitacao-AutoComplete").disabled = true;
 					}
 				}
 			}
 		};
-		$("#contratoCliente-Autocomplete").easyAutocomplete(optionscliente);
+		$("#contratoCliente-Autocomplete").easyAutocomplete(optionsclientecontrato);
 	
-		var optionsedital = {
+//document.getElementById("numeroLicitacao-AutoComplete").disabled = true;
+	var licitacaoCliente_cod = null;
+	//$('#cadastroCliente').slideUp();
+//	$('#cadastroCliente').slideDown();
+		var optionsclienteedital = {
 			url: function (cliente) {
-				//return "http://coisavirtual.com.br/contrato/editalPorCliente/" + cliente; //hospedagem
-				return "http://localhost:81/SOMVC/contrato/editalPorCliente/" + cliente;
-				//return "http://localhost/SOMVC/contrato/editalPorCliente/" + cliente;
+				//return "http://coisavirtual.com.br/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente; //hospedagem
+				//return "http://localhost:81/SOMVC/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente;
+				return "http://localhost/SOMVC/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente;
+			},
+			getValue: function (element) {
+					return element.razaosocial;
+			},
+			list: {
+				onChooseEvent: function () {
+					licitacaoCliente_cod = $("#editalCliente-Autocomplete").getSelectedItemData().licitacaoCliente_cod;
+					razaoSocial = $("#editalCliente-Autocomplete").getSelectedItemData().razaosocial;
+					$('#cliente').val(licitacaoCliente_cod);
+					$('#cadastroCliente').slideUp();
+					$('#numeroContrato').disabled = false;
+					document.getElementById("editalLicitacao-AutoComplete").disabled = false;									
+				},
+				onHideListEvent: function () {
+					if (licitacaoCliente_cod == null) {
+						$('#contratoCliente-Autocomplete').val('Nao encontrato');
+						$('#cadastroCliente').slideDown();
+						document.getElementById("editalLicitacao-AutoComplete").disabled = true;
+					}
+				}
+			}
+		};
+		$("#editalCliente-Autocomplete").easyAutocomplete(optionsclienteedital);
+	
+		var optionscontrato = {
+			url: function (cliente) {
+				//return "http://coisavirtual.com.br/contrato/autoCompleteNumeroContratoCodCliente/" + cliente; //hospedagem
+				//return "http://localhost:81/SOMVC/contrato/autoCompleteNumeroContratoCodCliente/" + cliente;
+				return "http://localhost/SOMVC/contrato/autoCompleteNumeroContratoCodCliente/"+cliente +"/"+ licitacaoCliente_cod;
 			},
 
 			getValue: function (element) {
@@ -44,7 +77,7 @@
 
 			list: {
 				onChooseEvent: function () {
-					numeroEdital = $("#numeroLicitacao-AutoComplete").getSelectedItemData().edt_id;
+					numeroEdital = $("#numeroLicitacao-AutoComplete").getSelectedItemData().edt_id;				
 					razaoSocial = $("#numeroLicitacao-AutoComplete").getSelectedItemData().razaosocial;
 					$('#numeroLicitacao').val(numeroEdital);			
 			
@@ -59,4 +92,34 @@
 				}
 			}
 		};
-		$("#numeroLicitacao-AutoComplete").easyAutocomplete(optionsedital);
+		$("#numeroLicitacao-AutoComplete").easyAutocomplete(optionscontrato);
+
+		var optionsedital = {
+			url: function (cliente) {
+				//return "http://coisavirtual.com.br/contrato/autoCompleteNumeroEditalCodCliente/" + cliente; //hospedagem
+				//return "http://localhost:81/SOMVC/contrato/autoCompleteNumeroEditalCodCliente/" + cliente;
+				return "http://localhost/SOMVC/contrato/autoCompleteNumeroEditalCodCliente/"+cliente +"/"+ licitacaoCliente_cod;
+			},
+
+			getValue: function (element) {
+					return element.edt_numero;
+			},
+
+			list: {
+				onChooseEvent: function () {
+					numeroEdital = $("#editalLicitacao-AutoComplete").getSelectedItemData().edt_id;				
+					razaoSocial = $("#editalLicitacao-AutoComplete").getSelectedItemData().razaosocial;
+					$('#numeroLicitacao').val(numeroEdital);			
+			
+					document.getElementById("editalLicitacao-AutoComplete").disabled = false;									
+				},
+				onHideListEvent: function () {
+					if (licitacaoCliente_cod == null || edt_id == null) {
+						$('#editalLicitacao-AutoComplete').val('Nao encontrato');
+						$('#numeroLicitacao').val('');					
+						document.getElementById("editalLicitacao-AutoComplete").disabled = true;
+					}
+				}
+			}
+		};
+		$("#editalLicitacao-AutoComplete").easyAutocomplete(optionsedital);

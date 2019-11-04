@@ -9,13 +9,15 @@
                 <h3 class="kt-portlet__head-title">
                 Pesquisa de editais registrados
             </h3>
-            <div class="col-lg-12">
+        <div class="kt-portlet__body">
+        <div class="form-group row">
+            <div class="col-lg-8">
             <label for="codCliente">Cliente</label>
                 <select class="form-control" name="codCliente">
                     <option value="">Selecione o cliente</option>
                     <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                            <?php echo $cliente->getRazaoSocial(); ?></option>
+                        <option value="<?php echo $cliente->getClienteLicitacao()->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getClienteLicitacao()->getCodCliente()) ? "selected" : ""; ?>>
+                            <?php echo $cliente->getClienteLicitacao()->getRazaoSocial(); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -24,13 +26,14 @@
                         <select class="form-control" id="codRepresentante" name="codRepresentante" >
                                 <option value="">Selecione o Representante</option>
                                 <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
-                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
-                                        <?php echo $representante->getNomeRepresentante(); ?></option>
+                                    <option value="<?php echo $representante->getRepresentante()->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getRepresentante()->getCodRepresentante()) ? "selected" : ""; ?>>
+                                        <?php echo $representante->getRepresentante()->getNomeRepresentante(); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         <span class="form-text text-muted">Por favor insira o Representante</span>
             </div>   
-            <div class="kt-portlet__body">
+            </div>   
+            
                 <div class="form-group row">
                     <div class="col-lg-1">
                         <label for="codigo">Codigo:</label>
@@ -180,7 +183,7 @@
                 <tbody>
                     <?php
                     $dados = $viewVar['listaEditais'];
-                    if ($dados > 0) {
+                    if (!empty($dados)) {  
                         foreach ($dados as $edital) {
                             ?>
                             <tr>

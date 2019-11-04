@@ -11,6 +11,8 @@ use App\Models\DAO\ContratoDAO;
 use App\Models\Validacao\ContratoValidador;
 use App\Models\Validacao\ResultadoValidacao;
 use App\Models\Entidades\Contrato;
+use App\Models\Entidades\Edital;
+use App\Models\Entidades\ClienteLicitacao;
 
 
 class ContratoService
@@ -20,10 +22,65 @@ class ContratoService
         $contratoDAO = new ContratoDAO();
         return $contratoDAO->listar($contratoId);
     }
+    public function listarClienteContrato($contratoId = null)
+    {
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->listarClienteContrato($contratoId);
+    }
+    public function listarRepresentanteContrato($contratoId = null)
+    {
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->listarRepresentanteContrato($contratoId);
+    }
+    public function listarPorEdital($editalId = null)
+    {
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->listarPorEdital($editalId);
+    }
     public function listarDinamico(Contrato $contrato)
     {
         $contratoDAO = new ContratoDAO();
         return $contratoDAO->listarDinamico($contrato);
+    }
+
+    public function autoCompleteContratoClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
+    {
+        
+        $clienteLicitacao->getRazaoSocial();
+        $contratoDAO = new ContratoDAO();
+        $busca = $contratoDAO->autoCompleteContratoClienteRazaoSocial($clienteLicitacao);
+        $exportar = new Exportar();
+        echo $exportar->exportarJSON($busca);
+    
+    }
+    public function autoCompleteNumeroContratoCodCliente(Edital $edital,ClienteLicitacao $clienteLicitacao)
+    {        
+        $edital->getEdtNumero();
+        $clienteLicitacao->getCodCliente();
+       $contratoDAO = new ContratoDAO();
+        $busca = $contratoDAO->autoCompleteNumeroContratoCodCliente($edital, $clienteLicitacao);
+        $exportar = new Exportar();
+        echo $exportar->exportarJSON($busca);
+    
+    }
+    public function autoCompleteEditalClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
+    {        
+        $clienteLicitacao->getRazaoSocial();
+        $contratoDAO = new ContratoDAO();
+        $busca = $contratoDAO->autoCompleteEditalClienteRazaoSocial($clienteLicitacao);
+        $exportar = new Exportar();
+        echo $exportar->exportarJSON($busca);
+    
+    }
+    public function autoCompleteNumeroEditalCodCliente(Edital $edital,ClienteLicitacao $clienteLicitacao)
+    {        
+        $edital->getEdtNumero();
+        $clienteLicitacao->getCodCliente();
+       $contratoDAO = new ContratoDAO();
+        $busca = $contratoDAO->autoCompleteNumeroEditalCodCliente($edital, $clienteLicitacao);
+        $exportar = new Exportar();
+        echo $exportar->exportarJSON($busca);
+    
     }
 
     public function autoComplete(Contrato $contrato)
@@ -87,7 +144,7 @@ class ContratoService
                 return true;
             }catch(\Exception $e){
                 $transacao->rollBack(); 
-              // var_dump($e);
+              //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
                return false;
             }

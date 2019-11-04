@@ -7,6 +7,7 @@ use App\Lib\Transacao;
 use App\Lib\Exportar;
 
 use App\Models\DAO\EditalDAO;
+use App\Models\DAO\ContratoDAO;
 use App\Models\Entidades\Contrato;
 use App\Models\Entidades\ClienteLicitacao;
 use App\Models\Validacao\EditalValidador;
@@ -20,6 +21,11 @@ class EditalService
     {
         $editalDAO = new EditalDAO();
         return $editalDAO->listar($edtId);
+    }
+    public function listarRepresentanteEdital($edtId = null)
+    {
+        $editalDAO = new EditalDAO();
+        return $editalDAO->listarRepresentanteEdital($edtId);
     }
     public function listarDinamico(Edital $edital)
     {
@@ -35,12 +41,22 @@ class EditalService
         return $exportar->exportarJSON($busca);
     }
     
-    public function editalPorCliente(ClienteLicitacao $clienteLicitacao)
+    public function autoCompleteEditalClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
     {
         
         $clienteLicitacao->getRazaoSocial();
+        $editalDAO = new EditalDAO();
+        $busca = $editalDAO->autoCompleteEditalClienteRazaoSocial($clienteLicitacao);
+        $exportar = new Exportar();
+        echo $exportar->exportarJSON($busca);
+    
+    }
+    public function autoCompleteNumeroEditalCodCliente(Edital $edital,ClienteLicitacao $clienteLicitacao)
+    {        
+        $edital->getEdtNumero();
+        $clienteLicitacao->getCodCliente();
        $editalDAO = new EditalDAO();
-        $busca = $editalDAO->editalPorClienteRazaoSocial($clienteLicitacao);
+        $busca = $editalDAO->autoCompleteNumeroEditalCodCliente($edital, $clienteLicitacao);
         $exportar = new Exportar();
         echo $exportar->exportarJSON($busca);
     
@@ -52,11 +68,11 @@ class EditalService
         return $editalDAO->listarEstadosVinculadas($edital);
     }
 
-    public function salvar(Contrato $contrato)
+    public function salvar(Edital $edital)
     {
         $transacao = new Transacao();
-        $contratoValidador = new ContratoValidador();
-        $resultadoValidacao = $contratoValidador->validar($contrato);
+        $editalValidador = new EditalValidador();
+        $resultadoValidacao = $editalValidador->validar($edital);
         
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
@@ -64,8 +80,8 @@ class EditalService
         } else {
             try{
                $transacao->beginTransaction();
-                $contratoDAO = new ContratoDAO();            
-                $contratoDAO->salvar($contrato);
+                $editalDAO = new EditalDAO();            
+                $editalDAO->salvar($edital);
                 $transacao->commit(); 
                 Sessao::gravaMensagem("cadastro realizado com sucesso!.");
                 Sessao::limpaFormulario();
@@ -114,9 +130,10 @@ class EditalService
             $transacao = new Transacao();
             $transacao->beginTransaction();
             
-            $editalDAO = new EditalDAO();
-                                   
+            $editalDAO = new EditalDAO();        
+
             $editalDAO->excluir($edital);
+            
             $transacao->commit();            
             
             Sessao::limpaMensagem();

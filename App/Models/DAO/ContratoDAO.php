@@ -30,57 +30,243 @@ class ContratoDAO extends BaseDAO
             $lista = [];
             foreach ($dados as $dado) {  
                 /*
-ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
-ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
-*/
-$contrato = new Contrato();
-$contrato->setCtrId($dado['ctr_id']);
-$contrato->setCtrNumero($dado['ctr_numero']);
-$contrato->setCtrDataInicio($dado['ctr_datainicio']);
-$contrato->setCtrDataVencimento($dado['ctr_datavencimento']);            
-$contrato->setCtrValor(number_format($dado['ctr_valor'], 2, ',', '.'));
-$contrato->setCtrStatus($dado['ctr_status']);
-$contrato->setCtrObservacao($dado['ctr_observacao']);
-$contrato->setCtrAnexo($dado['ctr_anexo']);
-$contrato->setCtrPrazoEntrega($dado['ctr_prazoentrega']);
-$contrato->setCtrPrazoPagamento($dado['ctr_prazopagamento']);
-$contrato->setCtrUsuario($dado['ctr_usuario']);
-$contrato->setCtrInstituicao($dado['ctr_instituicao']);
-$contrato->setCtrDataCadastro($dado['ctr_datacadastro']);
-$contrato->setCtrDataAlteracao($dado['ctr_dataalteracao']);
-$contrato->setEdital(new Edital());
-$contrato->getEdital()->setEdtId($dado['edt_id']);;
-$contrato->getEdital()->setEdtNumero($dado['edt_numero']);
-$contrato->getEdital()->setEdtDataAbertura($dado['edt_dataabertura']);
-$contrato->getEdital()->setEdtHora($dado['edt_hora']);
-$contrato->getEdital()->setEdtDataResultado($dado['edt_dataresultado']);
-$contrato->getEdital()->setEdtProposta($dado['edt_proposta']);
-$contrato->getEdital()->setEdtModalidade($dado['edt_modalidade']);
-$contrato->getEdital()->setEdtTipo($dado['edt_tipo']);
-$contrato->getEdital()->setEdtGarantia($dado['edt_garantia']);
-$contrato->getEdital()->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
-$contrato->getEdital()->setEdtStatus($dado['edt_status']);
-$contrato->getEdital()->setEdtAnalise($dado['edt_analise']);
-$contrato->getEdital()->setEdtObservacao($dado['edt_observacao']);
-$contrato->getEdital()->setEdtAnexo($dado['edt_anexo']);
-$contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataabertura']);
-$contrato->getEdital()->setEdtDataCadastro($dado['edt_datacadastro']);
-$contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataalteracao']);               
-$contrato->setRepresentante(new Representante());               
-$contrato->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
-$contrato->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
-$contrato->setClienteLicitacao(new ClienteLicitacao());
-$contrato->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
-$contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
-$contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
-$contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
-$contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
-$contrato->setInstituicao(new Instituicao());
-$contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
-$contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
-$contrato->setUsuario(new Usuario());
-$contrato->getUsuario()->setId($dado['id']);
-$contrato->getUsuario()->setNome($dado['nome']);
+        ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
+        ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
+        */
+        $contrato = new Contrato();
+        $contrato->setCtrId($dado['ctr_id']);
+        $contrato->setCtrNumero($dado['ctr_numero']);
+        $contrato->setCtrDataInicio($dado['ctr_datainicio']);
+        $contrato->setCtrDataVencimento($dado['ctr_datavencimento']);            
+        $contrato->setCtrValor(number_format($dado['ctr_valor'], 2, ',', '.'));
+        $contrato->setCtrStatus($dado['ctr_status']);
+        $contrato->setCtrObservacao($dado['ctr_observacao']);
+        $contrato->setCtrAnexo($dado['ctr_anexo']);
+        $contrato->setCtrPrazoEntrega($dado['ctr_prazoentrega']);
+        $contrato->setCtrPrazoPagamento($dado['ctr_prazopagamento']);
+        $contrato->setCtrUsuario($dado['ctr_usuario']);
+        $contrato->setCtrInstituicao($dado['ctr_instituicao']);
+        $contrato->setCtrDataCadastro($dado['ctr_datacadastro']);
+        $contrato->setCtrDataAlteracao($dado['ctr_dataalteracao']);
+        $contrato->setEdital(new Edital());
+        $contrato->getEdital()->setEdtId($dado['edt_id']);;
+        $contrato->getEdital()->setEdtNumero($dado['edt_numero']);
+        $contrato->getEdital()->setEdtDataAbertura($dado['edt_dataabertura']);
+        $contrato->getEdital()->setEdtHora($dado['edt_hora']);
+        $contrato->getEdital()->setEdtDataResultado($dado['edt_dataresultado']);
+        $contrato->getEdital()->setEdtProposta($dado['edt_proposta']);
+        $contrato->getEdital()->setEdtModalidade($dado['edt_modalidade']);
+        $contrato->getEdital()->setEdtTipo($dado['edt_tipo']);
+        $contrato->getEdital()->setEdtGarantia($dado['edt_garantia']);
+        $contrato->getEdital()->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
+        $contrato->getEdital()->setEdtStatus($dado['edt_status']);
+        $contrato->getEdital()->setEdtAnalise($dado['edt_analise']);
+        $contrato->getEdital()->setEdtObservacao($dado['edt_observacao']);
+        $contrato->getEdital()->setEdtAnexo($dado['edt_anexo']);
+        $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataabertura']);
+        $contrato->getEdital()->setEdtDataCadastro($dado['edt_datacadastro']);
+        $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataalteracao']);               
+        $contrato->setRepresentante(new Representante());               
+        $contrato->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
+        $contrato->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
+        $contrato->setClienteLicitacao(new ClienteLicitacao());
+        $contrato->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+        $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
+        $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+        $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+        $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+        $contrato->setInstituicao(new Instituicao());
+        $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
+        $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
+        $contrato->setUsuario(new Usuario());
+        $contrato->getUsuario()->setId($dado['id']);
+        $contrato->getUsuario()->setNome($dado['nome']);
+
+                $lista[] = $contrato;
+            }
+            return $lista;        
+                
+    }
+    public  function listarRepresentanteContrato($ctrId = null)
+    {        
+        $SQL = " SELECT distinct(r.codRepresentante), r.codRepresentante, r.nomeRepresentante
+		FROM contrato ctr
+		INNER JOIN edital edt ON edt.edt_id = ctr.ctr_edital
+		INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
+        INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
+		INNER JOIN usuarios u ON u.id = ctr.ctr_usuario";
+            if($ctrId) 
+            {    
+                $SQL.= " WHERE ctr.ctr_id = $ctrId";
+            }         
+            
+            $resultado = $this->select($SQL);
+            $dados = $resultado->fetchAll();
+            $lista = [];
+            foreach ($dados as $dado) {  
+                /*
+        ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
+        ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
+        */
+        $contrato = new Contrato();
+        $contrato->setCtrId($dado['ctr_id']);
+        $contrato->setCtrNumero($dado['ctr_numero']);
+        $contrato->setCtrDataInicio($dado['ctr_datainicio']);
+        $contrato->setCtrDataVencimento($dado['ctr_datavencimento']);            
+        $contrato->setCtrValor(number_format($dado['ctr_valor'], 2, ',', '.'));
+        $contrato->setCtrStatus($dado['ctr_status']);
+        $contrato->setCtrObservacao($dado['ctr_observacao']);
+        $contrato->setCtrAnexo($dado['ctr_anexo']);
+        $contrato->setCtrPrazoEntrega($dado['ctr_prazoentrega']);
+        $contrato->setCtrPrazoPagamento($dado['ctr_prazopagamento']);
+        $contrato->setCtrUsuario($dado['ctr_usuario']);
+        $contrato->setCtrInstituicao($dado['ctr_instituicao']);
+        $contrato->setCtrDataCadastro($dado['ctr_datacadastro']);
+        $contrato->setCtrDataAlteracao($dado['ctr_dataalteracao']);
+        $contrato->setEdital(new Edital());
+        $contrato->getEdital()->setEdtId($dado['edt_id']);;
+        $contrato->getEdital()->setEdtNumero($dado['edt_numero']);
+        $contrato->getEdital()->setEdtDataAbertura($dado['edt_dataabertura']);
+        $contrato->getEdital()->setEdtHora($dado['edt_hora']);
+        $contrato->getEdital()->setEdtDataResultado($dado['edt_dataresultado']);
+        $contrato->getEdital()->setEdtProposta($dado['edt_proposta']);
+        $contrato->getEdital()->setEdtModalidade($dado['edt_modalidade']);
+        $contrato->getEdital()->setEdtTipo($dado['edt_tipo']);
+        $contrato->getEdital()->setEdtGarantia($dado['edt_garantia']);
+        $contrato->getEdital()->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
+        $contrato->getEdital()->setEdtStatus($dado['edt_status']);
+        $contrato->getEdital()->setEdtAnalise($dado['edt_analise']);
+        $contrato->getEdital()->setEdtObservacao($dado['edt_observacao']);
+        $contrato->getEdital()->setEdtAnexo($dado['edt_anexo']);
+        $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataabertura']);
+        $contrato->getEdital()->setEdtDataCadastro($dado['edt_datacadastro']);
+        $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataalteracao']);               
+        $contrato->setRepresentante(new Representante());               
+        $contrato->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
+        $contrato->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
+        $contrato->setClienteLicitacao(new ClienteLicitacao());
+        $contrato->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+        $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
+        $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+        $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+        $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+        $contrato->setInstituicao(new Instituicao());
+        $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
+        $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
+        $contrato->setUsuario(new Usuario());
+        $contrato->getUsuario()->setId($dado['id']);
+        $contrato->getUsuario()->setNome($dado['nome']);
+
+                $lista[] = $contrato;
+            }
+            return $lista;        
+                
+    }
+    public  function listarClienteContrato($ctrId = null)
+    {        
+        $SQL = " SELECT distinct(c.razaosocial), c.licitacaoCliente_cod, c.nomefantasia
+		FROM contrato ctr
+		INNER JOIN edital edt ON edt.edt_id = ctr.ctr_edital
+		INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
+        INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
+		INNER JOIN usuarios u ON u.id = ctr.ctr_usuario";
+            if($ctrId) 
+            {    
+                $SQL.= " WHERE ctr.ctr_id = $ctrId";
+            }         
+            
+            $resultado = $this->select($SQL);
+            $dados = $resultado->fetchAll();
+            $lista = [];
+            foreach ($dados as $dado) {  
+                /*
+        ctr_id, ctr_numero, ctr_datainicio,  ctr_datavencimento, ctr_valor, ctr_status, ctr_observacao, ctr_anexo, ctr_clientelicitacao, ctr_usuario, 
+        ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
+        */
+        $contrato = new Contrato();
+        $contrato->setCtrId($dado['ctr_id']);
+        $contrato->setCtrNumero($dado['ctr_numero']);
+        $contrato->setCtrDataInicio($dado['ctr_datainicio']);
+        $contrato->setCtrDataVencimento($dado['ctr_datavencimento']);            
+        $contrato->setCtrValor(number_format($dado['ctr_valor'], 2, ',', '.'));
+        $contrato->setCtrStatus($dado['ctr_status']);
+        $contrato->setCtrObservacao($dado['ctr_observacao']);
+        $contrato->setCtrAnexo($dado['ctr_anexo']);
+        $contrato->setCtrPrazoEntrega($dado['ctr_prazoentrega']);
+        $contrato->setCtrPrazoPagamento($dado['ctr_prazopagamento']);
+        $contrato->setCtrUsuario($dado['ctr_usuario']);
+        $contrato->setCtrInstituicao($dado['ctr_instituicao']);
+        $contrato->setCtrDataCadastro($dado['ctr_datacadastro']);
+        $contrato->setCtrDataAlteracao($dado['ctr_dataalteracao']);
+        $contrato->setEdital(new Edital());
+        $contrato->getEdital()->setEdtId($dado['edt_id']);;
+        $contrato->getEdital()->setEdtNumero($dado['edt_numero']);
+        $contrato->getEdital()->setEdtDataAbertura($dado['edt_dataabertura']);
+        $contrato->getEdital()->setEdtHora($dado['edt_hora']);
+        $contrato->getEdital()->setEdtDataResultado($dado['edt_dataresultado']);
+        $contrato->getEdital()->setEdtProposta($dado['edt_proposta']);
+        $contrato->getEdital()->setEdtModalidade($dado['edt_modalidade']);
+        $contrato->getEdital()->setEdtTipo($dado['edt_tipo']);
+        $contrato->getEdital()->setEdtGarantia($dado['edt_garantia']);
+        $contrato->getEdital()->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
+        $contrato->getEdital()->setEdtStatus($dado['edt_status']);
+        $contrato->getEdital()->setEdtAnalise($dado['edt_analise']);
+        $contrato->getEdital()->setEdtObservacao($dado['edt_observacao']);
+        $contrato->getEdital()->setEdtAnexo($dado['edt_anexo']);
+        $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataabertura']);
+        $contrato->getEdital()->setEdtDataCadastro($dado['edt_datacadastro']);
+        $contrato->getEdital()->setEdtDataAlteracao($dado['edt_dataalteracao']);               
+        $contrato->setRepresentante(new Representante());               
+        $contrato->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
+        $contrato->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
+        $contrato->setClienteLicitacao(new ClienteLicitacao());
+        $contrato->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+        $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
+        $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+        $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+        $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+        $contrato->setInstituicao(new Instituicao());
+        $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
+        $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
+        $contrato->setUsuario(new Usuario());
+        $contrato->getUsuario()->setId($dado['id']);
+        $contrato->getUsuario()->setNome($dado['nome']);
+
+                $lista[] = $contrato;
+            }
+            return $lista;        
+                
+    }
+    public  function listarPorEdital($ctrId = null)
+    {        
+        $SQL = " SELECT * FROM contrato ";
+            if($ctrId) 
+            {    
+                $SQL.= " WHERE ctr_edital = $ctrId";
+            }         
+            
+            $resultado = $this->select($SQL);
+            $dados = $resultado->fetchAll();
+            $lista = [];
+            foreach ($dados as $dado) {  
+               
+        $contrato = new Contrato();
+        $contrato->setCtrId($dado['ctr_id']);
+        $contrato->setCtrNumero($dado['ctr_numero']);
+        $contrato->setCtrDataInicio($dado['ctr_datainicio']);
+        $contrato->setCtrDataVencimento($dado['ctr_datavencimento']);            
+        $contrato->setCtrValor(number_format($dado['ctr_valor'], 2, ',', '.'));
+        $contrato->setCtrStatus($dado['ctr_status']);
+        $contrato->setCtrObservacao($dado['ctr_observacao']);
+        $contrato->setCtrAnexo($dado['ctr_anexo']);
+        $contrato->setCtrPrazoEntrega($dado['ctr_prazoentrega']);
+        $contrato->setCtrPrazoPagamento($dado['ctr_prazopagamento']);
+        $contrato->setCtrUsuario($dado['ctr_usuario']);
+        $contrato->setCtrInstituicao($dado['ctr_instituicao']);
+        $contrato->setCtrDataCadastro($dado['ctr_datacadastro']);
+        $contrato->setCtrDataAlteracao($dado['ctr_dataalteracao']);
 
                 $lista[] = $contrato;
             }
@@ -88,63 +274,36 @@ $contrato->getUsuario()->setNome($dado['nome']);
                 
     }
     public  function listarDinamico(Contrato $contrato)
-    {     
-        
-        $codCliente         = $contrato->getCtrCliente();      
+    {   
+        $codCliente         = $contrato->getCtrClienteLicitacao();
+        $representante      = $contrato->getCtrRepresentante();
         $codContrato        = $contrato->getCtrId();
-        /*$proposta           = $contrato->getEdital()->getEdtProposta();
-        $numeroLicitacao    = $contrato->getEdital()->getEdtNumero();
+        $numeroContrato           = $contrato->getCtrNumero();
         $status             = $contrato->getCtrStatus();
-        $modalidade         = $contrato->getEdital()->getEdtModalidade();
-
-        if ($codContrato && $numeroLicitacao && $status && $proposta && $codCliente && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codContrato AND edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "' AND edt.edt_modalidade = '" . $modalidade . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($codContrato && $numeroLicitacao && $proposta && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codContrato AND edt.edt_proposta = '". $proposta . "' AND edt.edt_modalidade = '" . $modalidade . "'  AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($codContrato && $status && $proposta && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codContrato AND edt.edt_proposta = '". $proposta . "' AND edt.edt_modalidade = '" . $modalidade ."'  AND edt.edt_status = '" . $status . "'";
-        } elseif ($codContrato && $numeroLicitacao && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codContrato  AND edt.edt_numero = '" .  $numeroLicitacao . "' AND edt.edt_modalidade = '" . $modalidade .   "'";
-        } elseif ($codContrato && $proposta) {
-            $WHERE = "  WHERE edt.edt_id = $codContrato AND edt.edt_proposta = '". $proposta ."' ";
-        } elseif ($codContrato) {
-            $WHERE = "  WHERE edt.edt_id = $codContrato ";
-        } elseif ($numeroLicitacao && $status && $proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao && $status) {
-            $WHERE = "  WHERE edt.edt_status = '" . $status . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao && $proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao) {
-            $WHERE = "  WHERE edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao) {
-            $WHERE = "  WHERE  edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($status && $proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "'";
-        } elseif ($status) {
-            $WHERE = "  WHERE edt.edt_status = '" . $status . "'";
-        } elseif ($proposta && $codCliente) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.codCliente = $codCliente";
-        } elseif ($proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."' ";
-        } elseif ($codCliente) {
-            $WHERE = "  WHERE edt.edt_cliente = $codCliente";
-        } elseif ($modalidade) {
-            $WHERE = "  WHERE edt.edt_modalidade = '" . $modalidade ."'";
-        } else {
-            $WHERE = "";
-        }   */
-        $WHERE = "";
+        $modalidade         = $contrato->getCtrModalidade();
+        $numeroLicitacao    = $contrato->getCtrNumeroLicitacao();        
+        
         $SQL = " SELECT * 
 		FROM contrato ctr
 		INNER JOIN edital edt ON edt.edt_id = ctr.ctr_edital
-		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
-        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
-        INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
-		INNER JOIN usuarios u ON u.id = edt.edt_usuario $WHERE ";                 
-            
-            $resultado = $this->select($SQL);
-            $dados = $resultado->fetchAll();
+		INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
+        INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
+        INNER JOIN usuarios u ON u.id = ctr.ctr_usuario "; 
+        $where = Array();
+		if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
+		if( $representante ){ $where[] = " r.codRepresentante = {$representante}"; }
+		if( $codContrato ){ $where[] = " ctr.ctr_id = {$codContrato}"; }
+		if( $numeroContrato ){ $where[] = " ctr.ctr_numero = '{$numeroContrato}'"; }
+		if( $status ){ $where[] = " ctr.ctr_status = '{$status}'"; }
+		if( $modalidade ){ $where[] = " edt.edt_modalidade = '{$modalidade}'"; }
+        if( $numeroLicitacao ){ $where[] = " edt.edt_numero = '{$numeroLicitacao}'"; }   
+     
+     if( sizeof( $where ) )
+     $SQL .= ' WHERE '.implode( ' AND ',$where );    
+
+     $resultado = $this->select($SQL);
+     $dados = $resultado->fetchAll();
             $lista = [];
             foreach ($dados as $dado) {                
                 $contrato = new Contrato();
@@ -201,6 +360,67 @@ $contrato->getUsuario()->setNome($dado['nome']);
             return $lista;        
                 
     }
+    public function autoCompleteContratoClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            " SELECT * 
+            FROM contrato ctr
+            INNER JOIN edital edt ON edt.edt_id = ctr.ctr_edital
+            INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
+            INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
+            INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
+            INNER JOIN usuarios u ON u.id = ctr.ctr_usuario 
+            WHERE c.razaosocial
+            LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY edt.edt_numero LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function autoCompleteNumeroContratoCodCliente(Edital $edital, ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            " SELECT * 
+            FROM contrato ctr
+            INNER JOIN edital edt ON edt.edt_id = ctr.ctr_edital
+            INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
+            INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
+            INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
+            INNER JOIN usuarios u ON u.id = ctr.ctr_usuario
+            WHERE edt.edt_numero
+            LIKE '%".$edital->getEdtNumero()."%' AND c.licitacaoCliente_cod = ".$clienteLicitacao->getCodCliente()." ORDER BY edt.edt_numero LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function autoCompleteEditalClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            " SELECT edt.edt_id, c.licitacaoCliente_cod, edt.edt_numero,c.razaosocial,c.nomefantasia
+            FROM edital edt
+            INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
+            INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+            INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
+            INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+            WHERE c.razaosocial
+            LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY edt.edt_numero LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function autoCompleteNumeroEditalCodCliente(Edital $edital, ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            " SELECT edt.edt_id, c.licitacaoCliente_cod, edt.edt_numero,c.razaosocial,c.nomefantasia
+            FROM edital edt
+            INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
+            INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+            INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
+            INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+            WHERE edt.edt_numero
+            LIKE '%".$edital->getEdtNumero()."%' AND c.licitacaoCliente_cod = ".$clienteLicitacao->getCodCliente()." ORDER BY edt.edt_numero LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
     
    /* public function listarPorContrato($edtNome = null)
     {
@@ -217,14 +437,13 @@ $contrato->getUsuario()->setNome($dado['nome']);
     }*/
 
     public  function salvar(Contrato $contrato)
-    {
-      var_dump($contrato);
+    {     
         try {
             $ctrNumero                     = $contrato->getCtrNumero();
             $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
             $ctrDataVencimento             = $contrato->getCtrDataVencimento()->format('Y-m-d');
-            $valorAtual                    = $contrato->getCtrValor();
-            $ctrValor                      = str_replace(",", ".", $valorAtual);
+            $ctrValor                    = $contrato->getCtrValor();
+           // $ctrValor                      = str_replace(",", ".", $valorAtual);
             $ctrStatus                     = $contrato->getCtrStatus();
             $ctrObservacao                 = $contrato->getCtrObservacao();
             $ctrAnexo                      = $contrato->getCtrAnexo();
@@ -306,8 +525,10 @@ $contrato->getUsuario()->setNome($dado['nome']);
             $ctrNumero                     = $contrato->getCtrNumero();
             $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
             $ctrDataVencimento             = $contrato->getCtrDataVencimento()->format('Y-m-d');
-            $valorAtual                    = $contrato->getCtrValor();
-            $ctrValor                      = str_replace(",", ".", $valorAtual);
+            $ctrValor                    = $contrato->getCtrValor();
+           // $ctrValor                      = str_replace(',','.', str_replace(".", "", $valorAtual));
+            //str_replace(',','.', str_replace('.','', $_POST['txtSalario']))
+           // var_dump($ctrValor);
             $ctrStatus                     = $contrato->getCtrStatus();
             $ctrObservacao                 = $contrato->getCtrObservacao();
             $ctrAnexo                      = $contrato->getCtrAnexo();
@@ -379,7 +600,7 @@ $contrato->getUsuario()->setNome($dado['nome']);
         try {
             $ctrId = $contrato->getCtrId();
 
-            return $this->delete('contrato', "ctr_id = ctrId");
+            return $this->delete('contrato', "ctr_id = $ctrId");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);

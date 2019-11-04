@@ -22,26 +22,25 @@ class ContratoController extends Controller
     {
         $contratoId = $params[0];
         $contratoService = new ContratoService();
+        $editalService = new EditalService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $representanteService = new RepresentanteService();
         $contrato = new Contrato();
 
-        //self::setViewParam('listaEditais', $contratoService->listar($contratoId));
-        
-        self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
-        self::setViewParam('listarRepresentantes', $representanteService->listar());
+        self::setViewParam('listaClientes', $contratoService->listarClienteContrato($contratoId));
+        //self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
+        self::setViewParam('listarRepresentantes', $contratoService->listarRepresentanteContrato());
         
        if($_POST){
-           $contrato->setCtrId($_POST['codigo']);        
-           /*$contrato->setEdtProposta($_POST['proposta']);        
-           $contrato->setEdtNumero($_POST['numeroLicitacao']);              
-           $contrato->setEdtModalidade($_POST['modalidade']);        
-           $contrato->setEdtStatus($_POST['status']);        
-           $contrato->setEdtTipo($_POST['tipo']);  */
-           $contrato->setEdtCliente($_POST['codCliente']);
-           //var_dump(  $contrato->setEdtProposta($_POST['proposta']));
+           $contrato->setCtrRepresentante($_POST['codRepresentante']);
+           $contrato->setCtrId($_POST['codigo']);
+           $contrato->setCtrClienteLicitacao($_POST['clienteId']);
+           $contrato->setCtrNumero($_POST['contrato']); 
+           $contrato->setCtrStatus($_POST['status']);
+           $contrato->setCtrModalidade($_POST['modalidade']);       
+           $contrato->setCtrNumeroLicitacao($_POST['numeroLicitacao']); 
         }
-        
+    
         self::setViewParam('listaContratos', $contratoService->listarDinamico($contrato));
         $this->render('/contrato/index');
 
@@ -50,24 +49,46 @@ class ContratoController extends Controller
 
     }
 
-    public function editalPorCliente($params)
-    {        
+    public function autoCompleteContratoClienteRazaoSocial($params)
+    {       
         $clienteLicitacao = new ClienteLicitacao();
         $clienteLicitacao->setRazaoSocial($params[0]);        
-        $editalService = new EditalService();
-        $busca = $editalService->editalPorCliente($clienteLicitacao);      
+        
+        $contratoService = new ContratoService();
+        $busca = $contratoService->autoCompleteContratoClienteRazaoSocial($clienteLicitacao);      
         echo $busca;
     }
-
-    /*public function autoComplete($params)
-    {
-        $contrato = new Contrato();
-        $contrato->CidNome($params[0]);        
-        $contratoService = new ContratoService();
-        $busca = $contratoService->autoComplete($contrato);
+    public function autoCompleteEditalClienteRazaoSocial($params)
+    {       
+        $clienteLicitacao = new ClienteLicitacao();
+        $clienteLicitacao->setRazaoSocial($params[0]);        
         
+        $contratoService = new ContratoService();
+        $busca = $contratoService->autoCompleteEditalClienteRazaoSocial($clienteLicitacao);      
         echo $busca;
-    }*/
+    }
+    public function autoCompleteNumeroContratoCodCliente($params)
+    {       
+        $edital = new Edital();
+        $edital->setEdtNumero($params[0]);        
+        $clienteLicitacao = new ClienteLicitacao();
+        $clienteLicitacao->setCodCliente($params[1]);
+          
+        $contratoService = new ContratoService();
+        $busca = $contratoService->autoCompleteNumeroContratoCodCliente($edital, $clienteLicitacao);      
+        echo $busca;
+    }
+    public function autoCompleteNumeroEditalCodCliente($params)
+    {       
+        $edital = new Edital();
+        $edital->setEdtNumero($params[0]);        
+        $clienteLicitacao = new ClienteLicitacao();
+        $clienteLicitacao->setCodCliente($params[1]);
+          
+        $contratoService = new ContratoService();
+        $busca = $contratoService->autoCompleteNumeroEditalCodCliente($edital, $clienteLicitacao);      
+        echo $busca;
+    }
 
     public function cadastro()
     {
@@ -83,7 +104,7 @@ class ContratoController extends Controller
             $contrato->setClienteLicitacao($clienteLicitacao);
             
             $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
-            $edital = $clienteLicitacaoService->listar($editalId);
+            $edital = $clienteLicitacaoService->listar($editalId)[0];
             $contrato->setEdital($edital);
             
             $representanteId = Sessao::retornaValorFormulario('representante');
@@ -106,8 +127,7 @@ class ContratoController extends Controller
     }
 
     public function salvar()
-    {
-        
+    { 
         $clienteLicitacaoService  = new ClienteLicitacaoService();        
         $usuarioService = new UsuarioService();        
         $representanteService = new RepresentanteService();        
@@ -123,7 +143,7 @@ class ContratoController extends Controller
         $contrato->setCtrNumero($_POST['numeroContrato']);        
         $contrato->setCtrDataInicio($_POST['dataInicio']);        
         $contrato->setCtrDataVencimento($_POST['dataVencimento']);        
-        $contrato->setCtrValor($_POST['valor']);        
+        $contrato->setCtrValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
         $contrato->setCtrStatus($_POST['status']);        
         $contrato->setCtrObservacao($_POST['observacao']);
         $contrato->setCtrAnexo($_POST['anexo']);        
@@ -140,10 +160,14 @@ class ContratoController extends Controller
 
         $contratoValidador  = new ContratoValidador();
         $resultadoValidacao = $contratoValidador->validar($contrato);
-        // var_dump($contrato);
+
        if ($resultadoValidacao->getErros()) {
            $this->redirect('/contrato/cadastro');
         }
+        if (!$edital) {
+            $this->redirect('/contrato/cadastro');
+            Sessao::gravaMensagem("nenhuma licitacao informada");
+         }
 
         $contratoService = new ContratoService();
     
@@ -165,6 +189,7 @@ class ContratoController extends Controller
         ctr_prazoentrega, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_dataalteracao
         */
         $contratoId = $params[0];
+        
         $contratoService = new ContratoService();
         $representanteService = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
@@ -188,11 +213,9 @@ class ContratoController extends Controller
             Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/contrato');
         }
-       
         
         $this->setViewParam('contrato', $contrato);
         $this->render('/contrato/edicao');
-       // var_dump($contrato);
         
         Sessao::limpaMensagem();
     }
@@ -215,7 +238,7 @@ class ContratoController extends Controller
         $contrato->setCtrNumero($_POST['numeroContrato']);        
         $contrato->setCtrDataInicio($_POST['dataInicio']);        
         $contrato->setCtrDataVencimento($_POST['dataVencimento']);        
-        $contrato->setCtrValor($_POST['valor']);        
+        $contrato->setCtrValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
         $contrato->setCtrStatus($_POST['status']);        
         $contrato->setCtrObservacao($_POST['observacao']);
         $contrato->setCtrAnexo($_POST['anexo']);        

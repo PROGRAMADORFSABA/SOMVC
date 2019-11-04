@@ -31,6 +31,7 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
     private $representante;
     private $clienteLicitacao;
     private $edtCliente;
+    private $edtRepresentante;
 
          /**
          * Set the value of edtCliente
@@ -345,6 +346,26 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
         public function setUsuario(Usuario $usuario) {
                 $this->usuario = $usuario;
         }
+
+    /**
+     * Get the value of edtRepresentante
+     */ 
+    public function getEdtRepresentante()
+    {
+        return $this->edtRepresentante;
+    }
+
+    /**
+     * Set the value of edtRepresentante
+     *
+     * @return  self
+     */ 
+    public function setEdtRepresentante($edtRepresentante)
+    {
+        $this->edtRepresentante = $edtRepresentante;
+
+        return $this;
+    }
  }
 
 ?>

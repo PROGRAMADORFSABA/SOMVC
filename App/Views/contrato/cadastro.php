@@ -14,7 +14,7 @@
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/contrato/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
         <input type="hidden" class="form-control" name="ctrUsuario" id="ctrUsuario" value="<?php echo $_SESSION['id']; ?>" required>
-            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
+        <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
         <div class="kt-portlet__body">
             <input type="hidden" class="form-control" name="idCliente" id="idCliente" required>
             <div class="kt-portlet__body">
@@ -24,13 +24,13 @@
                     <a href="http://<?php echo APP_HOST; ?>/edital/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>Novo Edital</a>
                       <div>    
-                        <input type="text" name="contratoCliente-Autocomplete" id="contratoCliente-Autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
-                        value="<?php echo $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
-                        <input type="hidden" id="cliente" name="cliente" 
-                        value=<?php echo $viewVar['contrato']->getClienteLicitacao()->getCodCliente(); ?>>  
-                    </div>
-                      <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>                       
-            </div>
+                            <input type="text" name="editalCliente-Autocomplete" id="editalCliente-Autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
+                            value="<?php echo $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
+                            <input type="text" id="cliente" name="cliente" 
+                            value=<?php echo $viewVar['contrato']->getClienteLicitacao()->getCodCliente(); ?>>  
+                        </div>
+                        <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>                       
+                </div>
             <div class="form-group row">
                     <div class="col-lg-3">
                         <label for="numeroContrato" >Numero da Contrato:</label>
@@ -60,8 +60,8 @@
             </div>
                 <div class="form-group row">
                 <div class="col-lg-2">
-                        <label for="numeroLicitacao-AutoComplete" >Numero da Licitacao:</label>
-                        <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroLicitacao-AutoComplete" name="numeroLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao-AutoComplete'); ?>" required>
+                        <label for="editalLicitacao-AutoComplete" >Numero da Licitacao:</label>
+                        <input type="text" title="pesquisa o edital para o cliente selecionado" class="form-control" disabled placeholder="Digite numero da licitacao" id="editalLicitacao-AutoComplete" name="editalLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao-AutoComplete'); ?>" required>
                         <input type="hidden" id="numeroLicitacao" name="numeroLicitacao" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
                     </div>

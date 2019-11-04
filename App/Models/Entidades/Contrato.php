@@ -28,6 +28,8 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
     private $clienteLicitacao;
     private $ctrCliente;
     private $ctrUsuario;
+    private $ctrNumeroLicitacao;
+    private $ctrModalidade;
     
          /**
          * Set the value of ctrPrazoEntrega
@@ -96,7 +98,7 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
         }
 
         public function setCtrClienteLicitacao($ctrClienteLicitacao)   {
-                $this->CtrclienteLicitacao = $ctrClienteLicitacao;
+                $this->ctrClienteLicitacao = $ctrClienteLicitacao;
                 return $this;
         }
          /**
@@ -171,8 +173,7 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
                 $this->ctrStatus = $ctrStatus;
                 return $this;
         }
-        
-        
+                
         /**
          * Set the value of ctrDataAlteracao
          *
@@ -285,6 +286,12 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
         public function setEdital(Edital $edital) {
                 $this->edital = $edital;
         }
+        public function setCtrNumeroLicitacao($ctrNumeroLicitacao) {
+                $this->ctrNumeroLicitacao = $ctrNumeroLicitacao;
+        }
+        public function getCtrNumeroLicitacao() {
+             return   $this->ctrNumeroLicitacao;
+        }
 
     /**
      * Get the value of ctrCliente
@@ -333,7 +340,36 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
     {
         return $this->ctrUsuario;
     }
+    public function getCtrProposta()
+    {
+        return $this->ctrProposta;
+    }
+    public function setCtrProposta($ctrProposta)
+    {
+        $this->ctrProposta = $ctrProposta;
 
+        return $this;
+    }
+    public function getCtrModalidade()
+    {
+        return $this->ctrModalidade;
+    }
+    public function setCtrModalidade($ctrModalidade)
+    {
+        $this->ctrModalidade = $ctrModalidade;
+
+        return $this;
+    }
+    public function getCtrRepresentante()
+    {
+        return $this->ctrRepresentante;
+    }
+    public function setCtrRepresentante($ctrRepresentante)
+    {
+        $this->ctrRepresentante = $ctrRepresentante;
+
+        return $this;
+    }
     /**
      * Set the value of ctrUsuario
      *

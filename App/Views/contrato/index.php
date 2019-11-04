@@ -9,40 +9,43 @@
                         <i class="kt-font-brand flaticon2-line-chart"></i>
                         </span>
                     <h3 class="kt-portlet__head-title">
-                    Pesquisa de editais registrados 
+                    Pesquisa de contratos cadastrados 
                     </h3>                   
             </div>
-        </div>        
-        <div class="col-lg-12">
-            <label for="codCliente">Cliente</label>
-                <select class="form-control" name="codCliente">
-                    <option value="">Selecione o cliente</option>
-                    <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                            <?php echo $cliente->getRazaoSocial(); ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="col-lg-3">
+        </div>
+            <div class="kt-portlet__body">  
+                <div class="form-group row">
+                    <div class="col-lg-9">
+                        <label for="clienteId">Cliente</label>
+                        <select class="form-control" name="clienteId">
+                            <option value="">Selecione o cliente</option>
+                            <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
+                            <option value="<?php echo $cliente->getClienteLicitacao()->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('clienteId') == $cliente->getClienteLicitacao()->getCodCliente()) ? "selected" : ""; ?>>
+                            <?php echo $cliente->getClienteLicitacao()->getRazaoSocial(); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <span class="form-text text-muted">Por favor insira o cliente</span>
+                    </div>
+                    <div class="col-lg-3">
                         <label for="codRepresentante">Representante</label>
                         <select class="form-control" id="codRepresentante" name="codRepresentante" >
-                                <option value="">Selecione o Representante</option>
-                                <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
-                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
-                                        <?php echo $representante->getNomeRepresentante(); ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <option value="">Selecione o Representante</option>
+                            <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
+                            <option value="<?php echo $representante->getRepresentante()->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getRepresentante()->getCodRepresentante()) ? "selected" : ""; ?>>
+                            <?php echo $representante->getRepresentante()->getNomeRepresentante(); ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <span class="form-text text-muted">Por favor insira o Representante</span>
                     </div>   
-            <div class="kt-portlet__body">
+                </div>       
                 <div class="form-group row">
-                    <div class="col-lg-1">
+                    <div class="col-lg-2">
                         <label for="codigo">Codigo:</label>
                         <input type="text" class="form-control" title="Digite o codido" placeholder="codigo" id="codigo" name="codigo" value="<?php echo $Sessao::retornaValorFormulario('codigo'); ?>">
                     </div>
                     <div class="col-lg-2">
-                        <label for="prosposta">Prosposta:</label>
-                        <input type="text" class="form-control" title="Digite o numero da Prosposta" placeholder="Prosposta" id="proposta" name="proposta" value="<?php echo $Sessao::retornaValorFormulario('proposta'); ?>">
+                        <label for="numero">Contrato:</label>
+                        <input type="text" class="form-control" title="Digite o numero da Contrato" placeholder="Contrato" id="contrato" name="contrato" value="<?php echo $Sessao::retornaValorFormulario('contrato'); ?>">
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group"><label for="status">Status</label>
@@ -73,8 +76,8 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Pesquisar</button>
-            </div>
-        </form>
+            </div>                     
+    </form>
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
                 
@@ -177,7 +180,8 @@
                 <tbody>
                     <?php
                     $dados = $viewVar['listaContratos'];
-                    if ($dados > 0) {
+                   
+                    if (!empty($dados)) {            
                         foreach ($dados as $contrato) {
                             ?>
                             <tr>

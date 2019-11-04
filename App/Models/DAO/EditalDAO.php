@@ -70,6 +70,62 @@ class EditalDAO extends BaseDAO
             return $lista;        
                 
     }
+    public  function listarRepresentanteEdital($edtId = null)
+    {        
+        $SQL = " SELECT distinct(r.codRepresentante), r.nomeRepresentante
+		FROM edital edt
+		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+        INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
+		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";
+            if($edtId) 
+            {    
+                $SQL.= " WHERE edt.edt_id = $edtId";
+            }         
+            
+            $resultado = $this->select($SQL);
+            $dados = $resultado->fetchAll();
+            $lista = [];
+            foreach ($dados as $dado) {                
+                $edital = new Edital();
+                $edital->setEdtId($dado['edt_id']);;
+                $edital->setEdtNumero($dado['edt_numero']);
+                $edital->setEdtDataAbertura($dado['edt_dataabertura']);
+                $edital->setEdtHora($dado['edt_hora']);
+                $edital->setEdtDataResultado($dado['edt_dataresultado']);
+                $edital->setEdtProposta($dado['edt_proposta']);
+                $edital->setEdtModalidade($dado['edt_modalidade']);
+                $edital->setEdtTipo($dado['edt_tipo']);
+                $edital->setEdtGarantia($dado['edt_garantia']);
+                $edital->setEdtValor(number_format($dado['edt_valor'], 2, ',', '.'));
+                $edital->setEdtStatus($dado['edt_status']);
+                $edital->setEdtAnalise($dado['edt_analise']);
+                $edital->setEdtObservacao($dado['edt_observacao']);
+                $edital->setEdtAnexo($dado['edt_anexo']);
+                $edital->setEdtDataAlteracao($dado['edt_dataabertura']);
+                $edital->setEdtDataCadastro($dado['edt_datacadastro']);
+                $edital->setEdtDataAlteracao($dado['edt_dataalteracao']);
+                $edital->setRepresentante(new Representante());
+                $edital->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
+                $edital->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
+                $edital->setClienteLicitacao(new ClienteLicitacao());
+                $edital->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+                $edital->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
+                $edital->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+                $edital->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+                $edital->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+                $edital->setInstituicao(new Instituicao());
+                $edital->getInstituicao()->setInst_Id($dado['inst_id']);                    
+                $edital->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
+                $edital->setUsuario(new Usuario());
+                $edital->getUsuario()->setId($dado['id']);
+                $edital->getUsuario()->setNome($dado['nome']);
+                
+                $lista[] = $edital;
+            }
+            return $lista;        
+                
+    }
     public  function listarDinamico(Edital $edital)
     {     
         
@@ -79,51 +135,26 @@ class EditalDAO extends BaseDAO
         $numeroLicitacao    = $edital->getEdtNumero();
         $status             = $edital->getEdtStatus();
         $modalidade         = $edital->getEdtModalidade();
+        $representante      = $edital->getEdtRepresentante();
 
-        if ($codEdital && $numeroLicitacao && $status && $proposta && $codCliente && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codEdital AND edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "' AND edt.edt_modalidade = '" . $modalidade . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($codEdital && $numeroLicitacao && $proposta && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codEdital AND edt.edt_proposta = '". $proposta . "' AND edt.edt_modalidade = '" . $modalidade . "'  AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($codEdital && $status && $proposta && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codEdital AND edt.edt_proposta = '". $proposta . "' AND edt.edt_modalidade = '" . $modalidade ."'  AND edt.edt_status = '" . $status . "'";
-        } elseif ($codEdital && $numeroLicitacao && $modalidade) {
-            $WHERE = "  WHERE edt.edt_id = $codEdital  AND edt.edt_numero = '" .  $numeroLicitacao . "' AND edt.edt_modalidade = '" . $modalidade .   "'";
-        } elseif ($codEdital && $proposta) {
-            $WHERE = "  WHERE edt.edt_id = $codEdital AND edt.edt_proposta = '". $proposta ."' ";
-        } elseif ($codEdital) {
-            $WHERE = "  WHERE edt.edt_id = $codEdital ";
-        } elseif ($numeroLicitacao && $status && $proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao && $status) {
-            $WHERE = "  WHERE edt.edt_status = '" . $status . "' AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao && $proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao) {
-            $WHERE = "  WHERE edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($numeroLicitacao) {
-            $WHERE = "  WHERE  edt.edt_numero = '" . $numeroLicitacao . "'";
-        } elseif ($status && $proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.edt_status = '" . $status . "'";
-        } elseif ($status) {
-            $WHERE = "  WHERE edt.edt_status = '" . $status . "'";
-        } elseif ($proposta && $codCliente) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."'  AND edt.codCliente = $codCliente";
-        } elseif ($proposta) {
-            $WHERE = "  WHERE edt.edt_proposta = '". $proposta ."' ";
-        } elseif ($codCliente) {
-            $WHERE = "  WHERE edt.edt_cliente = $codCliente";
-        } elseif ($modalidade) {
-            $WHERE = "  WHERE edt.edt_modalidade = '" . $modalidade ."'";
-        } else {
-            $WHERE = "";
-        }   
         $SQL = " SELECT * 
 		FROM edital edt
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
-		INNER JOIN usuarios u ON u.id = edt.edt_usuario $WHERE ";                 
-            
+		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";                 
+             $where = Array();
+             if( $codCliente ){ $where[] = " edt.edt_cliente = {$codCliente}"; }
+             if( $codEdital ){ $where[] = " edt.edt_id = {$codEdital}"; }
+             if( $proposta ){ $where[] = " edt.edt_proposta = '{$proposta}'"; }
+             if( $status ){ $where[] = " edt.edt_status = '{$status}'"; }
+             if( $representante ){ $where[] = " r.codRepresentante = {$representante}"; }
+             if( $modalidade ){ $where[] = " edt.edt_modalidade = '{$modalidade}'"; }
+             if( $numeroLicitacao ){ $where[] = " edt.edt_numero = '{$numeroLicitacao}'"; }   
+          
+          if( sizeof( $where ) )
+          $SQL .= ' WHERE '.implode( ' AND ',$where ); 
+
             $resultado = $this->select($SQL);
             $dados = $resultado->fetchAll();
             $lista = [];
@@ -194,8 +225,8 @@ class EditalDAO extends BaseDAO
             $edtModalidade                 = $edital->getEdtModalidade();
             $edtTipo                       = $edital->getEdtTipo();
             $edtGarantia                   = $edital->getEdtGarantia();
-            $valorAtual                    = $edital->getEdtValor();
-            $edtValor                      = str_replace(",", ".", $valorAtual);
+            $edtValor                    = $edital->getEdtValor();
+           // $edtValor                      = str_replace(",", ".", $valorAtual);
             $edtStatus                     = $edital->getEdtStatus();
             $edtAnalise                    = $edital->getEdtAnalise();
             $edtObservacao                 = $edital->getEdtObservacao();
@@ -254,10 +285,10 @@ class EditalDAO extends BaseDAO
                 throw new \Exception("Erro na gravação de dados. " . $e, 500);
             }
     }
-    public function editalPorClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
+    public function autoCompleteEditalClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
     {
         $resultado = $this->select(
-            " SELECT * 
+            " SELECT edt.edt_id, edt.edt_numero, c.licitacaoCliente_cod, c.razaosocial,c.nomefantasia
             FROM edital edt
             INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
             INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
@@ -265,6 +296,21 @@ class EditalDAO extends BaseDAO
             INNER JOIN usuarios u ON u.id = edt.edt_usuario 
             WHERE c.razaosocial
                         LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY edt.edt_numero LIMIT 0,6"
+        );
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    public function autoCompleteNumeroEditalCodCliente(Edital $edital, ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            " SELECT edt.edt_id, edt.edt_numero, c.licitacaoCliente_cod, c.razaosocial,c.nomefantasia
+            FROM edital edt
+            INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
+            INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
+            INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
+            INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+            WHERE edt.edt_numero
+                        LIKE '%".$edital->getEdtNumero()."%' AND c.licitacaoCliente_cod = ".$clienteLicitacao->getCodCliente()." ORDER BY edt.edt_numero LIMIT 0,6"
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -290,8 +336,8 @@ class EditalDAO extends BaseDAO
             $edtModalidade                 = $edital->getEdtModalidade();
             $edtTipo                       = $edital->getEdtTipo();
             $edtGarantia                   = $edital->getEdtGarantia();
-            $valorAtual                    = $edital->getEdtValor();
-            $edtValor                      = str_replace(",", ".", $valorAtual);
+            $edtValor                    = $edital->getEdtValor();
+            //$edtValor                      = str_replace(",", ".", $valorAtual);
             $edtStatus                     = $edital->getEdtStatus();
             $edtAnalise                    = $edital->getEdtAnalise();
             $edtObservacao                 = $edital->getEdtObservacao();
@@ -367,7 +413,8 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
         try {
             $edtId = $edital->getEdtId();
 
-            return $this->delete('edital', "edt_id = $edtId");
+            $this->delete('contrato', "ctr_edital = $edtId");
+            $this->delete('edital', "edt_id = $edtId");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);
