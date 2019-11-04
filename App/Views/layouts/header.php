@@ -45,8 +45,9 @@ $dataAtual = date('Y-m-d H:i:s');
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
-
-	<link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.min.css"> 	
+    
+    <link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/style.css">
+    <link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.min.css">
 	<link rel="stylesheet" href="http://<?php echo APP_HOST; ?>/public/css/easy-autocomplete.themes.min.css"> 
 
 	<!--end::Page Vendors Styles -->

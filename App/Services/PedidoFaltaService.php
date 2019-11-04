@@ -77,4 +77,43 @@
             }
         }
         
+        public function salvar(PedidoFalta $pedidoFalta)
+        {
+         
+            $transacao = new Transacao();
+            $pedidoValidador = new PedidoFaltaValidador();
+            $resultadoValidacao = $pedidoValidador->validar($pedidoFalta);
+            
+            if($resultadoValidacao->getErros()){
+                Sessao::gravaErro($resultadoValidacao->getErros());
+                return false;
+            }else{
+                try{
+                    $pedidoFaltaDAO= new PedidoFaltaDAO();
+                    $transacao->beginTransaction();
+                    
+                    $id = $pedidoFaltaDAO->salvar($pedidoFalta);
+                    $pedidoFalta->setFaltaClienteCod($id);
+                    $pedidoFaltaDAO->addProduto($pedidoFalta);
+                    
+                    $transacao->commit();
+                    
+                    Sessao::limpaFormulario();
+                    Sessao::limpaMensagem();
+                    Sessao::gravaMensagem("Falta Cadastrada com sucesso !");
+                    
+                    return true;
+                    
+                }catch (\Exception $e)
+                {
+                    Sessao::gravaErro(['Erro ao gravar Falta !']);
+                    $transacao->rollBack();
+                    
+                    return false;
+                }
+            }
+            
+            
+        }
+        
     }

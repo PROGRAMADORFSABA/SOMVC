@@ -15,11 +15,11 @@ var app = {
 				this.exibeMensagem('O Produto <b>'+ produto.ProNome +'</b> já foi selecionada.');
 			}else{
 				$('#editar-tabela-produtos').append('<tr>'+
-					'<td>'+produto.ProNome+'<input type="hidden" value="'+produto.ProCodigo+'" name="produtos[]"></td>'+
+					'<td>'+produto.ProNome + ' - ' + '['+ produto.nomefantasia + ']'+' <input type="hidden" value="'+produto.ProCodigo+'" name="produtos[]"></td>'+
 					'<td><a class="btn btn-danger btn-sm" onClick="app.removeProduto(this,'+ produto.ProCodigo +')">remover</td>'+
 					'</tr>');			
 				$("#autocomplete-produto").val('');
-				app.arrayProdutos.push(produto.ProCodigo);
+				app.arrayProdutos.push(produto.ProCodigo + produto.nomefantasia);
 			}
 		}		
 	},
@@ -50,7 +50,8 @@ var optionsProdutos = {
 	},
 
 	getValue: function(element) {
-		return element.ProNome;
+		return element.ProNome + ' - '+'[' + element.nomefantasia + ']';
+
 		
 	},
 
@@ -58,10 +59,10 @@ var optionsProdutos = {
 		onChooseEvent: function() {		
 			item = $("#autocomplete-produto").getSelectedItemData();
 			
-			if(app.arrayProdutos.length < app.num_maximo_produto){				
-				if(app.arrayProdutos.indexOf(item.ProCodigo) < 0){	
+			if(app.arrayProdutos.length < app.num_maximo_produto){
+				if(app.arrayProdutos.indexOf(item.ProCodigo) < 0){
 					app.adicionaProduto(item);
-				}else{					
+				}else{
 					app.exibeMensagem('O produto <b>'+ item.ProNome +'</b> já foi selecionada.');
 					$("#autocomplete-produto").val('');
 				}

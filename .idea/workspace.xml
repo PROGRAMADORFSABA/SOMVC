@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ec0aff2-021c-42e5-a75e-248e394692bd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/validacao-produto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" afterDir="false" />
+    <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.maskedinput.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.validate.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ProdutoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/layouts/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/autocomplete-produto.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/autocomplete-produto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/validacao-produto.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/validacao-produto.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +110,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../php.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -111,6 +121,12 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp-7.3.8\htdocs\SOMVC\public\js" />
+      <recent name="C:\xampp-7.3.8\htdocs\SOMVC\public\css" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -156,8 +172,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JavaScript Debug.index.php JavaScript" />
       <item itemvalue="JavaScript Debug.cadastro.php" />
+      <item itemvalue="JavaScript Debug.index.php JavaScript" />
       <item itemvalue="JavaScript Debug.indexold.html" />
       <item itemvalue="PHP Script.index.php" />
     </list>
@@ -189,7 +205,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9ec0aff2-021c-42e5-a75e-248e394692bd" name="Default Changelist" comment="" />
+      <changelist id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="" />
       <created>1561084680149</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -267,6 +283,7 @@
       <workItem from="1572447516342" duration="5416000" />
       <workItem from="1572614496247" duration="4511000" />
       <workItem from="1572627336845" duration="3063000" />
+      <workItem from="1572814750128" duration="8514000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>

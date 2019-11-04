@@ -2,12 +2,12 @@ $().ready(function() {
 
     $('#form_cadastro_produto').validate({
         rules: {
-            produto: {
+            ProNome: {
                 required: true
             }
         },
         messages: {
-            produto: {
+            ProNome: {
                 required: "Este campo não pode ser vazio"
             }
         },

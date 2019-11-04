@@ -12,6 +12,7 @@
     use App\Models\DAO\ClienteLicitacaoDAO;
 
     use App\Services\ClienteLicitacaoService;
+    use App\Services\ClienteService;
     use App\Services\PedidoFaltaService;
     use App\Services\FornecedorService;
     use App\Services\MarcaService;
@@ -80,6 +81,33 @@
             $pedidoFalta->setProposta(trim($_POST['proposta']));
             $pedidoFalta->setAFM(trim($_POST['afm']));
             $pedidoFalta->setObservacao(trim($_POST['observacao']));
+            
+            if(ctype_digit($_POST['clientelicitacao'])){
+                $clienteLicitacaoService = new ClienteLicitacaoService();
+                $clienteLicitacao = $clienteLicitacaoService->listar($_POST['clientelicitacao'])[0];
+            }else{
+                throw new \Exception("Erro ao Cadastrar Vaga", 500);
+            }
+            
+            if(is_null($clienteLicitacao)){
+                throw new \Exception("Erro ao cadastra vaga !", 500);
+            }else{
+                $pedidoFalta->setFkCliente($clienteLicitacao);
+                $produtoService = new ProdutoService();
+                $produtos = $produtoService->preencheProduto($_POST['produtos']);
+                
+                $pedidoFalta->setFkProduto($produtos);
+                
+                Sessao::gravaFormulario($_POST);
+                
+                $pedidoFaltaService = new PedidoFaltaService();
+                
+                if($pedidoFaltaService->salvar($pedidoFalta)){
+                    $this->redirect('/pedidofalta/index');
+                }else{
+                    $this->redirect('/pedidofalta/cadastro');
+                }
+            }
         
         
         }

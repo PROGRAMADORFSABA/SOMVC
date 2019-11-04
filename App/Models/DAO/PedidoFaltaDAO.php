@@ -79,12 +79,12 @@
                     ':faltaCliente_cod,:fk_marca, :status, afm, observacao, dataFalta, proposta',
                     [
                         ':faltaCliente_cod' => $cliente,
-                        'fk_marca'      => $marca,
-                        'fk_status'     => $status,
-                        'afm'           => $afm,
-                        'observacao'    => $observacao,
-                        'dataFalta'     =>$dataFalta,
-                        'proposta'      =>$proposta
+                        'fk_marca'          => $marca,
+                        'fk_status'         => $status,
+                        'afm'               => $afm,
+                        'observacao'        => $observacao,
+                        'dataFalta'         =>$dataFalta,
+                        'proposta'          =>$proposta
                 
                     ]
                 );
