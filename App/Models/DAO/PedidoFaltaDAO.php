@@ -67,23 +67,23 @@
         {
             try {
                 $cliente        = $pedidoFalta->getFkCliente()->getCodCliente();
-                $marca          = $pedidoFalta->getFkMarca();
-                $status         = $pedidoFalta->getFkStatus();
+                //$marca          = $pedidoFalta->getFkMarca();
+                //$status         = $pedidoFalta->getFkStatus();
                 $afm            = $pedidoFalta->getAFM();
                 $observacao     = $pedidoFalta->getObservacao();
-                $dataFalta      = $pedidoFalta->getDataFalta();
+                //$dataFalta      = $pedidoFalta->getDataFalta();
                 $proposta       = $pedidoFalta->getProposta();
                 
                 return $this->insert(
                     'faltaCliente',
-                    ':faltaCliente_cod,:fk_marca, :status, afm, observacao, dataFalta, proposta',
+                    ':faltaCliente_cod, afm, observacao, proposta',
                     [
                         ':faltaCliente_cod' => $cliente,
-                        'fk_marca'          => $marca,
-                        'fk_status'         => $status,
+                        //'fk_marca'          => $marca,
+                        //'fk_status'         => $status,
                         'afm'               => $afm,
                         'observacao'        => $observacao,
-                        'dataFalta'         =>$dataFalta,
+                        //'dataFalta'         =>$dataFalta,
                         'proposta'          =>$proposta
                 
                     ]
@@ -132,12 +132,13 @@
                     'produtofalta',
                     ":proposta, :AFM, :observacao, :FK_CLIENTE, :FK_PRODUTO, FK_MARCA",
                     [
-                        'proposta'      => $proposta,
-                        'AFM'           => $AFM,
-                        'observacao'    => $observacao,
-                        'FK_CLIENTE'    => $fk_cliente,
-                        'FK_PRODUTO'    => $fk_produto,
-                        'FK_MARCA'      => $fk_marca
+                        'faltaCliente_cod'  =>$faltaCliente_cod,
+                        'proposta'          => $proposta,
+                        'AFM'               => $AFM,
+                        'observacao'        => $observacao,
+                        'FK_CLIENTE'        => $fk_cliente,
+                        'FK_PRODUTO'        => $fk_produto,
+                        'FK_MARCA'          => $fk_marca
                     ],
                     "faltaCliente_cod = :faltaCliente_cod"
                 );

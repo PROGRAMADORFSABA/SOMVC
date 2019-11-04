@@ -38,7 +38,7 @@
             if(Sessao::existeFormulario())
             {
                 $pedidoFalta = new PedidoFalta();
-                $pedidoFalta->setFaltaClienteCod(Sessao::retornaValorFormulario('idFaltaCliente'));
+                $pedidoFalta->setFaltaClienteCod(Sessao::retornaValorFormulario('cliente'));
                 $pedidoFalta->setProposta(Sessao::retornaValorFormulario('proposta'));
                 $pedidoFalta->setAFM(Sessao::retornaValorFormulario('AFM'));
                 $pedidoFalta->setFkStatus(Sessao::retornaValorFormulario('status'));

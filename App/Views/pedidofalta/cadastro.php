@@ -48,7 +48,7 @@
                                         <div class="iconic-input right">
                                             <input type="text" name="afm" class="form-control" placeholder="Proposta"
                                                    required value= <?php
-                                                echo $viewVar['pedidofalta']->getProposta(); ?>>
+                                                echo $viewVar['pedidofalta']->getAFM(); ?>>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">Cliente</label>
                                     <div class="col-lg-9">
                                         <div>
-                                            <input type="text" name="autocompleteCliente" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
+                                            <input type="text" name="autocompleteCliente" id="autocomplete-clientefalta" class="form-control" required placeholder="Cliente - autocomplete"
                                                    value=<?php echo $viewVar['pedidofalta']->getFkCliente()->getNomeFantasia();?> >
 
                                             <input type="hidden" id="cliente" name="cliente"
@@ -78,7 +78,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">Observação</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <textarea maxlength="350" class="form-control spinner" placeholder="Observacao da Vaga" rows="5" name="observacao"><?php echo $viewVar['pedidofalta']->getObservacao()?></textarea>
+                                            <textarea maxlength="350" class="form-control spinner" placeholder="Observacao da falta" rows="5" name="observacao"><?php echo $viewVar['pedidofalta']->getObservacao()?></textarea>
                                         </div>
                                     </div>
                                 </div>
