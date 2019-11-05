@@ -73,18 +73,18 @@
                 $observacao     = $pedidoFalta->getObservacao();
                 //$dataFalta      = $pedidoFalta->getDataFalta();
                 $proposta       = $pedidoFalta->getProposta();
-                
+          
                 return $this->insert(
                     'faltaCliente',
-                    ':faltaCliente_cod, afm, observacao, proposta',
+                    ':fk_cliente, :afm, :observacao, :proposta',
                     [
-                        ':faltaCliente_cod' => $cliente,
+                        ':fk_cliente' => $cliente,
                         //'fk_marca'          => $marca,
                         //'fk_status'         => $status,
-                        'afm'               => $afm,
-                        'observacao'        => $observacao,
+                        ':afm'               => $afm,
+                        ':observacao'        => $observacao,
                         //'dataFalta'         =>$dataFalta,
-                        'proposta'          =>$proposta
+                        ':proposta'          =>$proposta
                 
                     ]
                 );
@@ -95,23 +95,26 @@
     
         public function addProduto(PedidoFalta $pedidoFalta)
         {
+           
             try {
                 $produtos = $pedidoFalta->getFkProduto();
                 if (isset($produtos)) {
                     foreach ($produtos as $produto) {
+                     
                         $this->insert(
                             'faltaporcliente',
-                            ":FK_ID_FALTACLIENTE,:FK_IDPRODUTO, :FK_MARCA",
+                            ":FK_ID_FALTACLIENTE,:FK_IDPRODUTO, :FK_CLIENTE",
                             [
                                 ':FK_ID_FALATACLIENTE'  => $pedidoFalta->getFaltaClienteCod(),
                                 ':FK_IDPRODUTO'         => $produto->getProCodigo(),
-                                ':FK_MARCA'             => $produto->getFkMarca()
+                                ':FK_CLIENTE'             => $pedidoFalta->getFkCliente()->getCodCliente()
                             ]
                         );
                     }
                 }
                 return false;
             } catch (\Exception $e) {
+                
                 throw new \Exception("Erro na gravação de dados !", 500);
             }
         }

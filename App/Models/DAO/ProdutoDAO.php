@@ -8,17 +8,30 @@ use App\Models\Entidades\ClienteLicitacao;
 
 class ProdutoDAO extends BaseDAO
 {
-    public  function listar($proCodigo = null)
-    {
-        if ($proCodigo) {
-            $resultado = $this->select(
-                "SELECT * FROM Produto p
-                inner join marca m on m.marcacod = p.ProMarca
-                inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
-                inner join usuarios u on u.id = p.ProUsuario WHERE p.ProCodigo = $proCodigo"
-            );
+    public  function listar($proCodigo = null){
 
-            $dado = $resultado->fetch();
+        $SQL= "SELECT * FROM Produto p              
+                inner join fornecedor f on f.fornecedor_cod = p.ProFornecedor  ";
+        
+        if ($proCodigo) {
+                        
+            $SQL .= " WHERE p.ProCodigo = $proCodigo ";
+        }
+            $resultado = $this->select($SQL);
+           return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::Class);        
+    }
+
+    public  function listar_old($proCodigo = null)
+    {
+        
+        if (!$proCodigo) {
+            $resultado = $this->select(
+                "SELECT * FROM Produto p              
+                inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
+                WHERE p.ProCodigo = $proCodigo"
+            );
+            $dado = $resultado->fetch();            
+          
             if ($dado) {
                 $produto = new Produto();
                 $produto->setProCodigo($dado['ProCodigo']);
@@ -26,18 +39,18 @@ class ProdutoDAO extends BaseDAO
                 $produto->setProNomeComercial($dado['ProNomeComercial']);
                 $produto->setProDataAlteracao($dado['ProDataAlteracao']);
                 $produto->setProDataCadastro($dado['ProDataCadastro']);
-                $produto->getProMarca($dado['ProMarca']);
-                $produto->getMarca()->setMarcaCod($dado['marcacod']);
-                $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
+               // $produto->getProMarca($dado['ProMarca']);
+               // $produto->getMarca()->setMarcaCod($dado['marcacod']);
+              //  $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
                 $produto->setProFornecedor($dado['ProFornecedor']);
                 $produto->getFornecedor()->setFornecedor_Cod($dado['fornecedor_cod']);
                 $produto->getFornecedor()->setForNomeFantasia($dado['nomefantasia']);
                 $produto->getFornecedor()->setForRazaoSocial($dado['razaosocial']);
                 $produto->getFornecedor()->setForCnpj($dado['CNPJ']);
-                $produto->getUsuario($dado['ProUsuario']);
-                $produto->getUsuario()->setNome($dado['nome']);
-                $produto->getUsuario()->setEmail($dado['email']);
-
+                //$produto->getUsuario($dado['ProUsuario']);
+               // $produto->getUsuario()->setNome($dado['nome']);
+               // $produto->getUsuario()->setEmail($dado['email']);
+              
                 return $produto;
 
             }
@@ -45,9 +58,9 @@ class ProdutoDAO extends BaseDAO
 
             $resultado = $this->select(
                 "SELECT * FROM Produto p
-                inner join marca m on m.marcacod = p.ProMarca
+             --   inner join marca m on m.marcacod = p.ProMarca
                 inner join fornecedor f on f.fornecedor_cod= p.ProFornecedor
-                inner join usuarios u on u.id = p.ProUsuario "
+                inner join usuarios u on u.id = p.ProUsuario WHERE p.ProCodigo = $proCodigo"
             );
             $dados = $resultado->fetchAll();
 
@@ -62,9 +75,9 @@ class ProdutoDAO extends BaseDAO
                     $produto->setProNomeComercial($dado['ProNomeComercial']);
                     $produto->setProDataAlteracao($dado['ProDataAlteracao']);
                     $produto->setProDataCadastro($dado['ProDataCadastro']);
-                    $produto->setProMarca($dado['ProMarca']);
-                    $produto->getMarca()->setMarcaCod($dado['marcacod']);
-                    $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
+                   // $produto->setProMarca($dado['ProMarca']);
+                  //  $produto->getMarca()->setMarcaCod($dado['marcacod']);
+                 //   $produto->getMarca()->setMarcaNome($dado['nome_Marca']);
                     $produto->setProFornecedor($dado['ProFornecedor']);
                     $produto->getFornecedor()->setFornecedor_Cod($dado['fornecedor_cod']);
                     $produto->getFornecedor()->setForNomeFantasia($dado['nomefantasia']);
@@ -73,6 +86,7 @@ class ProdutoDAO extends BaseDAO
 
                     $lista[] = $produto;
                 }
+           
                 return $lista;
             }
 

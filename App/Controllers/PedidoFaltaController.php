@@ -40,18 +40,18 @@
                 $pedidoFalta = new PedidoFalta();
                 $pedidoFalta->setFaltaClienteCod(Sessao::retornaValorFormulario('cliente'));
                 $pedidoFalta->setProposta(Sessao::retornaValorFormulario('proposta'));
-                $pedidoFalta->setAFM(Sessao::retornaValorFormulario('AFM'));
-                $pedidoFalta->setFkStatus(Sessao::retornaValorFormulario('status'));
+                
+                $pedidoFalta->setAFM(Sessao::retornaValorFormulario('afm'));
+               // $pedidoFalta->setFkStatus(Sessao::retornaValorFormulario('status'));
                 $pedidoFalta->setObservacao(Sessao::retornaValorFormulario('observacao'));
                 $pedidoFalta->setDataFalta(Sessao::retornaValorFormulario('dataFalta'));
                 
-                $codCliente = Sessao::retornaValorFormulario('clienteLicitacao');
+                $codCliente = Sessao::retornaValorFormulario('cliente');
                 $clienteLicitacaoServices = new ClienteLicitacaoService();
-                $clienteLicitacao = $clienteLicitacaoServices->listar($codCliente)[0];
+                $clienteLicitacao = $clienteLicitacaoServices->listar($codCliente);
                 $pedidoFalta->setFkCliente($clienteLicitacao);
                 
                 $produtos = Sessao::retornaValorFormulario('produtos');
-                
                 if(empty($produtos)){
                     $pedidoFalta->setFkProduto(array());
                 }else{
@@ -68,7 +68,7 @@
                 
             }
             $this->setViewParam('pedidofalta', $pedidofalta);
-            $this->render('/pedidofalta/cadastro');
+           $this->render('/pedidofalta/cadastro');
             
             Sessao::limpaErro();
             Sessao::limpaFormulario();
@@ -81,21 +81,20 @@
             $pedidoFalta->setProposta(trim($_POST['proposta']));
             $pedidoFalta->setAFM(trim($_POST['afm']));
             $pedidoFalta->setObservacao(trim($_POST['observacao']));
-            
-            if(ctype_digit($_POST['clientelicitacao'])){
+            if(ctype_digit($_POST['cliente'])){
                 $clienteLicitacaoService = new ClienteLicitacaoService();
-                $clienteLicitacao = $clienteLicitacaoService->listar($_POST['clientelicitacao'])[0];
+                $clienteLicitacao = $clienteLicitacaoService->listar($_POST['cliente']);
             }else{
-                throw new \Exception("Erro ao Cadastrar Vaga", 500);
+                
+                throw new \Exception("Erro ao Cadastrar falta pedido", 500);
             }
-            
             if(is_null($clienteLicitacao)){
-                throw new \Exception("Erro ao cadastra vaga !", 500);
+                throw new \Exception("Erro ao cadastra falta pedido !", 500);
             }else{
                 $pedidoFalta->setFkCliente($clienteLicitacao);
                 $produtoService = new ProdutoService();
-                $produtos = $produtoService->preencheProduto($_POST['produtos']);
-                
+                $produtos = $produtoService->preencheProduto($_POST['produtos'])[0];
+          
                 $pedidoFalta->setFkProduto($produtos);
                 
                 Sessao::gravaFormulario($_POST);
@@ -103,9 +102,10 @@
                 $pedidoFaltaService = new PedidoFaltaService();
                 
                 if($pedidoFaltaService->salvar($pedidoFalta)){
-                    $this->redirect('/pedidofalta/index');
+                      $this->redirect('/pedidofalta/index');
+              
                 }else{
-                    $this->redirect('/pedidofalta/cadastro');
+                   $this->redirect('/pedidofalta/cadastro');
                 }
             }
         

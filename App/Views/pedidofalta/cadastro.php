@@ -9,7 +9,7 @@
                     if($Sessao::retornaErro()){ ?>
                     <div class="col-lg-12">
                         <div class="alert alert-danger" role="alert">
-                            <?php $Sessao =null;
+                            <?php 
                                 foreach($Sessao::retornaErro() as $key => $mensagem){ ?>
                                 <?php echo $mensagem; ?> <br>
                             <?php } ?>
@@ -36,7 +36,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">Proposta</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <input type="text" name="proposta" class="form-control" placeholder="Proposta"
+                                            <input type="text" id="proposta" name="proposta" class="form-control" placeholder="Proposta"
                                                    required value= <?php
                                                 echo $viewVar['pedidofalta']->getProposta(); ?>>
                                         </div>
@@ -46,7 +46,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">AFM</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <input type="text" name="afm" class="form-control" placeholder="Proposta"
+                                            <input type="text" id="afm" name="afm" class="form-control" placeholder="Proposta"
                                                    required value= <?php
                                                 echo $viewVar['pedidofalta']->getAFM(); ?>>
                                         </div>

@@ -5,8 +5,8 @@
 		var optionsclientecontrato = {
 			url: function (cliente) {
 				//return "http://coisavirtual.com.br/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente; //hospedagem
-				//return "http://localhost:81/SOMVC/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente;
-				return "http://localhost/SOMVC/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente;
+				return "http://localhost:81/SOMVC/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente;
+				//return "http://localhost/SOMVC/contrato/autoCompleteContratoClienteRazaoSocial/" + cliente;
 			},
 			getValue: function (element) {
 					return element.razaosocial;
@@ -38,8 +38,8 @@
 		var optionsclienteedital = {
 			url: function (cliente) {
 				//return "http://coisavirtual.com.br/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente; //hospedagem
-				//return "http://localhost:81/SOMVC/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente;
-				return "http://localhost/SOMVC/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente;
+				return "http://localhost:81/SOMVC/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente;
+				//return "http://localhost/SOMVC/contrato/autoCompleteEditalClienteRazaoSocial/" + cliente;
 			},
 			getValue: function (element) {
 					return element.razaosocial;
@@ -66,9 +66,9 @@
 	
 		var optionscontrato = {
 			url: function (cliente) {
-				//return "http://coisavirtual.com.br/contrato/autoCompleteNumeroContratoCodCliente/" + cliente; //hospedagem
-				//return "http://localhost:81/SOMVC/contrato/autoCompleteNumeroContratoCodCliente/" + cliente;
-				return "http://localhost/SOMVC/contrato/autoCompleteNumeroContratoCodCliente/"+cliente +"/"+ licitacaoCliente_cod;
+				//return "http://coisavirtual.com.br/contrato/autoCompleteNumeroContratoCodCliente/" + cliente+"/"+ licitacaoCliente_cod; //hospedagem
+				return "http://localhost:81/SOMVC/contrato/autoCompleteNumeroContratoCodCliente/" + cliente+"/"+ licitacaoCliente_cod;
+				//return "http://localhost/SOMVC/contrato/autoCompleteNumeroContratoCodCliente/"+cliente +"/"+ licitacaoCliente_cod;
 			},
 
 			getValue: function (element) {
@@ -96,9 +96,9 @@
 
 		var optionsedital = {
 			url: function (cliente) {
-				//return "http://coisavirtual.com.br/contrato/autoCompleteNumeroEditalCodCliente/" + cliente; //hospedagem
-				//return "http://localhost:81/SOMVC/contrato/autoCompleteNumeroEditalCodCliente/" + cliente;
-				return "http://localhost/SOMVC/contrato/autoCompleteNumeroEditalCodCliente/"+cliente +"/"+ licitacaoCliente_cod;
+				//return "http://coisavirtual.com.br/contrato/autoCompleteNumeroEditalCodCliente/" + cliente+"/"+ licitacaoCliente_cod; //hospedagem
+				return "http://localhost:81/SOMVC/contrato/autoCompleteNumeroEditalCodCliente/" + cliente+"/"+ licitacaoCliente_cod;
+				//return "http://localhost/SOMVC/contrato/autoCompleteNumeroEditalCodCliente/"+cliente +"/"+ licitacaoCliente_cod;
 			},
 
 			getValue: function (element) {

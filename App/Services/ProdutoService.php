@@ -58,7 +58,8 @@
             if (isset($arryProdutos)){
                 foreach ($arryProdutos as $proCodigo){
                     
-                    $produtos[] = $produtoDAO->listar($proCodigo)[0];
+                    $produtos[] = $produtoDAO->listar($proCodigo);
+                  
                 }
                 
                 return $produtos;

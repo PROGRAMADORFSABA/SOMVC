@@ -79,6 +79,7 @@
         
         public function salvar(PedidoFalta $pedidoFalta)
         {
+          
          
             $transacao = new Transacao();
             $pedidoValidador = new PedidoFaltaValidador();
@@ -91,9 +92,9 @@
                 try{
                     $pedidoFaltaDAO= new PedidoFaltaDAO();
                     $transacao->beginTransaction();
-                    
                     $id = $pedidoFaltaDAO->salvar($pedidoFalta);
                     $pedidoFalta->setFaltaClienteCod($id);
+                  
                     $pedidoFaltaDAO->addProduto($pedidoFalta);
                     
                     $transacao->commit();

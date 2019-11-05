@@ -103,7 +103,7 @@
         /**
          * @return mixed
          */
-        public function getFkCliente() : ClienteLicitacao
+        public function getFkCliente(): ClienteLicitacao
         {
             return $this->fk_cliente;
         }
