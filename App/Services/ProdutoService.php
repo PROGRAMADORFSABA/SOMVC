@@ -51,19 +51,21 @@
         }
         
         public function preencheProduto($arryProdutos)
-        {
+        {   
             $produtoDAO = new ProdutoDAO();
             $produtos = [];
             
             if (isset($arryProdutos)){
-                foreach ($arryProdutos as $proCodigo){
+                foreach ($arryProdutos as $proCodigo)
+                {
                     
-                    $produtos[] = $produtoDAO->listar($proCodigo);
+                    $produtos[] = $produtoDAO->listar($proCodigo)[0];
                   
                 }
-                
-                return $produtos;
+
             }
+            
+            return $produtos;
         
         }
         

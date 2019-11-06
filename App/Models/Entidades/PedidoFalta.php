@@ -120,7 +120,7 @@
         /**
          * @return mixed
          */
-        public function getFkProduto() : array
+        public function getFk_Produto() : array
         {
             return $this->fk_produto;
         }
@@ -128,7 +128,7 @@
         /**
          * @param mixed $fk_produto
          */
-        public function setFkProduto($fk_produto)
+        public function setFk_Produto(array $fk_produto)
         {
             $this->fk_produto = $fk_produto;
         }

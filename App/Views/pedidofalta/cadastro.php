@@ -37,18 +37,18 @@
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
                                             <input type="text" id="proposta" name="proposta" class="form-control" placeholder="Proposta"
-                                                   required value= <?php
-                                                echo $viewVar['pedidofalta']->getProposta(); ?>>
+                                                   required value="<?php echo $Sessao::retornaValorFormulario('proposta'); ?>">
                                         </div>
                                     </div>
                                 </div>
+                              
+
                                 <div class="form-group">
                                     <label  class="col-lg-3 col-sm-3 control-label">AFM</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
                                             <input type="text" id="afm" name="afm" class="form-control" placeholder="Proposta"
-                                                   required value= <?php
-                                                echo $viewVar['pedidofalta']->getAFM(); ?>>
+                                                   required value= "<?php   echo $Sessao::retornaValorFormulario('afm'); ?>" >
                                         </div>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">Observação</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <textarea maxlength="350" class="form-control spinner" placeholder="Observacao da falta" rows="5" name="observacao"><?php echo $viewVar['pedidofalta']->getObservacao()?></textarea>
+                                            <textarea maxlength="350" class="form-control spinner" placeholder="Observacao da falta" rows="5" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('analise'); ?>" ></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +107,8 @@
                                         </thead>
                                         <tbody id="editar-tabela-produtos">
                                         <?php
-                                            if($viewVar['pedidofalta']->getFkProduto()) {
-                                                foreach ($viewVar['pedidofalta']->getFkProduto() as $produto) {
+                                            if($viewVar['pedidofalta']->getFk_Produto()) {
+                                                foreach ($viewVar['pedidofalta']->getFk_Produto() as $produto) {
                                                     ?>
                                                     <tr>
                                                         <td>

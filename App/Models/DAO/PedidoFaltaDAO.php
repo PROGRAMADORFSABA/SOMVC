@@ -65,6 +65,7 @@
     
         public function salvar(PedidoFalta $pedidoFalta)
         {
+            
             try {
                 $cliente        = $pedidoFalta->getFkCliente()->getCodCliente();
                 //$marca          = $pedidoFalta->getFkMarca();
@@ -95,17 +96,16 @@
     
         public function addProduto(PedidoFalta $pedidoFalta)
         {
-           
             try {
-                $produtos = $pedidoFalta->getFkProduto();
+                $produtos = $pedidoFalta->getFk_Produto();
                 if (isset($produtos)) {
-                    foreach ($produtos as $produto) {
-                     
+                    foreach ($produtos as $produto) {                     
+                       
                         $this->insert(
                             'faltaporcliente',
                             ":FK_ID_FALTACLIENTE,:FK_IDPRODUTO, :FK_CLIENTE",
                             [
-                                ':FK_ID_FALATACLIENTE'  => $pedidoFalta->getFaltaClienteCod(),
+                                ':FK_ID_FALTACLIENTE'  => $pedidoFalta->getFaltaClienteCod(),
                                 ':FK_IDPRODUTO'         => $produto->getProCodigo(),
                                 ':FK_CLIENTE'             => $pedidoFalta->getFkCliente()->getCodCliente()
                             ]
@@ -114,7 +114,7 @@
                 }
                 return false;
             } catch (\Exception $e) {
-                
+                var_dump($e);
                 throw new \Exception("Erro na gravação de dados !", 500);
             }
         }

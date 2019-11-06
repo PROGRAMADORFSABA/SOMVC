@@ -96,7 +96,7 @@
                     $pedidoFalta->setFaltaClienteCod($id);
                   
                     $pedidoFaltaDAO->addProduto($pedidoFalta);
-                    
+                   
                     $transacao->commit();
                     
                     Sessao::limpaFormulario();
@@ -107,6 +107,7 @@
                     
                 }catch (\Exception $e)
                 {
+                    
                     Sessao::gravaErro(['Erro ao gravar Falta !']);
                     $transacao->rollBack();
                     

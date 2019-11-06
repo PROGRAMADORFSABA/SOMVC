@@ -17,7 +17,7 @@
                 $resultdoValidacao->addErro('fkcliente',"<b>Cliente</b> Este campo não pode ser vazio");
             }
             
-            if(empty($pedidoFalta->getFkProduto()))
+            if(empty($pedidoFalta->getFk_Produto()))
             {
                 $resultdoValidacao->addErro('fkproduto', "<b>Produto</b> É necessário no minimo 1 produto");
             }            

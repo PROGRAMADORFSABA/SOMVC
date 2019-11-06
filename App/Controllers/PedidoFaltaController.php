@@ -38,37 +38,41 @@
             if(Sessao::existeFormulario())
             {
                 $pedidoFalta = new PedidoFalta();
-                $pedidoFalta->setFaltaClienteCod(Sessao::retornaValorFormulario('cliente'));
-                $pedidoFalta->setProposta(Sessao::retornaValorFormulario('proposta'));
+               // $pedidoFalta->setFaltaClienteCod(Sessao::retornaValorFormulario('cliente'));
+               /* $pedidoFalta->setProposta(Sessao::retornaValorFormulario('proposta'));
                 
                 $pedidoFalta->setAFM(Sessao::retornaValorFormulario('afm'));
                // $pedidoFalta->setFkStatus(Sessao::retornaValorFormulario('status'));
                 $pedidoFalta->setObservacao(Sessao::retornaValorFormulario('observacao'));
                 $pedidoFalta->setDataFalta(Sessao::retornaValorFormulario('dataFalta'));
-                
+                */
                 $codCliente = Sessao::retornaValorFormulario('cliente');
                 $clienteLicitacaoServices = new ClienteLicitacaoService();
                 $clienteLicitacao = $clienteLicitacaoServices->listar($codCliente);
+               
                 $pedidoFalta->setFkCliente($clienteLicitacao);
                 
                 $produtos = Sessao::retornaValorFormulario('produtos');
+               
                 if(empty($produtos)){
-                    $pedidoFalta->setFkProduto(array());
+                    $pedidoFalta->setFk_Produto(array());
+                    
                 }else{
                     $produtoService = new ProdutoService();
                     $produtos = $produtoService->preencheProduto($produtos);
-                    $pedidoFalta->setFkProduto($produtos);
-                }
+                   
+                    $pedidoFalta->setFk_Produto($produtos);
+                }                
                 
             }else{
                 
-                $pedidofalta = new PedidoFalta();
-                $pedidofalta->setFkCliente(new ClienteLicitacao());
-                $pedidofalta->setFkProduto(array());
+                $pedidoFalta = new PedidoFalta();
+                $pedidoFalta->setFkCliente(new ClienteLicitacao());
+                $pedidoFalta->setFk_Produto(array());
                 
             }
-            $this->setViewParam('pedidofalta', $pedidofalta);
-           $this->render('/pedidofalta/cadastro');
+            $this->setViewParam('pedidofalta', $pedidoFalta);
+          //  $this->render('/pedidofalta/cadastro');
             
             Sessao::limpaErro();
             Sessao::limpaFormulario();
@@ -93,19 +97,17 @@
             }else{
                 $pedidoFalta->setFkCliente($clienteLicitacao);
                 $produtoService = new ProdutoService();
-                $produtos = $produtoService->preencheProduto($_POST['produtos'])[0];
-          
-                $pedidoFalta->setFkProduto($produtos);
-                
+                $produtos = $produtoService->preencheProduto($_POST['produtos']);
+                $pedidoFalta->setFk_Produto($produtos);
+              
                 Sessao::gravaFormulario($_POST);
-                
                 $pedidoFaltaService = new PedidoFaltaService();
                 
                 if($pedidoFaltaService->salvar($pedidoFalta)){
-                      $this->redirect('/pedidofalta/index');
+               //       $this->redirect('/pedidofalta/index');
               
                 }else{
-                   $this->redirect('/pedidofalta/cadastro');
+               //    $this->redirect('/pedidofalta/cadastro');
                 }
             }
         

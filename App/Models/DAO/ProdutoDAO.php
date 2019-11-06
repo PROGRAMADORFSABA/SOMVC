@@ -9,16 +9,18 @@ use App\Models\Entidades\ClienteLicitacao;
 class ProdutoDAO extends BaseDAO
 {
     public  function listar($proCodigo = null){
-
-        $SQL= "SELECT * FROM Produto p              
-                inner join fornecedor f on f.fornecedor_cod = p.ProFornecedor  ";
-        
+      
         if ($proCodigo) {
                         
-            $SQL .= " WHERE p.ProCodigo = $proCodigo ";
-        }
-            $resultado = $this->select($SQL);
-           return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::Class);        
+            $resultado = $this->select("SELECT * FROM Produto p              
+                inner join fornecedor f on f.fornecedor_cod = p.ProFornecedor WHERE p.ProCodigo = $proCodigo ");
+        }   else{
+            $resultado = $this->select("SELECT * FROM Produto p              
+            inner join fornecedor f on f.fornecedor_cod = p.ProFornecedor  ");
+    
+        }       
+                    
+           return $resultado->fetchAll(\PDO::FETCH_CLASS, Produto::class);        
     }
 
     public  function listar_old($proCodigo = null)
