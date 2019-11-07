@@ -167,7 +167,7 @@
                                 <td><?php echo $pedido->getNumeroAf(); ?></td>
                                 <td><?php echo $pedido->getNumeroLicitacao(); ?></td>
                                 <td><?php echo $pedido->getStatus()->getNome(); ?></td>
-                                <td><?php echo $pedido->getDataCadastro()->format('d/m/Y h:m:s'); ?></td>
+                                <td><?php echo $pedido->getDataCadastro()->format('d/m/Y H:m:s'); ?></td>
                                 <td>
                                     <span class="dropdown">
                                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" title="click aqui para exibir as acoes" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>

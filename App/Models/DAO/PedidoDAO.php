@@ -242,6 +242,7 @@ class PedidoDAO extends BaseDAO
                 $pedido->setNumeroAf($dado['numeroAf']);
                 $pedido->setValorPedido(number_format($dado['valorPedido'], 2, ',', '.'));
                 $pedido->setCodStatus($dado['idStatus']);
+                $pedido->setSomaPedido($dado['valorPedido']);
                 $pedido->setCodCliente($dado['idCliente']);
                 $pedido->setAnexo($dado['anexo']);
                 $pedido->setObservacao($dado['observacao']);
@@ -292,6 +293,7 @@ class PedidoDAO extends BaseDAO
                     $pedido->setValorPedido(number_format($dado['valorPedido'], 2, ',', '.'));
                     $pedido->setCodStatus($dado['idStatus']);
                     $pedido->setCodCliente($dado['idCliente']);
+                    $pedido->setSomaPedido($dado['valorPedido']);
                     $pedido->setAnexo($dado['anexo']);
                     $pedido->setObservacao($dado['observacao']);
                     $pedido->setCodRepresentante($dado['idRepresentante']);

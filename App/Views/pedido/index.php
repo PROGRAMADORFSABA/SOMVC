@@ -117,7 +117,17 @@
 				</tfoot>
 				<tbody>
 					<?php
-					foreach ($viewVar['listaPedido'] as $pedido) {
+					 $pedido1 = $viewVar['listaPedido'];
+                   
+					 $andre = $pedido1 > 0;
+					 $soma = 0;
+					 if ($pedido1 > 0) {
+						 foreach ($pedido1 as $pedido) {
+							 $soma = $pedido->getSomaPedido();
+							 $total += $soma;
+							 $qtdePedido += 1;
+							 
+					//foreach ($viewVar['listaPedido'] as $pedido) {
 
 						//$print = json_encode($pedido);
 						//var_dump($pedido);
@@ -149,13 +159,21 @@
 
 						<?php
 						}
-						?>
+					} else {
+
+						echo "<h3 class='kt-portlet__head-title'><p class='text-danger'>Sem Pedidos encontrados!</p></h3>";
+					}
+					?>
+						
 					</tr>
 				</tbody>
 			</table>
 			<!--end: Datatable -->
 		</div>
 	</div>
+	<?php
+    echo "<h3 class='kt-portlet__head-title'><p class='text-info'>Qtde. de Pedidos " . $qtdePedido . " e Valor Total R$" . number_format($total, 2, ',', '.') . "</p></h3>";
+    ?>
 </div>
 <!-- end:: Content -->
 </div>

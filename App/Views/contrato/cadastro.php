@@ -26,7 +26,7 @@
                       <div>    
                             <input type="text" name="editalCliente-Autocomplete" id="editalCliente-Autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
                             value="<?php echo $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
-                            <input type="text" id="cliente" name="cliente" 
+                            <input type="hidden" id="cliente" name="cliente" 
                             value=<?php echo $viewVar['contrato']->getClienteLicitacao()->getCodCliente(); ?>>  
                         </div>
                         <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>                       
