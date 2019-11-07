@@ -32,7 +32,8 @@ abstract class BaseDAO
              $stmt->execute($values);
             
          //  var_dump($values);
-            return $stmt->rowCount();
+           
+         return $this->conexao->lastInsertId();
         }else{
             return false;
         }

@@ -79,8 +79,6 @@
         
         public function salvar(PedidoFalta $pedidoFalta)
         {
-          
-         
             $transacao = new Transacao();
             $pedidoValidador = new PedidoFaltaValidador();
             $resultadoValidacao = $pedidoValidador->validar($pedidoFalta);
@@ -94,8 +92,9 @@
                     $transacao->beginTransaction();
                     $id = $pedidoFaltaDAO->salvar($pedidoFalta);
                     $pedidoFalta->setFaltaClienteCod($id);
-                  
+                    
                     $pedidoFaltaDAO->addProduto($pedidoFalta);
+                  
                    
                     $transacao->commit();
                     
@@ -106,8 +105,7 @@
                     return true;
                     
                 }catch (\Exception $e)
-                {
-                    
+                {                    
                     Sessao::gravaErro(['Erro ao gravar Falta !']);
                     $transacao->rollBack();
                     

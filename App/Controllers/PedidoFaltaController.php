@@ -72,7 +72,7 @@
                 
             }
             $this->setViewParam('pedidofalta', $pedidoFalta);
-          //  $this->render('/pedidofalta/cadastro');
+            $this->render('/pedidofalta/cadastro');
             
             Sessao::limpaErro();
             Sessao::limpaFormulario();
@@ -104,10 +104,10 @@
                 $pedidoFaltaService = new PedidoFaltaService();
                 
                 if($pedidoFaltaService->salvar($pedidoFalta)){
-               //       $this->redirect('/pedidofalta/index');
+                    $this->redirect('/pedidofalta/index');
               
                 }else{
-               //    $this->redirect('/pedidofalta/cadastro');
+                   $this->redirect('/pedidofalta/cadastro');
                 }
             }
         
