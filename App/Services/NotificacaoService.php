@@ -96,7 +96,7 @@ class NotificacaoService
         $notificacaoDAO = new NotificacaoDAO();
         return $notificacaoDAO->listarEstadosVinculadas($notificacao);
     }
-
+*/
     public function salvar(Notificacao $notificacao)
     {
         $transacao = new Transacao();
@@ -123,7 +123,7 @@ class NotificacaoService
             }
         }
     }
-
+/*
     public function Editar(Notificacao $notificacao)
     {   
         $transacao = new Transacao();

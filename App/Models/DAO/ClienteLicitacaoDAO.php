@@ -60,9 +60,9 @@ class ClienteLicitacaoDAO extends  BaseDAO
     
     public function listarClienteLicitacao(ClienteLicitacao $clienteLicitacao)
     {
-        $resultado = $this->select(
+        /*$resultado = $this->select(
             ""
-        )
+        )*/
     }
     public function listarporCliente($clienteLicitacao = null)
     {

@@ -24,9 +24,9 @@
                             <i class="la la-plus"></i>Novo Edital</a>
                       <div>    
                             <input type="text" name="editalCliente-Autocomplete" id="editalCliente-Autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
-                            value="<?php echo $viewVar['notificacao']->getNtf_clienteLicitacao()->getRazaoSocial(); ?>" > 
-                            <input type="hidden" id="cliente" name="cliente" 
-                            value=<?php echo $viewVar['notificacao']->getNtf_clienteLicitacao()->getCodCliente(); ?>>  
+                            value="<?php echo $viewVar['notificacao']->getNtf_clientelicitacao()->getRazaoSocial(); ?>" > 
+                            <input type="text" id="cliente" name="cliente" 
+                            value=<?php echo $viewVar['notificacao']->getNtf_clientelicitacao()->getCodCliente(); ?>>  
                         </div>
                         <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>                       
                 </div>
@@ -46,7 +46,7 @@
                         <select class="form-control" name="garantia" id="garantia" required>
                             <option value="">Selecione o garantia</option>
                                 <option value="Todas">Todas</option>
-                                <option value="Parcia">Parcia</option>
+                                <option value="Parcial">Parcial</option>
                                 <option value="Nenhuma">Nenhuma</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira a garantia</span>
@@ -85,7 +85,7 @@
                     </div>
                 <div class="col-lg-2">
                         <label for="editalLicitacao-AutoComplete" >Numero da Licitacao:</label>
-                        <input type="text" title="pesquisa o edital para o cliente selecionado" class="form-control" disabled placeholder="Digite numero da licitacao" id="editalLicitacao-AutoComplete" name="editalLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao-AutoComplete'); ?>" required>
+                        <input type="text" title="pesquisa o edital para o cliente selecionado" class="form-control" disabled placeholder="Digite numero da licitacao" id="editalLicitacao-AutoComplete" name="editalLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>" required>
                         <input type="hidden" id="numeroLicitacao" name="numeroLicitacao" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
                     </div>

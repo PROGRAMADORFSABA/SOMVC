@@ -317,70 +317,70 @@ class NotificacaoDAO extends BaseDAO
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
     
-   
+   */
 
-    public  function salvar(Contrato $contrato)
+    public  function salvar(Notificacao $notificacao)
     {     
         try {
-            $ctrNumero                     = $contrato->getCtrNumero();
-            $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
-            $ctrDataVencimento             = $contrato->getCtrDataVencimento()->format('Y-m-d');
-            $ctrValor                    = $contrato->getCtrValor();
-           // $ctrValor                      = str_replace(",", ".", $valorAtual);
-            $ctrStatus                     = $contrato->getCtrStatus();
-            $ctrObservacao                 = $contrato->getCtrObservacao();
-            $ctrAnexo                      = $contrato->getCtrAnexo();
-            $ctrClienteLicitacao           = $contrato->getClienteLicitacao()->getCodCliente();
-            $ctrUsuario                    = $contrato->getUsuario()->getId();           
-            $ctrRepresentante              = $contrato->getRepresentante()->getCodRepresentante();           
-            $ctrEdital                     = $contrato->getEdital()->getEdtId();           
-            $ctrPrazoEntrega               = $contrato->getCtrPrazoEntrega();
-            $ctrPrazoPagamento             = $contrato->getCtrPrazoPagamento();
-            $ctrInstituicao                = $contrato->getInstituicao()->getInst_Id();
-            $ctrDataCadastro               = $contrato->getCtrDataCadastro()->format('Y-m-d h:m:s');
-            $ctrDataAlteracao              = $contrato->getCtrDataAlteracao()->format('Y-m-d h:m:s');
-            
+            $ntfNumero                     = $notificacao->getNtf_numero();
+            $ntfLicitacao                  = $notificacao->getNtf_licitacao();
+            $ntfPedido                     = $notificacao->getNtf_pedido();
+            $ntfStatus                     = $notificacao->getNtf_status();
+            $ntfGarantia                   = $notificacao->getNtf_garantia();
+            $ntfTrocaMarca                 = $notificacao->getNtf_trocamarca();
+            $ntfValor                      = $notificacao->getNtf_valor();
+            $ntfAnexo                      = $notificacao->getNtf_anexo();
+            $ntfPrazoDefesa                = $notificacao->getNtf_prazodefesa();
+            $ntfClienteLicitacao           = $notificacao->getNtf_clientelicitacao()->getCodCliente();
+            $ntfUsuario                    = $notificacao->getNtf_usuario()->getId();          
+            $ntfRepresentante              = $notificacao->getNtf_representante()->getCodRepresentante();           
+            $ntfDataAlteracao              = $notificacao->getNtf_dataalteracao()->format('Y-m-d h:m:s');
+            $ntfDataCadastro               = $notificacao->getNtf_datacadastro()->format('Y-m-d h:m:s');
+            $ntfObservacao                 = $notificacao->getNtf_observacao();
+            $ntfInstituicao                = $notificacao->getNtf_instituicao()->getInst_Id();
+            /*
+                ntf_numero, ntf_licitacao,     ntf_pedido,     ntf_status,     ntf_garantia,     ntf_trocamarca,
+                ntf_valor,     ntf_anexo,     ntf_prazodefesa,     ntf_clientelicitacao,     ntf_usuario,
+                ntf_representante,    ntf_dataalteracao,    ntf_datacadastro  
+            */      
             $nomeanexo = date('Y-m-d-h:m:s');
             if (!$_FILES['anexo']['name'] == "") {
                 $validextensions = array("jpeg", "jpg", "png", "PNG", "JPG", "JPEG", "pdf", "PDF", "docx");
                 $temporary = explode(".", $_FILES["anexo"]["name"]);
                 $file_extension = end($temporary);
                 $ctrAnexo = md5($nomeanexo) . "." . $file_extension;
-                //var_dump($file_extension);
+
                 if (in_array($file_extension, $validextensions)) {
                     $sourcePath = $_FILES['anexo']['tmp_name'];
                     $targetPath = "public/assets/media/anexos/" . md5($nomeanexo) . "." . $file_extension;
                     move_uploaded_file($sourcePath, $targetPath); // Move arquivo                    
                 }
             } else {
-                if($ctrAnexo == ""){
-                    $ctrAnexo = "sem_anexo1.png";
+                if($ntfAnexo == ""){
+                    $ntfAnexo = "sem_anexo1.png";
                     }
-            }
-                     
+            } 
             return $this->insert(
-                'contrato',
-                ":ctr_numero, :ctr_datainicio, :ctr_datavencimento, :ctr_valor, :ctr_status, :ctr_observacao, :ctr_anexo, :ctr_clientelicitacao, :ctr_usuario, 
-                :ctr_prazoentrega, :ctr_prazopagamento, :ctr_instituicao, :ctr_datacadastro, :ctr_dataalteracao, :ctr_representante, :ctr_edital",
+                'notificacao',
+                ":ntf_numero, :ntf_licitacao, :ntf_pedido, :ntf_status, :ntf_garantia, :ntf_trocamarca, :ntf_valor, :ntf_anexo, :ntf_prazodefesa, 
+                :ntf_clientelicitacao, :ntf_usuario, :ntf_representante, :ntf_dataalteracao, :ntf_datacadastro, :ntf_instituicao, :ntf_observacao",
                 [
-                    ':ctr_numero' => $ctrNumero,
-                    ':ctr_datainicio' => $ctrDataInicio,
-                    ':ctr_datavencimento' => $ctrDataVencimento,
-                    ':ctr_valor' => $ctrValor,
-                    ':ctr_status' => $ctrStatus,
-                    ':ctr_observacao' => $ctrObservacao,
-                    ':ctr_anexo' => $ctrAnexo,
-                    ':ctr_clientelicitacao' => $ctrClienteLicitacao,
-                    ':ctr_usuario' => $ctrUsuario,
-                    ':ctr_prazoentrega' => $ctrPrazoEntrega,
-                    ':ctr_prazopagamento' => $ctrPrazoPagamento,
-                    ':ctr_instituicao' => $ctrInstituicao,
-                    ':ctr_datacadastro' => $ctrDataCadastro,
-                    ':ctr_dataalteracao' => $ctrDataAlteracao,
-                    ':ctr_representante' => $ctrRepresentante,
-                    ':ctr_datacadastro' => $ctrDataCadastro,
-                    ':ctr_edital' => $ctrEdital,
-                    ':ctr_dataalteracao' =>$ctrDataAlteracao
+                    ':ntf_numero' => $ntfNumero,
+                    ':ntf_licitacao' => $ntfLicitacao,
+                    ':ntf_pedido' => $ntfPedido,
+                    ':ntf_status' => $ntfStatus,
+                    ':ntf_garantia' => $ntfGarantia,
+                    ':ntf_trocamarca' => $ntfGarantia,
+                    ':ntf_valor' => $ntfValor,
+                    ':ntf_anexo' => $ntfAnexo,
+                    ':ntf_prazodefesa' => $ntfPrazoDefesa,
+                    ':ntf_clientelicitacao' => $ntfClienteLicitacao,
+                    ':ntf_usuario' => $ntfUsuario,
+                    ':ntf_representante' => $ntfRepresentante,
+                    ':ntf_dataalteracao' => $ntfDataAlteracao,
+                    ':ntf_datacadastro' => $ntfDataCadastro,
+                    ':ntf_instituicao' => $ntfInstituicao,
+                    ':ntf_observacao' => $ntfObservacao
                     ]
                 ); 
             } catch (\Exception $e) {        
@@ -388,7 +388,7 @@ class NotificacaoDAO extends BaseDAO
             }
     }
         
-    
+    /*
 
     public  function atualizar(Contrato $contrato)
     {

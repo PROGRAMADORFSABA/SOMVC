@@ -137,51 +137,56 @@ class NotificacaoController extends Controller
         $instituicaoService = new InstituicaoService();        
         $editalService = new EditalService();        
         $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
+        
         $usuario        = $usuarioService->listar($_POST['usuario']);
         $instituicao     =   $instituicaoService->listar($_POST['instituicao']);
         $representante    = $representanteService->listar($_POST['representante'])[0];
-        $edital    = $editalService->listar($_POST['numeroLicitacao'])[0];
+        
  /* 
 ntf_numero, ntf_licitacao,     ntf_pedido,     ntf_status,     ntf_garantia,     ntf_trocamarca,
      ntf_valor,     ntf_anexo,     ntf_prazodefesa,     ntf_clientelicitacao,     ntf_usuario,
      ntf_representante,    ntf_dataalteracao,    ntf_datacadastro
  */ 
         $notificacao = new Notificacao();
-        $notificacao->setNtf_Numero($_POST['numeroNotificacao']);        
+        $notificacao->setNtf_clientelicitacao($clienteLicitacao);
+        $notificacao->setNtf_numero($_POST['numeroNotificacao']);        
         $notificacao->setNtf_pedido($_POST['numeroPedido']);        
-        $notificacao->setNtf_Status($_POST['status']);        
-        $notificacao->setNtf_garantia($_POST['garatia']);        
-        $notificacao->setNtf_trocamarca($_POST['trocaMarca']);        
-        $notificacao->setNtf_Valor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
-        $notificacao->setNtf_Anexo($_POST['anexo']);        
+        $notificacao->setNtf_garantia($_POST['garantia']);        
+        $notificacao->setNtf_status($_POST['status']);        
         $notificacao->setNtf_prazodefesa($_POST['prazoDefesa']);        
-        $notificacao->setNtf_ClienteLicitacao($clienteLicitacao);
-        $notificacao->setNtf_Usuario($usuario);
-        $notificacao->setNtf_Representante($representante);
+        $notificacao->setNtf_trocamarca($_POST['trocaMarca']);        
+        $notificacao->setNtf_valor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
+        $notificacao->setNtf_licitacao($_POST['numeroLicitacao']);
+        $notificacao->setNtf_usuario($usuario);
+        $notificacao->setNtf_representante($representante);
         $notificacao->setNtf_datacadastro($_POST['dataCadastro']);        
-        $notificacao->setNtf_dataalteracao($_POST['dataAlteracao']);        
-        $notificacao->setNtf_Edital($edital);
-        $notificacao->setNtf_Instituicao($instituicao);
+        $notificacao->setNtf_dataalteracao($_POST['dataCadastro']);
+        $notificacao->setNtf_observacao($_POST['observacao']);
+        $notificacao->setNtf_anexo($_POST['anexo']);
+        $notificacao->setNtf_instituicao($instituicao);
         Sessao::gravaFormulario($_POST);
-
+        
+        
         $notificacaoValidador  = new NotificacaoValidador();
         $resultadoValidacao = $notificacaoValidador->validar($notificacao);
-
-       if ($resultadoValidacao->getErros()) {
-           $this->redirect('/notificacao/cadastro');
-        }
-        if (!$edital) {
+        
+        if ($resultadoValidacao->getErros()) {
             $this->redirect('/notificacao/cadastro');
+        }
+        var_dump( $notificacao );
+        if (!$notificacao) {
+           
+           // $this->redirect('/notificacao/cadastro');
             Sessao::gravaMensagem("nenhuma licitacao informada");
          }
 
         $notificacaoService = new NotificacaoService();
     
-       if($notificacaoService->salvar($notificacao)){
-            $this->redirect('/notificacao');
+       /*if($notificacaoService->salvar($notificacao)){
+          //  $this->redirect('/notificacao');
         }else{          
-            $this->redirect('/notificacao/cadastro');
-        }
+           // $this->redirect('/notificacao/cadastro');
+        }*/
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();

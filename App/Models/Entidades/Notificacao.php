@@ -38,6 +38,8 @@ namespace App\Models\Entidades;
     private $ntf_datacadastro;
     private $ntf_clientelicitacao;
     private $ntf_usuario;
+    private $ntf_instituicao;
+    private $ntf_observacao;
     private $ntf_edital;
     private $ntf_representante;
     private $ntf_codclientelicitacao;
@@ -80,6 +82,25 @@ namespace App\Models\Entidades;
     public function setNtf_numero($ntf_numero)
     {
         $this->ntf_numero = $ntf_numero;
+
+        return $this;
+    }
+    /**
+     * Get the value of ntf_observacao
+     */ 
+    public function getNtf_observacao()
+    {
+        return $this->ntf_observacao;
+    }
+
+    /**
+     * Set the value of ntf_observacao
+     *
+     * @return  self
+     */ 
+    public function setNtf_observacao($ntf_observacao)
+    {
+        $this->ntf_observacao = $ntf_observacao;
 
         return $this;
     }
@@ -300,6 +321,25 @@ namespace App\Models\Entidades;
     public function setNtf_clientelicitacao(ClienteLicitacao $ntf_clientelicitacao)
     {
         $this->ntf_clientelicitacao = $ntf_clientelicitacao;
+
+        return $this;
+    }
+    /**
+     * Get the value of ntf_instituicao
+     */ 
+    public function getNtf_instituicao()
+    {
+        return $this->ntf_instituicao;
+    }
+
+    /**
+     * Set the value of ntf_instituicao
+     *
+     * @return  self
+     */ 
+    public function setNtf_instituicao(Instituicao $ntf_instituicao)
+    {
+        $this->ntf_instituicao = $ntf_instituicao;
 
         return $this;
     }
