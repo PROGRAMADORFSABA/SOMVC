@@ -42,7 +42,7 @@ class App
        
         //banco hospedagem
       */
-        define('APP_HOST'       , $_SERVER['HTTP_HOST']);
+        define('APP_HOST'       , $_SERVER['HTTP_HOST']."/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
         define('DB_HOST'        , "mysql380.umbler.com:41890;charset=utf8");

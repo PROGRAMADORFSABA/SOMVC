@@ -3,6 +3,7 @@
     
     namespace App\Services;
     
+    use App\Lib\Exportar;
     use App\Lib\Sessao;
     use App\Lib\Transacao;
 

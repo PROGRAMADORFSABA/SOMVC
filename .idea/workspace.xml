@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/clientefalta-autocomplete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/ClienteLicitacaoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/ClienteLicitacaoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/PedidoFaltaDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/LoggerInterfaceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/LoggerInterfaceTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/psr/log/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/psr/log/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Caster/SymfonyCaster.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Caster/SymfonyCaster.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Dumper/CliDumper.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Dumper/CliDumper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Tests/Server/ConnectionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Tests/Server/ConnectionTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,13 +83,14 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="PhpDebugGeneral" xdebug_debug_port="8081" listening_started="true" />
+  <component name="PhpDebugGeneral" xdebug_debug_port="8081" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="0f6e0383-ad69-4c4e-a209-ffe163c0cdcd" name="Unnamed" use_path_mappings="true" />
       <server host="localhost" id="bf4c5be7-3f89-4f38-86b2-e50168b2fa43" name="PHP7" use_path_mappings="true" />
     </servers>
   </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="C:\xampp-7.3.8\htdocs\SOMVC" selected_validation_type="LOCAL" web_path_to_validation_script="localhost/SOMVC" />
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
@@ -103,7 +113,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -113,7 +123,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.google.cloud.tools.intellij.cloud.sdk.CloudSdkConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -138,8 +148,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.cadastro.php">
-    <configuration name="cadastro.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost/Dashbord/www/App/Views/pedidofalta/cadastro.php">
+  <component name="RunManager" selected="PHP Script.index.php">
+    <configuration name="cadastro.php" type="JavascriptDebugType" nameIsGenerated="true" uri="http://localhost/Dashbord/www/App/Views/pedidofalta/cadastro.php">
       <method v="2" />
     </configuration>
     <configuration name="index.php JavaScript" type="JavascriptDebugType" uri="http://localhost:63342/Dashbord/index.php" useBuiltInWebServerPort="true">
@@ -152,6 +162,7 @@
       <CommandLine parameters="-a" workingDirectory="$PROJECT_DIR$" />
       <method v="2">
         <option name="LaunchBrowser.Before.Run" url="http://localhost/Dashbord/" />
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="index.php JavaScript" run_configuration_type="JavascriptDebugType" />
       </method>
     </configuration>
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" editBeforeRun="true" server_name="Unnamed" start_url="/Dashbord">
@@ -172,7 +183,6 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.cadastro.php" />
         <item itemvalue="JavaScript Debug.indexold.html" />
       </list>
     </recent_temporary>
@@ -277,7 +287,13 @@
       <workItem from="1572614496247" duration="4511000" />
       <workItem from="1572627336845" duration="3063000" />
       <workItem from="1572814750128" duration="8704000" />
-      <workItem from="1572887129858" duration="4077000" />
+      <workItem from="1572887129858" duration="4141000" />
+      <workItem from="1572896499256" duration="2514000" />
+      <workItem from="1572913127663" duration="136000" />
+      <workItem from="1572996074025" duration="6748000" />
+      <workItem from="1573082929529" duration="3305000" />
+      <workItem from="1573172769334" duration="281000" />
+      <workItem from="1573173074820" duration="5813000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -461,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572831116466</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete">
+      <created>1572892903235</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1572892903235</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -517,14 +540,5 @@
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
     <option name="LAST_COMMIT_MESSAGE" value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>80</expression-string>
-        <language-id>JavaScript</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
   </component>
 </project>
