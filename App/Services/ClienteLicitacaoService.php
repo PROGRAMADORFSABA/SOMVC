@@ -43,4 +43,12 @@
             echo $exportar->exportarJSON($busca);
         
         }
+       
+        public function listarClienteFalta(ClienteLicitacao $clienteLicitacao)
+        {
+            $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
+            $busca = $clienteLicitacaoDAO->listar($clienteLicitacao);
+            
+            echo $busca;
+        }
     }

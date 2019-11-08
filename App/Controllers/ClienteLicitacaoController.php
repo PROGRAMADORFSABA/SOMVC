@@ -69,6 +69,19 @@ class ClienteLicitacaoController extends Controller
         
         echo $busca;
     }
+    
+    public function listarClienteFalta($params)
+    {
+        $clienteLicitacaoService = new ClienteLicitacaoService();
+        
+        $clienteLicitacao = new ClienteLicitacao();
+        $clienteLicitacaoService->listarClienteFalta($params[0]);
+        
+        $busca = $clienteLicitacao->setNomeFantasia($clienteLicitacao);
+        
+        echo $busca;
+    }
+
    
     public function edicao($params)
     {

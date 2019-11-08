@@ -41,8 +41,13 @@ class App
         define('DB_DRIVER'      , "mysql");
        
         //banco hospedagem
+<<<<<<< HEAD
       /*
         define('APP_HOST'       , $_SERVER['HTTP_HOST']);
+=======
+      */
+        define('APP_HOST'       , $_SERVER['HTTP_HOST']."/SOMVC");
+>>>>>>> 971096d37b90fe92c336a0b457f88ffe65df18c6
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
         define('DB_HOST'        , "mysql380.umbler.com:41890;charset=utf8");

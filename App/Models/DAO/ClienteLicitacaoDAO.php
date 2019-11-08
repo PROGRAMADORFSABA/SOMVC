@@ -57,6 +57,13 @@ class ClienteLicitacaoDAO extends  BaseDAO
         }
         return false;
     }
+    
+    public function listarClienteLicitacao(ClienteLicitacao $clienteLicitacao)
+    {
+        $resultado = $this->select(
+            ""
+        )
+    }
     public function listarporCliente($clienteLicitacao = null)
     {
         if($clienteLicitacao)
