@@ -46,9 +46,11 @@
        
         public function listarClienteFalta(ClienteLicitacao $clienteLicitacao)
         {
-            $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
-            $busca = $clienteLicitacaoDAO->listar($clienteLicitacao);
-            
-            echo $busca;
+            $clienteLicitacao->getNomeFantasia();
+            $clienteLicitacaoDAO =  new ClienteLicitacaoDAO();
+            $busca = $clienteLicitacaoDAO->listarClienteLicitacao($clienteLicitacao);
+
+            $exportar = new Exportar();
+            echo $exportar->exportarJSON($busca);
         }
     }

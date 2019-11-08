@@ -60,10 +60,32 @@ class ClienteLicitacaoDAO extends  BaseDAO
     
     public function listarClienteLicitacao(ClienteLicitacao $clienteLicitacao)
     {
-        /*$resultado = $this->select(
-            ""
-        )*/
+        $resultado = $this->select(
+            "SELECT FC.faltaCliente_cod,
+                    CL.nomefantasia as cliente,
+                    P.ProCodigo,
+                    P.ProNome,
+                    F.nomefantasia,
+                    P.ProMarca,
+                    FC.proposta,
+                    FC.AFM,
+                    FC.observacao,
+                    FC.dataFalta
+                    
+                FROM faltaCliente FC
+     
+     INNER JOIN faltaporcliente FPC on FPC.FK_ID_FALTACLIENTE = FC.faltaCliente_cod
+     INNER JOIN clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
+     INNER JOIN Produto P on P.ProCodigo = FPC.FK_IDPRODUTO
+     INNER JOIN fornecedor F on F.fornecedor_cod = P.ProFornecedor
+
+     "
+        );
+
+        return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+
     public function listarporCliente($clienteLicitacao = null)
     {
         if($clienteLicitacao)
