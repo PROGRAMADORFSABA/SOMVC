@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/pedidofalta/listar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/ClienteLicitacaoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/ClienteLicitacaoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/Controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/DAO/ClienteLicitacaoDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/ClienteLicitacaoService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Services/PedidoFaltaService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/LoggerInterfaceTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/psr/log/Psr/Log/Test/LoggerInterfaceTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/psr/log/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/psr/log/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Caster/SymfonyCaster.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Caster/SymfonyCaster.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Dumper/CliDumper.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Dumper/CliDumper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Tests/Server/ConnectionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Tests/Server/ConnectionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/ClienteLicitacao.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/ClienteLicitacao.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/layouts/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -293,7 +287,9 @@
       <workItem from="1572996074025" duration="6748000" />
       <workItem from="1573082929529" duration="3305000" />
       <workItem from="1573172769334" duration="281000" />
-      <workItem from="1573173074820" duration="5813000" />
+      <workItem from="1573173074820" duration="5911000" />
+      <workItem from="1573336928373" duration="1437000" />
+      <workItem from="1573380763027" duration="8763000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -484,7 +480,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572892903235</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete">
+      <created>1573179478863</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1573179478863</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView">

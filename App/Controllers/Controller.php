@@ -21,7 +21,7 @@ abstract class Controller{
             
                 session_destroy();                        //Destroi a seção por segurança
                 $this->redirect('/login');   
-                // header("Location: ../index.php");
+                // header("Location: ../listar.php");
                 exit;        //Redireciona o visitante para login        
         }
         
@@ -35,7 +35,7 @@ abstract class Controller{
         if($segundos>$limite){
          session_destroy();
          $this->redirect('/login');   
-         //header("Location: ../index.php");
+         //header("Location: ../listar.php");
         } else{
          $_SESSION['registro'] = time();
         }

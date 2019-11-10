@@ -21,14 +21,14 @@
     
     class PedidoFaltaController extends Controller
     {
-        public function  index($params)
+        public function  listar($params)
         {
             $faltaCliente_cod = $params[0];
             $pedidoFaltaService = new PedidoFaltaService();
             $pedidoFalta = $pedidoFaltaService->listar($faltaCliente_cod);
             
             $this->setViewParam('pedidofalta', $pedidoFalta);
-            $this->render('/pedidofalta/index');
+            $this->render('/pedidofalta/listar');
             
             Sessao::limpaMensagem();
         }
@@ -104,7 +104,7 @@
                 $pedidoFaltaService = new PedidoFaltaService();
                 
                 if($pedidoFaltaService->salvar($pedidoFalta)){
-                    $this->redirect('/pedidofalta/index');
+                    $this->redirect('/pedidofalta/listar');
               
                 }else{
                    $this->redirect('/pedidofalta/cadastro');

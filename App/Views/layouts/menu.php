@@ -202,7 +202,7 @@
 												<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
 													<ul class="kt-menu__subnav">
 														<li <?php if ($viewVar['nameController'] == "PedidoFaltaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/PedidoFalta/cadastro" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastro</span></a></li>
-														<li <?php if ($viewVar['nameController'] == "PedidoFaltaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/PedidoFalta/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
+														<li <?php if ($viewVar['nameController'] == "PedidoFaltaController") { ?><?php } ?> class="kt-menu__item " aria-haspopup="true"><a href="http://<?php echo APP_HOST; ?>/PedidoFalta/listar" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Lista</span></a></li>
 													</ul>
 												</div>
 											</li>

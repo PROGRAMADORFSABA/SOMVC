@@ -12,6 +12,7 @@ class ClienteLicitacao
     private $razaoSocial;
     private $nomeFantasia;
     private $cnpj;
+    private $tipoLicitacao;
     private $trocaMarca;
     private $dataCadastro;
     private $tipoCliente;

@@ -32,7 +32,7 @@ if($registro){
 
 if($segundos>$limite){
  session_destroy();
- header("Location: ../index.php");
+ header("Location: ../listar.php");
 } else{
  $_SESSION['registro'] = time();
 }
