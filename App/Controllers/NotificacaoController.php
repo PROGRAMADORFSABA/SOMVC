@@ -33,18 +33,19 @@ class NotificacaoController extends Controller
 
        // self::setViewParam('listaClientes', $contratoService->listarClienteContrato($contratoId));
         //self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
-       // self::setViewParam('listarRepresentantes', $contratoService->listarRepresentanteContrato());
+        //self::setViewParam('listarRepresentantes', $contratoService->listarRepresentanteContrato());
         
        if($_POST){
            $notificacao->setNtf_valor($_POST['codRepresentante']);
            $notificacao->setNtf_cod($_POST['codigo']);
-           $notificacao->setNtf_ClienteLicitacao($_POST['clienteId']);
-           $notificacao->setNtf_Numero($_POST['no$notificacao']); 
+           $notificacao->setClienteLicitacao($_POST['clienteId']);
+           $notificacao->setNtf_Numero($_POST['notificacao']); 
            $notificacao->setNtf_Status($_POST['status']);
            $notificacao->setNtf_pedido($_POST['modalidade']);       
            $notificacao->setNtf_numero($_POST['numeroLicitacao']); 
         }
-    
+      
+        //self::setViewParam('listaNotificacoes', $notificacaoService->listar($notificacao));
         self::setViewParam('listaNotificacoes', $notificacaoService->listarDinamico($notificacao));
         $this->render('/notificacao/index');
 
@@ -98,30 +99,29 @@ class NotificacaoController extends Controller
     {
         $representanteService = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
-        $editalService = new EditalService();   
-        $editalService = new NotificacaoService();   
+        $editalService = new EditalService(); 
         $contrato = new Contrato();
         $notificacao = new Notificacao();
         
         if(Sessao::existeFormulario()) { 
             
             $clienteId = Sessao::retornaValorFormulario('cliente');
-            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
-            $notificacao->setNtf_ClienteLicitacao($clienteLicitacao);
+            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];
+            $notificacao->setClienteLicitacao($clienteLicitacao);
             
             $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
-            $edital = $clienteLicitacaoService->listar($editalId)[0];
-           // $notificacao->setEdital($edital);
+            $edital = $editalService->listar($editalId)[0];
+            $notificacao->setEdital($edital);
             
             $representanteId = Sessao::retornaValorFormulario('representante');
             $representante = $representanteService->listar($representanteId)[0];
             $notificacao->setNtf_Representante($representante);
-        }else{    
-            self::setViewParam('listarRepresentantes', $representanteService->listar());                 
-            $notificacao->setNtf_clientelicitacao(new ClienteLicitacao());
+        }else{
+            $notificacao->setclientelicitacao(new ClienteLicitacao());
             $notificacao->setNtf_representante(new Representante());
         }
-      
+        
+        self::setViewParam('listarRepresentantes', $representanteService->listar());                 
         $this->setViewParam('notificacao',$notificacao);        
         $this->render('/notificacao/cadastro');
         Sessao::limpaFormulario();
@@ -131,24 +131,21 @@ class NotificacaoController extends Controller
 
     public function salvar()
     { 
-        $clienteLicitacaoService  = new ClienteLicitacaoService();        
-        $usuarioService = new UsuarioService();        
-        $representanteService = new RepresentanteService();        
-        $instituicaoService = new InstituicaoService();        
-        $editalService = new EditalService();        
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
+        $notificacaoService         = new NotificacaoService();
+        $clienteLicitacaoService    = new ClienteLicitacaoService();        
+        $usuarioService             = new UsuarioService();        
+        $representanteService       = new RepresentanteService();        
+        $instituicaoService         = new InstituicaoService();        
+        $editalService              = new EditalService();        
         
-        $usuario        = $usuarioService->listar($_POST['usuario']);
-        $instituicao     =   $instituicaoService->listar($_POST['instituicao']);
-        $representante    = $representanteService->listar($_POST['representante'])[0];
+        $edital             = $editalService->listar($_POST['numeroLicitacao'])[0];
+        $clienteLicitacao   = $clienteLicitacaoService->listar($_POST['cliente']);
+        $usuario            = $usuarioService->listar($_POST['usuario']);
+        $instituicao        = $instituicaoService->listar($_POST['instituicao']);
+        $representante      = $representanteService->listar($_POST['representante'])[0];
         
- /* 
-ntf_numero, ntf_licitacao,     ntf_pedido,     ntf_status,     ntf_garantia,     ntf_trocamarca,
-     ntf_valor,     ntf_anexo,     ntf_prazodefesa,     ntf_clientelicitacao,     ntf_usuario,
-     ntf_representante,    ntf_dataalteracao,    ntf_datacadastro
- */ 
         $notificacao = new Notificacao();
-        $notificacao->setNtf_clientelicitacao($clienteLicitacao);
+        $notificacao->setClienteLicitacao($clienteLicitacao);
         $notificacao->setNtf_numero($_POST['numeroNotificacao']);        
         $notificacao->setNtf_pedido($_POST['numeroPedido']);        
         $notificacao->setNtf_garantia($_POST['garantia']);        
@@ -156,145 +153,144 @@ ntf_numero, ntf_licitacao,     ntf_pedido,     ntf_status,     ntf_garantia,    
         $notificacao->setNtf_prazodefesa($_POST['prazoDefesa']);        
         $notificacao->setNtf_trocamarca($_POST['trocaMarca']);        
         $notificacao->setNtf_valor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
-        $notificacao->setNtf_licitacao($_POST['numeroLicitacao']);
+        $notificacao->setEdital($edital);
         $notificacao->setNtf_usuario($usuario);
         $notificacao->setNtf_representante($representante);
         $notificacao->setNtf_datacadastro($_POST['dataCadastro']);        
+        $notificacao->setNtf_datarecebimento($_POST['dataRecebimento']);
         $notificacao->setNtf_dataalteracao($_POST['dataCadastro']);
         $notificacao->setNtf_observacao($_POST['observacao']);
         $notificacao->setNtf_anexo($_POST['anexo']);
         $notificacao->setNtf_instituicao($instituicao);
         Sessao::gravaFormulario($_POST);
-        
-        
-        $notificacaoValidador  = new NotificacaoValidador();
-        $resultadoValidacao = $notificacaoValidador->validar($notificacao);
+                
+        $notificacaoValidador   = new NotificacaoValidador();
+        $resultadoValidacao     = $notificacaoValidador->validar($notificacao);
         
         if ($resultadoValidacao->getErros()) {
             $this->redirect('/notificacao/cadastro');
         }
-        var_dump( $notificacao );
-        if (!$notificacao) {
-           
-           // $this->redirect('/notificacao/cadastro');
-            Sessao::gravaMensagem("nenhuma licitacao informada");
+        
+        if (!$notificacao) {           
+            $this->redirect('/notificacao/cadastro');
+            Sessao::gravaMensagem("sem dados informados");
          }
-
-        $notificacaoService = new NotificacaoService();
     
-       /*if($notificacaoService->salvar($notificacao)){
-          //  $this->redirect('/notificacao');
-        }else{          
-           // $this->redirect('/notificacao/cadastro');
-        }*/
+       if($notificacaoService->salvar($notificacao)){
+              $this->redirect('/notificacao');       
+        }else{                      
+            $this->redirect('/notificacao/cadastro');
+        }
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
     }
-/*
+
     public function edicao($params)
-    { 
-       
-        $contratoId = $params[0];
-        
-        $contratoService = new ContratoService();
+    {       
+        $notificacao = new Notificacao();
+        $notificacao->setNtf_cod($params[0]);       
+        $notificacaoService = new NotificacaoService();
+        $editalService = new EditalService();
         $representanteService = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
-        $contrato = new Edital();
         if(Sessao::existeFormulario()) { 
-            $clienteId = Sessao::retornaValorFormulario('cliente');
+            $clienteId = Sessao::retornaValorFormulario('cliente');            
             $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
-            $contrato->setClienteLicitacao($clienteLicitacao);
-            
+            $notificacao->setClienteLicitacao($clienteLicitacao);            
+            $notificacao->setNtf_garantia( Sessao::retornaValorFormulario('garantia'));
+            $notificacao->setNtf_status( Sessao::retornaValorFormulario('status'));
+            $notificacao->setNtf_pedido( Sessao::retornaValorFormulario('numeroPedido'));
+            $notificacao->setNtf_prazodefesa( Sessao::retornaValorFormulario('prazoDefesa'));
+            $notificacao->setNtf_trocamarca( Sessao::retornaValorFormulario('trocaMarca'));
+            $notificacao->setNtf_valor( Sessao::retornaValorFormulario('valor'));
+            $notificacao->setNtf_observacao( Sessao::retornaValorFormulario('observacao'));
+            $notificacao->setNtf_anexo( Sessao::retornaValorFormulario('anexo'));
+            $notificacao->setNtf_numero( Sessao::retornaValorFormulario('numeroNotificacao'));
             $representanteId = Sessao::retornaValorFormulario('representante');
             $representante = $representanteService->listar($representanteId)[0];
-            self::setViewParam('listarRepresentantes', $representanteService->listar()); 
-            $contrato->setRepresentante($representante);
-            $contrato = $contratoService->listar($contratoId)[0];           
-        }else{                       
-            self::setViewParam('listarRepresentantes', $representanteService->listar());            
-           
-            $contrato = $contratoService->listar($contratoId)[0]; 
+            $notificacao->setNtf_representante($representante);
+
+            $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
+            $edital = $editalService->listar($editalId)[0];
+            $notificacao->setEdital($edital);
+            
+        }else{                                   
+            $notificacao = $notificacaoService->listarDinamico($notificacao)[0]; 
         }        
-        if (!$contrato) {
+        self::setViewParam('listarRepresentantes', $representanteService->listar());            
+        if (!$notificacao) {
             Sessao::gravaMensagem("Cadastro inexistente");
-            $this->redirect('/notificacao');
+           $this->redirect('/notificacao');
         }
-        
-        $this->setViewParam('contrato', $contrato);
-        $this->render('/notificacao/edicao');
+        $this->setViewParam('notificacao', $notificacao);
+        $this->render('/notificacao/editar');
         
         Sessao::limpaMensagem();
     }
 
     public function atualizar()
     {             
-        $clienteLicitacaoService  = new ClienteLicitacaoService();        
-        $usuarioService = new UsuarioService();        
-        $representanteService = new RepresentanteService();        
-        $instituicaoService = new InstituicaoService();        
-        $editalService = new EditalService();        
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
-        $usuario        = $usuarioService->listar($_POST['ctrUsuario']);
-        $instituicao     =   $instituicaoService->listar($_POST['fk_instituicao']);
-        $representante    = $representanteService->listar($_POST['representante'])[0];
-        $edital    = $editalService->listar($_POST['numeroLicitacao'])[0];
- 
-        $contrato = new Contrato();
-        $contrato->setCtrId($_POST['codigo']);        
-        $contrato->setCtrNumero($_POST['numeroContrato']);        
-        $contrato->setCtrDataInicio($_POST['dataInicio']);        
-        $contrato->setCtrDataVencimento($_POST['dataVencimento']);        
-        $contrato->setCtrValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
-        $contrato->setCtrStatus($_POST['status']);        
-        $contrato->setCtrObservacao($_POST['observacao']);
-        $contrato->setCtrAnexo($_POST['anexo']);        
-        $contrato->setEdital($edital);        
-        $contrato->setCtrPrazoPagamento($_POST['prazoPagamento']);        
-        $contrato->setCtrPrazoEntrega($_POST['prazoEntrega']);             
-        $contrato->setCtrDataAlteracao($_POST['dataCadastro']);        
-       // $contrato->setCtrDataCadastro($_POST['dataCadastro']);        
-        $contrato->setClienteLicitacao($clienteLicitacao);
-        $contrato->setInstituicao($instituicao);
-        $contrato->setRepresentante($representante);
-        $contrato->setUsuario($usuario);
+        $notificacaoService         = new NotificacaoService();
+        $clienteLicitacaoService    = new ClienteLicitacaoService();        
+        $usuarioService             = new UsuarioService();        
+        $representanteService       = new RepresentanteService();        
+        $instituicaoService         = new InstituicaoService();        
+        $editalService              = new EditalService();        
+        
+        $edital             = $editalService->listar($_POST['numeroLicitacao'])[0];             
+        $clienteLicitacao   = $clienteLicitacaoService->listar($_POST['cliente']);  
+        $usuario            = $usuarioService->listar($_POST['usuario']);
+        $instituicao        = $instituicaoService->listar($_POST['instituicao']);
+        $representante      = $representanteService->listar($_POST['representante'])[0];
+        
+        $notificacao = new Notificacao();
+        $notificacao->setClienteLicitacao($clienteLicitacao);
+        $notificacao->setNtf_cod($_POST['codigo']);        
+        $notificacao->setNtf_numero($_POST['numeroNotificacao']);        
+        $notificacao->setNtf_pedido($_POST['numeroPedido']);        
+        $notificacao->setNtf_garantia($_POST['garantia']);        
+        $notificacao->setNtf_status($_POST['status']);        
+        $notificacao->setNtf_prazodefesa($_POST['prazoDefesa']);        
+        $notificacao->setNtf_trocamarca($_POST['trocaMarca']);        
+        $notificacao->setNtf_valor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));
+        $notificacao->setEdital($edital);
+        $notificacao->setNtf_usuario($usuario);
+        $notificacao->setNtf_representante($representante);
+        $notificacao->setNtf_datarecebimento($_POST['dataRecebimento']);
+        $notificacao->setNtf_dataalteracao($_POST['dataCadastro']);
+        $notificacao->setNtf_observacao($_POST['observacao']);
+        $notificacao->setNtf_instituicao($instituicao);
         $anexo =  $_POST['anexo'];
         if($anexo == ""){
-            $contrato->setCtrAnexo($_POST['anexoAlt']);                    
+            $notificacao->setNtf_anexo($_POST['anexoAlt']);                    
         } else{
-            $contrato->setCtrAnexo($_POST['anexo']);        
+            $notificacao->setNtf_anexo($_POST['anexo']);        
         }
-        $contrato->setCtrObservacao($_POST['observacao']);        
-        $contrato->setClienteLicitacao($clienteLicitacao);
-        $contrato->setInstituicao($instituicao);
-        $contrato->setRepresentante($representante);
-        $contrato->setUsuario($usuario);
-
+        
         Sessao::gravaFormulario($_POST);
 
-        $contratoService = new ContratoService();
-    
-        $NotificacaoValidador = new NotificacaoValidador();
-        $resultadoValidacao = $NotificacaoValidador->validar($contrato);
+        $notificacaoValidador = new NotificacaoValidador();
+        $resultadoValidacao = $notificacaoValidador->validar($notificacao);
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            Sessao::gravaMensagem("erro na atualizacao");
             Sessao::gravaFormulario($_POST);
-           $this->redirect('/notificacao/edicao/' . $_POST['codigo']);
+            $this->redirect('/notificacao/edicao/' . $_POST['codigo']);
+            Sessao::gravaMensagem("erro na atualizacao");
         }        
-        if ($contratoService->Editar($contrato)) {
+        if ($notificacaoService->Editar($notificacao)) {
             $this->redirect('/notificacao');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();           
         }else{
             Sessao::gravaFormulario($_POST);            
+            $this->redirect('/notificacao/edicao/'.$_POST['codigo']);
             Sessao::gravaMensagem("erro na atualizacao");
-            //$this->redirect('/notificacao/edicao/'.$_POST['codigo']);
         }
     }
-    
+    /*
     public function exclusao($params)
     {
         $ctrId = $params[0];

@@ -186,15 +186,15 @@
                             ?>
                             <tr>
                                 <td><?php echo $notificacao->getNtf_cod(); ?></td>
-                                <td><?php echo $notificacao->getNtf_clientelicitacao()->getRazaoSocial(); ?></td>
-                                <td><?php echo $notificacao->getNtf_clientelicitacao()->getTipoCliente(); ?></td>
-                                <td><?php echo $notificacao->getNtf_edital()->getEdtNumero(); ?></td>
-                                <td><?php echo $notificacao->setNtf_pedido(); ?></td>
+                                <td><?php echo $notificacao->getClienteLicitacao()->getNomeFantasia(); ?></td>
+                                <td><?php echo $notificacao->getClienteLicitacao()->getTipoCliente(); ?></td>
+                                <td><?php echo $notificacao->getEdital()->getEdtNumero(); ?></td>
+                                <td><?php echo $notificacao->getNtf_pedido(); ?></td>
                                 <td><?php echo $notificacao->getNtf_status(); ?></td>
                                 <td><?php echo $notificacao->getNtf_prazodefesa(); ?></td>
                                 <td><?php echo $notificacao->getNtf_garantia(); ?></td>
                                 <td><?php echo $notificacao->getNtf_trocamarca(); ?></td>
-                                <td><?php echo $notificacao->getNtf_valor(); ?></td>
+                                <td>R$<?php echo $notificacao->getNtf_valor(); ?></td>
                                 <td><?php echo $notificacao->getNtf_datacadastro()->format('d/m/Y'); ?></td>
                                 <td>
                                     <span class="dropdown">

@@ -36,11 +36,12 @@ namespace App\Models\Entidades;
     private $ntf_prazodefesa;
     private $ntf_dataalteracao;
     private $ntf_datacadastro;
-    private $ntf_clientelicitacao;
+    private $ntf_datarecebimento;
+    private $clienteLicitacao;
     private $ntf_usuario;
     private $ntf_instituicao;
     private $ntf_observacao;
-    private $ntf_edital;
+    private $edital;
     private $ntf_representante;
     private $ntf_codclientelicitacao;
     private $ntf_codusuario;
@@ -304,26 +305,28 @@ namespace App\Models\Entidades;
 
         return $this;
     }
-
+    
     /**
-     * Get the value of ntf_clientelicitacao
+     * Get the value of ntf_datarecebimento
      */ 
-    public function getNtf_clientelicitacao()
+    public function getNtf_datarecebimento()
     {
-        return $this->ntf_clientelicitacao;
+        return new DateTime($this->ntf_datarecebimento);
     }
 
     /**
-     * Set the value of ntf_clientelicitacao
+     * Set the value of ntf_datarecebimento
      *
      * @return  self
      */ 
-    public function setNtf_clientelicitacao(ClienteLicitacao $ntf_clientelicitacao)
+    public function setNtf_datarecebimento($ntf_datarecebimento)
     {
-        $this->ntf_clientelicitacao = $ntf_clientelicitacao;
+        $this->ntf_datarecebimento = $ntf_datarecebimento;
 
         return $this;
     }
+
+    
     /**
      * Get the value of ntf_instituicao
      */ 
@@ -447,19 +450,39 @@ namespace App\Models\Entidades;
     /**
      * Get the value of ntf_edital
      */ 
-    public function getNtf_edital()
+    public function getEdital()
     {
-        return $this->ntf_edital;
+        return $this->edital;
     }
 
     /**
-     * Set the value of ntf_edital
+     * Set the value of edital
      *
      * @return  self
      */ 
-    public function setNtf_edital(Edital $ntf_edital)
+    public function setEdital(Edital $edital)
     {
-        $this->ntf_edital = $ntf_edital;
+        $this->edital = $edital;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of clienteLicitacao
+     */ 
+    public function getClienteLicitacao()
+    {
+        return $this->clienteLicitacao;
+    }
+
+    /**
+     * Set the value of clienteLicitacao
+     *
+     * @return  self
+     */ 
+    public function setClienteLicitacao(ClienteLicitacao $clienteLicitacao)
+    {
+        $this->clienteLicitacao = $clienteLicitacao;
 
         return $this;
     }

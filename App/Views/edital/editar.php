@@ -15,7 +15,7 @@
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
         <input type="hidden" class="form-control" id="codigo" name="codigo" value="<?php echo $viewVar['edital']->getEdtId(); ?>"  required>
         <input type="hidden" class="form-control" name="edtUsuario" id="edtUsuario" value="<?php echo $_SESSION['id']; ?>" required>
-            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
+        <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
         <div class="kt-portlet__body">
             <input type="hidden" class="form-control" name="idCliente" id="idCliente" required>
             <div class="kt-portlet__body">

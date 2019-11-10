@@ -16,17 +16,16 @@
         <input type="hidden" class="form-control" name="usuario" id="usuario" value="<?php echo $_SESSION['id']; ?>" required>
         <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
         <div class="kt-portlet__body">            
-            <div class="kt-portlet__body">
-            
+            <div class="kt-portlet__body">            
                 <div class="form-group">
                     <label for="cadastroCliente" class="">CADASTRO DO CLIENTE</label>                    
                     <a href="http://<?php echo APP_HOST; ?>/edital/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>Novo Edital</a>
                       <div>    
                             <input type="text" name="editalCliente-Autocomplete" id="editalCliente-Autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
-                            value="<?php echo $viewVar['notificacao']->getNtf_clientelicitacao()->getRazaoSocial(); ?>" > 
-                            <input type="text" id="cliente" name="cliente" 
-                            value=<?php echo $viewVar['notificacao']->getNtf_clientelicitacao()->getCodCliente(); ?>>  
+                            value="<?php echo $viewVar['notificacao']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
+                            <input type="hidden" id="cliente" name="cliente" 
+                            value=<?php echo $viewVar['notificacao']->getClienteLicitacao()->getCodCliente(); ?>>  
                         </div>
                         <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>                       
                 </div>
@@ -36,7 +35,7 @@
                         <input type="text" class="form-control" placeholder="Digite numero da Notificacao" id="numeroNotificacao" name="numeroNotificacao" value="<?php $Sessao::retornaValorFormulario('numeroNotificacao');?>" required>
                         <span class="form-text text-muted">Digite o numero da Notificacao</span>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label for="numeroPedido" >Numero do Pedido</label>
                         <input type="text" class="form-control" placeholder="Digite o numero do pedido" id="numeroPedido" name="numeroPedido" value="<?php $Sessao::retornaValorFormulario('numeroPedido');?>" required>
                         <span class="form-text text-muted">Digite numero do pedido</span>
@@ -51,7 +50,7 @@
                         </select>
                         <span class="form-text text-muted">Por favor insira a garantia</span>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status" required>
                             <option value="">Selecione o Status</option>
@@ -60,6 +59,11 @@
                                 <option value="Atendido">Atendido</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
+                    </div>
+                    <div class="col-lg-2">
+                            <label for="dataRecebimento" class="">Data de Recebimento:</label>
+                            <input type="date" class="form-control" placeholder="Digite a Data Recebimento" id="dataRecebimento" name="dataRecebimento" value="<?php echo $Sessao::retornaValorFormulario('dataRecebimento'); ?>" required>
+                            <span class="form-text text-muted">Digite a Data Recebimento</span>
                     </div>
                     <div class="col-lg-2">
                     <label for="prazoDefesa" class="">Prazo Defesa:</label>
@@ -85,11 +89,10 @@
                     </div>
                 <div class="col-lg-2">
                         <label for="editalLicitacao-AutoComplete" >Numero da Licitacao:</label>
-                        <input type="text" title="pesquisa o edital para o cliente selecionado" class="form-control" disabled placeholder="Digite numero da licitacao" id="editalLicitacao-AutoComplete" name="editalLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>" required>
+                        <input type="text" title="pesquisa o edital para o cliente selecionado" class="form-control" disabled placeholder="Digite numero da licitacao" id="editalLicitacao-AutoComplete" name="editalLicitacao-AutoComplete" value="<?php echo $Sessao::retornaValorFormulario('editalLicitacao-AutoComplete'); ?>" required>
                         <input type="hidden" id="numeroLicitacao" name="numeroLicitacao" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
-                    </div>
-                                        
+                    </div>   
                     <div class="col-lg-4">
                         <label for="representante">Representante</label>
                         <select class="form-control" id="representante" name="representante" required>
@@ -106,9 +109,9 @@
                 <div class="form-group row">
                
                     <div class="col-lg-7">
-                        <label for="observacao" class="">Observacao do Contrato:</label>
-                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Contrato" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
-                        <span class="form-text text-muted">Digite Observacao do Contrato</span>
+                        <label for="observacao" class="">Observacao do Notificacao:</label>
+                        <textarea class="form-control" rows="3" placeholder="Digite Observacao do Notificacao" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
+                        <span class="form-text text-muted">Digite Observacao do Notificacao</span>
                     </div>  
                     <div class="col-lg-3">
                         <label for="anexo" class="">Anexo:</label>

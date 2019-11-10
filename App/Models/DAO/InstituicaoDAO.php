@@ -23,7 +23,7 @@ class InstituicaoDAO extends BaseDAO
                 $instituicao->setInst_Nome($dado['inst_nome']);
                 $instituicao->setInst_Codigo($dado['inst_codigo']);
                 $instituicao->setInst_Nome($dado['inst_nomeFansia']);
-
+                
                 return $instituicao;
             }
         } else {

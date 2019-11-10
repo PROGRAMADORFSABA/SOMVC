@@ -161,10 +161,10 @@ class EditalController extends Controller
             $edital->setRepresentante($representante);
             
         }else{                       
-            self::setViewParam('listarRepresentantes', $representanteService->listar());            
             $editalService = new EditalService();
             $edital = $editalService->listar($editalId)[0]; 
         }        
+        self::setViewParam('listarRepresentantes', $representanteService->listar());            
         if (!$edital) {
             Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/edital');
