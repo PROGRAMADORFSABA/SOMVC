@@ -116,14 +116,14 @@ class NotificacaoService
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
-                var_dump($e);
+              // var_dump($e);
                 $transacao->rollBack(); 
                 Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
                return false;
             }
         }
     }
-/*
+
     public function Editar(Notificacao $notificacao)
     {   
         $transacao = new Transacao();
@@ -144,7 +144,7 @@ class NotificacaoService
                 return true;
             }catch(\Exception $e){
                 $transacao->rollBack(); 
-              //var_dump($e);
+             //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
                return false;
             }
@@ -172,5 +172,5 @@ class NotificacaoService
             throw new \Exception(["Erro ao excluir a empresa"]);            
             return false;
         }
-    }*/
+    }
 }
