@@ -26,7 +26,6 @@ namespace App\Models\Entidades;
      */
     private $ntf_cod;
     private $ntf_numero;
-    private $ntf_licitacao;
     private $ntf_pedido;
     private $ntf_status;
     private $ntf_garantia;
@@ -102,26 +101,6 @@ namespace App\Models\Entidades;
     public function setNtf_observacao($ntf_observacao)
     {
         $this->ntf_observacao = $ntf_observacao;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of ntf_licitacao
-     */ 
-    public function getNtf_licitacao()
-    {
-        return $this->ntf_licitacao;
-    }
-
-    /**
-     * Set the value of ntf_licitacao
-     *
-     * @return  self
-     */ 
-    public function setNtf_licitacao($ntf_licitacao)
-    {
-        $this->ntf_licitacao = $ntf_licitacao;
 
         return $this;
     }

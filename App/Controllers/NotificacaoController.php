@@ -106,7 +106,7 @@ class NotificacaoController extends Controller
         if(Sessao::existeFormulario()) { 
             
             $clienteId = Sessao::retornaValorFormulario('cliente');
-            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];
+            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
             $notificacao->setClienteLicitacao($clienteLicitacao);
             
             $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
@@ -115,7 +115,17 @@ class NotificacaoController extends Controller
             
             $representanteId = Sessao::retornaValorFormulario('representante');
             $representante = $representanteService->listar($representanteId)[0];
-            $notificacao->setNtf_Representante($representante);
+            $notificacao->setNtf_representante($representante);
+
+            $notificacao->setNtf_garantia( Sessao::retornaValorFormulario('garantia'));
+            $notificacao->setNtf_status( Sessao::retornaValorFormulario('status'));
+            $notificacao->setNtf_pedido( Sessao::retornaValorFormulario('numeroPedido'));
+            $notificacao->setNtf_prazodefesa( Sessao::retornaValorFormulario('prazoDefesa'));
+            $notificacao->setNtf_trocamarca( Sessao::retornaValorFormulario('trocaMarca'));
+            $notificacao->setNtf_valor( Sessao::retornaValorFormulario('valor'));
+            $notificacao->setNtf_observacao( Sessao::retornaValorFormulario('observacao'));
+            $notificacao->setNtf_anexo( Sessao::retornaValorFormulario('anexo'));
+            $notificacao->setNtf_numero( Sessao::retornaValorFormulario('numeroNotificacao'));
         }else{
             $notificacao->setclientelicitacao(new ClienteLicitacao());
             $notificacao->setNtf_representante(new Representante());
@@ -175,11 +185,11 @@ class NotificacaoController extends Controller
             $this->redirect('/notificacao/cadastro');
             Sessao::gravaMensagem("sem dados informados");
          }
-    
+ 
        if($notificacaoService->salvar($notificacao)){
               $this->redirect('/notificacao');       
         }else{                      
-            $this->redirect('/notificacao/cadastro');
+          //  $this->redirect('/notificacao/cadastro');
         }
 
         Sessao::limpaFormulario();
@@ -286,7 +296,7 @@ class NotificacaoController extends Controller
             Sessao::limpaErro();           
         }else{
             Sessao::gravaFormulario($_POST);            
-            $this->redirect('/notificacao/edicao/'.$_POST['codigo']);
+          //  $this->redirect('/notificacao/edicao/'.$_POST['codigo']);
             Sessao::gravaMensagem("erro na atualizacao");
         }
     }

@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="garantia">Garantia</label>
-                        <select class="form-control" name="garantia" id="garantia" required>
+                        <select class="form-control" name="garantia" id="garantia" value="<?php echo $Sessao::retornaValorFormulario('garantia'); ?>" required>
                             <option value="">Selecione o garantia</option>
                                 <option value="Todas">Todas</option>
                                 <option value="Parcial">Parcial</option>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status" required>
+                        <select class="form-control" name="status" id="status" value="<?php echo $Sessao::retornaValorFormulario('status'); ?>" required>
                             <option value="">Selecione o Status</option>
                                 <option value="Pendente">Pendente</option>
                                 <option value="Deferido">Deferido</option>
@@ -74,8 +74,8 @@
                 <div class="form-group row">
                 <div class="col-lg-3">
                         <label for="trocaMarca">Troca de Marca</label>
-                        <select class="form-control" name="trocaMarca" id="trocaMarca" required>
-                            <option value="">Selecione o trocaMarca</option>
+                        <select class="form-control" name="trocaMarca" id="trocaMarca"  value="<?php echo $Sessao::retornaValorFormulario('trocaMarca'); ?>" required>
+                            <option value="">Selecione a troca de Marca</option>
                                 <option value="Nao">Nao</option>
                                 <option value="Com Carta">Com Carta</option>
                                 <option value="Sem Carta">Sem Carta</option>

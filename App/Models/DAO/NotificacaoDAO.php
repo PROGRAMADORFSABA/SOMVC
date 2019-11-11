@@ -251,7 +251,7 @@ class NotificacaoDAO extends BaseDAO
         $representante      = $notificacao->getNtf_codrepresentante();
 
         $SQL = " SELECT * FROM notificacao ntf
-        INNER JOIN clientelicitacao c ON c.licitacaoCliente_cod = ntf.ntf_clientelicitacao
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ntf.ntf_clientelicitacao
         INNER JOIN usuarios u ON u.id = ntf.ntf_usuario
         INNER JOIN edital e on e.edt_id = ntf.ntf_edital
         INNER JOIN instituicao i on i.inst_id = ntf.ntf_instituicao
@@ -274,9 +274,8 @@ class NotificacaoDAO extends BaseDAO
             
         $notificacao = new Notificacao();
         $notificacao->setNtf_cod($dado['ntf_cod']);
-        $notificacao->setNtf_numero($dado['ntf_numero']);
-        $notificacao->setNtf_licitacao($dado['ntf_licitacao']);
-        $notificacao->setNtf_pedido($dado['ntf_pedido']);
+        $notificacao->setNtf_numero($dado['ntf_numero']);        
+        $notificacao->setNtf_pedido($dado['ntf_pedido']);        
         $notificacao->setNtf_status($dado['ntf_status']);
         $notificacao->setNtf_garantia($dado['ntf_garantia']);
         $notificacao->setNtf_trocamarca($dado['ntf_trocamarca']);
@@ -387,7 +386,7 @@ class NotificacaoDAO extends BaseDAO
             $ntfRepresentante              = $notificacao->getNtf_representante()->getCodRepresentante();           
             $ntfDataAlteracao              = $notificacao->getNtf_dataalteracao()->format('Y-m-d h:m:s');
             $ntfDataCadastro               = $notificacao->getNtf_datacadastro()->format('Y-m-d h:m:s');
-            $ntfDataRecebimento               = $notificacao->getNtf_datarecebimento()->format('Y-m-d h:m:s');
+            $ntfDataRecebimento            = $notificacao->getNtf_datarecebimento()->format('Y-m-d h:m:s');
             $ntfObservacao                 = $notificacao->getNtf_observacao();
             $ntfInstituicao                = $notificacao->getNtf_instituicao()->getInst_Id();
            
@@ -466,7 +465,7 @@ class NotificacaoDAO extends BaseDAO
             $ntfObservacao                 = $notificacao->getNtf_observacao();
             $ntfInstituicao                = $notificacao->getNtf_instituicao()->getInst_Id();                 
             $nomeanexo = date('Y-m-d-h:m:s');
-                    
+         
             if (!$_FILES['anexo']['name'] == "") {
                 $validextensions = array("jpeg", "jpg", "png", "PNG", "JPG", "JPEG", "pdf", "PDF", "docx");
                 $temporary = explode(".", $_FILES["anexo"]["name"]);
@@ -486,35 +485,45 @@ class NotificacaoDAO extends BaseDAO
                    
             return $this->update(
                 'notificacao',               
-                " ntf_numero = :ntfNumero, ntf_edital = : ntfEdital, ntf_pedido = : ntfPedido, ntf_status = : ntfStatus, 
-                ntf_garantia = : ntfGarantia, ntf_trocamarca = : ntfTrocaMarca, ntf_valor = : ntfValor, 
-                ntf_anexo = : ntfAnexo, ntf_prazodefesa = : ntfPrazoDefesa, ntf_clientelicitacao = : ntfClienteLicitacao,
-                ntf_usuario = : ntfUsuario, ntf_representante = : ntfRepresentante, ntf_dataalteracao = : ntfDataAlteracao,
-               ntf_datarecebimento = : ntfDataRecebimento, ntf_datarecebimento = : ntfDataRecebimento, 
-               ntf_instituicao = : ntfInstituicao, ntf_observacao = : ntfObservacao ",
+            "   ntf_numero = :ntfNumero, 
+                ntf_edital = :ntfEdital, 
+                ntf_pedido = :ntfPedido, 
+                ntf_status = :ntfStatus, 
+                ntf_garantia = :ntfGarantia, 
+                ntf_trocamarca = :ntfTrocaMarca, 
+                ntf_valor = :ntfValor, 
+                ntf_anexo = :ntfAnexo, 
+                ntf_prazodefesa = :ntfPrazoDefesa, 
+                ntf_clientelicitacao = :ntfClienteLicitacao,
+                ntf_usuario = :ntfUsuario, 
+                ntf_representante = :ntfRepresentante,
+                ntf_dataalteracao = :ntfDataAlteracao,
+                ntf_datarecebimento = :ntfDataRecebimento, 
+                ntf_instituicao = :ntfInstituicao, 
+                ntf_observacao = :ntfObservacao ",
                  [
-                    ':notificacaoId' => $notificacaoId,
-                    ':ntfNumero' => $ntfNumero,
-                    ':ntfEdital' => $ntfEdital,
-                    ':ntfPedido' => $ntfPedido,
-                    ':ntfStatus' => $ntfStatus,
-                    ':ntfGarantia' => $ntfGarantia,
-                    ':ntfTrocaMarca' => $ntfTrocaMarca,
-                    ':ntfValor' => $ntfValor,
-                    ':ntfAnexo' => $ntfAnexo,
-                    ':ntfPrazoDefesa' => $ntfPrazoDefesa,
-                    ':ntfClienteLicitacao' => $ntfClienteLicitacao,
-                    ':ntfUsuario' => $ntfUsuario,
-                    ':ntfRepresentante' => $ntfRepresentante,
-                    ':ntfDataAlteracao' => $ntfDataAlteracao,                    
-                    ':ntfDataRecebimento' => $ntfDataRecebimento,
-                    ':ntfInstituicao' => $ntfInstituicao,
-                    ':ntfObservacao' => $ntfObservacao,
+                    ':notificacaoId'        => $notificacaoId,
+                    ':ntfNumero'            => $ntfNumero,
+                    ':ntfEdital'            => $ntfEdital,
+                    ':ntfPedido'            => $ntfPedido,
+                    ':ntfStatus'            => $ntfStatus,
+                    ':ntfGarantia'          => $ntfGarantia,
+                    ':ntfTrocaMarca'        => $ntfTrocaMarca,
+                    ':ntfValor'             => $ntfValor,
+                    ':ntfAnexo'             => $ntfAnexo,
+                    ':ntfPrazoDefesa'       => $ntfPrazoDefesa,
+                    ':ntfClienteLicitacao'  => $ntfClienteLicitacao,
+                    ':ntfUsuario'           => $ntfUsuario,
+                    ':ntfRepresentante'     => $ntfRepresentante,
+                    ':ntfDataAlteracao'     => $ntfDataAlteracao,                    
+                    ':ntfDataRecebimento'   => $ntfDataRecebimento,
+                    ':ntfInstituicao'       => $ntfInstituicao,
+                    ':ntfObservacao'        => $ntfObservacao,
                 ],
-                " ntf_cod = : notificacaoId"
+                " ntf_cod = :notificacaoId"
                 );  
         } catch (\Exception $e) {
-            var_dump($e);
+           // var_dump($e);
             throw new \Exception("Erro na gravação de dados. ", 500);
         }
     }
@@ -524,7 +533,7 @@ class NotificacaoDAO extends BaseDAO
         try {
             $notificacaoId = $notificacao->getnotificacaoId();
 
-            return $this->delete('contrato', "ctr_id = $notificacaoId");
+            return $this->delete('notificacao', "ntf_id = $notificacaoId");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);
