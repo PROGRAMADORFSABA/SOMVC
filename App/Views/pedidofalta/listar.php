@@ -1,19 +1,9 @@
-<!-- begin:: Content -->
-<div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-    <div class="col-md-12">
-        <?php if($Sessao::retornaMensagem()){ ?>
-            <div class="alert alert-warning" role="alert">
-                <a href="#" class="close" data-dismiss="alert"
-                   aria-label="close">&times;</a>
-                <?php echo $Sessao::retornaMensagem(); ?>
-            </div>
-        <?php } ?>
-
     <!-- begin:: Content -->
     <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
         <div class="alert alert-light alert-elevate" role="alert">
             <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
             <div class="alert-text">
+
                 The Metronic Datatable component supports initialization from HTML table. It also defines the schema model of the data source. In addition to the visualization, the Datatable
                 provides built-in support for operations over data such
                 as sorting, filtering and paging performed in user browser(frontend).
@@ -146,7 +136,7 @@
                 <!--end: Search Form -->
             </div>
             <div class="kt-portlet__body kt-portlet__body--fit">
-
+            
                 <!--begin: Datatable -->
                 <table class="kt-datatable" id="html_table" width="100%">
                     <thead>
@@ -159,11 +149,12 @@
                         <th title="Field #6">Order Date</th>
                         <th title="Field #7">Status</th>
                         <th title="Field #8">Type</th>
+                        
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach($viewVar['pedidofalta'] as $pedidoFalta) { ?>
-
+                      <?php  // var_dump($pedidoFalta); ?>
                         <tr>
                             <td><?php echo $pedidoFalta->getFaltaClienteCod(); ?></td>
                             <td><?php echo $pedidoFalta->getAFM(); ?></td>

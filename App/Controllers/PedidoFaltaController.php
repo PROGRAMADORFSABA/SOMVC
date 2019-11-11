@@ -26,6 +26,9 @@
             $faltaCliente_cod = $params[0];
             $pedidoFaltaService = new PedidoFaltaService();
             $pedidoFalta = $pedidoFaltaService->listar($faltaCliente_cod);
+
+         
+           
             
             $this->setViewParam('pedidofalta', $pedidoFalta);
             $this->render('/pedidofalta/listar');

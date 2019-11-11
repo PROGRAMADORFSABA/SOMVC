@@ -16,20 +16,22 @@
         public function listar($faltaCliente_cod = null)
         {
             $SQL =
-                'SELECT FC.faltaCliente_cod,
-                        CL.nomefantasia,
-                        FC.proposta,
-                        FC.AFM,
-                        FC.observacao,
-                        FC.dataFalta,
-                        CL.nomefantasia,
-                        MF.marcanome,
-                        SF.nomeStatus
+                'SELECT 
+                    FC.faltaCliente_cod,
+                    CL.nomefantasia as ClienteLicitacao,
+                    P.ProNome,
+                    F.nomefantasia,
+                    FC.proposta,
+                    FC.AFM,
+                    FC.observacao,
+                    FC.dataFalta
                 
-                        FROM faltaCliente FC
-                        inner join clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
-                        inner join marca MF on MF.marcacod = FC.fk_marca
-                        inner join statusFalta SF on SF.faltaStatus_cod = FC.fk_status ';
+            FROM faltaCliente FC
+                
+                INNER JOIN faltaporcliente FPC on FPC.FK_ID_FALTACLIENTE = FC.faltaCliente_cod
+                INNER JOIN clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
+                INNER JOIN Produto P on P.ProCodigo = FPC.FK_IDPRODUTO
+                INNER JOIN fornecedor F on F.fornecedor_cod = P.ProFornecedor';
             if ($faltaCliente_cod) {
                 $SQL .= 'WHERE FC.faltaCliente_cod';
             }
@@ -40,26 +42,25 @@
         
             foreach ($dataSetFaltas as $dataSetFalta) {
                     $pedidofalta = new PedidoFalta();
-                    $pedidofalta->setFaltaClienteCod($dataSetFalta['idfalta']);
-                    $pedidofalta->setAFM($pedidofalta['afm']);
+                    $pedidofalta->setFaltaClienteCod($dataSetFalta['faltaCliente_cod']);
+                    $pedidofalta->setAFM($dataSetFalta['afm']);
                     $pedidofalta->setProposta($dataSetFalta['proposta']);
-                    $pedidofalta->setObservacao($pedidofalta['observacao']);
-                    
-                    $pedidofalta->setFkCliente( new FkCLiente);
+                    $pedidofalta->setObservacao($dataSetFalta['observacao']);
+                   /* 
+                    $pedidofalta->setFkCliente( new ClienteLicitacao());
                     $pedidofalta->getFkCliente()->getNomeFantasia($dataSetFalta['nomefantasia']);
                     
-                    $pedidofalta->getFkMarca(new Marca());
-                    $pedidofalta->getFkMarca()->setMarcaNome($dataSetFalta['marca']);
                     
-                    $pedidofalta->getFkProduto(new Produto());
-                    $pedidofalta->getFkProduto()->setProNome($dataSetFalta['produto']);
+                    $pedidofalta->settFk_Produto(new Produto());
+                    $pedidofalta->getFk_Produto()->setProNome($dataSetFalta['produto']);
+               
                 
-                
-       
+                    */
                 
                 
                 $listaFaltas[] = $pedidofalta;
             }
+           
             return $listaFaltas;
         }
     
@@ -129,12 +130,11 @@
                 $AFM                    = $pedidoFalta->getAFM();
                 $observacao             = $pedidoFalta->getObservacao();
                 $fk_cliente             = $pedidoFalta->getFkCliente()->getCodCliente();
-                $fk_produto             = $pedidoFalta->getFkProduto();
-                $fk_marca               = $pedidoFalta->getFkMarca();
+                $fk_produto             = $pedidoFalta->getFk_Produto();
                 
                 return $this->update(
                     'produtofalta',
-                    ":proposta, :AFM, :observacao, :FK_CLIENTE, :FK_PRODUTO, FK_MARCA",
+                    ":proposta, :AFM, :observacao, :FK_CLIENTE, :FK_PRODUTO",
                     [
                         'faltaCliente_cod'  =>$faltaCliente_cod,
                         'proposta'          => $proposta,
@@ -142,7 +142,6 @@
                         'observacao'        => $observacao,
                         'FK_CLIENTE'        => $fk_cliente,
                         'FK_PRODUTO'        => $fk_produto,
-                        'FK_MARCA'          => $fk_marca
                     ],
                     "faltaCliente_cod = :faltaCliente_cod"
                 );
