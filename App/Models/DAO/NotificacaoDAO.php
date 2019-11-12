@@ -259,7 +259,7 @@ class NotificacaoDAO extends BaseDAO
         $codCliente         = $notificacao->getNtf_codclientelicitacao();     
         $codNotificacao     = $notificacao->getNtf_Cod();        
         $proposta           = $notificacao->getNtf_pedido();
-        $edital           = $notificacao->getEdital()->getEdtId();
+        $edital             = $notificacao->getCodEdital();
         $numeroLicitacao    = $notificacao->getNtf_Numero();
         $status             = $notificacao->getNtf_Status();
         $modalidade         = $notificacao->getNtf_Codusuario();

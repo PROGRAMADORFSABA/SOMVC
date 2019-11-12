@@ -93,7 +93,8 @@
                     <h1><?php echo $varMessage; ?></h1>
                 </span>
                 <span class="kt-error_desc kt-font-light">
-                    Algo deu errado aqui
+                    
+                    <a   href="http://<?php echo APP_HOST; ?>/home/index"  title='Clique aqui pra retornar' > Click aqui para retornar </a>
                 </span>
             </div>
         </div>

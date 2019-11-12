@@ -41,6 +41,7 @@ namespace App\Models\Entidades;
     private $ntf_instituicao;
     private $ntf_observacao;
     private $edital;
+    private $codEdital;
     private $ntf_representante;
     private $ntf_codclientelicitacao;
     private $ntf_codusuario;
@@ -442,6 +443,25 @@ namespace App\Models\Entidades;
     public function setEdital(Edital $edital)
     {
         $this->edital = $edital;
+
+        return $this;
+    }
+    /**
+     * Get the value of codEdital
+     */ 
+    public function getCodEdital()
+    {
+        return $this->codEdital;
+    }
+
+    /**
+     * Set the value of codEdital
+     *
+     * @return  self
+     */ 
+    public function setCodEdital($edital)
+    {
+        $this->codEdital = $codEdital;
 
         return $this;
     }
