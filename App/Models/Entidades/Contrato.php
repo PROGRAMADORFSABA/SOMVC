@@ -22,6 +22,7 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
     private $instituicao;
     private $representante;
     private $edital;
+    private $codEdital;
     private $ctrInstituicao;
     private $ctrPrazoEntrega;
     private $ctrPrazoPagamento; 
@@ -378,6 +379,26 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
     public function setCtrUsuario($ctrUsuario)
     {
         $this->ctrUsuario = $ctrUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codEdital
+     */ 
+    public function getCodEdital()
+    {
+        return $this->codEdital;
+    }
+
+    /**
+     * Set the value of codEdital
+     *
+     * @return  self
+     */ 
+    public function setCodEdital($codEdital)
+    {
+        $this->codEdital = $codEdital;
 
         return $this;
     }

@@ -37,11 +37,18 @@ class NotificacaoService
         $notificacaoDAO = new NotificacaoDAO();
         return $notificacaoDAO->listarPorEdital($editalId);
     }
+    public function qtdeNotificacaoPorEdital($editalId = null)
+    {
+        $notificacaoDAO = new NotificacaoDAO();
+        return $notificacaoDAO->qtdeNotificacaoPorEdital($editalId);
+    }
+    
     public function listarDinamico(Notificacao $notificacao)
     {
         $notificacaoDAO = new NotificacaoDAO();
         return $notificacaoDAO->listarDinamico($notificacao);
     }
+    
 /*
     public function autoCompleteNotificacaoClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
     {
@@ -155,7 +162,7 @@ class NotificacaoService
     public function excluir(Notificacao $notificacao)
     {
         try {
-
+            
             $transacao = new Transacao();
             $transacao->beginTransaction();
             
@@ -168,6 +175,7 @@ class NotificacaoService
             Sessao::gravaMensagem("Notificacao Excluida com Sucesso!");
             return true;
         } catch (\Exception $e) {
+           // var_dump($e);
             $transacao->rollBack();
             throw new \Exception(["Erro ao excluir a empresa"]);            
             return false;

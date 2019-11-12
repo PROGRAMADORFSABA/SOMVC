@@ -105,7 +105,7 @@ class CidadeDAO extends BaseDAO
             $cidEstado          = $cidade->getEstado()->getEstId();
             $date               = $cidade->getCidDataAlteracao();
             $cidDataAlteracao =   date_format($date, 'Y-m-d H:i:s');
-            var_dump($cidDataAlteracao);
+           
             return $this->update(
                 'cidade',
                 "cidnome = :cidNome, cidusuario = :cidUsuario, 

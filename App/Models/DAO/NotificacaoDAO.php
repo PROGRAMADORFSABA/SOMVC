@@ -41,7 +41,7 @@ class NotificacaoDAO extends BaseDAO
           $lista = [];
           foreach ($dados as $dado) { 
             
-            $notificacao = new Notificacao();
+        $notificacao = new Notificacao();
         $notificacao->setNtf_cod($dado['ntf_cod']);
         $notificacao->setNtf_numero($dado['ntf_numero']);
         $notificacao->setClienteLicitacao(new ClienteLicitacao());
@@ -208,10 +208,10 @@ class NotificacaoDAO extends BaseDAO
     }
     public  function listarPorEdital($notificacaoId = null)
     {        
-        $SQL = " SELECT * FROM contrato ";
+        $SQL = " SELECT * FROM notificacao ";
             if($notificacaoId) 
             {    
-                $SQL.= " WHERE ctr_edital = $notificacaoId";
+                $SQL.= " WHERE ntf_edital = $notificacaoId";
             }         
             
             $resultado = $this->select($SQL);
@@ -219,32 +219,47 @@ class NotificacaoDAO extends BaseDAO
             $lista = [];
             foreach ($dados as $dado) {  
                
-        $contrato = new Contrato();
-        $contrato->setnotificacaoId($dado['ctr_id']);
-        $contrato->setCtrNumero($dado['ctr_numero']);
-        $contrato->setCtrDataInicio($dado['ctr_datainicio']);
-        $contrato->setCtrDataVencimento($dado['ctr_datavencimento']);            
-        $contrato->setCtrValor(number_format($dado['ctr_valor'], 2, ',', '.'));
-        $contrato->setCtrStatus($dado['ctr_status']);
-        $contrato->setCtrObservacao($dado['ctr_observacao']);
-        $contrato->setCtrAnexo($dado['ctr_anexo']);
-        $contrato->setCtrPrazoEntrega($dado['ctr_prazoentrega']);
-        $contrato->setCtrPrazoPagamento($dado['ctr_prazopagamento']);
-        $contrato->setCtrUsuario($dado['ctr_usuario']);
-        $contrato->setCtrInstituicao($dado['ctr_instituicao']);
-        $contrato->setCtrDataCadastro($dado['ctr_datacadastro']);
-        $contrato->setCtrDataAlteracao($dado['ctr_dataalteracao']);
+                $notificacao = new Notificacao();
+                $notificacao->setNtf_cod($dado['ntf_cod']);
+                $notificacao->setNtf_numero($dado['ntf_numero']);        
+                $notificacao->setNtf_pedido($dado['ntf_pedido']);        
+                $notificacao->setNtf_status($dado['ntf_status']);
+                $notificacao->setNtf_garantia($dado['ntf_garantia']);
+                $notificacao->setNtf_trocamarca($dado['ntf_trocamarca']);
+                $notificacao->setNtf_prazodefesa($dado['ntf_prazodefesa']);
+                $notificacao->setNtf_observacao($dado['ntf_observacao']);
+                $notificacao->setNtf_valor(number_format($dado['ntf_valor'], 2, ',', '.'));
 
-                $lista[] = $contrato;
+                $lista[] = $notificacao;
             }
             return $lista;        
                 
     }
+    public  function qtdeNotificacaoPorEdital($notificacaoId = null)
+    {        
+        $SQL = " SELECT COUNT(*) as total FROM notificacao ";
+            if($notificacaoId) 
+            {    
+                $SQL.= " WHERE ntf_edital = $notificacaoId";
+            }         
+            
+            $resultado = $this->select($SQL);           
+            $dado = $resultado->fetch();
+
+            if ($dado) {
+                $notificacao = new Notificacao();               
+                $notificacao->setNtf_numero($dado['total']);
+                
+            }
+                return $notificacao;                
+    }
+    
     public  function listarDinamico(Notificacao $notificacao)
     {   
         $codCliente         = $notificacao->getNtf_codclientelicitacao();     
         $codNotificacao     = $notificacao->getNtf_Cod();        
         $proposta           = $notificacao->getNtf_pedido();
+        $edital           = $notificacao->getEdital()->getEdtId();
         $numeroLicitacao    = $notificacao->getNtf_Numero();
         $status             = $notificacao->getNtf_Status();
         $modalidade         = $notificacao->getNtf_Codusuario();
@@ -259,6 +274,7 @@ class NotificacaoDAO extends BaseDAO
              $where = Array();
              if( $codCliente ){ $where[] = " ntf.ntf_clientelicitacao = {$codCliente}"; }
              if( $codNotificacao ){ $where[] = " ntf.ntf_cod = {$codNotificacao}"; }
+             if( $edital ){ $where[] = " ntf.ntf_edital = {$edital}"; }
              if( $proposta ){ $where[] = " ntf.ntf_numero = '{$proposta}'"; }
              if( $status ){ $where[] = " ntf.ntf_status = '{$status}'"; }
              if( $representante ){ $where[] = " ntf.ntf_usuario = {$representante}"; }
@@ -531,11 +547,10 @@ class NotificacaoDAO extends BaseDAO
     public function excluir(Notificacao $notificacao)
     {
         try {
-            $notificacaoId = $notificacao->getnotificacaoId();
-
-            return $this->delete('notificacao', "ntf_id = $notificacaoId");
+            $notificacaoId = $notificacao->getNtf_cod();
+            return $this->delete('notificacao', "ntf_cod = $notificacaoId");
         } catch (Exception $e) {
-
+          //  var_dump($e);
             throw new \Exception("Erro ao deletar", 500);
         }
     }

@@ -4,19 +4,16 @@ namespace App\Controllers;
 
 use App\Lib\Sessao;
 use App\Models\Entidades\Edital;
-use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\ClienteLicitacao;
-use App\Models\Entidades\Contrato;
 use App\Models\Entidades\Representante;
 use App\Models\Validacao\EditalValidador;
-use App\Models\Entidades\Usuario;
-use App\Models\Entidades\Estado;
 use App\Services\EditalService;
 use App\Services\RepresentanteService;
 use App\Services\ClienteLicitacaoService;
 use App\Services\ContratoService;
 use App\Services\UsuarioService;
 use App\Services\InstituicaoService;
+use App\Services\NotificacaoService;
 
 
 class EditalController extends Controller
@@ -146,13 +143,13 @@ class EditalController extends Controller
 
     public function edicao($params)
     {
-        $editalId = $params[0];
-        $representanteService = new RepresentanteService();
+        $editalId                = $params[0];
+        $representanteService    = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $edital = new Edital();
         
         if(Sessao::existeFormulario()) { 
-            $clienteId = Sessao::retornaValorFormulario('cliente');
+            $clienteId        = Sessao::retornaValorFormulario('cliente');
             $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];
             $edital->setClienteLicitacao($clienteLicitacao);
             
@@ -162,7 +159,7 @@ class EditalController extends Controller
             
         }else{                       
             $editalService = new EditalService();
-            $edital = $editalService->listar($editalId)[0]; 
+            $edital        = $editalService->listar($editalId)[0]; 
         }        
         self::setViewParam('listarRepresentantes', $representanteService->listar());            
         if (!$edital) {
@@ -246,17 +243,26 @@ class EditalController extends Controller
     
     public function exclusao($params)
     {
-        $editalId = $params[0];
+        $editalId           = $params[0];
 
-        $editalService = new EditalService();
-        $contratoService = new ContratoService();
+        $editalService      = new EditalService();
+        $contratoService    = new ContratoService();
+        $notificacaoService = new NotificacaoService();
 
-        $edital = $editalService->listar($editalId)[0];
-        $contrato = $contratoService->listarPorEdital($editalId)[0];
+        $edital      = $editalService->listar($editalId)[0];
+        $contrato    = $contratoService->qtdeContratoPorEdital($editalId);
+        $notificacao = $notificacaoService->qtdeNotificacaoPorEdital($editalId);
 
         if (!$edital) {
-        Sessao::gravaMensagem("Edital inexistente");
+        Sessao::gravaMensagem("Cadastro inexistente!");
             $this->redirect('/edital');
+        }
+        if($notificacao){
+            $notificacao = $notificacao->getNtf_numero();
+            self::setViewParam('notificacao', $notificacao);               
+        }else{
+            $notificacao = "";               
+            self::setViewParam('notificacao', $notificacao);
         }
         if($contrato){
             $contrato = $contrato->getCtrNumero();

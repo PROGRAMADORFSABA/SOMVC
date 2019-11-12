@@ -15,9 +15,25 @@ use App\Services\EditalService;
 use App\Services\InstituicaoService;
 use App\Services\ClienteLicitacaoService;
 use App\Services\RepresentanteService;
+use App\Services\NotificacaoService;
 
 class ContratoController extends Controller
 {
+    public function listarPorEdital($params)
+    {
+        $contratoService = new ContratoService();
+        $contrato = new Contrato();
+        $editalId = $params[0];
+        if($contrato)
+        {
+           // $contrato->setEdital(new Edital());
+            $contrato->setCodEdital($editalId);
+           
+            self::setViewParam('listaContratos', $contratoService->listarDinamico($contrato));
+            $this->render('/contrato/index');
+        }
+    }
+
     public function index($params)
     {
         $contratoId = $params[0];
@@ -291,15 +307,23 @@ class ContratoController extends Controller
     {
         $ctrId = $params[0];
 
-        $contratoService = new ContratoService();
-
-        $contrato = $contratoService->listar($ctrId)[0];
-
+        $contratoService    = new ContratoService();
+        $notificacaoService = new NotificacaoService();
+        $contrato           = $contratoService->listar($ctrId)[0];
+        $codEdital = $contrato->getEdital()->getEdtId();
+        $notificacao        = $notificacaoService->qtdeNotificacaoPorEdital($codEdital);
+        
         if (!$contrato) {
         Sessao::gravaMensagem("Contrato inexistente");
             $this->redirect('/contrato');
         }
-
+        if($notificacao){
+            $notificacao = $notificacao->getNtf_numero();
+            self::setViewParam('notificacao', $notificacao);               
+        }else{
+            $notificacao = "";               
+            self::setViewParam('notificacao', $notificacao);
+        }
         self::setViewParam('contrato', $contrato);
 
         $this->render('/contrato/exclusao');

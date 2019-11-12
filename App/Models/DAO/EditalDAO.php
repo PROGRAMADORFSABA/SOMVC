@@ -396,13 +396,7 @@ edt_representante= :edtRepresentante, edt_cliente= :edtCliente, edt_usuario= :ed
                     ':edtDataAlteracao' => $edtDataAlteracao, 
                 ],
                 "edt_id = :edtId"
-    /*
-        edt_id, edt_numero, edt_dataabertura, edt_hora, edt_dataresultado,  edt_proposta, edt_modalidade, 
-edt_tipo, edt_garantia, edt_valor, edt_status, edt_analise, edt_observacao, edt_anexo, 
-edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, edt_dataalteracao
-*/
-    
-            );
+                );
         } catch (\Exception $e) {
             throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
@@ -412,12 +406,11 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
     {
         try {
             $edtId = $edital->getEdtId();
-
+            $this->delete('notificacao', "ntf_edital = $edtId");
             $this->delete('contrato', "ctr_edital = $edtId");
             $this->delete('edital', "edt_id = $edtId");
         } catch (Exception $e) {
-
-            throw new \Exception("Erro ao deletar", 500);
+            throw new \Exception("Erro ao excluir edital", 500);
         }
     }
 

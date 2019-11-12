@@ -20,14 +20,21 @@
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">
                         <?php
-                                $contrato = $viewVar['contrato'];
+                            $contrato = $viewVar['contrato'];
                             if ($contrato) {
-                              $contrato = " e Contrato numero ".$contrato;
+                              $contrato = " - $contrato "." <a id='teste' target='blank' href=http://". APP_HOST."/contrato/listarPorEdital/".$viewVar['edital']->getEdtId()." title='Clique aqui pra detalhes' >Contratos</a>";
                             } else {
                                 $contrato = "";
                             }
+                            $notificacao = $viewVar['notificacao'];
+                            if ($notificacao) {
+                              $notificacao = " - $notificacao "." <a id='teste' target='blank' href=http://". APP_HOST."/notificacao/listarPorEdital/".$viewVar['edital']->getEdtId()." title='Clique aqui pra detalhes' >notificacoes</a>";
+                                
+                            } else {
+                                $notificacao = "";
+                            }
                         ?>
-                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o edital: <?php echo $viewVar['edital']->getEdtNumero() ." Cliente ". $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(). "  ".$contrato; ?> </h4>
+                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o edital: <?php echo $viewVar['edital']->getEdtNumero() ." Cliente ". $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(). "  ".$contrato. " ".$notificacao; ?> </h4>
                     </div>                    
                     <div class="panel-footer"> 
                         <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
