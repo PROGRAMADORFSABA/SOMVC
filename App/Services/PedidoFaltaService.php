@@ -9,7 +9,7 @@
 
     use App\Models\DAO\ClienteDAO;
     use App\Models\DAO\ProdutoDAO;
-    use App\Models\DAO\MarcaDAO;
+    use App\Models\DAO\FornecedorDAO;
     use App\Models\DAO\PedidoFaltaDAO;
     use App\Models\DAO\StatusDAO;
     
@@ -17,7 +17,7 @@
     use App\Models\Entidades\PedidoFalta;
     use App\Models\Entidades\Status;
     use App\Models\Entidades\Produto;
-    use App\Models\Entidades\Marca;
+    use App\Models\Entidades\Fornecedor;
     
     use App\Models\Validacao\PedidoFaltaValidador;
     use App\Models\Validacao\ResultadoValidacao;
@@ -51,8 +51,8 @@
                         $produtoDAO = new ProdutoDAO();
                         $produtoDAO->excluir($pedidoFalta);
                         
-                        $marcaDAO = new MarcaDAO();
-                        $marcaDAO->excluir($pedidoFalta);
+                        $fornecedorDAO = new FornecedorDAO();
+                        $fornecedorDAO->excluir($pedidoFalta);
                         
                         $statusDAO = new StatusDAO();
                         $statusDAO->excluir();
