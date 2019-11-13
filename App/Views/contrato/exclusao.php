@@ -19,7 +19,16 @@
 
                 <div class="panel panel-danger">
                     <div class="alert alert-warning" role="alert">
-                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o contrato: <?php echo $viewVar['contrato']->getCtrNumero() ." Cliente ". $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial(); ?> </h4>
+                    <?php
+                            $notificacao = $viewVar['notificacao'];
+                            if ($notificacao) {
+                              $notificacao = " - $notificacao "." <a id='teste' target='blank' href=http://". APP_HOST."/notificacao/listarPorEdital/".$viewVar['contrato']->getEdital()->getEdtId()." title='Clique aqui pra detalhes' >notificacoes</a>";
+                                
+                            } else {
+                                $notificacao = "";
+                            }
+                        ?>
+                    <h4><i class="flaticon-warning"></i> Deseja realmente excluir o contrato: <?php echo $viewVar['contrato']->getCtrNumero() ." Cliente ". $viewVar['contrato']->getClienteLicitacao()->getRazaoSocial(). " ".$notificacao; ; ?> </h4>
                     </div>
                     <div class="panel-footer"> 
                         <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>

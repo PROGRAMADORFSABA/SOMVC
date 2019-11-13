@@ -143,7 +143,7 @@
                         <label  class="" name="informacao" id="informacao" >
                             Recebido em: <?php echo $viewVar['notificacao']->getNtf_datarecebimento()->format('d/m/Y H:m:s'); ?></label>
                             - Alterado em: <?php echo $viewVar['notificacao']->getNtf_dataalteracao()->format('d/m/Y H:m:s'); ?></label>
-                            - Usuario: <?php echo $viewVar['notificacao']->getNtf_usuario()->getNome(); ?></label>
+                            - Usuario: <?php echo $viewVar['notificacao']->getNtf_usuario()->getNome(); ?> </label>
                         </div>
             </div>
         </div>

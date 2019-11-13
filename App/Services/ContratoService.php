@@ -37,6 +37,11 @@ class ContratoService
         $contratoDAO = new ContratoDAO();
         return $contratoDAO->listarPorEdital($editalId);
     }
+    public function qtdeContratoPorEdital($editalId = null)
+    {
+        $contratoDAO = new ContratoDAO();
+        return $contratoDAO->qtdeContratoPorEdital($editalId);
+    }
     public function listarDinamico(Contrato $contrato)
     {
         $contratoDAO = new ContratoDAO();

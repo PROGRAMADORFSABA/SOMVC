@@ -20,6 +20,20 @@ use App\Services\RepresentanteService;
 
 class NotificacaoController extends Controller
 {
+    public function listarPorEdital($params)
+    {
+        $notificacaoService = new NotificacaoService();
+        $notificacao = new Notificacao();
+        $editalId = $params[0];
+        if($editalId)
+        {
+            $notificacao->setEdital(new Edital());
+            $notificacao->getEdital()->setEdtId($editalId);
+           
+            self::setViewParam('listaNotificacoes', $notificacaoService->listarDinamico($notificacao));
+            $this->render('/notificacao/index');
+        }
+    }
     public function index($params)
     {
         $notificacaoId = $params[0];
@@ -30,12 +44,11 @@ class NotificacaoController extends Controller
         $representanteService = new RepresentanteService();
         $contrato = new Contrato();
         $notificacao = new Notificacao();
-
        // self::setViewParam('listaClientes', $contratoService->listarClienteContrato($contratoId));
         //self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
-        //self::setViewParam('listarRepresentantes', $contratoService->listarRepresentanteContrato());
-        
-       if($_POST){
+        //self::setViewParam('listarRepresentantes', $contratoService->listarRepresentanteContrato());                
+       
+        if($_POST){
            $notificacao->setNtf_valor($_POST['codRepresentante']);
            $notificacao->setNtf_cod($_POST['codigo']);
            $notificacao->setClienteLicitacao($_POST['clienteId']);
@@ -47,7 +60,7 @@ class NotificacaoController extends Controller
       
         //self::setViewParam('listaNotificacoes', $notificacaoService->listar($notificacao));
         self::setViewParam('listaNotificacoes', $notificacaoService->listarDinamico($notificacao));
-        $this->render('/notificacao/index');
+       $this->render('/notificacao/index');
 
         Sessao::limpaMensagem();
         Sessao::limpaFormulario();
@@ -106,7 +119,7 @@ class NotificacaoController extends Controller
         if(Sessao::existeFormulario()) { 
             
             $clienteId = Sessao::retornaValorFormulario('cliente');
-            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];
+            $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
             $notificacao->setClienteLicitacao($clienteLicitacao);
             
             $editalId = Sessao::retornaValorFormulario('numeroLicitacao');
@@ -115,7 +128,17 @@ class NotificacaoController extends Controller
             
             $representanteId = Sessao::retornaValorFormulario('representante');
             $representante = $representanteService->listar($representanteId)[0];
-            $notificacao->setNtf_Representante($representante);
+            $notificacao->setNtf_representante($representante);
+
+            $notificacao->setNtf_garantia( Sessao::retornaValorFormulario('garantia'));
+            $notificacao->setNtf_status( Sessao::retornaValorFormulario('status'));
+            $notificacao->setNtf_pedido( Sessao::retornaValorFormulario('numeroPedido'));
+            $notificacao->setNtf_prazodefesa( Sessao::retornaValorFormulario('prazoDefesa'));
+            $notificacao->setNtf_trocamarca( Sessao::retornaValorFormulario('trocaMarca'));
+            $notificacao->setNtf_valor( Sessao::retornaValorFormulario('valor'));
+            $notificacao->setNtf_observacao( Sessao::retornaValorFormulario('observacao'));
+            $notificacao->setNtf_anexo( Sessao::retornaValorFormulario('anexo'));
+            $notificacao->setNtf_numero( Sessao::retornaValorFormulario('numeroNotificacao'));
         }else{
             $notificacao->setclientelicitacao(new ClienteLicitacao());
             $notificacao->setNtf_representante(new Representante());
@@ -175,11 +198,11 @@ class NotificacaoController extends Controller
             $this->redirect('/notificacao/cadastro');
             Sessao::gravaMensagem("sem dados informados");
          }
-    
+ 
        if($notificacaoService->salvar($notificacao)){
               $this->redirect('/notificacao');       
         }else{                      
-            $this->redirect('/notificacao/cadastro');
+          //  $this->redirect('/notificacao/cadastro');
         }
 
         Sessao::limpaFormulario();
@@ -290,42 +313,43 @@ class NotificacaoController extends Controller
             Sessao::gravaMensagem("erro na atualizacao");
         }
     }
-    /*
+    
     public function exclusao($params)
     {
-        $ctrId = $params[0];
+        $notificacao = new Notificacao();
+        $notificacao->setNtf_cod($params[0]); 
 
-        $contratoService = new ContratoService();
+        $notificacaoService = new NotificacaoService();
 
-        $contrato = $contratoService->listar($ctrId)[0];
+        $notificacao = $notificacaoService->listarDinamico($notificacao)[0];
 
-        if (!$contrato) {
-        Sessao::gravaMensagem("Contrato inexistente");
+        if (!$notificacao) {
+        Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/notificacao');
         }
 
-        self::setViewParam('contrato', $contrato);
+        self::setViewParam('notificacao', $notificacao);
 
-        $this->render('/notificacao/exclusao');
+        $this->render('/notificacao/excluir');
 
         Sessao::limpaMensagem();
     }
 
     public function excluir()
     {
-        $contrato = new Contrato();
-        $contrato->setCtrId($_POST['codigo']);
+        $notificacao = new Notificacao();
+        $notificacao->setNtf_cod($_POST['codigo']);
+      
+        $notificacaoService = new NotificacaoService();
 
-        $contratoService= new ContratoService();
-
-        if (!$contratoService->excluir($contrato)) {
-            Sessao::gravaMensagem("Contrato inexistente");
-            $this->redirect('/notificacao/exclusao'.$contrato->getCtrId());
+        if (!$notificacaoService->excluir($notificacao)) {
+            Sessao::gravaMensagem("Cadastro inexistente");
+            $this->redirect('/notificacao/excluir'.$notificacao->getNtf_cod());
         }
 
-        Sessao::gravaMensagem("Contrato excluido com sucesso!");
+        Sessao::gravaMensagem("Cadastro excluido com sucesso!");
 
         $this->redirect('/notificacao');
     }
-*/
+
 }

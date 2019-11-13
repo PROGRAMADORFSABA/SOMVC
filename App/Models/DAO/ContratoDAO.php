@@ -273,12 +273,31 @@ class ContratoDAO extends BaseDAO
             return $lista;        
                 
     }
+    public  function qtdeContratoPorEdital($ctrId = null)
+    {        
+        $SQL = " SELECT COUNT(*) as total FROM contrato ";
+            if($ctrId) 
+            {    
+                $SQL.= " WHERE ctr_edital = $ctrId";
+            }         
+            
+            $resultado = $this->select($SQL);           
+            $dado = $resultado->fetch();
+
+            if ($dado) {
+                $contrato = new Contrato();               
+                $contrato->setCtrNumero($dado['total']);
+                
+            }
+                return $contrato;                
+    }
     public  function listarDinamico(Contrato $contrato)
     {   
         $codCliente         = $contrato->getCtrClienteLicitacao();
         $representante      = $contrato->getCtrRepresentante();
         $codContrato        = $contrato->getCtrId();
-        $numeroContrato           = $contrato->getCtrNumero();
+        $edital             = $contrato->getCodEdital();
+        $numeroContrato     = $contrato->getCtrNumero();
         $status             = $contrato->getCtrStatus();
         $modalidade         = $contrato->getCtrModalidade();
         $numeroLicitacao    = $contrato->getCtrNumeroLicitacao();        
@@ -293,7 +312,8 @@ class ContratoDAO extends BaseDAO
         $where = Array();
 		if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
 		if( $representante ){ $where[] = " r.codRepresentante = {$representante}"; }
-		if( $codContrato ){ $where[] = " ctr.ctr_id = {$codContrato}"; }
+        if( $codContrato ){ $where[] = " ctr.ctr_id = {$codContrato}"; }
+        if( $edital ){ $where[] = " ctr.ctr_edital = {$edital}"; }
 		if( $numeroContrato ){ $where[] = " ctr.ctr_numero = '{$numeroContrato}'"; }
 		if( $status ){ $where[] = " ctr.ctr_status = '{$status}'"; }
 		if( $modalidade ){ $where[] = " edt.edt_modalidade = '{$modalidade}'"; }
@@ -599,8 +619,10 @@ class ContratoDAO extends BaseDAO
     {
         try {
             $ctrId = $contrato->getCtrId();
+            $editalId = $contrato->getEdital()->getEdtId();
 
-            return $this->delete('contrato', "ctr_id = $ctrId");
+            $this->delete('notificacao', "ntf_edital = $editalId");
+            $this->delete('contrato', "ctr_id = $ctrId");
         } catch (Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);

@@ -47,6 +47,7 @@ var app = {
 var optionsTeste = {
 
 	url: function(teste) {
+		//return "http://coisavirtual.com.br/teste/autoComplete/" + teste;
 		return "http://localhost/SOMVC/teste/autoComplete/" + teste;
 	},
 	getValue: function(element) {

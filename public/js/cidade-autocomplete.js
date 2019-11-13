@@ -1,7 +1,8 @@
 var cidId = null;
 
 var optionsCidade = {
-	url: function(empresa) {
+	url: function(cidade) {
+		//return "http://coisavirtual.com.br/cidade/autoComplete/" + cidade;
 		return "http://localhost/SOMVC/cidade/autoComplete/" + cidade;
 	},
 
