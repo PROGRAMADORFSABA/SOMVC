@@ -8,7 +8,7 @@
     use App\Models\Entidades\Produto;
     use App\Models\Entidades\Marca;
     use App\Models\Entidades\Fornecedor;
-    use App\Models\Entidades\Status;
+    use App\Models\Entidades\StatusLicitacao;
 
     
     
@@ -48,7 +48,7 @@
                     $pedidofalta = new PedidoFalta();
                     $pedidofalta->setFaltaClienteCod($dataSetFalta['faltaCliente_cod']);
                     $pedidofalta->setAFM($dataSetFalta['AFM']);
-                    $pedidofalta->setProposta($dataSetFalta['proposta']);
+                    $pedidofalta->setProposta($dataSetFalta['proposta']); 
                     $pedidofalta->setObservacao($dataSetFalta['observacao']);
                     
                     $pedidofalta->setFkCliente( new ClienteLicitacao());
@@ -57,8 +57,8 @@
                     $pedidofalta->setFkProduto(new Produto());
                     $pedidofalta->getFkProduto()->setProNome($dataSetFalta['ProNome']);
                     
-                    $pedidofalta->setFkStatus(new Status());
-                    $pedidofalta->getFkStatus()->setNome($dataSetFaltas['nomeStatus']);
+                    $pedidofalta->setFkStatus(new StatusLicitacao());
+                    $pedidofalta->getFkStatus()->setNomeStatus($dataSetFalta['nomeStatus']);
 
                     $pedidofalta->setFkMarca(new Fornecedor());
                     $pedidofalta->getFkMarca()->setNomeFantasia($dataSetFalta['marca']);

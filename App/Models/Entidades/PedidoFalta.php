@@ -4,7 +4,7 @@
     namespace App\Models\Entidades;
     
     use App\Models\Entidades\ClienteLicitacao;
-    use App\Models\Entidades\Status;
+    use App\Models\Entidades\StatusLicitacao;
     use App\Models\Entidades\Fornecedor;
     use DateTime;
     
@@ -168,7 +168,7 @@
         /**
          * @return mixed
          */
-        public function getFkStatus() : Status
+        public function getFkStatus() : StatusLicitacao
         {
             return $this->fk_status;
         }
@@ -176,7 +176,7 @@
         /**
          * @param mixed $fk_status
          */
-        public function setFkStatus( Fk_status $fk_status): void
+        public function setFkStatus(Fk_status $fk_status): void
         {
             $this->fk_status = $fk_status;
         }
