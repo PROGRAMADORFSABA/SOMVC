@@ -7,6 +7,8 @@
     use App\Models\Entidades\PedidoFalta;
     use App\Models\Entidades\Produto;
     use App\Models\Entidades\Marca;
+    use App\Models\Entidades\Fornecedor;
+    use App\Models\Entidades\Status;
 
     
     
@@ -18,9 +20,10 @@
             $SQL =
                 'SELECT 
                     FC.faltaCliente_cod,
-                    CL.nomefantasia as ClienteLicitacao,
                     P.ProNome,
-                    F.nomefantasia,
+                    CL.nomefantasia as clientelicitacao,
+                    F.nomefantasia as marca,
+                    SF.nomeStatus,
                     FC.proposta,
                     FC.AFM,
                     FC.observacao,
@@ -31,7 +34,8 @@
                 INNER JOIN faltaporcliente FPC on FPC.FK_ID_FALTACLIENTE = FC.faltaCliente_cod
                 INNER JOIN clienteLicitacao CL on CL.licitacaoCliente_cod = FC.fk_cliente
                 INNER JOIN Produto P on P.ProCodigo = FPC.FK_IDPRODUTO
-                INNER JOIN fornecedor F on F.fornecedor_cod = P.ProFornecedor';
+                INNER JOIN fornecedor F on F.fornecedor_cod = P.ProFornecedor
+                INNER JOIN statusFalta SF on SF.faltaStatus_cod = FC.fk_status';
             if ($faltaCliente_cod) {
                 $SQL .= 'WHERE FC.faltaCliente_cod';
             }
@@ -43,25 +47,36 @@
             foreach ($dataSetFaltas as $dataSetFalta) {
                     $pedidofalta = new PedidoFalta();
                     $pedidofalta->setFaltaClienteCod($dataSetFalta['faltaCliente_cod']);
-                    $pedidofalta->setAFM($dataSetFalta['afm']);
+                    $pedidofalta->setAFM($dataSetFalta['AFM']);
                     $pedidofalta->setProposta($dataSetFalta['proposta']);
                     $pedidofalta->setObservacao($dataSetFalta['observacao']);
-                   /* 
+                    
                     $pedidofalta->setFkCliente( new ClienteLicitacao());
-                    $pedidofalta->getFkCliente()->getNomeFantasia($dataSetFalta['nomefantasia']);
+                    $pedidofalta->getFkCliente()->setNomeFantasia($dataSetFalta['clientelicitacao']);
+
+                    $pedidofalta->setFkProduto(new Produto());
+                    $pedidofalta->getFkProduto()->setProNome($dataSetFalta['ProNome']);
                     
+                    $pedidofalta->setFkStatus(new Status());
+                    $pedidofalta->getFkStatus()->setNome($dataSetFaltas['nomeStatus']);
+
+                    $pedidofalta->setFkMarca(new Fornecedor());
+                    $pedidofalta->getFkMarca()->setNomeFantasia($dataSetFalta['marca']);
+
                     
-                    $pedidofalta->settFk_Produto(new Produto());
-                    $pedidofalta->getFk_Produto()->setProNome($dataSetFalta['produto']);
-               
-                
-                    */
-                
-                
                 $listaFaltas[] = $pedidofalta;
             }
            
             return $listaFaltas;
+        }
+
+        public function listarPorProduto($ProCodigo = null)
+        {
+            $resultado = $this->select(
+                ""
+            );
+
+            return $resultado->fetchAll();
         }
     
         public function salvar(PedidoFalta $pedidoFalta)

@@ -559,6 +559,7 @@
 
 
 <!--begin::Page Scripts(used by this page) -->
+<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/datatables/advanced/row-grouping.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/metronic-datatable/base/html-table.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/metronic-datatable/child/data-local.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/datatables/basic/atualizahora.js" type="text/javascript"></script>

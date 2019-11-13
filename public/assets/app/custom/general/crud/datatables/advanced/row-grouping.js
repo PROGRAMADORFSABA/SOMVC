@@ -1,10 +1,20 @@
+$(document).ready(function () {
+    $("#report > tbody > tr").hide();
+    $("#report > tbody > tr:even").addClass("odd").show();
+
+    $("#report tr.odd").click(function () {
+        $(this).next("tr").toggle();
+        $(this).find(".arrow").toggleClass("up");
+    });
+});
+
 "use strict";
 var KTDatatablesAdvancedRowGrouping = function() {
 
 	var initTable1 = function() {
 		var table = $('#kt_table_1');
 
-		// begin first table
+		// começar a primeira tabela
 		table.DataTable({
 			responsive: true,
 			pageLength: 25,
@@ -17,7 +27,7 @@ var KTDatatablesAdvancedRowGrouping = function() {
 				api.column(2, {page: 'current'}).data().each(function(group, i) {
 					if (last !== group) {
 						$(rows).eq(i).before(
-							'<tr class="group"><td colspan="10">' + group + '</td></tr>',
+							'<tr class="group kt-badge--success"><td colspan="10">' + group + '</td></tr>',
 						);
 						last = group;
 					}
@@ -25,8 +35,8 @@ var KTDatatablesAdvancedRowGrouping = function() {
 			},
 			columnDefs: [
 				{
-					// hide columns by index number
-					targets: [0, 2],
+					// ocultar colunas por número de índice
+					targets: [0,2],
 					visible: false,
 				},
 				{
@@ -51,7 +61,7 @@ var KTDatatablesAdvancedRowGrouping = function() {
 					},
 				},
 				{
-					targets: 8,
+					targets: 9,
 					render: function(data, type, full, meta) {
 						var status = {
 							1: {'title': 'Pending', 'class': 'kt-badge--brand'},

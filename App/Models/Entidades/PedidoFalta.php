@@ -4,6 +4,8 @@
     namespace App\Models\Entidades;
     
     use App\Models\Entidades\ClienteLicitacao;
+    use App\Models\Entidades\Status;
+    use App\Models\Entidades\Fornecedor;
     use DateTime;
     
     
@@ -18,6 +20,10 @@
         private $fk_cliente;
         private $fk_marca;
         private $fk_status;
+        private $fkproduto;
+
+
+
    
         /**
          * @return mixed
@@ -115,6 +121,16 @@
         {
             $this->fk_cliente = $fk_cliente;
         }
+
+        public function getFkProduto(): Produto
+        {
+            return $this->fkproduto;
+        }
+
+        public function setFkProduto(Produto $fkproduto): void
+        {
+            $this->fkproduto = $fkproduto;
+        }
     
     
         /**
@@ -136,7 +152,7 @@
         /**
          * @return mixed
          */
-        public function getFkMarca() : Marca
+        public function getFkMarca() : Fornecedor
         {
             return $this->fk_marca;
         }

@@ -78,7 +78,7 @@
                                     <label  class="col-lg-3 col-sm-3 control-label">Observação</label>
                                     <div class="col-lg-9">
                                         <div class="iconic-input right">
-                                            <textarea maxlength="350" class="form-control spinner" placeholder="Observacao da falta" rows="5" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('analise'); ?>" ></textarea>
+                                            <textarea maxlength="350" class="form-control spinner" placeholder="Observacao da falta" rows="5" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
                                         </div>
                                     </div>
                                 </div>
