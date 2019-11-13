@@ -57,11 +57,11 @@
                     $pedidofalta->setFkProduto(new Produto());
                     $pedidofalta->getFkProduto()->setProNome($dataSetFalta['ProNome']);
                     
-                   /* $pedidofalta->setFkStatus(new StatusLicitacao());
-                    $pedidofalta->getFkStatus()->setNomeStatus($dataSetFalta['nomeStatus']);*/
-                    var_dump($pedidofalta);
+                    $pedidofalta->setFkStatus(new StatusLicitacao());
+                    $pedidofalta->getFkStatus()->setNomeStatus($dataSetFalta['nomeStatus']);
+                   // var_dump($pedidofalta);
                     $pedidofalta->setFkMarca(new Fornecedor());
-                    $pedidofalta->getFkMarca()->setNomeFantasia($dataSetFalta['marca']);
+                    $pedidofalta->getFkMarca()->setForNomeFantasia($dataSetFalta['marca']);
                     
                     
                 $listaFaltas[] = $pedidofalta;

@@ -80,11 +80,11 @@
 												<th>FALTA ID</th>
 												<th>PRODUTO</th>
 												<th>CLIENTE</th>
+												<th>MARCA</th>
+												<th>OBSERVACAO</th>
 												<th>AFM</th>
-												<th>Observacao</th>
-												<th>Company Agent</th>
-												<th>Company Name</th>
-												<th>Ship Date</th>
+												<th>STATUS</th>
+												<th>DATA</th>
 												<th>Status</th>
 												<th>Type</th>
 												<th>Actions</th>
@@ -96,10 +96,10 @@
 												<td><?php echo $pedidoFalta->getFaltaClienteCod();?></td>
 												<td><?php echo $pedidoFalta->getFkProduto()->getProNome();?></td>
 												<td><?php echo $pedidoFalta->getFkCliente()->getNomeFantasia();?></td>
-												<td><?php echo $pedidoFalta->getFkMarca()->getNomeFantasia();?></td>
+												<td><?php echo $pedidoFalta->getFkMarca()->getForNomeFantasia();?></td>
 												<td><?php echo $pedidoFalta->getObservacao();?></td>
-												<td><?php //echo $pedidoFalta->getObservacao();?></td>
-												<td><?php //echo $pedidoFalta->getObservacao();?></td>
+												<td><?php echo $pedidoFalta->getAfm();?></td>
+												<td><?php echo $pedidoFalta->getFkStatus()->getNomeStatus();?></td>
 												<td>9/16/2016</td>
 												<td>6</td>
 												<td>2</td>
