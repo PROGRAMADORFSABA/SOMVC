@@ -160,7 +160,7 @@
         /**
          * @param mixed $fk_marca
          */
-        public function setFkMarca(Fk_marca $fk_marca): void
+        public function setFkMarca(Fornecedor $fk_marca): void
         {
             $this->fk_marca = $fk_marca;
         }
@@ -176,7 +176,7 @@
         /**
          * @param mixed $fk_status
          */
-        public function setFkStatus(Fk_status $fk_status): void
+        public function setFkStatus(StatusLicitacao $fk_status): void
         {
             $this->fk_status = $fk_status;
         }
