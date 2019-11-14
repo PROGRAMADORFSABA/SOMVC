@@ -36,7 +36,7 @@ var KTDatatablesAdvancedRowGrouping = function() {
 			columnDefs: [
 				{
 					// ocultar colunas por número de índice
-					targets: [0,2],
+					targets: [0,2,7],
 					visible: false,
 				},
 				{
@@ -50,7 +50,7 @@ var KTDatatablesAdvancedRowGrouping = function() {
                               <i class="la la-ellipsis-h"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i class="la la-edit"></i> Edit Details</a>
+                                <a class="dropdown-item" href="http://localhost/SOMVC/pedidofalta/excluir"><i class="la la-edit"></i> Edit Details</a>
                                 <a class="dropdown-item" href="#"><i class="la la-leaf"></i> Update Status</a>
                                 <a class="dropdown-item" href="#"><i class="la la-print"></i> Generate Report</a>
                             </div>
@@ -64,7 +64,7 @@ var KTDatatablesAdvancedRowGrouping = function() {
 					targets: 9,
 					render: function(data, type, full, meta) {
 						var status = {
-							1: {'title': 'Pending', 'class': 'kt-badge--brand'},
+							1: {'title': 'Pendente', 'class': 'kt-badge--danger'},
 							2: {'title': 'Delivered', 'class': ' kt-badge--danger'},
 							3: {'title': 'Canceled', 'class': ' kt-badge--primary'},
 							4: {'title': 'Success', 'class': ' kt-badge--success'},

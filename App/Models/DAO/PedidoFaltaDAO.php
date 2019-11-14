@@ -23,7 +23,7 @@
                     P.ProNome,
                     CL.nomefantasia as clientelicitacao,
                     F.nomefantasia as marca,
-                    SF.nomeStatus,
+                    SF.faltaStatus_cod,
                     FC.proposta,
                     FC.AFM,
                     FC.observacao,
@@ -50,6 +50,7 @@
                     $pedidofalta->setAFM($dataSetFalta['AFM']);
                     $pedidofalta->setProposta($dataSetFalta['proposta']); 
                     $pedidofalta->setObservacao($dataSetFalta['observacao']);
+                    $pedidofalta->setDataFalta($dataSetFalta['dataFalta']);
                     
                     $pedidofalta->setFkCliente( new ClienteLicitacao());
                     $pedidofalta->getFkCliente()->setNomeFantasia($dataSetFalta['clientelicitacao']);
@@ -58,7 +59,7 @@
                     $pedidofalta->getFkProduto()->setProNome($dataSetFalta['ProNome']);
                     
                     $pedidofalta->setFkStatus(new StatusLicitacao());
-                    $pedidofalta->getFkStatus()->setNomeStatus($dataSetFalta['nomeStatus']);
+                    $pedidofalta->getFkStatus()->setFaltaStatus_cod($dataSetFalta['faltaStatus_cod']);
                    // var_dump($pedidofalta);
                     $pedidofalta->setFkMarca(new Fornecedor());
                     $pedidofalta->getFkMarca()->setForNomeFantasia($dataSetFalta['marca']);
