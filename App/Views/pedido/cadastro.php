@@ -1,7 +1,7 @@
 <!--begin::Portlet-->
 <div class="container">
     <br>
-    <h3>Cadastro de Pedido</h3>
+    <center><h3>Cadastro de Pedido</h3></center>
     <?php if ($Sessao::retornaErro()) { ?>
         <div class="alert alert-warning" role="alert">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -13,28 +13,23 @@
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
+        <input type="hidden" class="form-control" name="usuario" id="usuario" value="<?php echo $_SESSION['id']; ?>" required>
         <div class="kt-portlet__body">
             <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
             <div class="form-group">
-                    <label  class="col-lg-3 col-sm-3 control-label">TESTANDO AUTO COMPLETE DO CLIENTE</label>
-                    <div class="col-lg-9">
+                    <label for="cadastroCliente" class="">CADASTRO DO CLIENTE</label>                    
+                    <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                            <i class="la la-plus"></i>Novo Cliente</a>
                       <div>    
-                      <?php $cliente = $viewVar['listaClientes'] ?>
-                        <input type="text" name="clienteAutocomplete" id="cliente-autocomplete" class="form-control" required placeholder="Cliente - autocomplete">
-                      </div>
+                        <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
+                        value="<?php echo $viewVar['pedido']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
+                        
+                        <input type="text" id="cliente" name="cliente" 
+                        value="<?php echo $viewVar['pedido']->getClienteLicitacao()->getCodCliente(); ?>">  
                     </div>
-                  </div>
-                <div class="form-group"><label for="codCliente">Cliente</label>
-                    <input class="form-control" name="codCliente" required>
-                        <option value="">Selecione o cliente</option>
-                        <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                            <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                                <?php echo $cliente->getNomeCliente(); ?></option>
-                        <?php endforeach; ?>>
-                    <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>
-                </div>
-
+                      <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>                       
+            </div>            
                 <div class="form-group row">
                     <div class="col-lg-4">
                         <label>Numero da Licitacao:</label>
@@ -55,11 +50,11 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-4">
-                        <div class="form-group"><label for="codRepresentante">Representante</label>
-                            <select class="form-control" name="codRepresentante" required>
+                        <div class="form-group"><label for="representante">Representante</label>
+                            <select class="form-control" name="representante" required>
                                 <option value="">Selecione o Representante</option>
                                 <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
-                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
+                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('representante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
                                         <?php echo $representante->getNomeRepresentante(); ?></option>
                                 <?php endforeach; ?>
                             </select>

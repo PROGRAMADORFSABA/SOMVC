@@ -4,6 +4,11 @@ namespace App\Models\DAO;
 
 use App\Models\Entidades\Pedido;
 use App\Models\Entidades\Cliente;
+use App\Models\Entidades\ClienteLicitacao;
+use App\Models\Entidades\Instituicao;
+use App\Models\Entidades\Representante;
+use App\Models\Entidades\Status;
+use App\Models\Entidades\Usuario;
 
 class PedidoDAO extends BaseDAO
 {
@@ -16,14 +21,16 @@ class PedidoDAO extends BaseDAO
         if ($codControle) {
             $resultado = $this->select(
                 "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
-                ,c.codCliente,c.tipoCliente,c.nomeCliente,c.status AS statusCliente
+                ,c.licitacaoCliente_cod,c.tipo,c.razaosocial, c.nomefaNtasia,c.CNPJ
                 ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
-                ,i.inst_id,i.inst_nome,s.codStatus,s.nome
+                ,i.inst_id,i.inst_nome,s.codStatus,s.nome as nomeStatus,
+                u.id,u.nome,u.email,u.nivel
                 FROM controlePedido AS con 
                  INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
                  INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
-                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
-                 INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
+                 INNER JOIN clienteLicitacao AS c on c.licitacaoCliente_cod = con.codCliente
+                 INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao
+                 INNER JOIN usuarios AS u on u.id = con.fk_idUsuarioPed
                  WHERE con.codControle = $codControle "
             );
             $dados = $resultado->fetchAll();
@@ -52,7 +59,8 @@ class PedidoDAO extends BaseDAO
                     $pedido->getCliente()->setNomeCliente($dado['nomeCliente']);
                     $pedido->getCliente()->setTipoCliente($dado['tipoCliente']);
                     $pedido->getCliente()->setStatus($dado['statusCliente']);
-                    $pedido->getStatus()->setNome($dado['nome']);
+                    $pedido->setStatus(new Status());
+                    $pedido->getStatus()->setNome($dado['nomeStatus']);
                     $pedido->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
                     $pedido->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
                     $pedido->getRepresentante()->setStatusRepresentante($dado['statusRepresentante']);
@@ -68,12 +76,14 @@ class PedidoDAO extends BaseDAO
                 "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.dataAlteracao,con.valorPedido,s.nome,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
                ,c.codCliente,c.tipoCliente,c.nomeCliente,c.status AS statusCliente
                ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
-               ,i.inst_nome
+               ,i.inst_nome,s.nome as nomeStatus
+                u.id,u.nome,u.email,u.nivel
                FROM controlePedido AS con 
 				INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
                 INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
-                INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
+                INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao
+                INNER JOIN usuarios AS u on u.id = con.fk_idUsuarioPed
                 ORDER BY c.nomeCliente ASC"
             );
             $dados = $resultado->fetchAll();
@@ -102,7 +112,8 @@ class PedidoDAO extends BaseDAO
                     $pedido->getCliente()->setNomeCliente($dado['nomeCliente']);
                     $pedido->getCliente()->setTipoCliente($dado['tipoCliente']);
                     $pedido->getCliente()->setStatus($dado['statusCliente']);
-                    $pedido->getStatus()->setNome($dado['nome']);
+                    $pedido->setStatus(new Status());
+                    $pedido->getStatus()->setNome($dado['nomeStatus']);
                     $pedido->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
                     $pedido->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
                     $pedido->getRepresentante()->setStatusRepresentante($dado['statusRepresentante']);
@@ -159,15 +170,17 @@ class PedidoDAO extends BaseDAO
         } else {
             $WHERE = "";
         }
-        $sql = "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
-            ,c.codCliente,c.tipoCliente,c.nomeCliente,c.status AS statusCliente
-            ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
-            ,i.inst_id,i.inst_nome,s.codStatus,s.nome
-            FROM controlePedido AS con 
-             INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
-             INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
-             INNER JOIN cliente AS c on c.codCliente = con.codCliente
-             INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao $WHERE ";
+        $sql = "SELECT SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
+        ,c.licitacaoCliente_cod,c.tipo,c.razaosocial, c.nomefaNtasia,c.CNPJ
+        ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
+        ,i.inst_id,i.inst_nome,s.codStatus,s.nome as nomeStatus,
+                u.id,u.nome,u.email,u.nivel
+        FROM controlePedido AS con 
+         INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
+         INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
+         INNER JOIN clienteLicitacao AS c on c.licitacaoCliente_cod = con.codCliente
+         INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao 
+         INNER JOIN usuarios AS u on u.id = con.fk_idUsuarioPed $WHERE ";
 
         $resultado = $this->select(
             $sql
@@ -201,7 +214,8 @@ class PedidoDAO extends BaseDAO
                 $pedido->getCliente()->setNomeCliente($dado['nomeCliente']);
                 $pedido->getCliente()->setTipoCliente($dado['tipoCliente']);
                 $pedido->getCliente()->setStatus($dado['statusCliente']);
-                $pedido->getStatus()->setNome($dado['nome']);
+                $pedido->setStatus(new Status());
+                $pedido->getStatus()->setNome($dado['nomeStatus']);
                 $pedido->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
                 $pedido->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
                 $pedido->getRepresentante()->setStatusRepresentante($dado['statusRepresentante']);
@@ -216,73 +230,29 @@ class PedidoDAO extends BaseDAO
     }
 
     public function listar($codControle = null)
-    {
-
-        if ($codControle) {
-            $resultado = $this->select(
+    { 
+        
+            $SQL =
                 "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
-                ,c.codCliente,c.tipoCliente,c.nomeCliente,c.status AS statusCliente
+                ,c.licitacaoCliente_cod,c.tipo,c.razaosocial, c.nomefaNtasia,c.CNPJ
                 ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
-                ,i.inst_id,i.inst_nome,s.codStatus,s.nome
+                ,i.inst_id,i.inst_nome,s.codStatus,s.nome as nomeStatus,
+                u.id,u.nome,u.email,u.nivel
                 FROM controlePedido AS con 
                  INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
                  INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
-                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
-                 INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
-                 WHERE con.codControle = $codControle "
-            );
-            $dado = $resultado->fetch();
-
-            if ($dado) {
-                $pedido = new Pedido();
-                $pedido->setCodControle($dado['codControle']);
-                $pedido->setDataCadastro($dado['dataCadastro']);
-                //date_format($date, 'Y-m-d H:i:s');
-                $pedido->setNumeroLicitacao($dado['numeroPregao']);
-                $pedido->setNumeroAf($dado['numeroAf']);
-                $pedido->setValorPedido(number_format($dado['valorPedido'], 2, ',', '.'));
-                $pedido->setCodStatus($dado['idStatus']);
-                $pedido->setSomaPedido($dado['valorPedido']);
-                $pedido->setCodCliente($dado['idCliente']);
-                $pedido->setAnexo($dado['anexo']);
-                $pedido->setObservacao($dado['observacao']);
-                $pedido->setCodRepresentante($dado['idRepresentante']);
-                $pedido->setFk_Instituicao($dado['fk_idInstituicao']);
-                $pedido->setDataFechamento($dado['dataFechamento']);
-                $pedido->setDataAlteracao($dado['dataAlteracao']);
-                $pedido->getCliente()->setCodCliente($dado['codCliente']);
-                $pedido->getCliente()->setNomeCliente($dado['nomeCliente']);
-                $pedido->getCliente()->setTipoCliente($dado['tipoCliente']);
-                $pedido->getCliente()->setStatus($dado['statusCliente']);
-                $pedido->getStatus()->setCodStatus($dado['codStatus']);
-                $pedido->getStatus()->setNome($dado['nome']);
-                $pedido->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
-                $pedido->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
-                $pedido->getRepresentante()->setStatusRepresentante($dado['statusRepresentante']);
-                $pedido->getInstituicao()->setInst_Nome($dado['inst_nome']);
-                $pedido->getInstituicao()->setInst_Id($dado['inst_id']);
-
-                return $pedido;
-            }
-        } else {
-            $resultado = $this->select(
-                "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.dataAlteracao,con.valorPedido,s.nome,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
-               ,c.codCliente,c.tipoCliente,c.nomeCliente,c.status AS statusCliente
-               ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
-               ,i.inst_nome
-               FROM controlePedido AS con 
-				INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
-                INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
-                INNER JOIN cliente AS c on c.codCliente = con.codCliente
-                INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
-                ORDER BY c.nomeCliente ASC"
-            );
+                 INNER JOIN clienteLicitacao AS c on c.licitacaoCliente_cod = con.codCliente
+                 INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao
+                 INNER JOIN usuarios AS u on u.id = con.fk_idUsuarioPed
+                ";
+             $where = Array();
+             if( $codControle ){ $where[] = " con.codControle = {$codControle}"; }
+             if( sizeof( $where ) )
+          $SQL .= ' WHERE '.implode( ' AND ',$where );
+          $resultado = $this->select($SQL);
+         
             $dados = $resultado->fetchAll();
-
-            if ($dados) {
-
-                $lista = [];
-
+            $lista = [];
                 foreach ($dados as $dado) {
                     $pedido = new Pedido();
                     $pedido->setCodControle($dado['codControle']);
@@ -292,29 +262,37 @@ class PedidoDAO extends BaseDAO
                     $pedido->setNumeroAf($dado['numeroAf']);
                     $pedido->setValorPedido(number_format($dado['valorPedido'], 2, ',', '.'));
                     $pedido->setCodStatus($dado['idStatus']);
-                    $pedido->setCodCliente($dado['idCliente']);
                     $pedido->setSomaPedido($dado['valorPedido']);
                     $pedido->setAnexo($dado['anexo']);
                     $pedido->setObservacao($dado['observacao']);
-                    $pedido->setCodRepresentante($dado['idRepresentante']);
-                    //$pedido->setFk_Instituicao($dado['fk_idInstituicao']);
                     $pedido->setDataFechamento($dado['dataFechamento']);
                     $pedido->setDataAlteracao($dado['dataAlteracao']);
-                    $pedido->getCliente()->setCodCliente($dado['codCliente']);
-                    $pedido->getCliente()->setNomeCliente($dado['nomeCliente']);
-                    $pedido->getCliente()->setTipoCliente($dado['tipoCliente']);
-                    $pedido->getCliente()->setStatus($dado['statusCliente']);
-                    $pedido->getStatus()->setNome($dado['nome']);
+                    $pedido->setClienteLicitacao(new ClienteLicitacao());
+                    $pedido->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
+                    $pedido->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+                    $pedido->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+                    $pedido->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);      
+                    $pedido->getClienteLicitacao()->setTipoCliente($dado['tipo']);
+                    $pedido->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+                    $pedido->setStatus(new Status());
+                    $pedido->getStatus()->setCodStatus($dado['codStatus']);
+                    $pedido->getStatus()->setNome($dado['nomeStatus']);
+                    $pedido->setRepresentante(new Representante());
                     $pedido->getRepresentante()->setCodRepresentante($dado['codRepresentante']);
                     $pedido->getRepresentante()->setNomeRepresentante($dado['nomeRepresentante']);
                     $pedido->getRepresentante()->setStatusRepresentante($dado['statusRepresentante']);
+                    $pedido->setInstituicao(new Instituicao());
+                    $pedido->getInstituicao()->setInst_Id($dado['inst_id']);
+                    $pedido->getInstituicao()->setInst_Codigo($dado['inst_codigo']);
                     $pedido->getInstituicao()->setInst_Nome($dado['inst_nome']);
+                    $pedido->setUsuario(new Usuario());
+                    $pedido->getUsuario()->setId($dado['id']);
+                    $pedido->getUsuario()->setNome($dado['nome']);
+                    $pedido->getUsuario()->setEmail($dado['email']);
+
                     $lista[] = $pedido;
                 }
                 return $lista;
-            }
-        }
-        return false;
     }
     public function listarAtendidos($codControle = null)
     {
@@ -326,7 +304,7 @@ class PedidoDAO extends BaseDAO
                  INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
                  INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                  INNER JOIN cliente AS c on c.codCliente = con.codCliente
-                 INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
+                 INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao
                  WHERE con.codControle = $codControle "
             );
             $dado = $resultado->fetch();
@@ -342,7 +320,6 @@ class PedidoDAO extends BaseDAO
                 $pedido->setNumeroAf($dado['numeroAf']);
                 $pedido->setValorPedido(number_format($dado['valorPedido'], 2, ',', '.'));
                 $pedido->setCodStatus($dado['idStatus']);
-                $pedido->setCodCliente($dado['idCliente']);
                 $pedido->setAnexo($dado['anexo']);
                 $pedido->setObservacao($dado['observacao']);
                 $pedido->setCodRepresentante($dado['idRepresentante']);
@@ -366,7 +343,7 @@ class PedidoDAO extends BaseDAO
 				INNER JOIN statusPedido AS s on s.codStatus = con.codStatus
                 INNER JOIN cadRepresentante AS r on r.codRepresentante = con.codRepresentante
                 INNER JOIN cliente AS c on c.codCliente = con.codCliente
-                INNER JOIN instituicao AS i on i.inst_codigo = con.fk_idInstituicao
+                INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao
                 WHERE s.nome in  ('ATENDIDO')
                 ORDER BY c.nomeCliente ASC"
             );
@@ -413,12 +390,13 @@ class PedidoDAO extends BaseDAO
         try {
             $numeroLicitacao    = $pedido->getNumeroLicitacao();
             $numeroAf           = $pedido->getNumeroAf();
-            $valorPedidoAtual       = $pedido->getValorPedido();
-            $valorPedido        = str_replace(",", ".", $valorPedidoAtual);
+           // $valorPedido       = $pedido->getValorPedido();
+            $valorPedido        =str_replace(',','.', str_replace(".", "", $pedido->getValorPedido())); 
             $codStatus          = $pedido->getCodStatus();
-            $codCliente         = $pedido->getCodCliente();
-            $codRepresentante   = $pedido->getCodRepresentante();
-            $fk_instituicao     = $pedido->getFk_Instituicao();
+            $codCliente         = $pedido->getClienteLicitacao()->getCodCliente();
+            $codRepresentante   = $pedido->getRepresentante()->getCodRepresentante();
+            $codUsuario   = $pedido->getUsuario()->getId();
+            $fk_instituicao     = $pedido->getInstituicao()->getInst_Id();
             $dataCadastroAtual  = $pedido->getDataCadastro();
             $dataAlteracao      = $pedido->getDataAlteracao();
             $observacao         = $pedido->getObservacao();
@@ -441,13 +419,12 @@ class PedidoDAO extends BaseDAO
                 }
             } else {
                 //  echo " teste 02 ".$anexo;
-                $anexo = "sem_anexo.php";
+                $anexo = "sem_anexo1.png";
             }
-
-
+            
             return $this->insert(
                 'controlePedido',
-                " :numeroPregao, :numeroAf, :valorPedido, :codStatus, :codCliente, :codRepresentante,
+                " :numeroPregao, :numeroAf, :valorPedido, :codStatus, :codCliente, :codRepresentante, :fk_idUsuarioPed,
                 :dataCadastro, :fk_idInstituicao , :dataAlteracao, :observacao, :anexo",
                 [
                     ':numeroPregao' => $numeroLicitacao,
@@ -456,6 +433,7 @@ class PedidoDAO extends BaseDAO
                     ':codStatus' => $codStatus,
                     ':codCliente' => $codCliente,
                     ':codRepresentante' => $codRepresentante,
+                    ':fk_idUsuarioPed' => $codUsuario,
                     ':dataCadastro' => $dataCadastro,
                     ':fk_idInstituicao' => $fk_instituicao,
                     ':dataAlteracao' => $dataAlteracao,
@@ -463,7 +441,9 @@ class PedidoDAO extends BaseDAO
                     ':anexo' => $anexo
                 ]
             );
+            
         } catch (\Exception $e) {
+            //var_dump($e);
             throw new \Exception("Erro na gravação de dados. " . $e, 500);
         }
     }
@@ -471,16 +451,15 @@ class PedidoDAO extends BaseDAO
     public  function atualizar(Pedido $pedido)
     {
         try {
-
-            $codControle    = $pedido->getCodControle();
+            $codControle        = $pedido->getCodControle();
             $numeroLicitacao    = $pedido->getNumeroLicitacao();
             $numeroAf           = $pedido->getNumeroAf();
-            $valorPedidoAtual       = $pedido->getValorPedido();
-            $valorPedido        = str_replace(",", ".", $valorPedidoAtual);
-            $codStatus          = $pedido->getCodStatus();
-            $codCliente         = $pedido->getCodCliente();
-            $codRepresentante   = $pedido->getCodRepresentante();
-            $fk_instituicao     = $pedido->getFk_Instituicao();
+            $valorPedido        = str_replace(',','.', str_replace(".", "", $pedido->getValorPedido())); 
+            $codStatus          = $pedido->getStatus()->getCodStatus();
+            $codCliente         = $pedido->getClienteLicitacao()->getCodCliente();
+            $codRepresentante   = $pedido->getRepresentante()->getCodRepresentante();
+            $codUsuario         = $pedido->getUsuario()->getId();
+            $fk_instituicao     = $pedido->getInstituicao()->getInst_Id();
             $dataCadastroAtual  = $pedido->getDataCadastro();
             $dataAlteracao      = $pedido->getDataAlteracao();
             $observacao         = $pedido->getObservacao();
@@ -503,12 +482,13 @@ class PedidoDAO extends BaseDAO
                 }
             } else {
                 //  echo " teste 02 ".$anexo;
-                $anexo = "sem_anexo.php";
+                $anexo = "sem_anexo1.png";
             }
 
             return $this->update(
                 'controlePedido',
-                "numeroPregao= :numeroPregao, numeroAf=:numeroAf, valorPedido=:valorPedido, codStatus=:codStatus, codCliente=:codCliente, codRepresentante=:codRepresentante,
+                "numeroPregao= :numeroPregao, numeroAf=:numeroAf, valorPedido=:valorPedido, codStatus=:codStatus, 
+                codCliente=:codCliente, codRepresentante=:codRepresentante, fk_idUsuarioPed=:codUsuario, 
                 fk_idInstituicao=:fk_instituicao , dataAlteracao=:dataAlteracao, observacao=:observacao, anexo=:anexo",
                 [
                     ':codControle' => $codControle,
@@ -518,6 +498,7 @@ class PedidoDAO extends BaseDAO
                     ':codStatus' => $codStatus,
                     ':codCliente' => $codCliente,
                     ':codRepresentante' => $codRepresentante,
+                    ':codUsuario' => $codUsuario,
                     ':fk_instituicao' => $fk_instituicao,
                     ':dataAlteracao' => $dataAlteracao,
                     ':observacao' => $observacao,
@@ -526,7 +507,8 @@ class PedidoDAO extends BaseDAO
                 "codControle = :codControle"
             );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados. " . $valorPedidoAtual, 500);
+            var_dump("teste ".$e);
+            throw new \Exception("Erro na gravação de dados. ", 500);
         }
     }
 

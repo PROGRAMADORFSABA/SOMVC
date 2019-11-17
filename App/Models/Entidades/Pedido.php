@@ -22,24 +22,11 @@ class Pedido{
     private $somaPedido;
     private $status;
     private $cliente;
+    private $usuario;
     private $representante;
     private $instituicao;
-
-    public function __construct(){
-        $this->cliente = new Cliente();
-        $this->status = new Status();        
-        $this->representante = new Representante();
-        $this->instituicao = new Instituicao();
-    }
-   
-
-    /**
-     * @return mixed
-     */
-    public function getInstituicao()
-    {
-        return $this->instituicao;
-    }
+    private $clienteLicitacao;  
+       
     /**
      * @return mixed
      */
@@ -210,48 +197,14 @@ class Pedido{
     }
 
     /**
-     * Get the value of codRepresentante
-     */ 
-    public function getCodRepresentante()
-    {
-        return $this->codRepresentante;
-    }
-
-    /**
-     * Set the value of codRepresentante
-     *
-     * @return  self
-     */ 
-    public function setCodRepresentante($codRepresentante)
-    {
-        $this->codRepresentante = $codRepresentante;
-
-        return $this;
-    }
-
-    /**
      * Get the value of cliente
      */ 
     public function getCliente()
     {
         return $this->cliente;
     }
-
-    /**
-     * Get the value of representante
-     */ 
-    public function getRepresentante()
-    {
-        return $this->representante;
-    }
-
-    /**
-     * Get the value of status
-     */ 
-    public function getStatus()
-    {
-        return $this->status;
-    }
+    
+    
 
     /**
      * Get the value of codCliente
@@ -312,4 +265,101 @@ class Pedido{
 
         return $this;
     }
+     /**
+     * Get the value of clienteLicitacao
+     */ 
+    public function getClienteLicitacao()
+    {
+        return $this->clienteLicitacao;
+    }
+
+    /**
+     * Set the value of clienteLicitacao
+     *
+     * @return  self
+     */ 
+    public function setClienteLicitacao(ClienteLicitacao $clienteLicitacao)
+    {
+        $this->clienteLicitacao = $clienteLicitacao;
+
+        return $this;
+    }
+     /**
+     * Get the value of Representante
+     */ 
+    public function getRepresentante()
+    {
+        return $this->representante;
+    }
+
+    /**
+     * Set the value of representante
+     *
+     * @return  self
+     */ 
+    public function setRepresentante(Representante $representante)
+    {
+        $this->representante = $representante;
+
+        return $this;
+    }
+     /**
+     * Get the value of instituicao
+     */ 
+    public function getInstituicao()
+    {
+        return $this->instituicao;
+    }
+
+    /**
+     * Set the value of instituicao
+     *
+     * @return  self
+     */ 
+    public function setInstituicao(Instituicao $instituicao)
+    {
+        $this->instituicao = $instituicao;
+
+        return $this;
+    }
+     /**
+     * Get the value of usuario
+     */ 
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set the value of usuario
+     *
+     * @return  self
+     */ 
+    public function setUsuario(Usuario $usuario)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+     /**
+     * Get the value of staus
+     */ 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set the value of usuario
+     *
+     * @return  self
+     */ 
+    public function setStatus(Status $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+
 }

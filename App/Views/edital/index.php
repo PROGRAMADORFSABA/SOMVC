@@ -3,12 +3,16 @@
 
     <div class="kt-portlet kt-portlet--mobile">
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/edital/" method="post" id="form_cadastro" enctype="multipart/form-data">
-        <span class="kt-portlet__head-icon">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon">
                     <i class="kt-font-brand flaticon2-line-chart"></i>
                 </span>
                 <h3 class="kt-portlet__head-title">
                 Pesquisa de editais registrados
             </h3>
+        </div>
+        </div>
         <div class="kt-portlet__body">
         <div class="form-group row">
             <div class="col-lg-8">
@@ -75,7 +79,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Pesquisar</button>
             </div>
-        </form>
+    </form>
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon">

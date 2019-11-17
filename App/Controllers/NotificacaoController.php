@@ -202,7 +202,7 @@ class NotificacaoController extends Controller
        if($notificacaoService->salvar($notificacao)){
               $this->redirect('/notificacao');       
         }else{                      
-          //  $this->redirect('/notificacao/cadastro');
+           $this->redirect('/notificacao/cadastro');
         }
 
         Sessao::limpaFormulario();

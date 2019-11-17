@@ -30,11 +30,8 @@
                         <input type="hidden" id="cliente" name="cliente" 
                         value="<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>">  
                     </div>
-                      <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>
-
-                       
-            </div>
-            
+                      <span class="form-text text-muted">Por favor insira o cliente</span>                       
+                </div>            
             <div class="form-group row">
                     <div class="col-lg-2">
                         <label for="modalidade">Modalidade</label>

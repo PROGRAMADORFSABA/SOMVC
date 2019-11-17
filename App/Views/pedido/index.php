@@ -1,18 +1,38 @@
 <!-- begin:: Content -->
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
-	<?php
-	$print = array();
-	$pedido1 = $viewVar['listaPedidos'];
-	foreach ($pedido1 as $pedido2) {
-		//echo $pedido->getCodControle();
-		//	$print = json_encode($pedido->getCliente()->getNomeCliente());
-		$print[] = $pedido2;
-	}
-//	print json_encode($print);
-	$print1 = json_encode($print);
-	//var_dump($pedido2);
-	?>
+	
 	<div class="kt-portlet kt-portlet--mobile">
+	<form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/" method="post" id="form_cadastro" enctype="multipart/form-data">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                Pesquisa de editais registrados
+            </h3>
+        </div>
+        </div>
+        <div class="kt-portlet__body">		
+        <div class="form-group row">
+           
+            <div class="col-lg-3">
+                        <div class="form-group"><label for="representante">Representante</label>
+                            <select class="form-control" name="representante" required>
+                                <option value="">Selecione o Representante</option>
+                                <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
+                                    <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('representante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
+                                        <?php echo $representante->getNomeRepresentante(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <span class="form-text text-muted">Por favor insira o Representante do Pedido</span>
+                        </div> 
+            </div>   
+            
+               
+                <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Pesquisar</button>
+            </div>
+    </form>
 		<div class="kt-portlet__head kt-portlet__head--lg">
 			<div class="kt-portlet__head-label">
 				<span class="kt-portlet__head-icon">
@@ -117,7 +137,7 @@
 				</tfoot>
 				<tbody>
 					<?php
-					 $pedido1 = $viewVar['listaPedido'];
+					 $pedido1 = $viewVar['listarPedidos'];
                    
 					 $andre = $pedido1 > 0;
 					 $soma = 0;
@@ -136,8 +156,8 @@
 						?>
 					<tr>
 						<td><?php echo $pedido->getCodControle(); ?></td>
-						<td><?php echo $pedido->getCliente()->getNomeCliente(); ?></td>
-						<td><?php echo $pedido->getCliente()->getTipoCliente(); ?></td>
+						<td><?php echo $pedido->getClienteLicitacao()->getRazaoSocial(); ?></td>
+						<td><?php echo $pedido->getClienteLicitacao()->getTipoCliente(); ?></td>
 						<td>R$<?php echo $pedido->getValorPedido(); ?></td>
 						<td><?php echo $pedido->getNumeroAf(); ?></td>
 						<td><?php echo $pedido->getNumeroLicitacao(); ?></td>
@@ -155,6 +175,7 @@
 								</div>
 							</span>
 							<a href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+							<a href="http://<?php echo APP_HOST; ?>/pedido/exclusao/<?php echo $pedido->getCodControle(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
 						</td>
 
 						<?php

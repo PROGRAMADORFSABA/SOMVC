@@ -12,10 +12,11 @@ use App\Services\ClienteService;
 class ClienteController extends Controller{
 
     public function index(){
-
+    $clienteService = new ClienteService();
         $clienteDAO = new ClienteDAO();
 
-        self::setViewParam('listarCliente',$clienteDAO->listar());
+        self::setViewParam('listarCliente',$clienteService->listar());
+      //  self::setViewParam('listarCliente',$clienteDAO->listar());
 
         $this->render('/cliente/index');
 

@@ -21,6 +21,7 @@
            
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
             return $clienteLicitacaoDAO->listar($codCliente);
+           
            // return $clienteLicitacaoDAO->listarTeste($codCliente);
         }
         public function listarPorProduto(Produto $produto)

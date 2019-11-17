@@ -66,7 +66,7 @@ class EditalController extends Controller
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $edital = new Edital();
 
-        if(Sessao::existeFormulario()) { 
+        if(Sessao::existeFormulario()) {
      
         $clienteId = Sessao::retornaValorFormulario('cliente');
         $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];

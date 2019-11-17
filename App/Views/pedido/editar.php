@@ -12,21 +12,25 @@
     <?php } ?>
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/atualizar" method="post" id="form_cadastro" enctype="multipart/form-data">
-        <input type="hidden" class="form-control" name="codControle" id="codControle" value="<?php echo $viewVar['pedido']->getCodControle(); ?>">
-        <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['idInstituicao']; ?>" required>
+        <input type="hidden" class="form-control" name="codControle" id="codControle" value="<?php echo $viewVar['pedido']->getCodControle(); ?>" required >
+        <input type="hidden" class="form-control" name="usuario" id="usuario" value="<?php echo $_SESSION['id']; ?>" required>
+        <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
         <div class="kt-portlet__body">
             <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" readonly="readonly" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
-                <div class="form-group"><label for="codCliente">Cliente</label>
-                    <select class="form-control" name="codCliente" required>
-                        <option value="">Selecione o cliente</option>
-                        <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                            <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($viewVar['pedido']->getCliente()->getCodCliente()  == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                                <?php echo $cliente->getNomeCliente(); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>
-                </div>
+                <div class="form-group">
+                        <label for="cadastroCliente" class="">CADASTRO DO CLIENTE</label>                    
+                        <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                                <i class="la la-plus"></i>Novo Cliente</a>
+                        <div>    
+                            <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
+                            value="<?php echo $viewVar['pedido']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
+                            
+                            <input type="hidden" id="cliente" name="cliente" 
+                            value="<?php echo $viewVar['pedido']->getClienteLicitacao()->getCodCliente(); ?>">  
+                        </div>
+                        <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>                       
+                </div> 
                 <div class="form-group row">
                     <div class="col-lg-4">
                         <label>Numero da Licitacao:</label>
@@ -47,8 +51,8 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-4">
-                        <div class="form-group"><label for="codRepresentante">Representante</label>
-                            <select class="form-control" name="codRepresentante" required>
+                        <div class="form-group"><label for="representante">Representante</label>
+                            <select class="form-control" name="representante" required>
                                 <option value="">Selecione o Representante</option>
                                 <?php foreach ($viewVar['listaRepresentantes'] as $representante) : ?>
                                     <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($viewVar['pedido']->getRepresentante()->getCodRepresentante() == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
@@ -59,8 +63,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="form-group"><label for="codStatus">Status</label>
-                            <select class="form-control" name="codStatus" required>
+                        <div class="form-group"><label for="status">Status</label>
+                            <select class="form-control" name="status" required>
                                 <option value="">Selecione o status</option>
                                 <?php foreach ($viewVar['listaStatus'] as $status) : ?>
                                     <option value="<?php echo $status->getCodStatus(); ?>" <?php echo ($viewVar['pedido']->getStatus()->getCodStatus() == $status->getCodStatus()) ? "selected" : ""; ?>>
@@ -73,7 +77,7 @@
                     <div class="col-lg-4">
                         <label class="">Anexo:</label>
                         <input type="file" name="anexo" id="anexo" value="<?php echo  $viewVar['pedido']->getAnexo(); ?>">
-                        <input type="text" class="form-control" placeholder="anexoteste" id="anexoteste"  readonly="readonly" name="anexoteste" value="<?php echo $viewVar['pedido']->getAnexo(); ?>">
+                        <input type="hidden" class="form-control" id="anexoAlt"  readonly="readonly" name="anexoAlt" value="<?php echo $viewVar['pedido']->getAnexo(); ?>">
                         <span class="form-text text-muted">Selecione o arquivo</span>
                     </div>
                 </div>

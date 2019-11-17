@@ -29,7 +29,7 @@ abstract class BaseDAO
             $colunas       = str_replace(":", "", $cols);
             
             $stmt = $this->conexao->prepare("INSERT INTO $table ($colunas) VALUES ($parametros)");
-           // var_dump($values);
+           // var_dump($colunas);
              $stmt->execute($values);          
            
          return $this->conexao->lastInsertId();
@@ -48,7 +48,7 @@ abstract class BaseDAO
             }
             
             $stmt = $this->conexao->prepare("UPDATE $table SET $cols $where");
-            //var_dump($cols);
+           //var_dump($values);
             $stmt->execute($values);
 
             return $stmt->rowCount();
