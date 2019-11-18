@@ -26,19 +26,21 @@ class PedidoController extends Controller
     {
         $pedido = new Pedido();
         if($_POST){
-            $pedido->setNtf_valor($_POST['codRepresentante']);
-            $pedido->setNtf_cod($_POST['codigo']);
-            $pedido->setClienteLicitacao($_POST['clienteId']);
-            $pedido->setNtf_Numero($_POST['pedido']); 
-            $pedido->setNtf_Status($_POST['status']);
-            $pedido->setNtf_pedido($_POST['modalidade']);       
-            $pedido->setNtf_numero($_POST['numeroLicitacao']); 
+            $pedido->setCodControle($_POST['codigo']);
+            $pedido->setCodRepresentante($_POST['representante']);
+            $pedido->setCodCliente($_POST['cliente']);
+            //$pedido->setCodUsuario($_POST['usuario']); 
+            $pedido->setCodStatus($_POST['status']);
+            $pedido->setNumeroAF($_POST['pedido']);       
+            $pedido->setNumeroLicitacao($_POST['numeroLicitacao']); 
          }
 
         $pedidoService = new PedidoService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $representanteService = new RepresentanteService();
-        self::setViewParam('listarPedidos', $pedidoService->listar());
+        $statusService = new StatusService();
+        self::setViewParam('listaStatus', $statusService->listar());
+        self::setViewParam('listarPedidos', $pedidoService->listar($pedido));
         self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
         self::setViewParam('listarRepresentantes', $representanteService->listar());
         $pedidoDAO = new PedidoDAO();

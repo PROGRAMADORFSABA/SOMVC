@@ -32,7 +32,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
         } else {
 
             $resultado = $this->select(
-                ' SELECT * FROM clienteLicitacao '
+                ' SELECT * FROM clienteLicitacao ORDER BY razaosocial '
             );
             $dados = $resultado->fetchAll();
 

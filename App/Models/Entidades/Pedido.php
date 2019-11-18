@@ -362,4 +362,24 @@ class Pedido{
     }
 
 
+
+    /**
+     * Get the value of codRepresentante
+     */ 
+    public function getCodRepresentante()
+    {
+        return $this->codRepresentante;
+    }
+
+    /**
+     * Set the value of codRepresentante
+     *
+     * @return  self
+     */ 
+    public function setCodRepresentante($codRepresentante)
+    {
+        $this->codRepresentante = $codRepresentante;
+
+        return $this;
+    }
 }

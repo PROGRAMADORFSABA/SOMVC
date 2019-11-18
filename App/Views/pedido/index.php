@@ -3,22 +3,43 @@
 	
 	<div class="kt-portlet kt-portlet--mobile">
 	<form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/" method="post" id="form_cadastro" enctype="multipart/form-data">
-        <div class="kt-portlet__head kt-portlet__head--lg">
-            <div class="kt-portlet__head-label">
-            <span class="kt-portlet__head-icon">
-                    <i class="kt-font-brand flaticon2-line-chart"></i>
-                </span>
-                <h3 class="kt-portlet__head-title">
-                Pesquisa de editais registrados
+            <h3 class="kt-portlet__head-title">
+                Pesquisa de pedidos registrados
             </h3>
-        </div>
-        </div>
-        <div class="kt-portlet__body">		
-        <div class="form-group row">
-           
-            <div class="col-lg-3">
+            <div class="form-group"><label for="cliente">Cliente</label>
+                <select class="form-control" name="cliente">
+                    <option value="">Selecione o cliente</option>
+                    <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
+                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
+                            <?php echo $cliente->getRazaoSocial(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            
+            <div class="kt-portlet__body">
+                <div class="form-group row">
+                    <div class="col-lg-1">
+                        <label>Pedido:</label>
+                        <input type="text" class="form-control" title="Digite o codido do pedido" placeholder="pedido" id="codControle" name="codControle" value="<?php echo $Sessao::retornaValorFormulario('codControle'); ?>">
+                    </div>
+                    <div class="col-lg-1">
+                        <label>AFM:</label>
+                        <input type="text" class="form-control" title="Digite o numero o pedido" placeholder="pedido" id="numeroAf" name="numeroAf" value="<?php echo $Sessao::retornaValorFormulario('codControle'); ?>">
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group"><label for="status">Status</label>
+                            <select class="form-control" name="status" title="Selecione o status do pedido">
+                                <option value="">Selecione o status</option>
+                                <?php foreach ($viewVar['listaStatus'] as $status) : ?>
+                                    <option value="<?php echo $status->getCodStatus(); ?>" <?php echo ($Sessao::retornaValorFormulario('codStatus') == $status->getCodStatus()) ? "selected" : ""; ?>>
+                                        <?php echo $status->getNome(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+					</div>
+					<div class="col-lg-4">
                         <div class="form-group"><label for="representante">Representante</label>
-                            <select class="form-control" name="representante" required>
+                            <select class="form-control" name="representante">
                                 <option value="">Selecione o Representante</option>
                                 <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
                                     <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('representante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
@@ -26,13 +47,16 @@
                                 <?php endforeach; ?>
                             </select>
                             <span class="form-text text-muted">Por favor insira o Representante do Pedido</span>
-                        </div> 
-            </div>   
-            
-               
+                        </div>
+					</div>
+                    <div class="col-lg-2">
+                        <label>Licitacao:</label>
+                        <input type="text" class="form-control" title="Digite o numero da licitacao" placeholder="Nume. Licitacao" id="numeroLicitacao" name="numeroLicitacao" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>">
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Pesquisar</button>
             </div>
-    </form>
+        </form>
 		<div class="kt-portlet__head kt-portlet__head--lg">
 			<div class="kt-portlet__head-label">
 				<span class="kt-portlet__head-icon">
@@ -146,13 +170,6 @@
 							 $soma = $pedido->getSomaPedido();
 							 $total += $soma;
 							 $qtdePedido += 1;
-							 
-					//foreach ($viewVar['listaPedido'] as $pedido) {
-
-						//$print = json_encode($pedido);
-						//var_dump($pedido);
-						//	echo "teste = ".$print	;
-
 						?>
 					<tr>
 						<td><?php echo $pedido->getCodControle(); ?></td>

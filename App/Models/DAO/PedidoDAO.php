@@ -229,8 +229,14 @@ class PedidoDAO extends BaseDAO
         return false;
     }
 
-    public function listar($codControle = null)
+    public function listar(Pedido $pedido)
     { 
+        $codCliente         = $pedido->getCodCliente();
+        $codRepresentante   = $pedido->getCodRepresentante();
+        $codControle        = $pedido->getCodControle();
+        $numeropedido       = $pedido->getNumeroAF();
+        $codStatus             = $pedido->getCodStatus();
+        $numeroLicitacao    = $pedido->getNumeroLicitacao();
         
             $SQL =
                 "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
@@ -247,6 +253,12 @@ class PedidoDAO extends BaseDAO
                 ";
              $where = Array();
              if( $codControle ){ $where[] = " con.codControle = {$codControle}"; }
+             if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
+             if( $codRepresentante ){ $where[] = " r.codRepresentante = {$codRepresentante}"; }
+             if( $codStatus ){ $where[] = " s.codStatus = {$codStatus}"; }
+             if( $numeropedido ){ $where[] = " con.numeroAf = '{$numeropedido}'"; }
+             if( $numeroLicitacao ){ $where[] = " con.numeroPregao = '{$numeroLicitacao}'"; }
+
              if( sizeof( $where ) )
           $SQL .= ' WHERE '.implode( ' AND ',$where );
           $resultado = $this->select($SQL);

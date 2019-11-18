@@ -25,7 +25,7 @@
                         <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
                         value="<?php echo $viewVar['pedido']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
                         
-                        <input type="text" id="cliente" name="cliente" 
+                        <input type="hidden" id="cliente" name="cliente" 
                         value="<?php echo $viewVar['pedido']->getClienteLicitacao()->getCodCliente(); ?>">  
                     </div>
                       <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>                       

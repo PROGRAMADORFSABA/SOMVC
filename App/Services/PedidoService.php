@@ -17,10 +17,10 @@ use App\Models\Entidades\ClienteLicitacao;
 
 class PedidoService
 {
-    public function listar($pedidoId = null)
+    public function listar(Pedido $pedido)
     {
         $pedidoDAO = new PedidoDAO();
-        return $pedidoDAO->listar($pedidoId);
+        return $pedidoDAO->listar($pedido);
     }
     public function listarClientePedido($pedidoId = null)
     {
