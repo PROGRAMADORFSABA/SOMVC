@@ -287,7 +287,7 @@
       <workItem from="1573602063437" duration="1884000" />
       <workItem from="1573689744291" duration="1265000" />
       <workItem from="1573987408066" duration="132000" />
-      <workItem from="1573987562008" duration="12929000" />
+      <workItem from="1573987562008" duration="13022000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -492,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573429604453</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="cadastro pedidofalta">
+      <created>1574035653419</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1574035653419</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView">
@@ -548,6 +555,7 @@
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
     <MESSAGE value="LISTAR ALTERAÇÃO" />
-    <option name="LAST_COMMIT_MESSAGE" value="LISTAR ALTERAÇÃO" />
+    <MESSAGE value="cadastro pedidofalta" />
+    <option name="LAST_COMMIT_MESSAGE" value="cadastro pedidofalta" />
   </component>
 </project>
