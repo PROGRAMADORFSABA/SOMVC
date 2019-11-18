@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e35ab5e-731b-4251-beb5-2bd9a1538da4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/App/Views/pedidofalta/listar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/alexa.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/App.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/App.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/PedidoFaltaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Models/Entidades/ClienteLicitacao.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Entidades/ClienteLicitacao.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/layouts/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/layouts/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/pedidofalta/cadastro.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -289,7 +282,12 @@
       <workItem from="1573172769334" duration="281000" />
       <workItem from="1573173074820" duration="5911000" />
       <workItem from="1573336928373" duration="1437000" />
-      <workItem from="1573380763027" duration="8763000" />
+      <workItem from="1573380763027" duration="10026000" />
+      <workItem from="1573430781718" duration="599000" />
+      <workItem from="1573602063437" duration="1884000" />
+      <workItem from="1573689744291" duration="1265000" />
+      <workItem from="1573987408066" duration="132000" />
+      <workItem from="1573987562008" duration="12929000" />
     </task>
     <task id="LOCAL-00001" summary="Criação da class ClienteLicitacaoDAO">
       <created>1561403988454</created>
@@ -487,7 +485,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573179478863</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="LISTAR ALTERAÇÃO">
+      <created>1573429604453</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1573429604453</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -542,6 +547,7 @@
     <MESSAGE value="Correção tabela de Cadastro de falta" />
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO" />
     <MESSAGE value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mudanças em clienteFaltaLicitacao, Services, Controller, DAO + autocomplete" />
+    <MESSAGE value="LISTAR ALTERAÇÃO" />
+    <option name="LAST_COMMIT_MESSAGE" value="LISTAR ALTERAÇÃO" />
   </component>
 </project>
