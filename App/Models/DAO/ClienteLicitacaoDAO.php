@@ -25,6 +25,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                 $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
                 $clienteLicitacao->setCnpj($dado['CNPJ']);
                 $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                $clienteLicitacao->setTipoCliente($dado['tipo']);
                 // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);                             
                 return $clienteLicitacao;
             }
@@ -48,6 +49,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                     $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
                     $clienteLicitacao->setCnpj($dado['CNPJ']);
                     $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                    $clienteLicitacao->setTipoCliente($dado['tipo']);
                     // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);
 
                     $lista[] = $clienteLicitacao;
@@ -56,6 +58,37 @@ class ClienteLicitacaoDAO extends  BaseDAO
             }
         }
         return false;
+    }
+    public  function listaClientesPedido()
+    {
+        
+
+            $resultado = $this->select(
+                ' SELECT distinct(c.razaosocial), c.licitacaoCliente_cod,c.tipo, c.nomefantasia,c.CNPJ              
+                FROM  clienteLicitacao AS c
+                 INNER JOIN controlePedido AS con on c.licitacaoCliente_cod = con.codCliente ORDER BY c.razaosocial '
+            );
+            $dados = $resultado->fetchAll();
+
+            if ($dados) {
+
+                $lista = [];
+
+                foreach ($dados as $dado) {
+
+                    $clienteLicitacao = new ClienteLicitacao();
+                    $clienteLicitacao->setCodCliente($dado['licitacaoCliente_cod']);
+                    $clienteLicitacao->setRazaoSocial($dado['razaosocial']);
+                    $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
+                    $clienteLicitacao->setCnpj($dado['CNPJ']);
+                    $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                    $clienteLicitacao->setTipoCliente($dado['tipo']);
+                    // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);
+
+                    $lista[] = $clienteLicitacao;
+                }
+                return $lista;
+            }        
     }
     
     public function listarClienteLicitacao(ClienteLicitacao $clienteLicitacao)
@@ -172,22 +205,22 @@ class ClienteLicitacaoDAO extends  BaseDAO
     }
     public function salvar(ClienteLicitacao $clienteLicitacao)
     {
-
         try {
-
             $razaoSocial    = $clienteLicitacao->getRazaoSocial();
             $nomeFantasia   = $clienteLicitacao->getNomeFantasia();
-            $cnpj   = $clienteLicitacao->getCnpj();
+            $cnpj           = $clienteLicitacao->getCnpj();
             $trocaMarca     = $clienteLicitacao->getTrocaMarca();
+            $tipoCliente    = $clienteLicitacao->getTipoCliente();
 
             return $this->insert(
                 'clienteLicitacao',
-                ":razaosocial, :nomefantasia, :cnpj, :trocamarca",
+                ":razaosocial, :nomefantasia, :cnpj, :trocamarca, :tipo",
                 [
                     ":razaosocial"      => $razaoSocial,
-                    ":nomeFantasia"     => $nomeFantasia,
-                    ":cnpj"     => $cnpj,
-                    ":trocamarca"       => $trocaMarca
+                    ":nomefantasia"     => $nomeFantasia,
+                    ":cnpj"             => $cnpj,
+                    ":trocamarca"       => $trocaMarca,
+                    ":tipo"             => $tipoCliente
                 ]
             );
         } catch (\Exception $e) {
@@ -198,23 +231,25 @@ class ClienteLicitacaoDAO extends  BaseDAO
     public function atualizar(ClienteLicitacao $clienteLicitacao)
     {
         try {
-
+            var_dump($clienteLicitacao);
             $codCliente     = $clienteLicitacao->getCodCliente();
             $razaoSocial    = $clienteLicitacao->getRazaoSocial();
             $nomeFantasia   = $clienteLicitacao->getNomeFantasia();
             $cnpj           = $clienteLicitacao->getCnpj();
             $trocaMarca     = $clienteLicitacao->getTrocaMarca();
+            $tipoCliente    = $clienteLicitacao->getTipoCliente();
 
 //echo " cod ".$codCliente." razao ".$razaoSocial." nome ".$nomeFantasia." cnpj ".$cnpj." marca ".$trocaMarca;
             return $this->update(
                 'clienteLicitacao',
-                "  razaoSocial=:razaoSocial, nomeFantasia=:nomeFantasia, cnpj=:cnpj, trocaMarca=:trocaMarca ",
+                "  razaoSocial=:razaoSocial, nomeFantasia=:nomeFantasia, cnpj=:cnpj, trocaMarca=:trocaMarca, tipo=:tipoCliente ",
                 [
                     ':codCliente'       => $codCliente,
                     ':razaoSocial'      => $razaoSocial,
                     ':nomeFantasia'     => $nomeFantasia,
                     ':cnpj'             => $cnpj,
                     ':trocaMarca'       => $trocaMarca,
+                    ':tipoCliente'       => $tipoCliente,
                 ],
                 "licitacaoCliente_cod = :codCliente"
             );

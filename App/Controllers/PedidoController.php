@@ -41,7 +41,7 @@ class PedidoController extends Controller
         $statusService = new StatusService();
         self::setViewParam('listaStatus', $statusService->listar());
         self::setViewParam('listarPedidos', $pedidoService->listar($pedido));
-        self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
+        self::setViewParam('listaClientesPedido', $clienteLicitacaoService->listaClientesPedido());
         self::setViewParam('listarRepresentantes', $representanteService->listar());
         $pedidoDAO = new PedidoDAO();
         

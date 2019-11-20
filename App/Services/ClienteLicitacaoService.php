@@ -24,6 +24,11 @@
            
            // return $clienteLicitacaoDAO->listarTeste($codCliente);
         }
+        public function listaClientesPedido()
+        {           
+            $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
+            return $clienteLicitacaoDAO->listaClientesPedido();
+        }
         public function listarPorProduto(Produto $produto)
         {
             $produtoDAO =  new ProdutoDAO();

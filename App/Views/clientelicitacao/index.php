@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         &nbsp;
-                        <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
+                        <a href="http://<?php echo APP_HOST; ?>/clienteLicitacao/cadastro" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>
                             Novo Cliente
 
@@ -80,6 +80,8 @@
                         <th>CÓDIGO</th>
                         <th>RAZAO SOCIAL</th>
                         <th>NOME FANTASIA</th>
+                        <th>CNPJ</th>
+                        <th>TIPO</th>
                         <th>TROCA DE MARCA</th>
                         <th>Acoes</th>
 
@@ -95,19 +97,21 @@
                         <td><?php echo $clienteLicitacao->getCodCliente(); ?></td>
                         <td><?php echo $clienteLicitacao->getRazaoSocial(); ?></td>
                         <td><?php echo $clienteLicitacao->getNomeFantasia(); ?></td>
+                        <td><?php echo $clienteLicitacao->getCnpj(); ?></td>
+                        <td><?php echo $clienteLicitacao->getTipoCliente(); ?></td>
                         <td><?php echo $clienteLicitacao->getTrocaMarca(); ?></td>
                         <td>
                             <span class="dropdown">
                                 <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
-                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clienteLicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clienteLicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clienteLicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+                                    <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clienteLicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
                                 </div>
                             </span>
-                            <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
-                            <a href="http://<?php echo APP_HOST; ?>/clientelicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
+                            <a href="http://<?php echo APP_HOST; ?>/clienteLicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+                            <a href="http://<?php echo APP_HOST; ?>/clienteLicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
                         </td>
                         <?php
                             }
@@ -123,6 +127,8 @@
                         <th>CÓDIGO</th>
                         <th>RAZAO SOCIAL</th>
                         <th>NOME FANTASIA</th>
+                        <th>CNPJ</th>
+                        <th>TIPO</th>
                         <th>TROCA DE MARCA</th>
                         <th>Acoes</th>
                     </tr>

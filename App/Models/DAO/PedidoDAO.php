@@ -258,9 +258,14 @@ class PedidoDAO extends BaseDAO
              if( $codStatus ){ $where[] = " s.codStatus = {$codStatus}"; }
              if( $numeropedido ){ $where[] = " con.numeroAf = '{$numeropedido}'"; }
              if( $numeroLicitacao ){ $where[] = " con.numeroPregao = '{$numeroLicitacao}'"; }
+                // $where[] = " s.nome  not in  ('ATENDIDO','CANCELADO') ";
+              if( sizeof( $where ) ){
+                 $SQL .= ' WHERE '.implode( ' AND ',$where );
+                }else {
+                    $SQL .= " WHERE s.nome  not in  ('ATENDIDO','CANCELADO') ";
 
-             if( sizeof( $where ) )
-          $SQL .= ' WHERE '.implode( ' AND ',$where );
+                }
+                $SQL .= " ORDER BY c.razaosocial ";
           $resultado = $this->select($SQL);
          
             $dados = $resultado->fetchAll();

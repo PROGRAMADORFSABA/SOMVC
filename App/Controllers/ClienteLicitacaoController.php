@@ -24,40 +24,6 @@ class ClienteLicitacaoController extends Controller
 
         Sessao::limpaMensagem();
     }
-   
-    
-    public function cadastro()
-    {
-        $this->render('/clientelicitacao/cadastro');
-
-        Sessao::limpaFormulario();
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
-    }
-    public function salvar()
-    {
-        $clienteLicitacao = new ClienteLicitacao();
-
-        // $clienteLicitacao->setDataCadastro($_POST['dataCadastro']);
-        //date_format($date, 'Y-m-d H:i:s');
-        $clienteLicitacao->setCnpj($_POST['cnpj']);
-        $clienteLicitacao->setRazaoSocial($_POST['razaoSocial']);
-        $clienteLicitacao->setNomeFantasia($_POST['nomeFantasia']);
-        $clienteLicitacao->setTrocaMarca($_POST['trocaMarca']);
-        Sessao::gravaFormulario($_POST);
-
-        $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
-
-        if ($clienteLicitacaoDAO->salvar($clienteLicitacao)) {
-
-            Sessao::limpaFormulario();
-            Sessao::limpaMensagem();
-            Sessao::limpaErro();
-            $this->redirect('/clienteLicitacao');
-        } else {
-            Sessao::gravaMensagem("Erro ao gravar");
-        }
-    }
     public function autoComplete($params)
     {
         
@@ -81,15 +47,48 @@ class ClienteLicitacaoController extends Controller
 
         echo $busca;
     }
+    
+    public function cadastro()
+    {
+        $this->render('/clientelicitacao/cadastro');
 
-   
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
+    }
+    public function salvar()
+    {
+        $clienteLicitacao = new ClienteLicitacao();
+
+        // $clienteLicitacao->setDataCadastro($_POST['dataCadastro']);
+        //date_format($date, 'Y-m-d H:i:s');
+        $clienteLicitacao->setCnpj($_POST['cnpj']);
+        $clienteLicitacao->setRazaoSocial($_POST['razaoSocial']);
+        $clienteLicitacao->setNomeFantasia($_POST['nomeFantasia']);
+        $clienteLicitacao->setTrocaMarca($_POST['trocaMarca']);
+        $clienteLicitacao->setTipoCliente($_POST['tipoCliente']);
+        Sessao::gravaFormulario($_POST);
+
+        $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
+
+        if ($clienteLicitacaoDAO->salvar($clienteLicitacao)) {
+
+            Sessao::limpaFormulario();
+            Sessao::limpaMensagem();
+            Sessao::limpaErro();
+            $this->redirect('/clientelicitacao');
+        } else {
+            Sessao::gravaMensagem("Erro ao gravar");
+        }
+    }
+      
     public function edicao($params)
     {
         $codCliente = $params[0];
 
         if (!$codCliente) {
             Sessao::gravaMensagem("Nenhum Cadastro Selecionado");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
         $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
 
@@ -97,11 +96,11 @@ class ClienteLicitacaoController extends Controller
 
         if (!$clienteLicitacao) {
             Sessao::gravaMensagem("Cliente inexistente");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
 
         self::setViewParam('clienteLicitacao', $clienteLicitacao);
-        $this->render('/clienteLicitacao/editar');
+        $this->render('/clientelicitacao/editar');
 
         Sessao::limpaMensagem();
     }
@@ -115,6 +114,7 @@ class ClienteLicitacaoController extends Controller
         $clienteLicitacao->setRazaoSocial($_POST['razaoSocial']);
         $clienteLicitacao->setNomeFantasia($_POST['nomeFantasia']);
         $clienteLicitacao->setTrocaMarca($_POST['trocaMarca']);
+        $clienteLicitacao->setTipoCliente($_POST['tipoCliente']);
 
         Sessao::gravaFormulario($_POST);
         $clienteLicitacaoValidador = new ClienteLicitacaoValidador();
@@ -122,11 +122,10 @@ class ClienteLicitacaoController extends Controller
 
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/clienteLicitacao/edicao/' . $_POST['codCliente']);
+            $this->redirect('/clientelicitacao/edicao/' . $_POST['codCliente']);
         }
 
         $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
-
 
         $clienteLicitacaoDAO->atualizar($clienteLicitacao);
 
@@ -134,7 +133,7 @@ class ClienteLicitacaoController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/clienteLicitacao');
+        $this->redirect('/clientelicitacao');
     }
 
     public function exclusao($params)
@@ -148,11 +147,11 @@ class ClienteLicitacaoController extends Controller
 
         if (!$clienteLicitacao) {
             Sessao::gravaMensagem("Cliente inexistente");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
 
         self::setViewParam('clienteLicitacao', $clienteLicitacao);
-        $this->render('/clienteLicitacao/exclusao');
+        $this->render('/clientelicitacao/exclusao');
 
         Sessao::limpaMensagem();
     }
@@ -166,11 +165,11 @@ class ClienteLicitacaoController extends Controller
 
         if (!$clienteLicitacaoDAO->excluir($clienteLicitacao)) {
             Sessao::gravaMensagem("clienteLicitacao inexistente");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
 
         Sessao::gravaMensagem("clienteL excluido com sucesso!");
 
-        $this->redirect('/clienteLicitacao');
+        $this->redirect('/clientelicitacao');
     }
 }

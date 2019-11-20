@@ -9,9 +9,10 @@
             <div class="form-group"><label for="cliente">Cliente</label>
                 <select class="form-control" name="cliente">
                     <option value="">Selecione o cliente</option>
-                    <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                            <?php echo $cliente->getRazaoSocial(); ?></option>
+                    <?php foreach ($viewVar['listarPedidos'] as $cliente) : ?>
+                        <option value="<?php echo $cliente->getClienteLicitacao()->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getClienteLicitacao()->getCodCliente()) ? "selected" : ""; ?>>
+							<?php echo $cliente->getClienteLicitacao()->getRazaoSocial(); ?>
+						</option>
                     <?php endforeach; ?>
                 </select>
             </div>
