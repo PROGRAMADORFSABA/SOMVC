@@ -235,7 +235,7 @@ class PedidoDAO extends BaseDAO
         $codRepresentante   = $pedido->getCodRepresentante();
         $codControle        = $pedido->getCodControle();
         $numeropedido       = $pedido->getNumeroAF();
-        $codStatus             = $pedido->getCodStatus();
+        $codStatus          = $pedido->getCodStatus();
         $numeroLicitacao    = $pedido->getNumeroLicitacao();
         
             $SQL =
@@ -258,10 +258,14 @@ class PedidoDAO extends BaseDAO
              if( $codStatus ){ $where[] = " s.codStatus = {$codStatus}"; }
              if( $numeropedido ){ $where[] = " con.numeroAf = '{$numeropedido}'"; }
              if( $numeroLicitacao ){ $where[] = " con.numeroPregao = '{$numeroLicitacao}'"; }
+            
+             if( sizeof( $where ) ){
+                 $SQL .= ' WHERE '.implode( ' AND ',$where );
+            }else {
+                    $SQL .= " WHERE s.nome  not in  ('ATENDIDO','CANCELADO') ";
+            }
 
-             if( sizeof( $where ) )
-          $SQL .= ' WHERE '.implode( ' AND ',$where );
-          $resultado = $this->select($SQL);
+            $resultado = $this->select($SQL);
          
             $dados = $resultado->fetchAll();
             $lista = [];

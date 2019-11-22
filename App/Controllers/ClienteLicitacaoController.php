@@ -89,7 +89,7 @@ class ClienteLicitacaoController extends Controller
 
         if (!$codCliente) {
             Sessao::gravaMensagem("Nenhum Cadastro Selecionado");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
         $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
 
@@ -97,11 +97,11 @@ class ClienteLicitacaoController extends Controller
 
         if (!$clienteLicitacao) {
             Sessao::gravaMensagem("Cliente inexistente");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
 
-        self::setViewParam('clienteLicitacao', $clienteLicitacao);
-        $this->render('/clienteLicitacao/editar');
+        self::setViewParam('clientelicitacao', $clienteLicitacao);
+        $this->render('/clientelicitacao/editar');
 
         Sessao::limpaMensagem();
     }
@@ -122,7 +122,7 @@ class ClienteLicitacaoController extends Controller
 
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
-            $this->redirect('/clienteLicitacao/edicao/' . $_POST['codCliente']);
+            $this->redirect('/clientelicitacao/edicao/' . $_POST['codCliente']);
         }
 
         $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
@@ -134,7 +134,7 @@ class ClienteLicitacaoController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
-        $this->redirect('/clienteLicitacao');
+        $this->redirect('/clientelicitacao');
     }
 
     public function exclusao($params)
@@ -148,11 +148,11 @@ class ClienteLicitacaoController extends Controller
 
         if (!$clienteLicitacao) {
             Sessao::gravaMensagem("Cliente inexistente");
-            $this->redirect('/clienteLicitacao');
+            $this->redirect('/clientelicitacao');
         }
 
-        self::setViewParam('clienteLicitacao', $clienteLicitacao);
-        $this->render('/clienteLicitacao/exclusao');
+        self::setViewParam('clientelicitacao', $clienteLicitacao);
+        $this->render('/clientelicitacao/exclusao');
 
         Sessao::limpaMensagem();
     }
@@ -165,12 +165,12 @@ class ClienteLicitacaoController extends Controller
         $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
 
         if (!$clienteLicitacaoDAO->excluir($clienteLicitacao)) {
-            Sessao::gravaMensagem("clienteLicitacao inexistente");
-            $this->redirect('/clienteLicitacao');
+            Sessao::gravaMensagem("cliente Licitacao inexistente");
+            $this->redirect('/clientelicitacao');
         }
 
         Sessao::gravaMensagem("clienteL excluido com sucesso!");
 
-        $this->redirect('/clienteLicitacao');
+        $this->redirect('/clientelicitacao');
     }
 }

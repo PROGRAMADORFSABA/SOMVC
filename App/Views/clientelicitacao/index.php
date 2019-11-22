@@ -80,6 +80,8 @@
                         <th>CÓDIGO</th>
                         <th>RAZAO SOCIAL</th>
                         <th>NOME FANTASIA</th>
+                        <th>CNPJ</th>
+                        <th>TIPO</th>
                         <th>TROCA DE MARCA</th>
                         <th>Acoes</th>
 
@@ -95,6 +97,8 @@
                         <td><?php echo $clienteLicitacao->getCodCliente(); ?></td>
                         <td><?php echo $clienteLicitacao->getRazaoSocial(); ?></td>
                         <td><?php echo $clienteLicitacao->getNomeFantasia(); ?></td>
+                        <td><?php echo $clienteLicitacao->getCnpj(); ?></td>
+                        <td><?php echo $clienteLicitacao->getTipoCliente(); ?></td>
                         <td><?php echo $clienteLicitacao->getTrocaMarca(); ?></td>
                         <td>
                             <span class="dropdown">
@@ -123,6 +127,8 @@
                         <th>CÓDIGO</th>
                         <th>RAZAO SOCIAL</th>
                         <th>NOME FANTASIA</th>
+                        <th>CNPJ</th>
+                        <th>TIPO</th>
                         <th>TROCA DE MARCA</th>
                         <th>Acoes</th>
                     </tr>

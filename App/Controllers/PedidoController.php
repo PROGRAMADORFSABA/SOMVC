@@ -188,6 +188,7 @@ class PedidoController extends Controller
         $codControle = $params[0];
         
         $pedido = new Pedido();
+        $pedido->setCodControle($codControle);
         $pedidoService           = new PedidoService();
         $usuarioService          = new UsuarioService();
         $statusService           = new StatusService();
@@ -232,7 +233,7 @@ class PedidoController extends Controller
             $pedido->setDataAlteracao(Sessao::retornaValorFormulario('dataAlteracao'));
             
         }else{
-            $pedido = $pedidoService->listar($codControle)[0];
+            $pedido = $pedidoService->listar($pedido)[0];
         }
         if (!$pedido) {
             Sessao::gravaMensagem("Pedido inexistente");

@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="">Observacao do Pedido:</label>
-                    <textarea class="form-control" rows="3" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" required></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Digite Observacao do Pedido" id="observacao" name="observacao" value="<?php echo $Sessao::retornaValorFormulario('observacao'); ?>" ></textarea>
                     <span class="form-text text-muted">Digite Observacao do Pedido</span>
 
                 </div>

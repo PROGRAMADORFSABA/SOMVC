@@ -3,7 +3,7 @@
 var KTDatatablesAdvancedColumnVisibility = function() {
 
 	var initTable1 = function() {
-		var table = $('#kt_table_pedido');
+		var table = $('#kt_table_1');
 
 		// begin first table
 		table.DataTable({
@@ -78,7 +78,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 	
 
 	var initTable1 = function() {
-		var table = $('#kt_table_cliente_licitacao');
+		var table = $('#kt_table_2');
 
 		// begin first table
 		table.DataTable({
@@ -134,7 +134,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 		});
 	};
 	var initTable1 = function() {
-		var table = $('#kt_table_cliente_2');
+		var table = $('#kt_table_cliente');
 
 		// begin first table
 		table.DataTable({
@@ -245,7 +245,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 							333333: {'title': 'Ativo', 'state': 'success'},
 							'ATENDIDO': {'title': 'ATENDIDO', 'state': 'success'},
 							'ANALISE FINANCEIRO': {'title': 'ANALISE FINANCEIRO', 'state': 'warning'},
-							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'info'},
+							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'warning'},
 							'AUTORIZADO': {'title': 'AUTORIZADO', 'state': 'warning'},
 						};
 						if (typeof status[data] === 'undefined') {

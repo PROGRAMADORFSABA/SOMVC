@@ -25,6 +25,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                 $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
                 $clienteLicitacao->setCnpj($dado['CNPJ']);
                 $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                $clienteLicitacao->setTipoCliente($dado['tipo']);
                 // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);                             
                 return $clienteLicitacao;
             }
@@ -48,6 +49,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                     $clienteLicitacao->setNomeFantasia($dado['nomefantasia']);
                     $clienteLicitacao->setCnpj($dado['CNPJ']);
                     $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
+                    $clienteLicitacao->setTipoCliente($dado['tipo']);
                     // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);
 
                     $lista[] = $clienteLicitacao;

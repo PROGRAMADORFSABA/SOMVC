@@ -2,7 +2,7 @@ var estid = null;
 
 var optionsEstado = {
 	url: function(estado) {
-		//return "http://coisavirtual.com.br/estado/autoComplete/" + estado;
+		//return "http://www.coisavirtual.com.br/estado/autoComplete/" + estado;
 		return "http://localhost/SOMVC/estado/autoComplete/" + estado;
 	},
 
