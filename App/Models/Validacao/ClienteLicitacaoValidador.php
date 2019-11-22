@@ -13,14 +13,14 @@ class ClienteLicitacaoValidador{
         $resultadoValidacao = new ResultadoValidacao();
 
         if(empty($clienteLicitacao->getRazaoSocial())){
-            $resultadoValidacao->addErro('razaoSocial', "Razao social do cliente: Este campo não pode ser vazio !");
+            $resultadoValidacao->addErro('razaoSocial', "Razao social do cliente: Este campo não pode ser vazio!");
         }
 
         if(empty($clienteLicitacao->getNomeFantasia())){
-            $resultadoValidacao->addErro('nomeFantasia', "Nome fantasia do cliente: Este campo não pode ser vazio !");
+            $resultadoValidacao->addErro('nomeFantasia', "Nome fantasia do cliente: Este campo não pode ser vazio!");
         }
         if(empty($clienteLicitacao->getCnpj())){
-            $resultadoValidacao->addErro('cnpj', "CNPJ do cliente: Este campo não pode ser vazio !");
+            $resultadoValidacao->addErro('cnpj', "CNPJ do cliente: Este campo não pode ser vazio!");
         }
         return $resultadoValidacao;
     }

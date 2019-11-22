@@ -1097,8 +1097,8 @@
                                 </div>
                                 <div class="kt-widget14__legends">
                                     <div class="kt-widget14__legend">
-                                        <span class="kt-widget14__bullet kt-bg-success"></span>
-                                        <span class="kt-widget14__stats">37% Sport Tickets</span>
+                                        <span class="kt-widget14__bullet kt-bg-success"></span>                                       
+                                        <span class="kt-widget14__stats"> 37% Sport Tickets</span>
                                     </div>
                                     <div class="kt-widget14__legend">
                                         <span class="kt-widget14__bullet kt-bg-warning"></span>

@@ -1,7 +1,58 @@
 <!-- begin:: Content -->
+
 <div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+                    
+     <!--GRAFICO begin:: Widgets/Daily Sales (DASHBOARD.JS)-->
+     <div class="col-xl-4">
+        <div class="kt-portlet kt-portlet--height-fluid">
+            <div class="kt-widget14">
+                <div class="kt-widget14__header kt-margin-b-30">
+                    <h3 class="kt-widget14__title">
+                        Daily Sales
+                    </h3>
+                    <span class="kt-widget14__desc">
+                        
+                        Check out each collumn for more details
+                    </span>
+                    <div class="chart-container">
+                        <canvas id="line-chartcanvas"></canvas>
+                        <?php
+                        $clienteLicitacao = $viewVar['listar'];
+                    
+                    
+                        echo $clienteLicitacao->getCodCliente()[0]; 
+                         echo $clienteLicitacao->getRazaoSocial()[0]; 
+                         ?>
+                    </div>
+
+                </div>
+                <div class="kt-widget14__chart" style="height:120px;">
+                        <canvas id="kt_chart_profit_share"></canvas>
+                </div>
+                    <div class="kt-widget14__chart" style="height:120px;">
+                            <canvas id="kt_chart_sales_stats"></canvas>
+                    </div>
+                    <div class="kt-widget14__chart" style="height:120px;">
+                            <canvas id="kt_chart_support_requests"></canvas>
+                    </div>
+                    <div class="kt-widget14__chart" style="height:120px;">
+                            <canvas id="kt_chart_order_statistics"></canvas>
+                    </div>
+                    <div class="kt-widget14__chart" style="height:120px;">
+                            <canvas id="kt_chart_order_statistics"></canvas>
+                    </div>
+                <div class="kt-widget14__chart" style="height:120px;">
+                    <canvas id="kt_chart_daily_sales"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- GRAFICOend:: Widgets/Daily Sales-->
+
 
     <div class="kt-portlet kt-portlet--mobile">
+        
+    
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
                 <span class="kt-portlet__head-icon">
@@ -17,7 +68,9 @@
                 </div>
                 <?php } ?>
             </div>
+           
             <div class="kt-portlet__head-toolbar">
+           
                 <div class="kt-portlet__head-wrapper">
                     <div class="kt-portlet__head-actions">
                         <div class="dropdown dropdown-inline">
@@ -102,7 +155,7 @@
                         <td><?php echo $clienteLicitacao->getTrocaMarca(); ?></td>
                         <td>
                             <span class="dropdown">
-                                <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
+                                <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" title="Click para ver acoes desejadas" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clienteLicitacao/edicao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
                                     <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/clienteLicitacao/exclusao/<?php echo $clienteLicitacao->getCodcliente(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
@@ -138,7 +191,9 @@
             <!--end: Datatable -->
         </div>
     </div>
+   
 </div>
 
 <!-- end:: Content -->
 </div>
+   

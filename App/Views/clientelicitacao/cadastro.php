@@ -27,16 +27,16 @@
                         <input type="text" class="form-control" placeholder="Digite o Nome Fantasia" id="nomeFantasia" name="nomeFantasia" value="<?php echo $Sessao::retornaValorFormulario('nomeFantasia'); ?>" required>
                         <span class="form-text text-muted">Por favor insira o Nome Fantasia</span>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <label class="">Numero do CNPJ:</label>
-                        <input type="text" class="form-control" placeholder="Digite o numero do CNPJ" id="cnpj" name="cnpj" value="<?php echo $Sessao::retornaValorFormulario('cnpj'); ?>" required>
+                        <input type="text" class="form-control" placeholder="Digite o CNPJ" id="cnpj" name="cnpj" value="<?php echo $Sessao::retornaValorFormulario('cnpj'); ?>" required>
                         <span class="form-text text-muted">Digite o numero do CNPJ</span>
                     </div>
                     <div class="col-lg-3">
                             <label for="trocaMarca">Aceita Troca Marca</label>
                             <div class="input-group">
                                 <select class="form-control" name="trocaMarca" id="trocaMarca">
-                                    <option value="">Selecione a Marca</option>
+                                    <option value="">Aceita Troca da Marca</option>
                                     <option value="NAO">0 - NAO</option>
                                     <option value="SIM">1 - SIM</option>
                                 </select>
@@ -55,7 +55,7 @@
                                 </select>
                             </div>
                             <span class="form-text text-muted">Informe o tipo do Cliente</span>
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="kt-portlet__foot">
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
-                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Gravar</button>
+                            <button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
                             <a href="http://<?php echo APP_HOST; ?>/ClienteLicitacao" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>
@@ -74,9 +74,6 @@
     <br>
     <!--end::Form-->
 </div>
-
 <!--end::Portlet-->
-
 <!-- footer -->
-
 </div>

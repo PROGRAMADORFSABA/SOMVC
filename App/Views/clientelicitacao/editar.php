@@ -20,16 +20,18 @@
                 <div class="form-group">
                     <label for="razaoSocial">Razao Social</label>
                     <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" placeholder="Razao Social do cliente" value="<?php echo $viewVar['clienteLicitacao']->getRazaoSocial(); ?>" required>
-
-                    <div class="form-group row">
+                    <span class="form-text text-muted">Por favor insira a Razao Social do Cliente</span>
+                </div>
+                <div class="form-group row">
                         <div class="col-lg-4">
                             <label for="nomeFantasia">Nome Fantasia</label>
                             <input type="text" class="form-control" name="nomeFantasia" id="nomeFantasia" placeholder="Nome Fantasia do cliente" value="<?php echo $viewVar['clienteLicitacao']->getNomeFantasia(); ?>" required>
+                            <span class="form-text text-muted">Por favor insira o Nome Fantasia</span>
                         </div>
-
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label for="cnpj">CNPJ</label>
                             <input type="text" class="form-control" name="cnpj" id="Cnpj" placeholder="Cnpj" value="<?php echo $viewVar['clienteLicitacao']->getCnpj(); ?>" required>
+                            <span class="form-text text-muted">Digite o numero do CNPJ</span>
                         </div>
                         <div class="col-lg-3">
                             <label for="trocaMarca">Aceita Troca Marca</label>
@@ -42,6 +44,7 @@
                                     <option value="SIM">1 - SIM</option>
                                 </select>
                             </div>
+                            <span class="form-text text-muted">Informe se o Cliente Aceita Troca de Marca</span>
                         </div>
                         <div class="col-lg-3">
                              <label for="tipoCliente">Tipo cliente</label>
@@ -55,15 +58,18 @@
                                     <option value="Particular">4 - Particular</option>
                                 </select>
                             </div>
-                        </div>                       
-                    </div>
+                            <span class="form-text text-muted">Informe o tipo do Cliente</span>
+                        </div>
                 </div>
             </div>
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions">
                     <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-8">
                         <button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
                         <a href="http://<?php echo APP_HOST; ?>/clienteLicitacao" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                    </div>
                     </div>
                 </div>
             </div>

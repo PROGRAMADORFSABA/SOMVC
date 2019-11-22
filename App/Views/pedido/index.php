@@ -142,6 +142,7 @@
 						<th>VALOR</th>
 						<th>AF</th>
 						<th>LICITACAO</th>
+						<th>USUARIO</th>
 						<th>STATUS</th>
 						<th>DATA</th>
 						<th>Acoes</th>
@@ -155,6 +156,7 @@
 						<th>VALOR</th>
 						<th>AF</th>
 						<th>LICITACAO</th>
+						<th>USUARIO</th>
 						<th>STATUS</th>
 						<th>DATA</th>
 						<th>Acoes</th>
@@ -179,6 +181,7 @@
 						<td>R$<?php echo $pedido->getValorPedido(); ?></td>
 						<td><?php echo $pedido->getNumeroAf(); ?></td>
 						<td><?php echo $pedido->getNumeroLicitacao(); ?></td>
+						<td><?php echo $pedido->getUsuario()->getNome(); ?></td>
 						<td><?php echo $pedido->getStatus()->getNome(); ?></td>
 						<td><?php echo $pedido->getDataCadastro()->format('d/m/Y H:m:s'); ?></td>
 						<td>
