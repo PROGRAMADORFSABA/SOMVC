@@ -7,14 +7,10 @@
     use App\Lib\Exportar;
     use App\Lib\Transacao;
 
-    use App\Models\DAO\ProdutoDAO;
     use App\Models\Entidades\ClienteLicitacao;
-    use App\Models\Entidades\PedidoFalta;
     
     use App\Models\DAO\ClienteLicitacaoDAO;
-    use App\Models\Entidades\Produto;
-
-    class ClienteLicitacaoService
+        class ClienteLicitacaoService
     {
         public function listar($codCliente = null)
         {
@@ -24,11 +20,12 @@
            
            // return $clienteLicitacaoDAO->listarTeste($codCliente);
         }
-        public function listarPorProduto(Produto $produto)
-        {
-            $produtoDAO =  new ProdutoDAO();
-            return $produtoDAO->listarPorProduto($produto->getProCodigo());
+        public function listaClientesPedido()
+        {           
+            $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
+            return $clienteLicitacaoDAO->listaClientesPedido();
         }
+        
         public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
         {
             $clienteLicitacaoDAO =  new ClienteLicitacaoDAO();
@@ -54,4 +51,86 @@
             $exportar = new Exportar();
             echo $exportar->exportarJSON($busca);
         }
+
+        public function salvar(ClienteLicitacao $clienteLicitacao)
+        {
+            $transacao = new Transacao();
+            $clienteLicitacaoValidador = new ClienteLicitacaoValidador();
+            $resultadoValidacao = $clienteLicitacaoValidador->validar($clienteLicitacao);
+            
+            if ($resultadoValidacao->getErros()) {
+                Sessao::limpaErro();
+                Sessao::gravaErro($resultadoValidacao->getErros());
+            } else {
+                try{
+                   $transacao->beginTransaction();
+                    $clienteLicitacaoDAO = new ClienteLicitacaoDAO();            
+                    $clienteLicitacaoDAO->salvar($clienteLicitacao);
+                    $transacao->commit(); 
+                    Sessao::gravaMensagem("cadastro realizado com sucesso!.");
+                    Sessao::limpaFormulario();
+                    return true;
+                }catch(\Exception $e){
+                    //var_dump($e);
+                    $transacao->rollBack(); 
+                    Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
+                   return false;
+                }
+            }
+        }
+
+        public function atualizar(ClienteLicitacao $clienteLicitacao)
+        {   
+            $transacao = new Transacao();
+            $clienteLicitacaoValidador = new ClienteLicitacaoValidador();
+            $resultadoValidacao = $clienteLicitacaoValidador->validar($clienteLicitacao);
+            
+            if ($resultadoValidacao->getErros()) {
+                Sessao::limpaErro();
+                Sessao::gravaErro($resultadoValidacao->getErros());
+            } else {
+                try{
+                   $transacao->beginTransaction();
+                    $clienteLicitacaoDAO = new ClienteLicitacaoDAO();            
+                    $clienteLicitacaoDAO->atualizar($clienteLicitacao);
+                    $transacao->commit(); 
+                    Sessao::gravaMensagem("cadastro alterado com sucesso!.");
+                    Sessao::limpaFormulario();
+                    return true;
+                }catch(\Exception $e){
+                    $transacao->rollBack(); 
+                  //var_dump($e);
+                    Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
+                   return false;
+                }
+            }
+    
+        }
+        public function excluir(ClienteLicitacao $clienteLicitacao)
+        {
+            try {
+    
+                $transacao = new Transacao();
+                $transacao->beginTransaction();
+                
+                $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
+                                       
+                $clienteLicitacaoDAO->excluir($clienteLicitacao);
+                $transacao->commit();            
+                
+                Sessao::limpaMensagem();
+                Sessao::gravaMensagem("Cadastro Excluido com Sucesso!");
+                return true;
+            } catch (\Exception $e) {
+                $transacao->rollBack();
+                throw new \Exception(["Erro ao excluir a cadastro"]);            
+                return false;
+            }
+        }
+
+
+
+
+
+
     }

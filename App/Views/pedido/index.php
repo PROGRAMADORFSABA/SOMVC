@@ -9,9 +9,10 @@
             <div class="form-group"><label for="cliente">Cliente</label>
                 <select class="form-control" name="cliente">
                     <option value="">Selecione o cliente</option>
-                    <?php foreach ($viewVar['listaClientes'] as $cliente) : ?>
-                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-                            <?php echo $cliente->getRazaoSocial(); ?></option>
+                    <?php foreach ($viewVar['listarPedidos'] as $cliente) : ?>
+                        <option value="<?php echo $cliente->getClienteLicitacao()->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getClienteLicitacao()->getCodCliente()) ? "selected" : ""; ?>>
+							<?php echo $cliente->getClienteLicitacao()->getRazaoSocial(); ?>
+						</option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -141,6 +142,7 @@
 						<th>VALOR</th>
 						<th>AF</th>
 						<th>LICITACAO</th>
+						<th>USUARIO</th>
 						<th>STATUS</th>
 						<th>DATA</th>
 						<th>Acoes</th>
@@ -154,6 +156,7 @@
 						<th>VALOR</th>
 						<th>AF</th>
 						<th>LICITACAO</th>
+						<th>USUARIO</th>
 						<th>STATUS</th>
 						<th>DATA</th>
 						<th>Acoes</th>
@@ -178,6 +181,7 @@
 						<td>R$<?php echo $pedido->getValorPedido(); ?></td>
 						<td><?php echo $pedido->getNumeroAf(); ?></td>
 						<td><?php echo $pedido->getNumeroLicitacao(); ?></td>
+						<td><?php echo $pedido->getUsuario()->getNome(); ?></td>
 						<td><?php echo $pedido->getStatus()->getNome(); ?></td>
 						<td><?php echo $pedido->getDataCadastro()->format('d/m/Y H:m:s'); ?></td>
 						<td>

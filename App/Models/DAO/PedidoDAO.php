@@ -522,8 +522,9 @@ class PedidoDAO extends BaseDAO
                 ],
                 "codControle = :codControle"
             );
+            
         } catch (\Exception $e) {
-            var_dump("teste ".$e);
+           // var_dump("teste ".$e);
             throw new \Exception("Erro na gravação de dados. ", 500);
         }
     }

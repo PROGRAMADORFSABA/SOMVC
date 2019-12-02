@@ -41,7 +41,7 @@ class PedidoController extends Controller
         $statusService = new StatusService();
         self::setViewParam('listaStatus', $statusService->listar());
         self::setViewParam('listarPedidos', $pedidoService->listar($pedido));
-        self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
+        self::setViewParam('listaClientesPedido', $clienteLicitacaoService->listaClientesPedido());
         self::setViewParam('listarRepresentantes', $representanteService->listar());
         $pedidoDAO = new PedidoDAO();
         
@@ -169,7 +169,34 @@ class PedidoController extends Controller
 
         $pedidoService = new PedidoService();
 
-        if ($pedidoService->salvar($pedido)) {
+        if ( $codPedido  = $pedidoService->salvar($pedido)) {
+            
+            $nomeUsuario        = $pedido->getUsuario()->getNome();           
+            $codUsuario         = $pedido->getUsuario()->getId();
+            $codStatus          =  $pedido->setCodStatus($_POST['codStatus']);
+            $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
+            $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
+            if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
+                $to = 'posvenda@fabmed.com.br';
+            }else{
+                if( $codUsuario != 30){// AND $tipoCliente == 'Municipal'){
+                $to = 'atendimento@fabmed.feira.br';
+                }                
+            } 
+               $subject = "Cadastro do Pedido - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
+               $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou cadastro do pedido no sistema <br><br> " . "\r\n";
+               $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
+              // $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexo."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+               $message .= "Dados do cadastro: <br> <br><br>" . "\r\n";
+               $message .= "favor da tratamento" . "\r\n";
+               $headers = 'MIME-Version: 1.0' . "\r\n";
+               $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
+               $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
+               //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+           //	$headers .= 'Reply-To: < carlosandrefsaba@gmail.com>' . "\r\n"; //email para resposta
+
+               mail($to, $subject, $message, $headers);
+
 
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
@@ -264,7 +291,7 @@ class PedidoController extends Controller
         $pedido->setNumeroAf($_POST['numeroAf']);
         //$pedido->setValorPedido(number_format($_POST['valorPedido'], 2, ',', '.'));
         $pedido->setUsuario($usuario);
-        $pedido->setStatus($status);
+       $pedido->setStatus($status);
         $pedido->setValorPedido($_POST['valorPedido']);
         $pedido->setClienteLicitacao($clienteLicitacao);            
         $pedido->setObservacao($_POST['observacao']);
@@ -288,6 +315,33 @@ class PedidoController extends Controller
         }
         $pedidoService = new PedidoService();
         if ($pedidoService->Editar($pedido)) {
+            $nomeUsuario        = $pedido->getUsuario()->getNome();
+            $codPedido          = $pedido->getCodControle();
+            $codUsuario         = $pedido->getUsuario()->getId();
+            $codStatus          = $pedido->getStatus()->getCodStatus();
+            $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
+            $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
+            if( $codStatus == 5){// AND $tipoCliente == 'Municipal'){
+                $to = 'licitacao2@fabmed.com.br';
+            }else{
+                if( $codUsuario != 30){// AND $tipoCliente == 'Municipal'){
+                $to = 'atendimento@fabmed.feira.br';
+                }                
+            } 
+               $subject = "Alteracao do Pedido - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
+               $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou movimentacao de pedido no sistema <br><br> " . "\r\n";
+               $message .= "<a href=http://www.coisavirtual.com.br/pedido/edicao/". $codPedido . " > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
+              // $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexo."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+               $message .= "Dados do cadastro: <br> <br><br>" . "\r\n";
+               $message .= "favor da tratamento" . "\r\n";
+               $headers = 'MIME-Version: 1.0' . "\r\n";
+               $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
+               $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
+               //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+           //	$headers .= 'Reply-To: < carlosandrefsaba@gmail.com>' . "\r\n"; //email para resposta
+
+               mail($to, $subject, $message, $headers);         
+
             $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();

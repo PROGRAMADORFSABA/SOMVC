@@ -96,6 +96,10 @@
                             <a href="http://<?php echo APP_HOST; ?>/pedido" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>
+                    <br>
+                        <label  class="" name="informacao" id="informacao" >
+                            Cadastrado em: <?php echo $viewVar['pedido']->getDataCadastro()->format('d/m/Y H:m:s'); ?></label>
+                            - Usuario: <?php echo $viewVar['pedido']->getUsuario()->getNome(); ?> </label>
                 </div>
             </div>
         </div>

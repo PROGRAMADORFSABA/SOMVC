@@ -292,6 +292,7 @@ class NotificacaoDAO extends BaseDAO
         $notificacao->setNtf_cod($dado['ntf_cod']);
         $notificacao->setNtf_numero($dado['ntf_numero']);        
         $notificacao->setNtf_pedido($dado['ntf_pedido']);        
+        $notificacao->setNtf_anexo($dado['ntf_anexo']);        
         $notificacao->setNtf_status($dado['ntf_status']);
         $notificacao->setNtf_garantia($dado['ntf_garantia']);
         $notificacao->setNtf_trocamarca($dado['ntf_trocamarca']);
