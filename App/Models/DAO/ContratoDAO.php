@@ -74,6 +74,7 @@ class ContratoDAO extends BaseDAO
         $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
         $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
         $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+        $contrato->getClienteLicitacao()->setTipoCliente($dado['tipo']);
         $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
         $contrato->setInstituicao(new Instituicao());
         $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
@@ -151,6 +152,7 @@ class ContratoDAO extends BaseDAO
         $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
         $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
         $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
+        $contrato->getClienteLicitacao()->setTipoCliente($dado['tipo']);
         $contrato->setInstituicao(new Instituicao());
         $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
         $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
@@ -226,6 +228,7 @@ class ContratoDAO extends BaseDAO
         $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
         $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
         $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+        $contrato->getClienteLicitacao()->setTipoCliente($dado['tipo']);
         $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
         $contrato->setInstituicao(new Instituicao());
         $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    
@@ -367,6 +370,7 @@ class ContratoDAO extends BaseDAO
                 $contrato->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
                 $contrato->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
                 $contrato->getClienteLicitacao()->setCnpj($dado['CNPJ']);
+                $contrato->getClienteLicitacao()->setTipoCliente($dado['tipo']);
                 $contrato->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
                 $contrato->setInstituicao(new Instituicao());
                 $contrato->getInstituicao()->setInst_Id($dado['inst_id']);                    

@@ -115,11 +115,12 @@ class PedidoService
             try{
                $transacao->beginTransaction();
                 $pedidoDAO = new PedidoDAO();            
-                $pedidoDAO->salvar($pedido);
+                $codPedido = $pedidoDAO->salvar($pedido);
+
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro realizado com sucesso!.");
+                Sessao::gravaMensagem("cadastro realizado com sucesso!. <br>  <br> Pedido Numero: ".$codPedido);
                 Sessao::limpaFormulario();
-                return true;
+                return $codPedido;
             }catch(\Exception $e){
                 //var_dump($e);
                 $transacao->rollBack(); 
@@ -143,8 +144,9 @@ class PedidoService
                $transacao->beginTransaction();
                 $pedidoDAO = new PedidoDAO();            
                 $pedidoDAO->atualizar($pedido);
+                
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro alterado com sucesso!.");
+                Sessao::gravaMensagem("cadastro alterado com sucesso!. <br> <br>  Codigo ".$pedido->getCodControle());
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){

@@ -244,6 +244,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 							'RECEPCIONADO': {'title': 'RECEPCIONADO', 'state': 'primary'},
 							333333: {'title': 'Ativo', 'state': 'success'},
 							'ATENDIDO': {'title': 'ATENDIDO', 'state': 'success'},
+							'Atendido': {'title': 'Atendido', 'state': 'success'},
 							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'info'},
 							'ANALISE FINANCEIRO': {'title': 'ANALISE FINANCEIRO', 'state': 'warning'},
 							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'info'},

@@ -53,9 +53,9 @@
                             <option value="">Selecione o Status</option>
                             <option value="<?php echo $viewVar['contrato']->getCtrStatus(); ?>" <?php echo ($viewVar['contrato']->getCtrStatus() == $viewVar['contrato']->getCtrStatus()) ? "selected" : ""; ?>>
                                     <?php echo $viewVar['contrato']->getCtrStatus(); ?> </option>
-                                    <option value="Pendente">Pendente</option>
-                                <option value="Lancado">Lancado</option>
-                                <option value="Vencido">Vencido</option>
+                                <option value="PENDENTE">PENDENTE</option>
+                                <option value="LANCADO">LANCADO</option>
+                                <option value="VENCIDO">VENCIDO</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>

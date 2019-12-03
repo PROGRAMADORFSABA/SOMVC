@@ -270,7 +270,8 @@ class NotificacaoDAO extends BaseDAO
         INNER JOIN usuarios u ON u.id = ntf.ntf_usuario
         INNER JOIN edital e on e.edt_id = ntf.ntf_edital
         INNER JOIN instituicao i on i.inst_id = ntf.ntf_instituicao
-        INNER JOIN cadRepresentante r ON r.codRepresentante = ntf.ntf_representante ";                 
+        INNER JOIN cadRepresentante r ON r.codRepresentante = ntf.ntf_representante 
+        WHERE ntf.ntf_status in  ('ATENDIDO')";                 
              $where = Array();
              if( $codCliente ){ $where[] = " ntf.ntf_clientelicitacao = {$codCliente}"; }
              if( $codNotificacao ){ $where[] = " ntf.ntf_cod = {$codNotificacao}"; }

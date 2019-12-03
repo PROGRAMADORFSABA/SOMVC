@@ -152,11 +152,11 @@
                     <th>TIPO</th>
                     <th>LICITACAO</th>
                     <th>PEDIDO</th>
-                    <th>STATUS</th>
                     <th>ENTREGA</th>
                     <th>GARANTIA</th>
                     <th>MARCA</th>
                     <th>VALOR</th>
+                    <th>STATUS</th>
                     <th>DATA</th>
                     <th>ACOES</th>
                     </tr>
@@ -168,11 +168,11 @@
                         <th>TIPO</th>
                         <th>LICITACAO</th>
                         <th>PEDIDO</th>
-                        <th>STATUS</th>
                         <th>ENTREGA</th>
                         <th>GARANTIA</th>
                         <th>MARCA</th>
                         <th>VALOR</th>
+                        <th>STATUS</th>
                         <th>DATA</th>
                         <th>ACOES</th>
                     </tr>
@@ -190,11 +190,11 @@
                                 <td><?php echo $notificacao->getClienteLicitacao()->getTipoCliente(); ?></td>
                                 <td><?php echo $notificacao->getEdital()->getEdtNumero(); ?></td>
                                 <td><?php echo $notificacao->getNtf_pedido(); ?></td>
-                                <td><?php echo $notificacao->getNtf_status(); ?></td>
                                 <td><?php echo $notificacao->getNtf_prazodefesa(); ?></td>
                                 <td><?php echo $notificacao->getNtf_garantia(); ?></td>
                                 <td><?php echo $notificacao->getNtf_trocamarca(); ?></td>
                                 <td>R$<?php echo $notificacao->getNtf_valor(); ?></td>
+                                <td><?php echo $notificacao->getNtf_status(); ?></td>
                                 <td><?php echo $notificacao->getNtf_datacadastro()->format('d/m/Y'); ?></td>
                                 <td>
                                     <span class="dropdown">

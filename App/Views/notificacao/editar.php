@@ -62,9 +62,9 @@
                             <option value="">Selecione o garantia</option>
                             <option value="<?php echo $viewVar['notificacao']->getNtf_status(); ?>" <?php echo ($viewVar['notificacao']->getNtf_status() == $viewVar['notificacao']->getNtf_status()) ? "selected" : ""; ?>>
                                     <?php echo $viewVar['notificacao']->getNtf_status(); ?> </option>
-                                <option value="Pendente">Pendente</option>
-                                <option value="Deferido">Deferido</option>
-                                <option value="Atendido">Atendido</option>
+                                <option value="PENDENTE">PENDENTE</option>
+                                <option value="DEFERIDO">DEFERIDO</option>
+                                <option value="ATENDIDO">ATENDIDO</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>

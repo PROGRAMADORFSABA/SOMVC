@@ -51,9 +51,9 @@
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status" required>
                             <option value="">Selecione o Status</option>
-                                <option value="Pendente">Pendente</option>
-                                <option value="Lancado">Lancado</option>
-                                <option value="Vencido">Vencido</option>
+                                <option value="PENDENTE">PENDENTE</option>
+                                <option value="LANCADO">LANCADO</option>
+                                <option value="VENCIDO">VENCIDO</option>
                         </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>

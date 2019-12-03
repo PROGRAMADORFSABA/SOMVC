@@ -173,9 +173,19 @@ class PedidoController extends Controller
             
             $nomeUsuario        = $pedido->getUsuario()->getNome();           
             $codUsuario         = $pedido->getUsuario()->getId();
-            $codStatus          =  $pedido->setCodStatus($_POST['codStatus']);
+            $codStatus          = $pedido->setCodStatus($_POST['codStatus']);
             $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
             $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
+            $anexo              = $pedido->getAnexo();
+            $numeroPregao       = $pedido->getNumeroLicitacao();
+            $numeroAf           = $pedido->getNumeroAf();
+            $observacao         = $pedido->getObservacao();
+            $valorPedidoAtual   = $pedido->getValorPedido();
+           
+
+            $dadosCadastro = "Codigo: ".$codPedido." <br>"."Cliente: ".$razaoSocialCliente." <br>"."Licitacao: ".$numeroPregao." <br>"."Autorizacao: ".$numeroAf 
+                    ." <br>"."Valor do Pedido R$".$valorPedidoAtual." <br>"."Observacao: ".$observacao." <br>";
+                    
             if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
                 $to = 'posvenda@fabmed.com.br';
             }else{
@@ -187,7 +197,7 @@ class PedidoController extends Controller
                $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou cadastro do pedido no sistema <br><br> " . "\r\n";
                $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
               // $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexo."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
-               $message .= "Dados do cadastro: <br> <br><br>" . "\r\n";
+              $message .= "Dados do cadastro: <br>" . $dadosCadastro. " <br><br>" . "\r\n";
                $message .= "favor da tratamento" . "\r\n";
                $headers = 'MIME-Version: 1.0' . "\r\n";
                $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -321,6 +331,14 @@ class PedidoController extends Controller
             $codStatus          = $pedido->getStatus()->getCodStatus();
             $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
             $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
+            $numeroPregao       = $pedido->getNumeroLicitacao();
+            $numeroAf           = $pedido->getNumeroAf();
+            $observacao         = $pedido->getObservacao();
+            $valorPedidoAtual   = $pedido->getValorPedido();
+
+            $dadosCadastro = "Codigo: ".$codPedido." <br>"."Cliente: ".$razaoSocialCliente." <br>"."Licitacao: ".$numeroPregao." <br>"."Autorizacao: ".$numeroAf 
+                    ." <br>"."Valor do Pedido R$".$valorPedidoAtual." <br>"."Observacao: ".$observacao." <br>";
+
             if( $codStatus == 5){// AND $tipoCliente == 'Municipal'){
                 $to = 'licitacao2@fabmed.com.br';
             }else{
@@ -331,8 +349,8 @@ class PedidoController extends Controller
                $subject = "Alteracao do Pedido - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
                $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou movimentacao de pedido no sistema <br><br> " . "\r\n";
                $message .= "<a href=http://www.coisavirtual.com.br/pedido/edicao/". $codPedido . " > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-              // $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexo."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
-               $message .= "Dados do cadastro: <br> <br><br>" . "\r\n";
+               $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+               $message .= "Dados do cadastro: <br>" . $dadosCadastro. " <br><br>" . "\r\n";
                $message .= "favor da tratamento" . "\r\n";
                $headers = 'MIME-Version: 1.0' . "\r\n";
                $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
