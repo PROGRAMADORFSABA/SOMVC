@@ -17,33 +17,35 @@
                     <div class="chart-container">
                         <canvas id="line-chartcanvas"></canvas>
                         <?php
-                        $clienteLicitacao = $viewVar['listar'];
-                    
-                    
-                        echo $clienteLicitacao->getCodCliente()[0]; 
-                         echo $clienteLicitacao->getRazaoSocial()[0]; 
+                        $clienteLicitacao = $viewVar['listar'];   
+                                                            
+                      // echo $clienteLicitacao->getCodCliente()[0]; 
+                        // echo $clienteLicitacao->getRazaoSocial()[0]; 
+                        
                          ?>
                     </div>
 
-                </div>
+                </div><div class="kt-widget14__content">
                 <div class="kt-widget14__chart" style="height:120px;">
                         <canvas id="kt_chart_profit_share"></canvas>
+
+                        <div class="kt-widget14__legends">
+                                    <div class="kt-widget14__legend">
+                                        <span class="kt-widget14__bullet kt-bg-success"></span>                                       
+                                        <span class="kt-widget14__stats"> <?php echo $clienteLicitacao->getCodCliente(); ?></span>
+                                    </div>
+                                    <div class="kt-widget14__legend">
+                                        <span class="kt-widget14__bullet kt-bg-warning"></span>
+                                        <span class="kt-widget14__stats">47% Business Events</span>
+                                    </div>
+                                    <div class="kt-widget14__legend">
+                                        <span class="kt-widget14__bullet kt-bg-brand"></span>
+                                        <span class="kt-widget14__stats">19% Others</span>
+                                    </div>
+                                </div>
                 </div>
-                    <div class="kt-widget14__chart" style="height:120px;">
-                            <canvas id="kt_chart_sales_stats"></canvas>
-                    </div>
-                    <div class="kt-widget14__chart" style="height:120px;">
-                            <canvas id="kt_chart_support_requests"></canvas>
-                    </div>
-                    <div class="kt-widget14__chart" style="height:120px;">
-                            <canvas id="kt_chart_order_statistics"></canvas>
-                    </div>
-                    <div class="kt-widget14__chart" style="height:120px;">
-                            <canvas id="kt_chart_order_statistics"></canvas>
-                    </div>
-                <div class="kt-widget14__chart" style="height:120px;">
-                    <canvas id="kt_chart_daily_sales"></canvas>
                 </div>
+                    
             </div>
         </div>
     </div>

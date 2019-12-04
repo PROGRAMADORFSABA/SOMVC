@@ -12,6 +12,7 @@ use App\Services\PedidoService;
 use App\Services\InstituicaoService;
 use App\Services\UsuarioService;
 use App\Services\StatusService;
+use App\Services\EmailService;
 use App\Models\Entidades\Pedido;
 use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\Usuario;
@@ -171,12 +172,16 @@ class PedidoController extends Controller
 
         if ( $codPedido  = $pedidoService->salvar($pedido)) {
             
+            $emailService = new EmailService();
+            $subject = 1;
+            $emailService->email($pedido, $subject);
+/*
             $nomeUsuario        = $pedido->getUsuario()->getNome();           
             $codUsuario         = $pedido->getUsuario()->getId();
             $codStatus          = $pedido->setCodStatus($_POST['codStatus']);
             $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
             $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
-            $anexo              = $pedido->getAnexo();
+            $anexos              = $pedido->getAnexo();
             $numeroPregao       = $pedido->getNumeroLicitacao();
             $numeroAf           = $pedido->getNumeroAf();
             $observacao         = $pedido->getObservacao();
@@ -196,7 +201,7 @@ class PedidoController extends Controller
                $subject = "Cadastro do Pedido - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
                $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou cadastro do pedido no sistema <br><br> " . "\r\n";
                $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-              // $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexo."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+               $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
               $message .= "Dados do cadastro: <br>" . $dadosCadastro. " <br><br>" . "\r\n";
                $message .= "favor da tratamento" . "\r\n";
                $headers = 'MIME-Version: 1.0' . "\r\n";
@@ -207,7 +212,7 @@ class PedidoController extends Controller
 
                mail($to, $subject, $message, $headers);
 
-
+*/
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();
@@ -325,41 +330,10 @@ class PedidoController extends Controller
         }
         $pedidoService = new PedidoService();
         if ($pedidoService->Editar($pedido)) {
-            $nomeUsuario        = $pedido->getUsuario()->getNome();
-            $codPedido          = $pedido->getCodControle();
-            $codUsuario         = $pedido->getUsuario()->getId();
-            $codStatus          = $pedido->getStatus()->getCodStatus();
-            $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
-            $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
-            $numeroPregao       = $pedido->getNumeroLicitacao();
-            $numeroAf           = $pedido->getNumeroAf();
-            $observacao         = $pedido->getObservacao();
-            $valorPedidoAtual   = $pedido->getValorPedido();
-
-            $dadosCadastro = "Codigo: ".$codPedido." <br>"."Cliente: ".$razaoSocialCliente." <br>"."Licitacao: ".$numeroPregao." <br>"."Autorizacao: ".$numeroAf 
-                    ." <br>"."Valor do Pedido R$".$valorPedidoAtual." <br>"."Observacao: ".$observacao." <br>";
-
-            if( $codStatus == 5){// AND $tipoCliente == 'Municipal'){
-                $to = 'licitacao2@fabmed.com.br';
-            }else{
-                if( $codUsuario != 30){// AND $tipoCliente == 'Municipal'){
-                $to = 'atendimento@fabmed.feira.br';
-                }                
-            } 
-               $subject = "Alteracao do Pedido - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
-               $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou movimentacao de pedido no sistema <br><br> " . "\r\n";
-               $message .= "<a href=http://www.coisavirtual.com.br/pedido/edicao/". $codPedido . " > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-               $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
-               $message .= "Dados do cadastro: <br>" . $dadosCadastro. " <br><br>" . "\r\n";
-               $message .= "favor da tratamento" . "\r\n";
-               $headers = 'MIME-Version: 1.0' . "\r\n";
-               $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
-               $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-               //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
-           //	$headers .= 'Reply-To: < carlosandrefsaba@gmail.com>' . "\r\n"; //email para resposta
-
-               mail($to, $subject, $message, $headers);         
-
+            $emailService = new EmailService();
+            $subject = 2;
+            $emailService->email($pedido, $subject);
+                       
             $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();

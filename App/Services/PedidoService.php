@@ -13,6 +13,7 @@ use App\Models\Validacao\ResultadoValidacao;
 use App\Models\Entidades\Pedido;
 use App\Models\Entidades\Edital;
 use App\Models\Entidades\ClienteLicitacao;
+use App\Services\EmailService;
 
 
 class PedidoService
@@ -122,6 +123,8 @@ class PedidoService
                 Sessao::limpaFormulario();
                 return $codPedido;
             }catch(\Exception $e){
+                $emailService = new EmailService();
+                $emailService->emailSuporte($e);
                 //var_dump($e);
                 $transacao->rollBack(); 
                 Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
@@ -150,6 +153,8 @@ class PedidoService
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
+                $emailService = new EmailService();
+                $emailService->emailSuporte($e);
                 $transacao->rollBack(); 
               //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
@@ -175,6 +180,8 @@ class PedidoService
             Sessao::gravaMensagem("Pedido Excluida com Sucesso!");
             return true;
         } catch (\Exception $e) {
+            $emailService = new EmailService();
+            $emailService->emailSuporte($e);
             $transacao->rollBack();
             throw new \Exception(["Erro ao excluir a empresa"]);            
             return false;
