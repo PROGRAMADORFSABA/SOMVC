@@ -28,7 +28,7 @@ class EmailDAO extends BaseDAO
             if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
                 $to = 'posvenda@fabmed.com.br';
             }else{
-                if( $codUsuario != 30){// AND $tipoCliente == 'Municipal'){
+                if( $codUsuario != 30 AND $tipoCliente != 'Municipal'){// AND $tipoCliente == 'Municipal'){
                 $to = 'atendimento@fabmed.feira.br';
                 }                
             }
@@ -40,7 +40,7 @@ class EmailDAO extends BaseDAO
            }
     
        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
-       $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou cadastro do pedido no sistema <br><br> " . "\r\n";
+       $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";

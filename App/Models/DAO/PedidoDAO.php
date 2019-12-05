@@ -417,9 +417,9 @@ class PedidoDAO extends BaseDAO
             $dataAlteracao      = $pedido->getDataAlteracao();
             $observacao         = $pedido->getObservacao();
             $anexo              = $pedido->getAnexo();
-            $dataCadastro       = $dataCadastroAtual->format('Y-m-d h:m:s');
+            $dataCadastro       = $dataCadastroAtual->format('Y-m-d H:m:s');
             $dataAlteracao      = $dataCadastro;
-            $nomeanexo =  date('Y-m-d-h:m:s');
+            $nomeanexo =  date('Y-m-d-H:m:s');
 
             if (!$_FILES['anexo']['name'] == "") {
                 $validextensions = array("jpeg", "jpg", "png", "PNG", "JPG", "JPEG", "pdf", "PDF", "docx");
@@ -480,9 +480,9 @@ class PedidoDAO extends BaseDAO
             $dataAlteracao      = $pedido->getDataAlteracao();
             $observacao         = $pedido->getObservacao();
             $anexo              = $pedido->getAnexo();
-            $dataCadastro       = $dataCadastroAtual->format('Y-m-d h:m:s');
+            $dataCadastro       = $dataCadastroAtual->format('Y-m-d H:m:s');
             $dataAlteracao      = $dataCadastro;
-            $nomeanexo =  date('Y-m-d-h:m:s');
+            $nomeanexo =  date('Y-m-d-H:m:s');
 
             if (!$_FILES['anexo']['name'] == "") {
                 $validextensions = array("jpeg", "jpg", "png", "PNG", "JPG", "JPEG", "pdf", "PDF", "docx");

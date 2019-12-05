@@ -174,7 +174,7 @@ class PedidoController extends Controller
             
             $emailService = new EmailService();
             $subject = 1;
-            $emailService->email($pedido, $subject);
+            $emailService->email($codPedido, $subject);
 /*
             $nomeUsuario        = $pedido->getUsuario()->getNome();           
             $codUsuario         = $pedido->getUsuario()->getId();

@@ -402,9 +402,9 @@ class NotificacaoDAO extends BaseDAO
             $ntfClienteLicitacao           = $notificacao->getClienteLicitacao()->getCodCliente();
             $ntfUsuario                    = $notificacao->getNtf_usuario()->getId();          
             $ntfRepresentante              = $notificacao->getNtf_representante()->getCodRepresentante();           
-            $ntfDataAlteracao              = $notificacao->getNtf_dataalteracao()->format('Y-m-d h:m:s');
-            $ntfDataCadastro               = $notificacao->getNtf_datacadastro()->format('Y-m-d h:m:s');
-            $ntfDataRecebimento            = $notificacao->getNtf_datarecebimento()->format('Y-m-d h:m:s');
+            $ntfDataAlteracao              = $notificacao->getNtf_dataalteracao()->format('Y-m-d H:m:s');
+            $ntfDataCadastro               = $notificacao->getNtf_datacadastro()->format('Y-m-d H:m:s');
+            $ntfDataRecebimento            = $notificacao->getNtf_datarecebimento()->format('Y-m-d H:m:s');
             $ntfObservacao                 = $notificacao->getNtf_observacao();
             $ntfInstituicao                = $notificacao->getNtf_instituicao()->getInst_Id();
            
@@ -478,8 +478,8 @@ class NotificacaoDAO extends BaseDAO
             $ntfClienteLicitacao           = $notificacao->getClienteLicitacao()->getCodCliente();
             $ntfUsuario                    = $notificacao->getNtf_usuario()->getId();          
             $ntfRepresentante              = $notificacao->getNtf_representante()->getCodRepresentante();           
-            $ntfDataAlteracao              = $notificacao->getNtf_dataalteracao()->format('Y-m-d h:m:s');
-            $ntfDataRecebimento            = $notificacao->getNtf_datarecebimento()->format('Y-m-d h:m:s');
+            $ntfDataAlteracao              = $notificacao->getNtf_dataalteracao()->format('Y-m-d H:m:s');
+            $ntfDataRecebimento            = $notificacao->getNtf_datarecebimento()->format('Y-m-d H:m:s');
             $ntfObservacao                 = $notificacao->getNtf_observacao();
             $ntfInstituicao                = $notificacao->getNtf_instituicao()->getInst_Id();                 
             $nomeanexo = date('Y-m-d-h:m:s');
