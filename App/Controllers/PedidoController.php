@@ -171,59 +171,20 @@ class PedidoController extends Controller
         $pedidoService = new PedidoService();
 
         if ( $codPedido  = $pedidoService->salvar($pedido)) {
-            
+            $pedido->setCodControle($codPedido);
             $emailService = new EmailService();
             $subject = 1;
-            $emailService->email($codPedido, $subject);
-/*
-            $nomeUsuario        = $pedido->getUsuario()->getNome();           
-            $codUsuario         = $pedido->getUsuario()->getId();
-            $codStatus          = $pedido->setCodStatus($_POST['codStatus']);
-            $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
-            $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
-            $anexos              = $pedido->getAnexo();
-            $numeroPregao       = $pedido->getNumeroLicitacao();
-            $numeroAf           = $pedido->getNumeroAf();
-            $observacao         = $pedido->getObservacao();
-            $valorPedidoAtual   = $pedido->getValorPedido();
-           
-
-            $dadosCadastro = "Codigo: ".$codPedido." <br>"."Cliente: ".$razaoSocialCliente." <br>"."Licitacao: ".$numeroPregao." <br>"."Autorizacao: ".$numeroAf 
-                    ." <br>"."Valor do Pedido R$".$valorPedidoAtual." <br>"."Observacao: ".$observacao." <br>";
-                    
-            if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
-                $to = 'posvenda@fabmed.com.br';
-            }else{
-                if( $codUsuario != 30){// AND $tipoCliente == 'Municipal'){
-                $to = 'atendimento@fabmed.feira.br';
-                }                
-            } 
-               $subject = "Cadastro do Pedido - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
-               $message = "Ola, <br><br> " .$nomeUsuario. " - " . $tipoCliente  . " efetuou cadastro do pedido no sistema <br><br> " . "\r\n";
-               $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-               $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
-              $message .= "Dados do cadastro: <br>" . $dadosCadastro. " <br><br>" . "\r\n";
-               $message .= "favor da tratamento" . "\r\n";
-               $headers = 'MIME-Version: 1.0' . "\r\n";
-               $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
-               $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-               //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
-           //	$headers .= 'Reply-To: < carlosandrefsaba@gmail.com>' . "\r\n"; //email para resposta
-
-               mail($to, $subject, $message, $headers);
-
-*/
+            $emailService->email($pedido,$subject);
+          
+            $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();
-            $this->redirect('/pedido');
         } else {
             Sessao::gravaMensagem("Erro ao gravar");
          //   $this->redirect('/pedido/cadastro');
         }
-        Sessao::limpaFormulario();
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
+        
     }
     public function edicao($params)
     {
@@ -301,7 +262,7 @@ class PedidoController extends Controller
         $representante        = $representanteService->listar($_POST['representante'])[0];
         $status               = $statusService->listar($_POST['status']);
     
-        $pedido->setCodControle($_POST['codControle']);
+        $codPedido = $pedido->setCodControle($_POST['codControle']);
         $pedido->setNumeroLicitacao($_POST['numeroPregao']);
         $pedido->setNumeroAf($_POST['numeroAf']);
         //$pedido->setValorPedido(number_format($_POST['valorPedido'], 2, ',', '.'));

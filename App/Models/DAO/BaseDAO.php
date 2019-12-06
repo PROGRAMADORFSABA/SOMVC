@@ -29,10 +29,9 @@ abstract class BaseDAO
             $colunas       = str_replace(":", "", $cols);
             
             $stmt = $this->conexao->prepare("INSERT INTO $table ($colunas) VALUES ($parametros)");
-           // var_dump($colunas);
-             $stmt->execute($values);          
-           
-         return $this->conexao->lastInsertId();
+            $stmt->execute($values);          
+
+            return $this->conexao->lastInsertId();
         }else{
             return false;
         }

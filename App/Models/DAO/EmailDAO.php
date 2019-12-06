@@ -9,7 +9,6 @@ class EmailDAO extends BaseDAO
     public  function email(Pedido $pedido, $subject)
    {
         $codPedido          = $pedido->getCodControle();           
-        $codStatus          = $pedido->getCodStatus();           
         $nomeUsuario        = $pedido->getUsuario()->getNome();           
         $codUsuario         = $pedido->getUsuario()->getId();
         $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();

@@ -119,6 +119,7 @@ class PedidoService
                 $codPedido = $pedidoDAO->salvar($pedido);
 
                 $transacao->commit(); 
+                
                 Sessao::gravaMensagem("cadastro realizado com sucesso!. <br>  <br> Pedido Numero: ".$codPedido);
                 Sessao::limpaFormulario();
                 return $codPedido;
