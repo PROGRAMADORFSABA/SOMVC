@@ -21,7 +21,7 @@ class EmailDAO extends BaseDAO
         $numeroAf           = $pedido->getNumeroAf();
         $observacao         = $pedido->getObservacao();
         $valorPedidoAtual   = $pedido->getValorPedido();   
-
+        
         $dadosCadastro = "Codigo: ".$codPedido." <br>"."Cliente: ".$razaoSocialCliente." <br>"."Licitacao: ".$numeroPregao." <br>"."Autorizacao: ".$numeroAf 
                 ." <br>"."Valor do Pedido R$".$valorPedidoAtual." <br>"."Observacao: ".$observacao." <br>";
                 
@@ -52,7 +52,7 @@ class EmailDAO extends BaseDAO
        //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
        $headers .= 'Reply-To: <nuvem@fabmed.com.br;vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
 
-       mail($to, $subject, $message, $headers);
+      // mail($to, $subject, $message, $headers);
    }
     public  function emailSugestoes(Sugestoes $sugestoes, $subject)
    {

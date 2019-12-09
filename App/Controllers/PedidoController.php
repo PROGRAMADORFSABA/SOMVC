@@ -142,8 +142,8 @@ class PedidoController extends Controller
         $representanteService     = new RepresentanteService();        
         $instituicaoService       = new InstituicaoService();        
         
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente'])[0];
-        $usuario                  = $usuarioService->listar($_POST['usuario'])[0];
+        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
+        $usuario                  = $usuarioService->listar($_POST['usuario']);
         $instituicao              = $instituicaoService->listar($_POST['fk_instituicao']);
         $representante            = $representanteService->listar($_POST['representante'])[0];
         
@@ -163,24 +163,26 @@ class PedidoController extends Controller
         $pedido->setRepresentante($representante);
         $pedido->setUsuario($usuario);
         $pedido->setClienteLicitacao($clienteLicitacao);
-
+       
+        
         Sessao::gravaFormulario($_POST);
 
         $pedidoService = new PedidoService();
 
         if ( $codPedido  = $pedidoService->salvar($pedido)) {
             $pedido->setCodControle($codPedido);
+            $pedido = $pedidoService->listar($pedido)[0];
             $emailService = new EmailService();
             $subject = 1;
             $emailService->email($pedido,$subject);
-          
-            $this->redirect('/pedido');
+           
+           $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();
         } else {
             Sessao::gravaMensagem("Erro ao gravar");
-         //   $this->redirect('/pedido/cadastro');
+            $this->redirect('/pedido/cadastro');
         }
         
     }

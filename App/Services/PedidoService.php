@@ -38,11 +38,12 @@ class PedidoService
                $transacao->beginTransaction();
                 $pedidoDAO = new PedidoDAO();            
                $codPedido = $pedidoDAO->salvar($pedido);
-                $transacao->commit(); 
+               $transacao->commit();   
+              
                 Sessao::gravaMensagem("cadastro realizado com sucesso!.  <br> Pedido Numero: ".$codPedido);
                 Sessao::limpaFormulario();
-                return true;
-            }catch(\Exception $e){
+                return $codPedido;
+            }catch(\Exception $pe){
                  $emailService = new EmailService();
                 $emailService->emailSuporte($e);
                 //var_dump($e);
