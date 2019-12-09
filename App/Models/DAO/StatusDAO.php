@@ -44,6 +44,7 @@ class StatusDAO extends BaseDAO
                     $lista[] = $status;
                 }
                 return $lista;
+                var_dump($lista);
             }
         }
 
@@ -51,7 +52,7 @@ class StatusDAO extends BaseDAO
     }
    
 
-
+/*
     public  function salvar(status $status)
     {
         try {
@@ -113,4 +114,5 @@ class StatusDAO extends BaseDAO
             throw new \Exception("Erro ao deletar", 500);
         }
     }
+*/
 }

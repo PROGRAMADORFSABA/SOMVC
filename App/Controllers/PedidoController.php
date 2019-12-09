@@ -66,8 +66,6 @@ class PedidoController extends Controller
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
 
-        $clienteDAO = new ClienteDAO();
-        self::setViewParam('listaClientes', $clienteDAO->listar());
         $representanteDAO = new RepresentanteDAO();
         self::setViewParam('listaRepresentantes', $representanteDAO->listar());
 
@@ -109,7 +107,7 @@ class PedidoController extends Controller
             $pedido->setRepresentante($representante);     
             
             $usuarioId = Sessao::retornaValorFormulario('usuario');
-            $usuario = $usuadioService->listar($usuarioId);
+            $usuario = $usuadioService->listar($usuarioId)[0];
             $pedido->setUsuario($usuario);     
             
             $pedido->setDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));            
@@ -144,8 +142,8 @@ class PedidoController extends Controller
         $representanteService     = new RepresentanteService();        
         $instituicaoService       = new InstituicaoService();        
         
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
-        $usuario                  = $usuarioService->listar($_POST['usuario']);
+        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente'])[0];
+        $usuario                  = $usuarioService->listar($_POST['usuario'])[0];
         $instituicao              = $instituicaoService->listar($_POST['fk_instituicao']);
         $representante            = $representanteService->listar($_POST['representante'])[0];
         
@@ -208,7 +206,7 @@ class PedidoController extends Controller
             $pedido->setClienteLicitacao($clienteLicitacao);
             
             $representanteId = Sessao::retornaValorFormulario('representante');
-            $representante = $representanteService->listar($representanteId)[0];
+            $representante = $representanteService->listar($representanteId);
             $pedido->setRepresentante($representante);     
             
             $usuarioId = Sessao::retornaValorFormulario('usuario');
@@ -236,14 +234,14 @@ class PedidoController extends Controller
             $pedido->setDataAlteracao(Sessao::retornaValorFormulario('dataAlteracao'));
             
         }else{
-            $pedido = $pedidoService->listar($pedido)[0];
+            $pedido = $pedidoService->listar($pedido);
         }
         if (!$pedido) {
             Sessao::gravaMensagem("Pedido inexistente");
             $this->redirect('/pedido');
         }
         self::setViewParam('pedido', $pedido);
-       $this->render('/pedido/editar');
+         $this->render('/pedido/editar');
         Sessao::limpaMensagem();
     }
 
@@ -262,12 +260,11 @@ class PedidoController extends Controller
         $representante        = $representanteService->listar($_POST['representante'])[0];
         $status               = $statusService->listar($_POST['status']);
     
-        $codPedido = $pedido->setCodControle($_POST['codControle']);
+        $pedido->setCodControle($_POST['codControle']);
         $pedido->setNumeroLicitacao($_POST['numeroPregao']);
-        $pedido->setNumeroAf($_POST['numeroAf']);
-        //$pedido->setValorPedido(number_format($_POST['valorPedido'], 2, ',', '.'));
+        $pedido->setNumeroAf($_POST['numeroAf']);        
         $pedido->setUsuario($usuario);
-       $pedido->setStatus($status);
+        $pedido->setStatus($status);
         $pedido->setValorPedido($_POST['valorPedido']);
         $pedido->setClienteLicitacao($clienteLicitacao);            
         $pedido->setObservacao($_POST['observacao']);
@@ -295,7 +292,7 @@ class PedidoController extends Controller
             $subject = 2;
             $emailService->email($pedido, $subject);
                        
-            $this->redirect('/pedido');
+          //  $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();           

@@ -3,6 +3,7 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Usuario;
+use Exception;
 
 class UsuarioDAO extends BaseDAO
 {
@@ -30,10 +31,9 @@ class UsuarioDAO extends BaseDAO
 
     public function listar($id = null)
     {
-
         if ($id) {
             $pwd = sha1($Password);
-
+            
             $resultado = $this->select(
                 "SELECT u.id, u.nome, u.nivel, u.email, u.status, u.dataCadastro, u.valida, u.dica, u.senha, u.fk_idInstituicao,
                 d.id aS idDep, d.nome AS nomeDep FROM usuarios AS u 
@@ -41,7 +41,7 @@ class UsuarioDAO extends BaseDAO
                 INNER JOIN departamentos AS d on d.id = u.id_dep where u.id ='" . $id . "'"
             );
             $dado = $resultado->fetch();
-
+            
             if ($dado) {
                 $usuario = new Usuario();
                 $usuario->setId($dado['id']);
@@ -57,11 +57,11 @@ class UsuarioDAO extends BaseDAO
                 $usuario->setFk_Instituicao($dado['fk_idInstituicao']);
                 $usuario->getDepartamento()->setId($dado['idDep']);
                 $usuario->getDepartamento()->setNome($dado['nomeDep']);
-
+                
                 return $usuario;
             }
         } else {
-
+            
             $resultado = $this->select(
                 "SELECT u.id, u.nome, u.nivel, u.email, u.status, u.dataCadastro, u.valida, u.dica, u.senha, u.fk_idInstituicao,
                     d.id aS idDep, d.nome AS nomeDep
@@ -70,11 +70,11 @@ class UsuarioDAO extends BaseDAO
                     INNER JOIN departamentos AS d on d.id = u.id_dep ORDER BY u.nome ASC"
             );
             $dados = $resultado->fetchAll();
-
+            
             if ($dados) {
-
+                
                 $lista = [];
-
+                
                 foreach ($dados as $dado) {
                     $usuario = new Usuario();
                     $usuario->setId($dado['id']);
@@ -90,16 +90,17 @@ class UsuarioDAO extends BaseDAO
                     $usuario->setFk_Instituicao($dado['fk_idInstituicao']);
                     $usuario->getDepartamento()->setId($dado['idDep']);
                     $usuario->getDepartamento()->setNome($dado['nomeDep']);
-
+                    
                     $lista[] = $usuario;
                 }
-                return $lista;
+
+                return $lista;                
             }
             return false;
         }
     }
-
-
+    
+    
     public  function salvar(Usuario $usuario) {
         try {
             $nome          = $usuario->getNome();

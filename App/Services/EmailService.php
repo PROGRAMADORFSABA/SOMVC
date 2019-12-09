@@ -9,6 +9,7 @@ use App\Lib\Exportar;
 use App\Models\DAO\EmailDAO;
 
 use App\Models\Entidades\Instituicao;
+use App\Models\Entidades\Sugestoes;
 use App\Models\Entidades\Pedido;
 
 
@@ -18,6 +19,12 @@ class EmailService
     {
         $emailDAO = new EmailDAO();
         return $emailDAO->email($pedido, $subject);
+       
+    }
+    public function emailSugestoes(Sugestoes $sugestoes, $subject)
+    {
+        $emailDAO = new EmailDAO();
+        return $emailDAO->emailSugestoes($sugestoes, $subject);
        
     }
     public function emailSuporte( $erro)

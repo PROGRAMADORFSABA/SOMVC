@@ -3,12 +3,15 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Pedido;
+use App\Models\Entidades\Sugestoes;
 
 class EmailDAO extends BaseDAO
 {    
     public  function email(Pedido $pedido, $subject)
    {
+      // var_dump($pedido);
         $codPedido          = $pedido->getCodControle();           
+        $codStatus          = $pedido->getCodStatus();           
         $nomeUsuario        = $pedido->getUsuario()->getNome();           
         $codUsuario         = $pedido->getUsuario()->getId();
         $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
@@ -41,6 +44,37 @@ class EmailDAO extends BaseDAO
        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
        $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
+       $headers = 'MIME-Version: 1.0' . "\r\n";
+       $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
+       $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
+       //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+       $headers .= 'Reply-To: <nuvem@fabmed.com.br;vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
+
+       mail($to, $subject, $message, $headers);
+   }
+    public  function emailSugestoes(Sugestoes $sugestoes, $subject)
+   {
+        $codSugestoes       = $sugestoes->getSugId();           
+        $status             = $sugestoes->getSugStatus();
+        $tipo               = $sugestoes->getSugTipo();
+        $nomeUsuario        = $sugestoes->getUsuario()->getNome();
+        $anexos             = $sugestoes->getSugAnexo();
+        $descricao          = $sugestoes->getSugDescricao(); 
+
+        $dadosCadastro = "Codigo: ".$codSugestoes." <br>"."Tipo: ".$tipo
+        ." <br>"."Status: ".$status." <br>"."Descricao: ".$descricao." <br>";
+                
+        if($subject == 1){
+            $subject = "Cadastro do Sugestoes";
+        }else{
+            $subject = "Alteração de Sugestoes";           
+           }
+           $to = 'nuvem@fabmed.com.br;vendas2@fabmed.com.br';
+       $subject .= " - Codigo: " . $codSugestoes . "  - Tipo: ".$tipo;
+       $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/sugestoes > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
        $headers = 'MIME-Version: 1.0' . "\r\n";

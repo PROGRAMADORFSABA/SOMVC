@@ -9,6 +9,7 @@ use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\Representante;
 use App\Models\Entidades\Status;
 use App\Models\Entidades\Usuario;
+use Exception;
 
 class PedidoDAO extends BaseDAO
 {
@@ -237,8 +238,8 @@ class PedidoDAO extends BaseDAO
         $numeropedido       = $pedido->getNumeroAF();
         $codStatus          = $pedido->getCodStatus();
         $numeroLicitacao    = $pedido->getNumeroLicitacao();
-        
-            $SQL =
+        //$tipo               = $pedido->getNumeroLicitacao();
+        $SQL =
                 "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
                 ,c.licitacaoCliente_cod,c.tipo,c.razaosocial, c.nomefaNtasia,c.CNPJ
                 ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
@@ -251,6 +252,7 @@ class PedidoDAO extends BaseDAO
                  INNER JOIN instituicao AS i on i.inst_id = con.fk_idInstituicao
                  INNER JOIN usuarios AS u on u.id = con.fk_idUsuarioPed
                 ";
+         
              $where = Array();
              if( $codControle ){ $where[] = " con.codControle = {$codControle}"; }
              if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
@@ -258,17 +260,17 @@ class PedidoDAO extends BaseDAO
              if( $codStatus ){ $where[] = " s.codStatus = {$codStatus}"; }
              if( $numeropedido ){ $where[] = " con.numeroAf = '{$numeropedido}'"; }
              if( $numeroLicitacao ){ $where[] = " con.numeroPregao = '{$numeroLicitacao}'"; }
-            
+             //   if( $tipo ){ $where[] = " c.tipoo = '{$tipo}'"; }
+             // $where[] = " s.nome  not in  ('ATENDIDO','CANCELADO') ";
              if( sizeof( $where ) ){
                  $SQL .= ' WHERE '.implode( ' AND ',$where );
-            }else {
+                }else {
                     $SQL .= " WHERE s.nome  not in  ('ATENDIDO','CANCELADO') ";
-            }
-
-            $resultado = $this->select($SQL);
+                }
+                $resultado = $this->select($SQL);
          
-            $dados = $resultado->fetchAll();
-            $lista = [];
+                $dados = $resultado->fetchAll();
+                $lista = [];
                 foreach ($dados as $dado) {
                     $pedido = new Pedido();
                     $pedido->setCodControle($dado['codControle']);
@@ -497,8 +499,9 @@ class PedidoDAO extends BaseDAO
                     move_uploaded_file($sourcePath, $targetPath); // Move arquivo                    
                 }
             } else {
-                //  echo " teste 02 ".$anexo;
+               if($anexo == ""){
                 $anexo = "sem_anexo1.png";
+                }
             }
 
             return $this->update(
@@ -522,9 +525,9 @@ class PedidoDAO extends BaseDAO
                 ],
                 "codControle = :codControle"
             );
-            
+          
         } catch (\Exception $e) {
-           // var_dump("teste ".$e);
+            var_dump("teste ".$e);
             throw new \Exception("Erro na gravação de dados. ", 500);
         }
     }

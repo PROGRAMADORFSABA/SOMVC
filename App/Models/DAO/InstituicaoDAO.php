@@ -13,7 +13,7 @@ class InstituicaoDAO extends BaseDAO
         if ($inst_id) {
 
             $resultado = $this->select(
-                "SELECT * FROM instituicao "
+                "SELECT * FROM instituicao WHERE inst_id = $inst_id "
             );
             $dado = $resultado->fetch();
 

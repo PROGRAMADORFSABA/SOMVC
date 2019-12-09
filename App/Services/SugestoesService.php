@@ -19,10 +19,9 @@ class SugestoesService
     {
         $sugestoesDAO = new SugestoesDAO();
         return $sugestoesDAO->listar($sugestoes);
-    }
-   
+    }   
 
-    public function salvar(Pedido $sugestoes)
+    public function salvar(Sugestoes $sugestoes)
     {
         $transacao = new Transacao();
         $sugestoesValidador = new SugestoesValidador();
@@ -35,16 +34,16 @@ class SugestoesService
             try{
                $transacao->beginTransaction();
                 $sugestoesDAO = new SugestoesDAO();            
-                $codPedido = $sugestoesDAO->salvar($sugestoes);
-
+                $codSugestoes = $sugestoesDAO->salvar($sugestoes);
+                
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro realizado com sucesso!. <br>  <br> Pedido Numero: ".$codPedido);
+                
+                Sessao::gravaMensagem("cadastro realizado com sucesso!. <br><br> Sugestoes Numero: ".$codSugestoes);
                 Sessao::limpaFormulario();
-                return $codPedido;
+                return $codSugestoes;
             }catch(\Exception $e){
                 $emailService = new EmailService();
                 $emailService->emailSuporte($e);
-                //var_dump($e);
                 $transacao->rollBack(); 
                 Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
                return false;
@@ -52,7 +51,7 @@ class SugestoesService
         }
     }
 
-    public function Editar(Pedido $sugestoes)
+    public function Editar(Sugestoes $sugestoes)
     {   
         $transacao = new Transacao();
         $sugestoesValidador = new SugestoesValidador();
@@ -68,7 +67,7 @@ class SugestoesService
                 $sugestoesDAO->atualizar($sugestoes);
                 
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro alterado com sucesso!. <br> <br>  Codigo ".$sugestoes->getCodControle());
+                Sessao::gravaMensagem("cadastro alterado com sucesso!. <br> <br>  Codigo ".$sugestoes->getSugId());
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
@@ -83,7 +82,7 @@ class SugestoesService
 
     }
 
-    public function excluir(Pedido $sugestoes)
+    public function excluir(Sugestoes $sugestoes)
     {
         try {
 
@@ -96,7 +95,7 @@ class SugestoesService
             $transacao->commit();            
             
             Sessao::limpaMensagem();
-            Sessao::gravaMensagem("Pedido Excluida com Sucesso!");
+            Sessao::gravaMensagem("Sugestoes Excluida com Sucesso!");
             return true;
         } catch (\Exception $e) {
             $emailService = new EmailService();

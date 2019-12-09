@@ -13,15 +13,15 @@ class SugestoesValidador{
 
         if(empty($sugestoes->getSugTipo()))
         {
-            $resultadoValidacao->addErro('sugTipo',"Tipo da Sugestao: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('tipo',"Tipo da Sugestao: Este campo não pode ser vazio");
         }               
         if(empty($sugestoes->getSugDescricao()))
         {
-            $resultadoValidacao->addErro('sugDescricao',"Descricao da Sugestao: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('descricao',"Descricao da Sugestao: Este campo não pode ser vazio");
         }               
         if(empty($sugestoes->getSugStatus()))
         {
-            $resultadoValidacao->addErro('sugStatus',"Status de Sugestao: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('status',"Status de Sugestao: Este campo não pode ser vazio");
         }                               
 
         return $resultadoValidacao;

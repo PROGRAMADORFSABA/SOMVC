@@ -1,7 +1,7 @@
 					<!-- begin:: Footer -->
 					<div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop">
 						<div class="kt-footer__copyright">
-							2019&nbsp;&copy;&nbsp;<a href="http://www.alexnogueira.tech" target="_blank" class="kt-link">devAction</a>
+							2019&nbsp;&copy;&nbsp;<a href="http://www.devAction.com.br" target="_blank" class="kt-link">Desenvolvido por DevAction</a>
 						</div>
 
 						<div id="timefooter" name="timefooter"></div>

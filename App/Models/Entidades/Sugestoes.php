@@ -14,7 +14,10 @@ class Sugestoes
     private $sugDataCadastro;
     private $sugDataAlteracao;
     private $instituicao;
-    private $sugusuario;
+    private $codInstituicao;
+    private $usuario;
+    private $codUsuario;
+    
     
     /**
      * Get the value of sugId
@@ -121,7 +124,7 @@ class Sugestoes
      */ 
     public function getSugDataCadastro()
     {
-        return $this->sugDataCadastro;
+        return new DateTime($this->sugDataCadastro);        
     }
 
     /**
@@ -141,7 +144,7 @@ class Sugestoes
      */ 
     public function getSugDataAlteracao()
     {
-        return $this->sugDataAlteracao;
+        return new DateTime($this->sugDataAlteracao);
     }
 
     /**
@@ -179,9 +182,9 @@ class Sugestoes
     /**
      * Get the value of sugusuario
      */ 
-    public function getSugusuario()
+    public function getUsuario()
     {
-        return $this->sugusuario;
+        return $this->usuario;
     }
 
     /**
@@ -189,9 +192,49 @@ class Sugestoes
      *
      * @return  self
      */ 
-    public function setSugusuario(Usuario $sugusuario)
+    public function setUsuario(Usuario $usuario)
     {
-        $this->sugusuario = $sugusuario;
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codUsuario
+     */ 
+    public function getCodUsuario()
+    {
+        return $this->codUsuario;
+    }
+
+    /**
+     * Set the value of codUsuario
+     *
+     * @return  self
+     */ 
+    public function setCodUsuario($codUsuario)
+    {
+        $this->codUsuario = $codUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codInstituicao
+     */ 
+    public function getCodInstituicao()
+    {
+        return $this->codInstituicao;
+    }
+
+    /**
+     * Set the value of codInstituicao
+     *
+     * @return  self
+     */ 
+    public function setCodInstituicao($codInstituicao)
+    {
+        $this->codInstituicao = $codInstituicao;
 
         return $this;
     }

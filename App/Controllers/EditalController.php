@@ -125,6 +125,7 @@ class EditalController extends Controller
         $resultadoValidacao = $editalValidador->validar($edital);
 
         if ($resultadoValidacao->getErros()) {
+            Sessao::gravaErro($resultadoValidacao->getErros());
            $this->redirect('/edital/cadastro');
         }
 
