@@ -91,7 +91,7 @@
                     <div class="row">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
-                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Salvar</button>
+                        <button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Gravar</button>
                             <a href="http://<?php echo APP_HOST; ?>/pedido" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>

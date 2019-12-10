@@ -14,6 +14,7 @@ use App\Services\ContratoService;
 use App\Services\NotificacaoService;
 use App\Services\UsuarioService;
 use App\Services\EditalService;
+use App\Services\EmailService;
 use App\Services\InstituicaoService;
 use App\Services\ClienteLicitacaoService;
 use App\Services\RepresentanteService;
@@ -199,8 +200,14 @@ class NotificacaoController extends Controller
             Sessao::gravaMensagem("sem dados informados");
          }
  
-       if($notificacaoService->salvar($notificacao)){
-              $this->redirect('/notificacao');       
+       if($codNotificacao = $notificacaoService->salvar($notificacao)){
+            $notificacao->setNtf_cod($codNotificacao);
+            $notificacao = $notificacaoService->listar($notificacao)[0];
+            $emailService = new EmailService();
+            $subject = 1;        
+            $emailService->emailNotificacao($notificacao,$subject);
+
+            $this->redirect('/notificacao');       
         }else{                      
            $this->redirect('/notificacao/cadastro');
         }
@@ -303,6 +310,9 @@ class NotificacaoController extends Controller
             Sessao::gravaMensagem("erro na atualizacao");
         }        
         if ($notificacaoService->Editar($notificacao)) {
+            $emailService = new EmailService();
+            $subject = 2;
+            $emailService->emailNotificacao($notificacao, $subject);
             $this->redirect('/notificacao');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();

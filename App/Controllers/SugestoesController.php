@@ -109,8 +109,10 @@ class SugestoesController extends Controller
             }
             if ($codSugestoes  = $sugestoesService->salvar($sugestoes)) {
                 $sugestoes->setSugId($codSugestoes);
+                $sugestoes = $sugestoesService->listar($sugestoes)[0];
                 $emailService = new EmailService();
                 $subject = 1;
+                
                 $emailService->emailSugestoes($sugestoes,$subject);
                 $this->redirect('/sugestoes');
                 Sessao::limpaFormulario();
@@ -172,7 +174,7 @@ class SugestoesController extends Controller
         $instituicaoService   = new InstituicaoService();        
         
         $instituicaoId  = Sessao::retornaValorFormulario('instituicao');
-        var_dump($instituicaoId);
+       // var_dump($instituicaoId);
         $instituicao    = $instituicaoService->listar($instituicaoId);
         
         $usuarioId      = Sessao::retornaValorFormulario('usuario');
@@ -211,18 +213,19 @@ class SugestoesController extends Controller
         }else{
             Sessao::gravaFormulario($_POST);            
             Sessao::gravaMensagem("erro na atualizacao");
-           // $this->redirect('/sugestoes/edicao/' . $_POST['codigo']);
+            $this->redirect('/sugestoes/edicao/' . $_POST['codigo']);
         }
         
     }
 
     public function exclusao($params)
     {
-        $id = $params[0];
+        $sugestoes          = new Sugestoes();
+        $sugestoesService   = new SugestoesService();
+        $codSugestoes = $params[0];
 
-        $sugestoesService = new SugestoesService();
-
-        $sugestoes = $sugestoesService->listar($id)[0];
+        $sugestoes->setSugId($codSugestoes);
+        $sugestoes = $sugestoesService->listar($sugestoes)[0];
 
         if (!$sugestoes) {
             Sessao::gravaMensagem("sugestao inexistente");
@@ -245,6 +248,7 @@ class SugestoesController extends Controller
             Sessao::gravaMensagem("sugestao inexistente");
             $this->redirect('/sugestoes');
         }
+              
         $this->redirect('/sugestoes');
 
         Sessao::gravaMensagem("Cadastro excluido com sucesso!");
