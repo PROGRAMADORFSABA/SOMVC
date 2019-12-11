@@ -1788,9 +1788,9 @@
 								<h3 class="kt-subheader__title">Dashboard</h3>
 								<span class="kt-subheader__separator kt-subheader__separator--v"></span>
 								<span class="kt-subheader__desc">#XRS-45670</span>
-								<a href="#" class="btn btn-label-warning btn-bold btn-sm btn-icon-h kt-margin-l-10">
-									Adcionar Novo
-								</a>
+								 <a href="http://<?php echo APP_HOST; ?>/sugestoes/cadastro" class="btn btn-label-warning btn-bold btn-sm btn-icon-h kt-margin-l-10">
+								 <h3>Adicionar Sugestao </h3>
+								</a> 
 								<a><i class="fa fa-user"></i> Você está logado como <b class="hidden-xs"> <?php echo $_SESSION['nome']; ?> </b> </a>
 								<div class="kt-input-icon kt-input-icon--right kt-subheader__search kt-hidden">
 									<input type="text" class="form-control" placeholder="Search order..." id="generalSearch">

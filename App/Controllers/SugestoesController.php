@@ -109,6 +109,7 @@ class SugestoesController extends Controller
             }
             if ($codSugestoes  = $sugestoesService->salvar($sugestoes)) {
                 $sugestoes->setSugId($codSugestoes);
+                $sugestoes = $sugestoesService->listar($sugestoes)[0];    
                 $emailService = new EmailService();
                 $subject = 1;
                 $emailService->emailSugestoes($sugestoes,$subject);
@@ -173,10 +174,10 @@ class SugestoesController extends Controller
         
         $instituicaoId  = Sessao::retornaValorFormulario('instituicao');
         var_dump($instituicaoId);
-        $instituicao    = $instituicaoService->listar($instituicaoId);
+        $instituicao    = $instituicaoService->listar($instituicaoId)[0];
         
         $usuarioId      = Sessao::retornaValorFormulario('usuario');
-        $usuario        = $usuarioService->listar($usuarioId);
+        $usuario        = $usuarioService->listar($usuarioId)[0];
         $sugestoes->setSugId($_POST['codigo']);
         $sugestoes->setSugDescricao($_POST['descricao']);
         $sugestoes->setSugStatus($_POST['status']);
