@@ -117,11 +117,11 @@ class NotificacaoService
             try{
                $transacao->beginTransaction();
                 $notificacaoDAO = new NotificacaoDAO();            
-                $notificacaoDAO->salvar($notificacao);
+                $codNotificacao =  $notificacaoDAO->salvar($notificacao);
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro realizado com sucesso!.");
+                Sessao::gravaMensagem("cadastro realizado com sucesso!. <br><br> Numero: ".$codNotificacao);
                 Sessao::limpaFormulario();
-                return true;
+                return $codNotificacao;
             }catch(\Exception $e){
               // var_dump($e);
                 $transacao->rollBack(); 
@@ -145,7 +145,9 @@ class NotificacaoService
                $transacao->beginTransaction();
                 $notificacaoDAO = new NotificacaoDAO();            
                 $notificacaoDAO->atualizar($notificacao);
-                $transacao->commit(); 
+                $transacao->commit();           
+               
+                Sessao::gravaMensagem("cadastro atualizado com sucesso!. <br><br> Numero: ".$notificacao->getNtf_cod());
                 Sessao::gravaMensagem("cadastro alterado com sucesso!.");
                 Sessao::limpaFormulario();
                 return true;

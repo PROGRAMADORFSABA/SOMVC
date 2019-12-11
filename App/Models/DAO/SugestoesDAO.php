@@ -23,7 +23,7 @@ class SugestoesDAO extends BaseDAO
                 "SELECT sg.sug_id, sg.sug_tipo, sg.sug_descricao, sg.sug_status, sg.sug_anexo, sg.sug_datacadastro, sg.sug_dataalteracao,
                 u.id, u.nome,u.nivel, u.email, u.status, u.id_dep,
                 i.inst_id, i.inst_codigo, i.inst_nome, i.inst_nomeFantasia,
-                d.id as idDep, d.nome
+                d.id as idDep, d.nome as nomeDep
                 FROM sugestoes as sg
                 INNER JOIN instituicao AS i ON i.inst_id = sg.sug_instituicao
                 INNER JOIN usuarios AS u ON u.id = sg.sug_usuario

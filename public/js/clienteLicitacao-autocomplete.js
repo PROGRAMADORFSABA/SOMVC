@@ -5,7 +5,7 @@
 	
 		var optionscliente = {
 			url: function (cliente) {
-				return "http://www.coisavirtual.com.br/ClienteLicitacao/autoComplete/" + cliente; //hospedagem
+				return "http://coisavirtual.com.br/ClienteLicitacao/autoComplete/" + cliente; //hospedagem
 				//return "http://localhost:81/SOMVC/ClienteLicitacao/autoComplete/" + cliente;
 				//return "http://localhost/SOMVC/ClienteLicitacao/autoComplete/" + cliente;
 			},

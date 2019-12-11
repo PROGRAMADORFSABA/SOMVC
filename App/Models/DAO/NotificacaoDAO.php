@@ -270,8 +270,7 @@ class NotificacaoDAO extends BaseDAO
         INNER JOIN usuarios u ON u.id = ntf.ntf_usuario
         INNER JOIN edital e on e.edt_id = ntf.ntf_edital
         INNER JOIN instituicao i on i.inst_id = ntf.ntf_instituicao
-        INNER JOIN cadRepresentante r ON r.codRepresentante = ntf.ntf_representante 
-        WHERE ntf.ntf_status in  ('ATENDIDO')";                 
+        INNER JOIN cadRepresentante r ON r.codRepresentante = ntf.ntf_representante ";                 
              $where = Array();
              if( $codCliente ){ $where[] = " ntf.ntf_clientelicitacao = {$codCliente}"; }
              if( $codNotificacao ){ $where[] = " ntf.ntf_cod = {$codNotificacao}"; }
@@ -293,8 +292,8 @@ class NotificacaoDAO extends BaseDAO
         $notificacao->setNtf_cod($dado['ntf_cod']);
         $notificacao->setNtf_numero($dado['ntf_numero']);        
         $notificacao->setNtf_pedido($dado['ntf_pedido']);        
-        $notificacao->setNtf_anexo($dado['ntf_anexo']);        
         $notificacao->setNtf_status($dado['ntf_status']);
+        $notificacao->setNtf_anexo($dado['ntf_anexo']); 
         $notificacao->setNtf_garantia($dado['ntf_garantia']);
         $notificacao->setNtf_trocamarca($dado['ntf_trocamarca']);
         $notificacao->setNtf_prazodefesa($dado['ntf_prazodefesa']);

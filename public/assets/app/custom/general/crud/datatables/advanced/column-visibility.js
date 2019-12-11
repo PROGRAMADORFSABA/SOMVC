@@ -236,15 +236,18 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 					targets: -3,//definindo em qual coluna vai executar esta funcao
 					render: function(data, type, full, meta) {
 						var status = {
+							'Cancelado': {'title': 'CANCELADO', 'state': 'danger'},
 							'CANCELADO': {'title': 'CANCELADO', 'state': 'danger'},
+							'Negado': {'title': 'NEGADO', 'state': 'danger'},
 							'NEGADO': {'title': 'NEGADO', 'state': 'danger'},
+							'Pendente': {'title': 'PENDENTE', 'state': 'danger'},
 							'PENDENTE': {'title': 'PENDENTE', 'state': 'danger'},
 							111111: {'title': 'Desativado', 'state': 'danger'},
 							222222: {'title': 'Retail', 'state': 'primary'},
 							'RECEPCIONADO': {'title': 'RECEPCIONADO', 'state': 'primary'},
 							333333: {'title': 'Ativo', 'state': 'success'},
 							'ATENDIDO': {'title': 'ATENDIDO', 'state': 'success'},
-							'Atendido': {'title': 'Atendido', 'state': 'success'},
+							'Atendido': {'title': 'ATENDIDO', 'state': 'success'},
 							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'info'},
 							'ANALISE FINANCEIRO': {'title': 'ANALISE FINANCEIRO', 'state': 'warning'},
 							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'info'},

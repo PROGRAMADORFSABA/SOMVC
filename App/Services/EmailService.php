@@ -11,6 +11,7 @@ use App\Models\DAO\EmailDAO;
 use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\Sugestoes;
 use App\Models\Entidades\Pedido;
+use App\Models\Entidades\Notificacao;
 
 
 class EmailService
@@ -22,9 +23,15 @@ class EmailService
        
     }
     public function emailSugestoes(Sugestoes $sugestoes, $subject)
-    {
+    {    
         $emailDAO = new EmailDAO();
         return $emailDAO->emailSugestoes($sugestoes, $subject);
+       
+    }
+    public function emailNotificacao(Notificacao $notificacao, $subject)
+    {    
+        $emailDAO = new EmailDAO();
+        return $emailDAO->emailNotificacao($notificacao, $subject);
        
     }
     public function emailSuporte( $erro)
