@@ -200,7 +200,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 				{
 					// oculta coluna por numero de idex
 					targets: false,
-					 //targets: [0, 3],
+					//targets: [0, 3],
 					visible: false,
 				},
 				{
@@ -252,6 +252,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 							'ANALISE FINANCEIRO': {'title': 'ANALISE FINANCEIRO', 'state': 'warning'},
 							'ATENDIDO PARCIAL': {'title': 'ATENDIDO PARCIAL', 'state': 'info'},
 							'AUTORIZADO': {'title': 'AUTORIZADO', 'state': 'warning'},
+							'AUTORIZADO PARCIAL': {'title': 'AUTORIZADO PARCIAL', 'state': 'warning'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;

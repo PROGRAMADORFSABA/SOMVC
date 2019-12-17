@@ -84,7 +84,6 @@
                         <label for="trocaMarca">Troca de Marca</label>
                         <select class="form-control" name="trocaMarca" id="trocaMarca" required>
                             <option value="">Selecione o trocaMarca</option>
-                            <option value="">Selecione o garantia</option>
                             <option value="<?php echo $viewVar['notificacao']->getNtf_trocamarca(); ?>" <?php echo ($viewVar['notificacao']->getNtf_trocamarca() == $viewVar['notificacao']->getNtf_trocamarca()) ? "selected" : ""; ?>>
                                     <?php echo $viewVar['notificacao']->getNtf_trocamarca(); ?> </option>
                                 <option value="Nao">Nao</option>

@@ -573,7 +573,7 @@
 <!--end::Page Scripts -->
 <script src="http://<?php echo APP_HOST; ?>/public/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/js/jquery.maskedinput.js" type="text/javascript"></script>
-
+<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/forms/widgets/select2.js" type="text/javascript"></script>
 <!--begin::Global App Bundle(used by all pages) -->
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/bundle/app.bundle.js" type="text/javascript"></script>
 
