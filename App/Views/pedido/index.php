@@ -9,9 +9,9 @@
             <div class="form-group"><label for="cliente">Cliente</label>
                 <select class="form-control" name="cliente">
                     <option value="">Selecione o cliente</option>
-                    <?php foreach ($viewVar['listarPedidos'] as $cliente) : ?>
-                        <option value="<?php echo $cliente->getClienteLicitacao()->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getClienteLicitacao()->getCodCliente()) ? "selected" : ""; ?>>
-							<?php echo $cliente->getClienteLicitacao()->getRazaoSocial(); ?>
+                    <?php foreach ($viewVar['listaClientesPedido'] as $cliente) : ?>
+                        <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
+							<?php echo $cliente->getRazaoSocial(); ?>
 						</option>
                     <?php endforeach; ?>
                 </select>
@@ -49,6 +49,25 @@
                             </select>
                             <span class="form-text text-muted">Por favor insira o Representante do Pedido</span>
                         </div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<div class="form-group">
+											<label class="col-form-label col-lg-3 col-sm-12" for="tipo" >Tipo Cliente</label>
+											<div class=" col-lg-4 col-md-9 col-sm-12">
+												<select class="form-control m-select2" id="kt_select2_3" name="tipo" multiple="multiple">
+													<optgroup for="tipo" label="Tipo Cliente">
+													<?php foreach ($viewVar['listaClientesPedido'] as $cliente) : ?>
+													<option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
+														<?php echo $cliente->getTipoCliente(); ?>
+													</option>
+													<?php endforeach; ?>
+													</optgroup>													
+												</select>
+											</div>
+											
+							</div>
+						</div>
 					</div>
                     <div class="col-lg-2">
                         <label>Licitacao:</label>

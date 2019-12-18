@@ -61,8 +61,6 @@ class ClienteLicitacaoDAO extends  BaseDAO
     }
     public  function listaClientesPedido()
     {
-        
-
             $resultado = $this->select(
                 ' SELECT distinct(c.razaosocial), c.licitacaoCliente_cod,c.tipo, c.nomefantasia,c.CNPJ              
                 FROM  clienteLicitacao AS c

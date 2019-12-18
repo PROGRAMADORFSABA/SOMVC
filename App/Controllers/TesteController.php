@@ -32,12 +32,23 @@ class TesteController extends Controller
 
         Sessao::limpaMensagem();
     }
-    public function teste()
-    {        
-     //   $this->render('/pedido/teste');
+    public function teste($params)
+    {
+        $id = $params[0];
+
+        $testeService = new TesteService();
+        $teste = $testeService->listar($id);
+        $this->setViewParam('teste', $teste);        
+        
+        $pedidoDAO = new ClienteDAO();
+       // self::setViewParam('teste', $pedidoDAO->listar());
+       
+
+        $this->render('/teste/teste');
 
         Sessao::limpaMensagem();
     }
+   
 
 
     public function autoComplete($params)

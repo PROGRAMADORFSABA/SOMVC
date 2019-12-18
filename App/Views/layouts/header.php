@@ -29,7 +29,11 @@ $dataAtual = date('Y-m-d H:i:s');
 		});
 	</script>
 	<!--end::Fonts -->
-
+	<!--end::Select2 multo select -->
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
+	<!--end::Select2 multo select -->
 
 	<!--begin::Page Vendors Styles(used by this page) -->
 	<link href="//www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" />	

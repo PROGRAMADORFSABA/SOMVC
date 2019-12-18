@@ -50,22 +50,21 @@ class EmailDAO extends BaseDAO
             }else if( $codStatus == 6 AND $tipoCliente != 'Municipal'){
                 $to = 'atendimento@fabmed.feira.br';
             }
-        }
-        
-        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
-        $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
-        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-        $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
-        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
-        $headers = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
-        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-        //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
-        $headers .= 'Reply-To: < nuvem@fabmed.com.br, vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
-       
-        
+           }
+    
+       $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
+       $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
+       $headers = 'MIME-Version: 1.0' . "\r\n";
+       $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
+       $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
+       //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+       $headers .= 'Reply-To: <nuvem@fabmed.com.br; vendas2@fabmed.com.br; >' . "\r\n"; //email para resposta
+
        mail($to, $subject, $message, $headers);
-    }
+   }
     public  function emailSugestoes(Sugestoes $sugestoes, $subject)
     {
         $codSugestoes       = $sugestoes->getSugId();           
