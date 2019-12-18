@@ -143,8 +143,8 @@ class ClienteLicitacaoDAO extends  BaseDAO
             foreach ($dataSetclienteLicitacaos as $dataSetclienteLicitacao) {
 
                 $clienteLicitacao = new ClienteLicitacao();
-                $clienteLicitacao->setIdCliente($dataSetclienteLicitacao['idCliente']);
-                $clienteLicitacao->setNome($dataSetclienteLicitacao['nome']);
+                $clienteLicitacao->setCodCliente($dataSetclienteLicitacao['idCliente']);
+                $clienteLicitacao->setRazaoSocial($dataSetclienteLicitacao['nome']);
                 $clienteLicitacao->setNomeFantasia($dataSetclienteLicitacao['nomeFantasia']);
                 $clienteLicitacao->getTipoCliente()->setNomeTipo($dataSetclienteLicitacao['nomeTipo']);
 
@@ -171,6 +171,25 @@ class ClienteLicitacaoDAO extends  BaseDAO
             $resultado = $this->select(
                 "SELECT * FROM clienteLicitacao "
                 //'SELECT * FROM cliente c INNER JOIN tipoCliente tp ON tp.codTipoCliente = c.idTipoCliente '
+            );
+            return  $resultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
+        }
+
+        return false;
+    }
+    public function listaTipoClienteLicitacao($idCliente = null)
+    {
+        
+        if ($idCliente) {
+
+            $resultado = $this->select(                
+               "SELECT * FROM clienteTipo  WHERE tpc_id = $idCliente"
+            );
+
+            return $resultado->fetchObject(ClienteLicitacao::class);
+        } else {
+            $resultado = $this->select(
+                "SELECT * FROM clienteTipo "                
             );
             return  $resultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
         }

@@ -25,6 +25,11 @@
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
             return $clienteLicitacaoDAO->listaClientesPedido();
         }
+        public function listaTipoCliente()
+        {           
+            $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
+            return $clienteLicitacaoDAO->listaTipoClienteLicitacao();
+        }
         
         public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
         {

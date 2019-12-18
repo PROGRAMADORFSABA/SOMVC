@@ -57,7 +57,7 @@
 											<div class=" col-lg-4 col-md-9 col-sm-12">
 												<select class="form-control m-select2" id="kt_select2_3" name="tipo" multiple="multiple">
 													<optgroup for="tipo" label="Tipo Cliente">
-													<?php foreach ($viewVar['listaClientesPedido'] as $cliente) : ?>
+													<?php foreach ($viewVar['listaTipoClientes'] as $cliente) : ?>
 													<option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
 														<?php echo $cliente->getTipoCliente(); ?>
 													</option>
