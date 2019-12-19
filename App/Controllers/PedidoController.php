@@ -44,6 +44,7 @@ class PedidoController extends Controller
         self::setViewParam('listaStatus', $statusService->listar());
         self::setViewParam('listarPedidos', $pedidoService->listar($pedido));
         self::setViewParam('listaClientesPedido', $clienteLicitacaoService->listaClientesPedido());
+        self::setViewParam('listaTipoClientes', $clienteLicitacaoService->listaTipoCliente());
         self::setViewParam('listarRepresentantes', $representanteService->listar());
         $pedidoDAO = new PedidoDAO();
         
@@ -66,7 +67,6 @@ class PedidoController extends Controller
 
         $statusDAO = new StatusDAO();
         self::setViewParam('listaStatus', $statusDAO->listar());
-
         $representanteDAO = new RepresentanteDAO();
         self::setViewParam('listaRepresentantes', $representanteDAO->listar());
 
@@ -108,7 +108,7 @@ class PedidoController extends Controller
             $pedido->setRepresentante($representante);     
             
             $usuarioId = Sessao::retornaValorFormulario('usuario');
-            $usuario = $usuadioService->listar($usuarioId)[0];
+            $usuario = $usuadioService->listar($usuarioId);
             $pedido->setUsuario($usuario);     
             
             $pedido->setDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));            
@@ -164,8 +164,7 @@ class PedidoController extends Controller
         $pedido->setRepresentante($representante);
         $pedido->setUsuario($usuario);
         $pedido->setClienteLicitacao($clienteLicitacao);
-       
-        
+
         Sessao::gravaFormulario($_POST);
 
         $pedidoService = new PedidoService();
@@ -175,9 +174,8 @@ class PedidoController extends Controller
             $pedido = $pedidoService->listar($pedido)[0];
             $emailService = new EmailService();
             $subject = 1;
-            $emailService->email($pedido,$subject);
-           
-           $this->redirect('/pedido');
+            $emailService->email($pedido, $subject);
+            $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();
@@ -185,7 +183,9 @@ class PedidoController extends Controller
             Sessao::gravaMensagem("Erro ao gravar");
             $this->redirect('/pedido/cadastro');
         }
-        
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
     }
     public function edicao($params)
     {
@@ -209,7 +209,7 @@ class PedidoController extends Controller
             $pedido->setClienteLicitacao($clienteLicitacao);
             
             $representanteId = Sessao::retornaValorFormulario('representante');
-            $representante = $representanteService->listar($representanteId);
+            $representante = $representanteService->listar($representanteId)[0];
             $pedido->setRepresentante($representante);     
             
             $usuarioId = Sessao::retornaValorFormulario('usuario');
@@ -237,14 +237,14 @@ class PedidoController extends Controller
             $pedido->setDataAlteracao(Sessao::retornaValorFormulario('dataAlteracao'));
             
         }else{
-            $pedido = $pedidoService->listar($pedido);
+            $pedido = $pedidoService->listar($pedido)[0];
         }
         if (!$pedido) {
             Sessao::gravaMensagem("Pedido inexistente");
             $this->redirect('/pedido');
         }
         self::setViewParam('pedido', $pedido);
-         $this->render('/pedido/editar');
+       $this->render('/pedido/editar');
         Sessao::limpaMensagem();
     }
 
@@ -265,7 +265,8 @@ class PedidoController extends Controller
     
         $pedido->setCodControle($_POST['codControle']);
         $pedido->setNumeroLicitacao($_POST['numeroPregao']);
-        $pedido->setNumeroAf($_POST['numeroAf']);        
+        $pedido->setNumeroAf($_POST['numeroAf']);
+        //$pedido->setValorPedido(number_format($_POST['valorPedido'], 2, ',', '.'));
         $pedido->setUsuario($usuario);
         $pedido->setStatus($status);
         $pedido->setValorPedido($_POST['valorPedido']);
@@ -294,8 +295,8 @@ class PedidoController extends Controller
             $emailService = new EmailService();
             $subject = 2;
             $emailService->email($pedido, $subject);
-                       
-          //  $this->redirect('/pedido');
+            
+            //$this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();           

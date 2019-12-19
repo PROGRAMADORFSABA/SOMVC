@@ -10,41 +10,37 @@ class EmailDAO extends BaseDAO
 {    
     public  function email(Pedido $pedido, $subject)
    {
-      // var_dump($pedido);
-        $codPedido          = $pedido->getCodControle();           
-        $codStatus          = $pedido->getCodStatus();           
-        $nomeUsuario        = $pedido->getUsuario()->getNome();           
-        $codUsuario         = $pedido->getUsuario()->getId();
-        $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
-        $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
-        $anexos             = $pedido->getAnexo();
-        $numeroPregao       = $pedido->getNumeroLicitacao();
-        $numeroAf           = $pedido->getNumeroAf();
-        $observacao         = $pedido->getObservacao();
-        $valorPedidoAtual   = $pedido->getValorPedido();   
-        
-        $dadosCadastro .= "
-    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
-        <tr> <td>Codigo</td> <td> $codPedido  </td>  </tr>
-        <tr> <td>Cliente</td> <td> $razaoSocialCliente  </td>  </tr>
-        <tr> <td>Pregao</td> <td>$numeroPregao</td></tr>
-        <tr> <td>Numero</td> <td>$numeroAf</td> </tr>
-        <tr> <td>Valor</td> <td>$valorPedidoAtual</td> </tr>
-        <tr> <td>Observacao</td><td> $observacao </td></tr>
-    </table>";
-    
-        /*$dadosCadastro = "Codigo: ".$codPedido." <br>"."Cliente: ".$razaoSocialCliente." <br>"
-        ."Licitacao: ".$numeroPregao." <br>"."Autorizacao: ".$numeroAf 
-        ." <br>"."Valor do Pedido R$".$valorPedidoAtual." <br>"
-        ."Observacao: ".$observacao." <br>";*/
-                
-        if($subject == 1){
-            $subject = "Cadastro do Pedido";
-            if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
-                $to = 'posvenda@fabmed.com.br';
+       $codPedido          = $pedido->getCodControle();           
+       $codStatus          = $pedido->getStatus()->getCodStatus();           
+       $nomeStatus         = $pedido->getStatus()->getNome();           
+       $nomeUsuario        = $pedido->getUsuario()->getNome();           
+       $codUsuario         = $pedido->getUsuario()->getId();
+       $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
+       $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
+       $anexos             = $pedido->getAnexo();
+       $numeroPregao       = $pedido->getNumeroLicitacao();
+       $numeroAf           = $pedido->getNumeroAf();
+       $observacao         = $pedido->getObservacao();
+       $valorPedidoAtual   = $pedido->getValorPedido();   
+       
+       $dadosCadastro .= "
+                    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
+                            <tr> <td>Codigo</td> <td> $codPedido  </td>  </tr>
+                            <tr> <td>Cliente</td> <td> $razaoSocialCliente  </td>  </tr>
+                            <tr> <td>Status</td> <td>$nomeStatus</td></tr>
+                            <tr> <td>Pregao</td> <td>$numeroPregao</td></tr>
+                            <tr> <td>Numero</td> <td>$numeroAf</td> </tr>
+                            <tr> <td>Valor</td> <td>R$$valorPedidoAtual</td> </tr>
+                            <tr> <td>Observacao</td><td> $observacao </td></tr>
+                    </table>";
+       
+       if($subject == 1){
+           $subject = "Cadastro do Pedido";
+           if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
+               $to = 'posvenda@fabmed.com.br';
             }else{
                 if( $codUsuario != 30 AND $tipoCliente != 'Municipal'){// AND $tipoCliente == 'Municipal'){
-                $to = 'atendimento@fabmed.feira.br';
+                    $to = 'atendimento@fabmed.feira.br';
                 }                
             }
         }else{
@@ -70,17 +66,17 @@ class EmailDAO extends BaseDAO
        mail($to, $subject, $message, $headers);
    }
     public  function emailSugestoes(Sugestoes $sugestoes, $subject)
-   {
-       $codSugestoes       = $sugestoes->getSugId();           
-       $status             = $sugestoes->getSugStatus();
-       $tipo               = $sugestoes->getSugTipo();
-       $nomeUsuario        = $sugestoes->getUsuario()->getNome();
+    {
+        $codSugestoes       = $sugestoes->getSugId();           
+        $status             = $sugestoes->getSugStatus();
+        $tipo               = $sugestoes->getSugTipo();
+        $nomeUsuario        = $sugestoes->getUsuario()->getNome();
         $anexos             = $sugestoes->getSugAnexo();
         $descricao          = $sugestoes->getSugDescricao(); 
         
         $dadosCadastro = "Codigo: ".$codSugestoes." <br>"."Tipo: ".$tipo
         ." <br>"."Status: ".$status." <br>"."Descricao: ".$descricao." <br>";
-                
+        
         if($subject == 1){
             $subject = "Cadastro de Sugestoes";
         }else if($subject == 2){
