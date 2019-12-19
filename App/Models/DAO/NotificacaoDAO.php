@@ -15,18 +15,18 @@ class NotificacaoDAO extends BaseDAO
     {             
         $codCliente         = $notificacao->getNtf_codclientelicitacao();     
         $codNotificacao     = $notificacao->getNtf_Cod();
-        $proposta           = $notificacao->getNtf_Cod();
+       // $proposta           = $notificacao->getNtf_Cod();
         $numeroLicitacao    = $notificacao->getNtf_Numero();
         $status             = $notificacao->getNtf_Status();
         $modalidade         = $notificacao->getNtf_Codusuario();
         $representante      = $notificacao->getNtf_Codrepresentante();
 
         $SQL = " SELECT * FROM notificacao ntf
-        INNER JOIN clientelicitacao c ON c.licitacaoCliente_cod = ntf.ntf_clientelicitacao
+        INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ntf.ntf_clientelicitacao
         INNER JOIN usuarios u ON u.id = ntf.ntf_usuario  ";                 
              $where = Array();
              if( $codCliente ){ $where[] = " ntf.ntf_clientelicitacao = {$codCliente}"; }
-             if( $codNotificacao ){ $where[] = " ntf.ntf_id = {$codNotificacao}"; }
+             if( $codNotificacao ){ $where[] = " ntf.ntf_cod = {$codNotificacao}"; }
              if( $proposta ){ $where[] = " ntf.ntf_numero = '{$proposta}'"; }
              if( $status ){ $where[] = " ntf.ntf_status = '{$status}'"; }
              if( $representante ){ $where[] = " ntf.ntf_usuario = {$representante}"; }
@@ -36,7 +36,7 @@ class NotificacaoDAO extends BaseDAO
           if( sizeof( $where ) )
           $SQL .= ' WHERE '.implode( ' AND ',$where );
           $resultado = $this->select($SQL);
-         
+         var_dump($SQL);
           $dados = $resultado->fetchAll();
           $lista = [];
           foreach ($dados as $dado) { 
@@ -46,7 +46,11 @@ class NotificacaoDAO extends BaseDAO
         $notificacao->setNtf_numero($dado['ntf_numero']);
         $notificacao->setClienteLicitacao(new ClienteLicitacao());
         $notificacao->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
-        $notificacao->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);      
+        $notificacao->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);    
+        $notificacao->setNtf_usuario(new Usuario());
+        $notificacao->getNtf_usuario()->setId($dado['id']);
+        $notificacao->getNtf_usuario()->setNome($dado['nome']);
+        $notificacao->getNtf_usuario()->setEmail($dado['email']);  
             
             $lista[] = $notificacao;
         }

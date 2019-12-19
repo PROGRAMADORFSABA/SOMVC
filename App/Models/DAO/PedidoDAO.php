@@ -238,7 +238,8 @@ class PedidoDAO extends BaseDAO
         $numeropedido       = $pedido->getNumeroAF();
         $codStatus          = $pedido->getCodStatus();
         $numeroLicitacao    = $pedido->getNumeroLicitacao();
-        //$tipo               = $pedido->getNumeroLicitacao();
+        $tipo               = $pedido->getTipoCliente();
+        var_dump($tipo);
         $SQL =
                 "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
                 ,c.licitacaoCliente_cod,c.tipo,c.razaosocial, c.nomefaNtasia,c.CNPJ
@@ -253,20 +254,21 @@ class PedidoDAO extends BaseDAO
                  INNER JOIN usuarios AS u on u.id = con.fk_idUsuarioPed
                 ";
          
-             $where = Array();
-             if( $codControle ){ $where[] = " con.codControle = {$codControle}"; }
-             if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
-             if( $codRepresentante ){ $where[] = " r.codRepresentante = {$codRepresentante}"; }
-             if( $codStatus ){ $where[] = " s.codStatus = {$codStatus}"; }
-             if( $numeropedido ){ $where[] = " con.numeroAf = '{$numeropedido}'"; }
+         $where = Array();
+         if( $codControle ){ $where[] = " con.codControle = {$codControle}"; }
+         if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
+         if( $codRepresentante ){ $where[] = " r.codRepresentante = {$codRepresentante}"; }
+         if( $codStatus ){ $where[] = " s.codStatus ={$codStatus}"; }
+         if( $numeropedido ){ $where[] = " con.numeroAf LIKE '%{$numeropedido}%' "; }
              if( $numeroLicitacao ){ $where[] = " con.numeroPregao = '{$numeroLicitacao}'"; }
-             //   if( $tipo ){ $where[] = " c.tipoo = '{$tipo}'"; }
+             if( $tipo ){ $where[] = " c.tipo = '{$tipo}'"; }
              // $where[] = " s.nome  not in  ('ATENDIDO','CANCELADO') ";
              if( sizeof( $where ) ){
                  $SQL .= ' WHERE '.implode( ' AND ',$where );
                 }else {
                     $SQL .= " WHERE s.nome  not in  ('ATENDIDO','CANCELADO') ";
                 }
+               
                 $resultado = $this->select($SQL);
          
                 $dados = $resultado->fetchAll();
@@ -413,7 +415,7 @@ class PedidoDAO extends BaseDAO
             $codStatus          = $pedido->getCodStatus();
             $codCliente         = $pedido->getClienteLicitacao()->getCodCliente();
             $codRepresentante   = $pedido->getRepresentante()->getCodRepresentante();
-            $codUsuario   = $pedido->getUsuario()->getId();
+            $codUsuario         = $pedido->getUsuario()->getId();
             $fk_instituicao     = $pedido->getInstituicao()->getInst_Id();
             $dataCadastroAtual  = $pedido->getDataCadastro();
             $dataAlteracao      = $pedido->getDataAlteracao();

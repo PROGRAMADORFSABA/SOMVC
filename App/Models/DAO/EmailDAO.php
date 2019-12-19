@@ -146,8 +146,8 @@ class EmailDAO extends BaseDAO
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
        //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
        $headers .= 'Reply-To: <nuvem@fabmed.com.br, vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
-
-      mail($to, $subject, $message, $headers);
+        var_dump($dadosCadastro);
+     // mail($to, $subject, $message, $headers);
    }
     public  function emailSuporte($erro)
    {

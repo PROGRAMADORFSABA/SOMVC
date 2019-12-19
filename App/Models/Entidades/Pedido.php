@@ -42,6 +42,21 @@ class Pedido{
     {
         $this->codControle = $codControle;
     }
+    /**
+     * @return mixed
+     */
+    public function getTipoCliente()
+    {
+        return $this->tipoCliente;
+    }
+
+    /**
+     * @param mixed $tipoCliente
+     */
+    public function setTipoCliente($tipoCliente)
+    {
+        $this->tipoCliente = $tipoCliente;
+    }
 
     /**
      * @return mixed

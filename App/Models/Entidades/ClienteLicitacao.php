@@ -33,6 +33,18 @@ class ClienteLicitacao
     }
     
     /**
+     * Set the value of tipoCliente
+     *
+     * @return  self
+     */ 
+    public function setTipoCliente($tipoCliente)
+    {
+        $this->tipoCliente = $tipoCliente;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getCodCliente()
@@ -156,16 +168,5 @@ class ClienteLicitacao
 
         return $this;
     }
-
-    /**
-     * Set the value of tipoCliente
-     *
-     * @return  self
-     */ 
-    public function setTipoCliente($tipoCliente)
-    {
-        $this->tipoCliente = $tipoCliente;
-
-        return $this;
-    }
+    
 }

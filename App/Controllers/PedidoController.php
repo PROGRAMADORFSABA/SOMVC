@@ -32,8 +32,9 @@ class PedidoController extends Controller
             $pedido->setCodCliente($_POST['cliente']);
             //$pedido->setCodUsuario($_POST['usuario']); 
             $pedido->setCodStatus($_POST['status']);
-            $pedido->setNumeroAF($_POST['pedido']);       
+            $pedido->setNumeroAF($_POST['numeroAf']);       
             $pedido->setNumeroLicitacao($_POST['numeroLicitacao']); 
+            $pedido->setTipoCliente($_POST['tipo']);            
          }
 
         $pedidoService = new PedidoService();
