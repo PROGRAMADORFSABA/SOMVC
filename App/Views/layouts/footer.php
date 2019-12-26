@@ -562,7 +562,6 @@
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/datatables/advanced/row-grouping.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/metronic-datatable/base/html-table.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/metronic-datatable/child/data-local.js" type="text/javascript"></script>
-<script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/datatables/basic/atualizahora.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/crud/datatables/advanced/column-visibility.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/components/charts/morris-charts.js" type="text/javascript"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/assets/app/custom/general/components/charts/amcharts/charts.js" type="text/javascript"></script>
@@ -588,6 +587,7 @@
 <script src="http://<?php echo APP_HOST; ?>/public/js/clienteLicitacao-autocomplete.js"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/js/autocomplete-produto.js"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/js/clientefalta-autocomplete.js"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/js/atualizahora.js" type="text/javascript"></script>
 <!--end::Global App Bundle -->
 </body>
 

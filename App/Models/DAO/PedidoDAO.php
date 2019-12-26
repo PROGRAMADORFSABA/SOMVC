@@ -230,8 +230,9 @@ class PedidoDAO extends BaseDAO
         return false;
     }
 
-    public function listar(Pedido $pedido)
+    public function listar()
     { 
+        $pedido = new Pedido();
         $codCliente         = $pedido->getCodCliente();
         $codRepresentante   = $pedido->getCodRepresentante();
         $codControle        = $pedido->getCodControle();
