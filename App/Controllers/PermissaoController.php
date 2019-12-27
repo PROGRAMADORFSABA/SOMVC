@@ -83,7 +83,62 @@ class PermissaoController extends Controller
     }
     public function salvar()
     {
-       
+        if(filter_input(INPUT_SERVER, 'REQUEST_METHOD')=='POST') {
+            $s = array();
+            foreach ($_POST as $chave => $valor) {
+              if(is_array($valor)) {
+                  echo 'Chave: ' . $chave . ' Valores:<br />';
+                  foreach($valor as $ch=>$va){
+                      echo 'Chave: ' . $ch . ' | Valor: ' . $va . '<br />';
+                  }
+                  echo '<br />';
+              } else {
+                  echo 'Chave: ' . $chave . ' | Valor: ' . $valor . '<br />';  
+              }
+            }            
+        }
+
+        $test = array();
+        $test = $_POST['tabela1'];
+         var_dump($test);
+            for ($i = 0; $i < count($test) ; $i++) { 
+                echo "<br> teste  " .$i. "<br>";
+            }
+            $teste = $_POST['tabela'];
+             var_dump($teste);
+            for ($i = 0; $i < count($teste) ; $i++) { 
+                echo "<br> teste 00  " .$i. "<br>";
+            }
+      /*
+        $test = $_POST['tabela1']?false:true; 
+        var_dump($test);
+        if (isset($_POST['tabela1'])?false:true) {  
+            foreach($test as $teste){               
+                echo " marcado <br>";
+               /* if(){ 
+                echo " marcado <br>";
+            }else{
+                echo " nao marcado <br>";
+            }
+            }
+        }    */
+      
+        if (isset($_REQUEST['tabela'])) {          
+            $qt = count($_REQUEST['tabela']);
+            $k = 1;         
+            foreach ($_REQUEST['tabela'] as $treinamento){             
+                $v = "";
+                if($k < $qt) {
+                    $v = ", ";
+                }
+                $comp .= $treinamento.$v;
+                $k++;
+            }
+          //  var_dump($comp);
+            return $comp;
+        } else {
+            $comp = null;
+        }
         $teste = $_POST['tabela'];
          var_dump($teste);
             for ($i = 0; $i < count($teste) ; $i++) { 

@@ -16,10 +16,10 @@ use App\Models\Entidades\Notificacao;
 
 class EmailService
 {
-    public function email(Pedido $pedido, $subject)
+    public function email(Pedido $pedido, $email, $subject)
     {
         $emailDAO = new EmailDAO();
-        return $emailDAO->email($pedido, $subject);
+        return $emailDAO->email($pedido, $email, $subject);
        
     }
     public function emailSugestoes(Sugestoes $sugestoes, $subject)

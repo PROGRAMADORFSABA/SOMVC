@@ -26,6 +26,7 @@ class PedidoController extends Controller
     public function index()
     {
         $pedido = new Pedido();
+        $clienteLicitacao = new ClienteLicitacao();
         if($_POST){
             $pedido->setCodControle($_POST['codigo']);
             $pedido->setCodRepresentante($_POST['representante']);
@@ -34,7 +35,10 @@ class PedidoController extends Controller
             $pedido->setCodStatus($_POST['status']);
             $pedido->setNumeroAF($_POST['numeroAf']);       
             $pedido->setNumeroLicitacao($_POST['numeroLicitacao']); 
-            $pedido->setTipoCliente($_POST['tipo']);            
+            $pedido->setTipoCliente(implode( "','", $_POST['tipo']));
+                               
+       /*$id = implode( " ','", $_POST['tipo'] );
+        var_dump($id);*/
          }
 
         $pedidoService = new PedidoService();
@@ -44,7 +48,7 @@ class PedidoController extends Controller
         self::setViewParam('listaStatus', $statusService->listar());
         self::setViewParam('listarPedidos', $pedidoService->listar($pedido));
         self::setViewParam('listaClientesPedido', $clienteLicitacaoService->listaClientesPedido());
-        self::setViewParam('listaTipoClientes', $clienteLicitacaoService->listaTipoCliente());
+        self::setViewParam('listaTipoClientes', $clienteLicitacaoService->listaTipoCliente($clienteLicitacao));
         self::setViewParam('listarRepresentantes', $representanteService->listar());
         $pedidoDAO = new PedidoDAO();
         
@@ -170,12 +174,17 @@ class PedidoController extends Controller
         $pedidoService = new PedidoService();
 
         if ( $codPedido  = $pedidoService->salvar($pedido)) {
+            if(isset($_POST['enviarEmail'])){  
             $pedido->setCodControle($codPedido);
             $pedido = $pedidoService->listar($pedido)[0];
-            $emailService = new EmailService();
-            $subject = 1;
-            $emailService->email($pedido, $subject);
-            $this->redirect('/pedido');
+           
+                $email = $_POST['email'];
+                $emailService = new EmailService();
+                $subject = 1;
+                $emailService->email($pedido,$email, $subject);
+            }
+            
+           // $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();
@@ -292,11 +301,14 @@ class PedidoController extends Controller
         }
         $pedidoService = new PedidoService();
         if ($pedidoService->Editar($pedido)) {
-            $emailService = new EmailService();
-            $subject = 2;
-            $emailService->email($pedido, $subject);
+            if(isset($_POST['enviarEmail'])){  
+                $email = $_POST['email'];               
+                $emailService = new EmailService();
+                $subject = 2;
+                $emailService->email($pedido,$email, $subject);
+            }
             
-            //$this->redirect('/pedido');
+           // $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();           

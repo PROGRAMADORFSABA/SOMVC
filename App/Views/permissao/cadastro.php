@@ -12,7 +12,7 @@
             <?php } ?>
         </div>
     <?php } ?>
-        <form class="was-validated" action="http://<?php echo APP_HOST; ?>/permissao/salvar" method="post" >
+        <form id="frmCadastro" class="was-validated" action="http://<?php echo APP_HOST; ?>/permissao/salvar" method="post" >
           
                 <table  class="table table-bordered table-striped table-condensed cf">
                     <thead class="cf">                    
@@ -30,7 +30,7 @@
                     <tbody >
                         <tr >
                             <td >Usuario</td>
-                            <td><input type="checkbox" id="tabela[]" name="tabela[]" value="1" ></td>
+                            <td><input type="checkbox" id="tabela[]" name="tabela[]" value="1000" ></td>
                             <td><input type="checkbox" id="tabela[]" name="tabela[]" value="1" ></td>
                             <td><input type="checkbox" id="tabela[]" name="tabela[]" value="1" ></td>
                             <td><input type="checkbox" id="tabela[]" name="tabela[]" value="1" ></td>
@@ -109,14 +109,13 @@
                             <td><input type="checkbox" id="tabela[]" name="tabela[]" value="1" ></td>
                         </tr>
                     </tbody>
-            </table>
-
+            </table>        
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions">
                     <div class="row">
                         <div class="col-lg-5"></div>
                         <div class="col-lg-5">
-                        <button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
+                        <button type="submit" id="submit" name="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
                         <a href="http://<?php echo APP_HOST; ?>/permissao" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>

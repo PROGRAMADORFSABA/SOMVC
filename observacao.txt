@@ -1,0 +1,81 @@
+	*STATUS* -> FALTA PRODUTO 
+
+ - FALTA
+ - COMPRADO
+ - TRANSITO DO FORNECEDOR
+ - CONFERENCIA (DE ENTRADA)
+ - FINALIZADO
+ - CANCELADO (PELO CLIENTE)
+
+/------------------------------------/
+EDITAL
+
+STATUS
+ - analise inicial
+ - descartado
+ - proposta
+ - registro
+ - registrado
+ - finalizado (definir se houve ganhos ou nao)
+ - analise final
+ - analisado
+
+(desenvolver algum procedimento que possa marcar ok para parte documental, esclarecimento/ impugnação e recurso)
+
+/-------------------/
+contrato
+
+STATUS
+ - pendente
+ - lancado
+ - aditivado
+ - vencido
+(adicionar cliente com contrato atraves de adesão)
+
+campo prazo de entrega e prazo de pagamento indexar os valores (01 a 100 dias)
+
+/------------------------/
+notificacao
+
+STATUS
+
+ - recepicionada
+ - defesa
+ - ciencia ao cliente
+ - resposta do cliente
+ - prorrogacao da entrega
+ - apelacao
+ - outros
+ - finalizado
+
+
+/----------------------------------/
+acompanhamento de entrega
+
+nota fiscal/ cliente / transportador/ data/ status
+
+STATUS
+ - aguardando coleta
+ - coletado (campo para anexo)
+ - entregue ao cliente
+ - ocorrencia
+ - finalizado (listar somente mediante consulta)
+
+**obs. nota fiscal de forma coletiva para o mesmo cliente na mesma coleta
+
+/-----------------------------------/
+
+acompanhamento de cliente
+representante/ rota
+
+data visita/ cliente/ pregao/ situacao financeira/ previsao de pagamento/ previsao de demanda/ observacao
+
+status sit. financeira
+ - Nfs empenhadas parcial
+ - Nfs empenhadas total
+observacao financeiro
+
+Status demanda
+ - promessa de itens
+ - sem promessa de itens
+observacao demanda

@@ -4,6 +4,8 @@ namespace App\Models\DAO;
 
 use App\Models\Entidades\ClienteLicitacao;
 use App\Models\Entidades\Produto;
+use App\Models\Entidades\Usuario;
+use App\Models\Entidades\Instituicao;
 
 class ClienteLicitacaoDAO extends  BaseDAO
 {
@@ -177,21 +179,51 @@ class ClienteLicitacaoDAO extends  BaseDAO
 
         return false;
     }
-    public function listaTipoClienteLicitacao($idCliente = null)
+    public function listaTipoClienteLicitacao(ClienteLicitacao $clienteLicitacao)
     {
-        
-        if ($idCliente) {
+        $descricao = null;
+        $codTipo = null;
 
-            $resultado = $this->select(                
-               "SELECT * FROM clienteTipo  WHERE tpc_id = $idCliente"
-            );
+        $SQL = "SELECT * FROM clienteTipo ORDER BY tpc_descricao" ;
+                
+                $where = Array();
+                if( $codTipo ){ $where[] = " tpc_id = {$codTipo}"; }
+                if( $descricao ){ $where[] = " tpc_descricao LIKE '%{$descricao}%' "; }
+                
+                if( sizeof( $where ) ){
+                    $SQL .= ' WHERE '.implode( ' AND ',$where );
+                   }else {
+                     //  $SQL .= " WHERE tpc_status  not in  ('INATIVO') ";
+                   }
+            $resultado = $this->select($SQL);
+            $dados = $resultado->fetchAll();
 
-            return $resultado->fetchObject(ClienteLicitacao::class);
-        } else {
-            $resultado = $this->select(
-                "SELECT * FROM clienteTipo "                
-            );
-            return  $resultado->fetchAll(\PDO::FETCH_CLASS, ClienteLicitacao::class);
+        if ($dados) {
+
+            $lista = [];
+
+            foreach ($dados as $dado) {
+
+                $clienteLicitacao = new ClienteLicitacao();
+                $clienteLicitacao->setTpcId($dado['tpc_id']);
+                $clienteLicitacao->setTpcDescricao($dado['tpc_descricao']);
+               /* $clienteLicitacao->setTpcDescricao($dado['tpc_status']);
+                $clienteLicitacao->setTpcDescricao($dado['tpc_datacadastro']);
+                $clienteLicitacao->setTpcDescricao($dado['tpc_dataalteracao']);
+                $clienteLicitacao->setTpcDescricao($dado['tpc_intituicao']);
+                $clienteLicitacao->setTpcDescricao($dado['tpc_usuario']);
+                $clienteLicitacao->setInstituicao(new Instituicao());
+                $clienteLicitacao->getInstituicao()->setInst_Id($dado['inst_id']);
+                $clienteLicitacao->getInstituicao()->setInst_Codigo($dado['inst_codigo']);
+                $clienteLicitacao->getInstituicao()->setInst_Nome($dado['inst_nome']);
+                $clienteLicitacao->setUsuario(new Usuario());
+                $clienteLicitacao->getUsuario()->setId($dado['id']);
+                $clienteLicitacao->getUsuario()->setNome($dado['nome']);
+                $clienteLicitacao->getUsuario()->setEmail($dado['email']);
+                */
+                $lista[] = $clienteLicitacao;
+            }
+            return $lista;
         }
 
         return false;

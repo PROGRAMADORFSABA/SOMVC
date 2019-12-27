@@ -86,6 +86,13 @@
 
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <input type="checkbox" id="enviarEmail" name="enviarEmail" >
+                    <label>Deseja enviar Email?</label>
+                    <input type="text" class="form-control" title="Digite o endereco de e-mail" placeholder="email separado por virgula" id="email" name="email" disabled value="<?php echo $Sessao::retornaValorFormulario('eviarEmail'); ?>">
+                </div>
+            </div>
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions">
                     <div class="row">

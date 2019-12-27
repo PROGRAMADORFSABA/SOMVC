@@ -8,7 +8,7 @@ use App\Models\Entidades\Notificacao;
 
 class EmailDAO extends BaseDAO
 {    
-    public  function email(Pedido $pedido, $subject)
+    public  function email(Pedido $pedido, $email, $subject)
    {
        $codPedido          = $pedido->getCodControle();           
        $codStatus          = $pedido->getStatus()->getCodStatus();           
@@ -22,7 +22,7 @@ class EmailDAO extends BaseDAO
        $numeroAf           = $pedido->getNumeroAf();
        $observacao         = $pedido->getObservacao();
        $valorPedidoAtual   = $pedido->getValorPedido();   
-       
+   
        $dadosCadastro .= "
                     <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
                             <tr> <td>Codigo</td> <td> $codPedido  </td>  </tr>
@@ -37,21 +37,26 @@ class EmailDAO extends BaseDAO
        if($subject == 1){
            $subject = "Cadastro do Pedido";
            if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
-               $to = 'posvenda@fabmed.com.br';
+               $to .= 'posvenda@fabmed.com.br';
             }else{
                 if( $codUsuario != 30 AND $tipoCliente != 'Municipal'){// AND $tipoCliente == 'Municipal'){
-                    $to = 'atendimento@fabmed.feira.br';
+                    $to .= 'atendimento@fabmed.feira.br';
                 }                
             }
         }else{
             $subject = "Alteração de Pedido";
+            $to .= 'licitacao2@fabmed.com.br, sac@fabmed.com.br';
             if( $codStatus == 5 || $codStatus == 3){
-                $to = 'licitacao2@fabmed.com.br, sac@fabmed.com.br';
             }else if( $codStatus == 6 AND $tipoCliente != 'Municipal'){
-                $to = 'atendimento@fabmed.feira.br';
+                $to .= 'atendimento@fabmed.feira.br';
             }
-           }
-    
+        }
+        $arrayEmail = array();
+        $arrayEmail[] = $email;
+        if( sizeof( $arrayEmail ) ){
+            $to .= ', '.implode( ',',$arrayEmail );
+        }        
+      
        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
        $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";

@@ -21,13 +21,13 @@
                 <div class="form-group row">
                     <div class="col-lg-1">
                         <label>Pedido:</label>
-                        <input type="text" class="form-control" title="Digite o codido do pedido" placeholder="pedido" id="codControle" name="codControle" value="<?php echo $Sessao::retornaValorFormulario('codControle'); ?>">
+                        <input type="text" class="form-control" title="Digite o codido do pedido" placeholder="codigo" id="codControle" name="codControle" value="<?php echo $Sessao::retornaValorFormulario('codControle'); ?>">
                     </div>
                     <div class="col-lg-1">
                         <label>AFM:</label>
                         <input type="text" class="form-control" title="Digite o numero o pedido" placeholder="pedido" id="numeroAf" name="numeroAf" value="<?php echo $Sessao::retornaValorFormulario('codControle'); ?>">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <div class="form-group"><label for="status">Status</label>
                             <select class="form-control" name="status" title="Selecione o status do pedido">
                                 <option value="">Selecione o status</option>
@@ -38,10 +38,10 @@
                             </select>
                         </div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-3">
                         <div class="form-group"><label for="representante">Representante</label>
                             <select class="form-control" name="representante">
-                                <option value="">Selecione o Representante</option>
+                                <option value="">Representante</option>
                                 <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
                                     <option value="<?php echo $representante->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('representante') == $representante->getCodRepresentante()) ? "selected" : ""; ?>>
                                         <?php echo $representante->getNomeRepresentante(); ?></option>
@@ -50,24 +50,22 @@
                             <span class="form-text text-muted">Por favor insira o Representante do Pedido</span>
                         </div>
 					</div>
-					<div class="col-lg-6">
-						<div class="form-group">
+					<div class="col-lg-3">
 							<div class="form-group">
-											<label class="col-form-label col-lg-3 col-sm-12" for="tipo" >Tipo Cliente</label>
-											<div class=" col-lg-4 col-md-9 col-sm-12">
-												<select class="form-control m-select2" id="kt_select2_3" name="tipo" multiple="multiple">
+								<div class="form-group"><label  for="tipo" >Tipo Cliente</label>
+											
+												<select class="form-control m-select2" id="kt_select2_3"  title="Digite um ou mais tipo de clientes" name="tipo[]" multiple="multiple">
 													<optgroup for="tipo" label="Tipo Cliente">
 													<?php foreach ($viewVar['listaTipoClientes'] as $cliente) : ?>
-													<option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-														<?php echo $cliente->getTipoCliente(); ?>
+													<option value="<?php echo $cliente->getTpcDescricao(); ?>" <?php echo ($Sessao::retornaValorFormulario('tipo') == $cliente->getTpcId()) ? "selected" : ""; ?>>
+														<?php echo $cliente->getTpcDescricao(); ?>
 													</option>
 													<?php endforeach; ?>
 													</optgroup>													
 												</select>
-											</div>
-											
+												<span class="form-text text-muted">Por favor insira o tipo do cliente</span>			
+								</div>
 							</div>
-						</div>
 					</div>
                     <div class="col-lg-2">
                         <label>Licitacao:</label>

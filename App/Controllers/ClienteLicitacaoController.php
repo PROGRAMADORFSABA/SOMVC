@@ -175,7 +175,7 @@ class ClienteLicitacaoController extends Controller
     {
         $clienteLicitacao        = new ClienteLicitacao();
         $clienteLicitacaoService = new ClienteLicitacaoService();
-        $clienteLicitacao->setCodControle($_POST['codControle']);
+        $clienteLicitacao->setCodCliente($_POST['codCliente']);
 
         $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
 

@@ -8,9 +8,11 @@
     use App\Lib\Transacao;
 
     use App\Models\Entidades\ClienteLicitacao;
-    
+    use App\Models\Validacao\ClienteLicitacaoValidador;
     use App\Models\DAO\ClienteLicitacaoDAO;
-        class ClienteLicitacaoService
+    use App\Models\Entidades\Pedido;
+
+class ClienteLicitacaoService
     {
         public function listar($codCliente = null)
         {
@@ -25,17 +27,17 @@
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
             return $clienteLicitacaoDAO->listaClientesPedido();
         }
-        public function listaTipoCliente()
+        public function listaTipoCliente(ClienteLicitacao $clienteLicitacao)
         {           
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
-            return $clienteLicitacaoDAO->listaTipoClienteLicitacao();
+            return $clienteLicitacaoDAO->listaTipoClienteLicitacao($clienteLicitacao);
         }
         
-        public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
+       /* public function listraPorCliente(ClienteLicitacao $clienteLicitacao)
         {
             $clienteLicitacaoDAO =  new ClienteLicitacaoDAO();
             $clienteLicitacao = $clienteLicitacaoDAO->listarPorNomeFantasia($clienteLicitacao);
-        }
+        }*/
         
         public function autoComplete(ClienteLicitacao $clienteLicitacao)
         {
