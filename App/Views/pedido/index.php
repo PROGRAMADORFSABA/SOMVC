@@ -9,14 +9,12 @@
             <div class="form-group"><label for="cliente">Cliente</label>
                 <select class="form-control" name="cliente">
                     <option value="">Selecione o cliente</option>
-                    <?php foreach ($viewVar['listaClientesPedido'] as $cliente) : ?>
+                     <?php foreach ($viewVar['listaClientesPedido'] as $cliente) : ?>
                         <option value="<?php echo $cliente->getCodCliente(); ?>" <?php echo ($Sessao::retornaValorFormulario('cliente') == $cliente->getCodCliente()) ? "selected" : ""; ?>>
-							<?php echo $cliente->getRazaoSocial(); ?>
-						</option>
+                            <?php echo $cliente->getRazaoSocial(); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            
             <div class="kt-portlet__body">
                 <div class="form-group row">
                     <div class="col-lg-1">
@@ -50,11 +48,11 @@
                             <span class="form-text text-muted">Por favor insira o Representante do Pedido</span>
                         </div>
 					</div>
-					<div class="col-lg-3">
+			        <div class="col-lg-2">
 							<div class="form-group">
 								<div class="form-group"><label  for="tipo" >Tipo Cliente</label>
 											
-												<select class="form-control m-select2" id="kt_select2_3"  title="Digite um ou mais tipo de clientes" name="tipo[]" multiple="multiple">
+												<select class="form-control m-select2" id="kt_select2_3" name="tipo[]" multiple="multiple">
 													<optgroup for="tipo" label="Tipo Cliente">
 													<?php foreach ($viewVar['listaTipoClientes'] as $cliente) : ?>
 													<option value="<?php echo $cliente->getTpcDescricao(); ?>" <?php echo ($Sessao::retornaValorFormulario('tipo') == $cliente->getTpcId()) ? "selected" : ""; ?>>
@@ -66,7 +64,7 @@
 												<span class="form-text text-muted">Por favor insira o tipo do cliente</span>			
 								</div>
 							</div>
-					</div>
+					</div>	
                     <div class="col-lg-2">
                         <label>Licitacao:</label>
                         <input type="text" class="form-control" title="Digite o numero da licitacao" placeholder="Nume. Licitacao" id="numeroLicitacao" name="numeroLicitacao" value="<?php echo $Sessao::retornaValorFormulario('numeroLicitacao'); ?>">
@@ -207,7 +205,7 @@
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Alterar pedido" class="btn btn-info btn-sm"><i class="la la-edit"></i> Alterar</a>
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/exclusao/<?php echo $pedido->getCodControle(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
-									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Alterar Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+									<a class="dropdown-item" data-codstatus="<?php echo $pedido->getCodControle(); ?>"  data-toggle="modal" data-target="#kt_select2_modal" title="Alterar Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/public/assets/media/anexos/<?php echo $pedido->getAnexo(); ?>" target="_blank" title="Visualizar Anexo" class="btn btn-info btn-sm"><i class="la la-chain"></i> Anexo</a>
 								</div>
@@ -231,8 +229,62 @@
 		</div>
 	</div>
 	<?php
-    echo "<h3 class='kt-portlet__head-title'><p class='text-info'>Qtde. de Pedidos " . $qtdePedido . " e Valor Total R$" . number_format($total, 2, ',', '.') . "</p></h3>";
+    	echo "<h3 class='kt-portlet__head-title'><p class='text-info'>Qtde. de Pedidos " . $qtdePedido . " e Valor Total R$" . number_format($total, 2, ',', '.') . "</p></h3>";
     ?>
-</div>
+</div>		
+<!--begin::Modal-->
+<div class="modal fade" id="kt_select2_modal" role="dialog"  aria-labelledby="" aria-hidden="true">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5  class="modal-title" id="">Alteracao de Status - <b> <?php echo $pedido->getClienteLicitacao()->getRazaoSocial(); ?></b></h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true" class="la la-remove"></span>
+											</button>
+										</div>
+										<form class="kt-form kt-form--fit kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/atualizar" method="post" id="form_cadastro">
+											<input type="text" class="form-control" name="codControle" id="codControle" value="<?php echo $pedido->getCodControle(); ?>" required >
+											<input type="text" class="form-control" name="cliente" id="cliente" value="<?php echo $pedido->getClienteLicitacao()->getCodCliente(); ?>" required >
+											<input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $_SESSION['id']; ?>" required>
+											<input type="text" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
+											<div class="modal-body">
+												<div class="form-group row kt-margin-t-20">
+													<label class="col-form-label col-lg-3 col-sm-12">Status</label>
+													<div class="col-lg-9 col-md-9 col-sm-12">
+														<select class="form-control m-select2" id="kt_select2_1_modal" name="status">
+														<option value="">Selecione o status</option>
+																	<?php foreach ($viewVar['listaStatus'] as $status) : ?>
+																		<option value="<?php echo $status->getCodStatus(); ?>" <?php echo ($Sessao::retornaValorFormulario('status') == $status->getCodStatus()) ? "selected" : ""; ?>>
+																			<?php echo $status->getNome(); ?></option>
+																	<?php endforeach; ?>
+														</select>
+													</div>
+												</div>
+																								
+												<div class="form-group row kt-margin-b-20">
+													<label class="col-form-label col-lg-3 col-sm-12">Placeholder</label>
+													<div class="col-lg-9 col-md-9 col-sm-12">
+														<select class="form-control m-select2" id="kt_select2_4_modal" name="param">
+															<option></option>
+															<optgroup label="Alaskan/Hawaiian Time Zone">
+																<option value="AK">Alaska</option>
+																<option value="HI">Hawaii</option>
+															</optgroup>
+																													
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-brand" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
+												<button type="button" class="btn btn-secondary">Salvar</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<!--end::Modal-->				
 <!-- end:: Content -->
 </div>

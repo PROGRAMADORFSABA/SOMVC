@@ -1,12 +1,11 @@
+<!DOCTYPE html5>
+<html lang="en">
 
 <?php
 date_default_timezone_set('America/Bahia');
 $dataAtual = date('Y-m-d H:i:s');	
-
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
 <!-- begin::Head -->
 

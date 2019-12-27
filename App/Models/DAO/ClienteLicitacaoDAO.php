@@ -199,11 +199,8 @@ class ClienteLicitacaoDAO extends  BaseDAO
             $dados = $resultado->fetchAll();
 
         if ($dados) {
-
             $lista = [];
-
             foreach ($dados as $dado) {
-
                 $clienteLicitacao = new ClienteLicitacao();
                 $clienteLicitacao->setTpcId($dado['tpc_id']);
                 $clienteLicitacao->setTpcDescricao($dado['tpc_descricao']);
