@@ -42,6 +42,7 @@ class Pedido{
     {
         $this->codControle = $codControle;
     }
+
     /**
      * @return mixed
      */

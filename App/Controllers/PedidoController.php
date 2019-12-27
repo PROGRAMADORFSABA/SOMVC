@@ -26,6 +26,7 @@ class PedidoController extends Controller
     public function index()
     {
         $pedido = new Pedido();
+        $clienteLicitacao = new ClienteLicitacao();
         if($_POST){
             $pedido->setCodControle($_POST['codigo']);
             $pedido->setCodRepresentante($_POST['representante']);
@@ -33,8 +34,9 @@ class PedidoController extends Controller
             //$pedido->setCodUsuario($_POST['usuario']); 
             $pedido->setCodStatus($_POST['status']);
             $pedido->setNumeroAF($_POST['numeroAf']);       
-            $pedido->setNumeroLicitacao($_POST['numeroLicitacao']); 
-            $pedido->setTipoCliente($_POST['tipo']);            
+            $pedido->setNumeroLicitacao($_POST['numeroLicitacao']);
+           // $pedido->setTipoCliente($_POST['tipo']);
+            $pedido->setTipoCliente(implode( "','", $_POST['tipo']));
          }
 
         $pedidoService = new PedidoService();
@@ -44,7 +46,7 @@ class PedidoController extends Controller
         self::setViewParam('listaStatus', $statusService->listar());
         self::setViewParam('listarPedidos', $pedidoService->listar($pedido));
         self::setViewParam('listaClientesPedido', $clienteLicitacaoService->listaClientesPedido());
-        self::setViewParam('listaTipoClientes', $clienteLicitacaoService->listaTipoCliente());
+        self::setViewParam('listaTipoClientes', $clienteLicitacaoService->listaTipoCliente($clienteLicitacao));
         self::setViewParam('listarRepresentantes', $representanteService->listar());
         $pedidoDAO = new PedidoDAO();
         
@@ -262,7 +264,6 @@ class PedidoController extends Controller
         $instituicao          = $instituicaoService->listar($_POST['fk_instituicao']);
         $representante        = $representanteService->listar($_POST['representante'])[0];
         $status               = $statusService->listar($_POST['status']);
-    
         $pedido->setCodControle($_POST['codControle']);
         $pedido->setNumeroLicitacao($_POST['numeroPregao']);
         $pedido->setNumeroAf($_POST['numeroAf']);
@@ -288,6 +289,7 @@ class PedidoController extends Controller
         
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
+            
            $this->redirect('/pedido/edicao/' . $_POST['codControle']);
         }
         $pedidoService = new PedidoService();
@@ -296,7 +298,7 @@ class PedidoController extends Controller
             $subject = 2;
             $emailService->email($pedido, $subject);
             
-            //$this->redirect('/pedido');
+            $this->redirect('/pedido');
             Sessao::limpaFormulario();
             Sessao::limpaMensagem();
             Sessao::limpaErro();           

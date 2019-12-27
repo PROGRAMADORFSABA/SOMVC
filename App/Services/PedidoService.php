@@ -18,10 +18,10 @@ use App\Services\EmailService;
 
 class PedidoService
 {
-    public function listar()
+    public function listar(Pedido $pedido)
     {
         $pedidoDAO = new PedidoDAO();
-        return $pedidoDAO->listar();
+        return $pedidoDAO->listar($pedido);
     }
     
     public function salvar(Pedido $pedido)

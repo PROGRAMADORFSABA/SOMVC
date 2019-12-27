@@ -17,7 +17,8 @@ class ClienteLicitacao
     private $dataCadastro;
     private $tipoCliente;
     private $idTipoCliente;
-    
+    private $tpcDescricao;
+    private $tpcId;
     
    /* public  function  __construct()
     {
@@ -28,22 +29,11 @@ class ClienteLicitacao
      * @return TipoCliente
      */
 
-    public function getTipoCliente()   {
+    public function getTipoCliente()   
+    {
         return $this->tipoCliente;
     }
     
-    /**
-     * Set the value of tipoCliente
-     *
-     * @return  self
-     */ 
-    public function setTipoCliente($tipoCliente)
-    {
-        $this->tipoCliente = $tipoCliente;
-
-        return $this;
-    }
-
     /**
      * @return mixed
      */
@@ -79,6 +69,45 @@ class ClienteLicitacao
     public function setIdTipoCliente($IdTipoCliente)
     {
         $this->$IdTipoCliente = $IdTipoCliente;
+    }
+    /**
+     * @return tpcDescricao
+     */
+
+    public function getTpcDescricao()   {
+        return $this->tpcDescricao;
+    }
+    
+    /**
+     * Set the value of tpcDescricao
+     *
+     * @return  self
+     */ 
+    public function setTpcDescricao($tpcDescricao)
+    {
+        $this->tpcDescricao = $tpcDescricao;
+
+        return $this;
+    }
+    
+    /**
+     * @return tpcId
+     */
+
+    public function getTpcId()   {
+        return $this->tpcId;
+    }
+    
+    /**
+     * Set the value of tpcId
+     *
+     * @return  self
+     */ 
+    public function setTpcId($tpcId)
+    {
+        $this->tpcId = $tpcId;
+
+        return $this;
     }
     /**
      * @return mixed
@@ -168,5 +197,16 @@ class ClienteLicitacao
 
         return $this;
     }
-    
+
+    /**
+     * Set the value of tipoCliente
+     *
+     * @return  self
+     */ 
+    public function setTipoCliente($tipoCliente)
+    {
+        $this->tipoCliente = $tipoCliente;
+
+        return $this;
+    }
 }
