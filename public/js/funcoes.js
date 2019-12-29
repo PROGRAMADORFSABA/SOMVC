@@ -1,8 +1,9 @@
 
-document.getElementById('frmCadastro').addEventListener('submit', function(){ // CRIA EM EVENTO QUE É DISPARADO QUANDO O ELEMENTO DE ID 'form' FOR 'submetido/enviado'.
+$(document).ready(function(){
+	document.getElementById('frmCadastro').addEventListener('submit', function(){ // CRIA EM EVENTO QUE É DISPARADO QUANDO O ELEMENTO DE ID 'form' FOR 'submetido/enviado'.
 var inputs = this.getElementsByTagName('input'); // PEGA TODOS OS INPUTS PRESENTES NESSE ELEMENTO
 var teste = 0;
-var tabela1;
+var tabela3;
 for(var i in inputs){ // ITERA OS INPUTS
 	//teste = teste + 1;
 	var input = inputs[i];
@@ -15,18 +16,20 @@ for(var i in inputs){ // ITERA OS INPUTS
 		//	alert("checked falso js  " +teste );
 		teste = 0;
 		}
-		tabela1 = teste;
+		tabela3 = teste;
 	$.ajax({ //Função AJAX
 	//url:"http://coisavirtual.com.br/Permissao/cadastro",			//Arquivo php
-		url:"http://localhost/SOMVC/permissao/salvar.php",			//Arquivo php
+		url:"http://localhost/SOMVC/permissao/salvar",			//Arquivo php
+		//url:"http://localhost/SOMVC/App/Controllers/PermissaoController.php",			//Arquivo php
 		type:"POST",				//Método de envio
-		data: {tabela1:tabela1}	//Dados
+		data: {tabela3:tabela3}	//Dados
 		});
 	}
 	//input.checked = true; // SETA COMO CHECKED PARA QUE ELE SEJA ENVIADO, O VALOR VALIDO É O QUE ESTA NO 'value' DO ELEMENTO
 }
 
 
+	});
 });
 
 if(document.getElementById("enviarEmail").checked == true){

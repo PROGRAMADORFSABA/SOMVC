@@ -83,7 +83,10 @@ class PermissaoController extends Controller
     }
     public function salvar()
     {
-        if(filter_input(INPUT_SERVER, 'REQUEST_METHOD')=='POST') {
+        $test = $_POST['tabela3'];
+        $Dados = filter_input_array(INPUT_POST);
+        var_dump( $Dados);
+     /*   if(filter_input(INPUT_SERVER, 'REQUEST_METHOD')=='POST') {
             $s = array();
             foreach ($_POST as $chave => $valor) {
               if(is_array($valor)) {
@@ -97,7 +100,7 @@ class PermissaoController extends Controller
               }
             }            
         }
-
+*/
         $test = array();
         $test = $_POST['tabela1'];
          var_dump($test);

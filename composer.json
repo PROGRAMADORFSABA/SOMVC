@@ -1,4 +1,13 @@
 {
+  "name": "DevAction",
+  "description": "Software Administrativo",
+  "authors": 
+    [
+      { 
+      "name": "Alex Nogueira",
+      "email": "suporte@devaction.com.br"
+    }
+  ],
   "autoload": {
     "psr-4": {
         "App\\": "App"
