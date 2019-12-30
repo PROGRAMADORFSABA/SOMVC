@@ -27,6 +27,7 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
     private $edtDataAlteracao;
     private $usuario;
     private $instituicao;
+    private $editalStatus;
     private $edtInstituicao;
     private $representante;
     private $clienteLicitacao;
@@ -308,6 +309,18 @@ edt_representante, edt_cliente, edt_usuario, edt_instituicao, edt_datacadastro, 
     
         public function setRepresentante(Representante $representante) {
             $this->representante = $representante;
+        }
+        /**
+         * Set the value of EditalStatus
+         *
+         * @return  self
+         */ 
+        public function getEditalStatus() {
+            return $this->editalStatus;
+        }
+    
+        public function setEditalStatus(EditalStatus $editalStatus) {
+            $this->editalStatus = $editalStatus;
         }
         /**
          * Set the value of Instituicao

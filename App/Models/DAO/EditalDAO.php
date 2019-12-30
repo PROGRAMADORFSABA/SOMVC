@@ -227,7 +227,8 @@ class EditalDAO extends BaseDAO
             $edtGarantia                   = $edital->getEdtGarantia();
             $edtValor                    = $edital->getEdtValor();
            // $edtValor                      = str_replace(",", ".", $valorAtual);
-            $edtStatus                     = $edital->getEdtStatus();
+            //$edtStatus                     = $edital->getEdtStatus();
+            $edtStatus                    = $edital->getEditalStatus()->getStEdtId();
             $edtAnalise                    = $edital->getEdtAnalise();
             $edtObservacao                 = $edital->getEdtObservacao();
             $edtAnexo                      = $edital->getEdtAnexo();
@@ -336,14 +337,15 @@ class EditalDAO extends BaseDAO
             $edtModalidade                 = $edital->getEdtModalidade();
             $edtTipo                       = $edital->getEdtTipo();
             $edtGarantia                   = $edital->getEdtGarantia();
-            $edtValor                    = $edital->getEdtValor();
+            $edtValor                      = $edital->getEdtValor();
             //$edtValor                      = str_replace(",", ".", $valorAtual);
-            $edtStatus                     = $edital->getEdtStatus();
+            //$edtStatus                     = $edital->getEdtStatus();
             $edtAnalise                    = $edital->getEdtAnalise();
             $edtObservacao                 = $edital->getEdtObservacao();
             $edtAnexo                      = $edital->getEdtAnexo();
             $edtRepresentante              = $edital->getRepresentante()->getCodRepresentante();
             $edtCliente                    = $edital->getClienteLicitacao()->getCodCliente();
+            $edtStatus                    = $edital->getEditalStatus()->getStEdtId();
             $edtUsuario                    = $edital->getUsuario()->getId();           
             $edtInstituicao                = $edital->getInstituicao()->getInst_Id();
             $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d h:m:s');

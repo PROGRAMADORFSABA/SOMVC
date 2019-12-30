@@ -4,10 +4,12 @@ namespace App\Controllers;
 
 use App\Lib\Sessao;
 use App\Models\Entidades\Edital;
+use App\Models\Entidades\EditalStatus;
 use App\Models\Entidades\ClienteLicitacao;
 use App\Models\Entidades\Representante;
 use App\Models\Validacao\EditalValidador;
 use App\Services\EditalService;
+use App\Services\EditalStatusService;
 use App\Services\RepresentanteService;
 use App\Services\ClienteLicitacaoService;
 use App\Services\ContratoService;
@@ -15,20 +17,20 @@ use App\Services\UsuarioService;
 use App\Services\InstituicaoService;
 use App\Services\NotificacaoService;
 
-
 class EditalController extends Controller
 {
     public function index($params)
     {
-        $editalId = $params[0];
-        $editalService = new EditalService();
-        $clienteLicitacaoService = new ClienteLicitacaoService();
-        $representanteService = new RepresentanteService();
-        $edital = new Edital();
+        $editalId                   = $params[0];
+        $editalService              = new EditalService();
+        $clienteLicitacaoService    = new ClienteLicitacaoService();
+        $representanteService       = new RepresentanteService();
+        $edital                     = new Edital();
 
         self::setViewParam('listaClientes', $editalService->listar($editalId));
         
         //self::setViewParam('listaClientes', $clienteLicitacaoService->listar());
+       
         self::setViewParam('listarRepresentantes', $editalService->listarRepresentanteEdital());
         
        if($_POST){
@@ -61,13 +63,18 @@ class EditalController extends Controller
 
     public function cadastro()
     {
-        
-        $representanteService = new RepresentanteService();
+        $editalStatusService     = new EditalStatusService();
+        $editalStatus            = new EditalStatus();
+        $representanteService    = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $edital = new Edital();
 
         if(Sessao::existeFormulario()) {
      
+        $editalStatusId = Sessao::retornaValorFormulario('cliente');
+        $editalStatus = $editalStatusService->listar($editalStatusId)[0];
+        $edital->setEditalStatus($editalStatus);
+        
         $clienteId = Sessao::retornaValorFormulario('cliente');
         $clienteLicitacao = $clienteLicitacaoService->listar($clienteId)[0];
         $edital->setClienteLicitacao($clienteLicitacao);
@@ -75,11 +82,14 @@ class EditalController extends Controller
         $representanteId = Sessao::retornaValorFormulario('representante');
         $representante = $representanteService->listar($representanteId)[0];
         $edital->setRepresentante($representante);
-        }else{    
-        self::setViewParam('listarRepresentantes', $representanteService->listar());                 
+        }else{   
+            
+            self::setViewParam('listarRepresentantes', $representanteService->listar());                 
             $edital->setClienteLicitacao(new ClienteLicitacao());
             $edital->setRepresentante(new Representante());
+            $edital->setEditalStatus(new EditalStatus());
         }
+        self::setViewParam('listarEditalStatus', $editalStatusService->listar($editalStatus)); 
         $this->setViewParam('edital',$edital);        
         $this->render('/edital/cadastro');
         Sessao::limpaFormulario();
@@ -89,21 +99,25 @@ class EditalController extends Controller
 
     public function salvar()
     {
-        $clienteLicitacaoService  = new ClienteLicitacaoService();        
-        $usuarioService = new UsuarioService();        
-        $representanteService = new RepresentanteService();        
-        $instituicaoService = new InstituicaoService();        
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
-        $usuario        = $usuarioService->listar($_POST['edtUsuario']);
-        $instituicao     =   $instituicaoService->listar($_POST['fk_instituicao']);
-        $representante    = $representanteService->listar($_POST['representante'])[0];
+        $editalStatus           = new EditalStatus();
+        $clienteLicitacaoService = new ClienteLicitacaoService();        
+        $usuarioService          = new UsuarioService();        
+        $editalStatusService     = new EditalStatusService();        
+        $representanteService    = new RepresentanteService();        
+        $instituicaoService      = new InstituicaoService();        
+        $clienteLicitacao        = $clienteLicitacaoService->listar($_POST['cliente']);
+        $usuario                 = $usuarioService->listar($_POST['edtUsuario']);
+        $editalStatus->setStEdtId($_POST['status']);
+        $status                  = $editalStatusService->listar($editalStatus)[0];
+        $instituicao             = $instituicaoService->listar($_POST['fk_instituicao']);
+        $representante           = $representanteService->listar($_POST['representante'])[0];
 
         $edital = new Edital();
         $edital->setEdtProposta($_POST['proposta']);        
         $edital->setEdtNumero($_POST['numeroLicitacao']);        
         $edital->setEdtValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));      
         $edital->setEdtModalidade($_POST['modalidade']);        
-        $edital->setEdtStatus($_POST['status']);        
+       // $edital->setEdtStatus($_POST['status']);        
         $edital->setEdtTipo($_POST['tipo']);        
         $edital->setEdtHora($_POST['hora']);        
         $edital->setEdtDataAlteracao($_POST['dataAbertura']);        
@@ -118,6 +132,7 @@ class EditalController extends Controller
         $edital->setInstituicao($instituicao);
         $edital->setRepresentante($representante);
         $edital->setUsuario($usuario);
+        $edital->setEditalStatus($status);
 
         Sessao::gravaFormulario($_POST);
 
@@ -144,10 +159,12 @@ class EditalController extends Controller
 
     public function edicao($params)
     {
+        $editalStatus            = new EditalStatus();
         $editalId                = $params[0];
         $representanteService    = new RepresentanteService();
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $edital = new Edital();
+        
         
         if(Sessao::existeFormulario()) { 
             $clienteId        = Sessao::retornaValorFormulario('cliente');
@@ -157,6 +174,9 @@ class EditalController extends Controller
             $representanteId = Sessao::retornaValorFormulario('codRepresentante');
             $representante = $representanteService->listar($representanteId)[0];
             $edital->setRepresentante($representante);
+
+            $editalStatus->setStEdtId($_POST['status']);
+            $status    = $editalStatusService->listar($editalStatus)[0];
             
         }else{                       
             $editalService = new EditalService();
@@ -178,23 +198,25 @@ class EditalController extends Controller
     public function atualizar()
     {       
         $edital = new Edital();
-
+        $editalStatus = new EditalStatus();
+        $editalStatusService     = new EditalStatusService();    
         $clienteLicitacaoService  = new ClienteLicitacaoService();        
-        $usuarioService = new UsuarioService();        
-        $representanteService = new RepresentanteService();        
-        $instituicaoService = new InstituicaoService();        
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
-        $usuario        = $usuarioService->listar($_POST['edtUsuario']);
-        $instituicao     =   $instituicaoService->listar($_POST['fk_instituicao']);
-        $representante    = $representanteService->listar($_POST['representante'])[0];
-
-        $edital = new Edital();
+        $usuarioService          = new UsuarioService();        
+        $representanteService    = new RepresentanteService();        
+        $instituicaoService      = new InstituicaoService();        
+        $clienteLicitacao        = $clienteLicitacaoService->listar($_POST['cliente']);
+        $editalStatus->setStEdtId($_POST['status']);
+        $status                  = $editalStatusService->listar($editalStatus)[0];
+        $usuario                 = $usuarioService->listar($_POST['edtUsuario']);
+        $instituicao             =   $instituicaoService->listar($_POST['fk_instituicao']);
+        $representante           = $representanteService->listar($_POST['representante'])[0];
+       
         $edital->setEdtId($_POST['codigo']);        
         $edital->setEdtProposta($_POST['proposta']);        
         $edital->setEdtNumero($_POST['numeroLicitacao']);        
         $edital->setEdtValor(str_replace(',','.', str_replace(".", "", $_POST['valor'])));      
         $edital->setEdtModalidade($_POST['modalidade']);        
-        $edital->setEdtStatus($_POST['status']);        
+       //$edital->setEdtStatus($_POST['status']);        
         $edital->setEdtTipo($_POST['tipo']);        
         $edital->setEdtHora($_POST['hora']);        
         $edital->setEdtDataAlteracao($_POST['dataAbertura']);        
@@ -214,6 +236,7 @@ class EditalController extends Controller
         $edital->setInstituicao($instituicao);
         $edital->setRepresentante($representante);
         $edital->setUsuario($usuario);
+        $edital->setEditalStatus($status);
 
         Sessao::gravaFormulario($_POST);
 

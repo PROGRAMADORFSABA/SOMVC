@@ -13,20 +13,7 @@
     private $stEdtUsuario;
     private $stEdtInstituicao;
 
-                 /**
-         * Set the value of stEdtInstituicao
-         *
-         * @return  self
-         */ 
-        public function setStEdtInstituicao()
-        {
-                return $this->stEdtInstituicao;
-        }
-
-        public function getStEdtInstituicao($stEdtInstituicao)        {
-                $this->stEdtInstituicao = $stEdtInstituicao;
-                return $this;
-        }
+       
          /**
          * Set the value of edtValor
          *
@@ -104,7 +91,6 @@
         public function setStEdtDataCadastro($stEdtDataCadastro)
         {
                 $this->stEdtDataCadastro = $stEdtDataCadastro;
-
                 return $this;
         }
         
@@ -114,12 +100,26 @@
          * @return  self
          */ 
 
+        public function setStEdtUsuario(Usuario $stEdtUsuario) {
+                $this->stEdtUsuario = $stEdtUsuario;
+        }
         public function getStEdtUsuario() {
                 return $this->stEdtUsuario;
         }
+                                
+                  /**
+         * Set the value of stEdtInstituicao
+         *
+         * @return  self
+         */ 
+        public function setStEdtInstituicao(Instituicao $stEdtInstituicao)
+        {
+                return $this->stEdtInstituicao = $stEdtInstituicao;
+        }
         
-        public function setStEdtUsuario(Usuario $stEdtUsuario) {
-                $this->stEdtUsuario = $stEdtUsuario;
+        public function getStEdtInstituicao() 
+        {
+                return $this->stEdtInstituicao;
         }
  }
 

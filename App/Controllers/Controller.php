@@ -51,15 +51,13 @@ abstract class Controller{
     }
 
     public function renderLogin($view)
-    {
-        
+    {        
         $viewVar    = $this->getViewVar();
         $Sessao     = Sessao::class;
 
         require_once PATH . '/App/Views/layouts/header.php';
         require_once PATH . '/App/Views/' . $view . '.php';
         require_once PATH . '/App/Views/layouts/footer.php';
-
     }
 
     public function redirect($view)

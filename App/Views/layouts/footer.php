@@ -1,15 +1,15 @@
 					<!-- begin:: Footer -->
 					<div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop">
 						<div class="kt-footer__copyright">
-							2019&nbsp;&copy;&nbsp;<a href="http://www.devAction.com.br" target="_blank" class="kt-link">Desenvolvido por DevAction</a>
+							2019&nbsp;&copy;&nbsp;<a href="http://www.devAction.com.br" target="_blank" class="kt-link">Copyright Desenvolvido por DevAction</a>
 						</div>
 
 						<div id="timefooter" name="timefooter"></div>
 
 						<div class="kt-footer__menu">
-							<a href="http://www.alexnogueira.tech" target="_blank" class="kt-footer__menu-link kt-link">Sobre</a>
-							<a href="http://www.alexnogueira.tech" target="_blank" class="kt-footer__menu-link kt-link">Equipe</a>
-							<a href="http://www.alexnogueira.tech" target="_blank" class="kt-footer__menu-link kt-link">Contato</a>
+							<a href="http://www.devaction.com.br" target="_blank" class="kt-footer__menu-link kt-link">Sobre</a>
+							<a href="http://www.devaction.com.br" target="_blank" class="kt-footer__menu-link kt-link">Equipe</a>
+							<a href="http://www.devaction.com.br" target="_blank" class="kt-footer__menu-link kt-link">Contato</a>
 						</div>
 					</div>
 

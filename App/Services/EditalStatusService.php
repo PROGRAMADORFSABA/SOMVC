@@ -14,18 +14,12 @@ use App\Models\Entidades\EditalStatus;
 
 class EditalStatusService
 {
-    public function listar($edtId = null)
+    public function listar(EditalStatus $editalStatus)
     {
         $editalStatusDAO = new EditalStatusDAO();
-        return $editalStatusDAO->listar($edtId);
+        return $editalStatusDAO->listar($editalStatus);
     }
     
-    public function listarDinamico(EditalStatus $editalStatus)
-    {
-        $editalStatusDAO = new EditalStatusDAO();
-        return $editalStatusDAO->listarDinamico($editalStatus);
-    }
-
     public function salvar(EditalStatus $editalStatus)
     {
         $transacao = new Transacao();
@@ -41,7 +35,7 @@ class EditalStatusService
                 $editalStatusDAO = new EditalStatusDAO();            
                 $editalStatusDAO->salvar($editalStatus);
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro realizado com sucesso!.");
+                Sessao::gravaMensagem("Cadastro realizado com sucesso!.");
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
@@ -68,7 +62,7 @@ class EditalStatusService
                 $editalStatusDAO = new EditalStatusDAO();            
                 $editalStatusDAO->atualizar($editalStatus);
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro alterado com sucesso!.");
+                Sessao::gravaMensagem("Cadastro alterado com sucesso!.");
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
@@ -95,7 +89,7 @@ class EditalStatusService
             $transacao->commit();            
             
             Sessao::limpaMensagem();
-            Sessao::gravaMensagem("Edital Excluida com Sucesso!");
+            Sessao::gravaMensagem("Cadastro Excluido com Sucesso!");
             return true;
         } catch (\Exception $e) {
             $transacao->rollBack();

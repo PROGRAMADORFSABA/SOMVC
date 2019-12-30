@@ -57,19 +57,18 @@
                                 <option value="Nao">NÃO</option>
                         </select>
                         <span class="form-text text-muted">Por favor Garantia</span>
-                    </div>  
+                    </div>                    
                     <div class="col-lg-2">
                         <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status" required>
-                            <option value="">Selecione o Status</option>
-                            <option value="Em Analise">Em Analise</option>
-                                <option value="Ganha">Ganha</option>
-                                <option value="Concorrendo">Concorrendo</option>
-                                <option value="Em Montagem">Em Montagem</option>
-                                <option value="Perdida">Perdida</option>
-                        </select>
+                        <select class="form-control" id="status" name="status" required>
+                                <option value="">Selecione o Status</option>
+                                <?php foreach ($viewVar['listarEditalStatus'] as $editalStatus) : ?>
+                                    <option value="<?php echo $editalStatus->getStEdtId(); ?>" <?php echo ($Sessao::retornaValorFormulario('status') == $editalStatus->getStEdtId()) ? "selected" : ""; ?>>
+                                        <?php echo $editalStatus->getStEdtNome(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
-                    </div>
+                    </div>   
                     <div class="col-lg-3">
                         <label for="codRepresentante">Representante</label>
                         <select class="form-control" id="codRepresentante" name="codRepresentante" required>
