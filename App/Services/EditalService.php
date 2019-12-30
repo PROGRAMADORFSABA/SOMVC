@@ -36,9 +36,9 @@ class EditalService
     public function autoComplete(Edital $edital)
     { 
         $editalDAO = new EditalDAO();
-        $busca = $editalDAO->listaPorNome($edital);          
+      //  $busca = $editalDAO->listaPorNome($edital);          
         $exportar = new Exportar();
-        return $exportar->exportarJSON($busca);
+       // return $exportar->exportarJSON($busca);
     }
     
     public function autoCompleteEditalClienteRazaoSocial(ClienteLicitacao $clienteLicitacao)
@@ -65,7 +65,7 @@ class EditalService
     public function listarEstadosVinculadas(Edital $edital)
     {
         $editalDAO = new EditalDAO();
-        return $editalDAO->listarEstadosVinculadas($edital);
+       // return $editalDAO->listarEstadosVinculadas($edital);
     }
 
     public function salvar(Edital $edital)
