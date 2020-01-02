@@ -321,7 +321,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
     {
         $resultado = $this->select(
             "SELECT * FROM clienteLicitacao WHERE razaosocial
-                        LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY razaosocial LIMIT 0,6"
+                        LIKE '%".$clienteLicitacao->getRazaoSocial()."%' ORDER BY razaosocial LIMIT 0,10"
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }

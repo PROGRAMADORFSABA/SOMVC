@@ -23,6 +23,12 @@ class UsuarioService
         $usuarioDAO = new UsuarioDAO();
         return $usuarioDAO->listar($idUsuario);
     }
+   
+    public function validacadastro($email,$valida)
+    {
+        $usuarioDAO = new UsuarioDAO();
+        return $usuarioDAO->validacadastro($codigo,$email,$valida);
+    }
 
   /*public function autoComplete(Usuario $usuario)
     { 

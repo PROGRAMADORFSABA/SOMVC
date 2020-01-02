@@ -1,34 +1,34 @@
 
+
 $(document).ready(function(){
 	document.getElementById('frmCadastro').addEventListener('submit', function(){ // CRIA EM EVENTO QUE É DISPARADO QUANDO O ELEMENTO DE ID 'form' FOR 'submetido/enviado'.
-var inputs = this.getElementsByTagName('input'); // PEGA TODOS OS INPUTS PRESENTES NESSE ELEMENTO
-var teste = 0;
-var tabela3;
-for(var i in inputs){ // ITERA OS INPUTS
-	//teste = teste + 1;
-	var input = inputs[i];
-	if(input.type == 'checkbox'){ // CASO SEJA UM 'checkbox'
-		input.value = input.checked; // SETA 'value' COM TRUE/FALSE DE ACORDO COM O CHECKED
-		if(input.checked == true){
-		//	alert("checked true js " +teste );
-		teste = 1;
-		}else{
-		//	alert("checked falso js  " +teste );
-		teste = 0;
+	var inputs = this.getElementsByTagName('input'); // PEGA TODOS OS INPUTS PRESENTES NESSE ELEMENTO
+	var teste = 0;
+	var tabela3;
+	for(var i in inputs){ // ITERA OS INPUTS
+		//teste = teste + 1;
+		var input = inputs[i];
+			if(input.type == 'checkbox'){ // CASO SEJA UM 'checkbox'
+				input.value = input.checked; // SETA 'value' COM TRUE/FALSE DE ACORDO COM O CHECKED
+				if(input.checked == true){
+				//	alert("checked true js " +teste );
+				teste = 1;
+				}else{
+					//alert("checked falso js  " +teste );
+				teste = 0;
+				}
+				tabela3 = teste;
+				alert("checked falso js  "  );
+				$.ajax({ //Função AJAX
+				//url:"http://coisavirtual.com.br/Permissao/cadastro",			//Arquivo php
+					url:"http://localhost/SOMVC/permissao/salvar",			//Arquivo php
+					//url:"http://localhost/SOMVC/App/Controllers/PermissaoController.php",			//Arquivo php
+					type:"POST",				//Método de envio
+					data: {tabela3:tabela3}	//Dados
+				});
+			}
+			//input.checked = true; // SETA COMO CHECKED PARA QUE ELE SEJA ENVIADO, O VALOR VALIDO É O QUE ESTA NO 'value' DO ELEMENTO
 		}
-		tabela3 = teste;
-	$.ajax({ //Função AJAX
-	//url:"http://coisavirtual.com.br/Permissao/cadastro",			//Arquivo php
-		url:"http://localhost/SOMVC/permissao/salvar",			//Arquivo php
-		//url:"http://localhost/SOMVC/App/Controllers/PermissaoController.php",			//Arquivo php
-		type:"POST",				//Método de envio
-		data: {tabela3:tabela3}	//Dados
-		});
-	}
-	//input.checked = true; // SETA COMO CHECKED PARA QUE ELE SEJA ENVIADO, O VALOR VALIDO É O QUE ESTA NO 'value' DO ELEMENTO
-}
-
-
 	});
 });
 

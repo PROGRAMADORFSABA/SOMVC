@@ -9,9 +9,12 @@ use App\Models\Entidades\home;
 
 class LoginController extends Controller
 {
+    public function sucesso()
+    { 
+        $this->renderLogin('/login/sucesso');
+    }
     public function index()
-    {       
-
+    { 
         $this->renderLogin('/login/index');
     }
 

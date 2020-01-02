@@ -121,7 +121,7 @@ class ClienteDAO extends BaseDAO
     {
         $resultado = $this->select(
             "SELECT * FROM cliente WHERE nomeFantasiaCliente 
-            LIKE '%".$cliente->getNomeFantasiaCliente()."%' LIMIT 0,6"
+            LIKE '%".$cliente->getNomeFantasiaCliente()."%' LIMIT 0,10"
         );
         return $resultado->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -129,7 +129,7 @@ class ClienteDAO extends BaseDAO
     {      
         $resultado = $this->select(
             "SELECT * FROM cliente WHERE nomeCliente 
-            LIKE '%".$cliente->getNomeCliente()."%' ORDER BY nomeCliente LIMIT 0,6"
+            LIKE '%".$cliente->getNomeCliente()."%' ORDER BY nomeCliente LIMIT 0,10"
         );       
             return $resultado->fetchAll(\PDO::FETCH_ASSOC);                                
     }

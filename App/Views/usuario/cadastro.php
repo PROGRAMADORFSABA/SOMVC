@@ -62,14 +62,14 @@
 
                     <div class="col-lg-4">
                         <label class="">Status de usuário:</label>
-                        <div class="kt-radio-inline">
+                        <div class="kt-radio-inline" >
                             <label class="kt-radio kt-radio--solid">
-                                <input type="radio" name="status" value="1"> Ativo
+                                <input type="radio" name="status" value="1" disabled> Ativo
                                 <span></span>
                             </label>
                         </div>
                         <label class="kt-radio kt-radio--solid">
-                            <input type="radio" name="status" value="2"> Desativado
+                            <input type="radio" name="status" checked value="2" disabled> Desativado
                             <span></span>
                         </label>
                         <span class="form-text text-muted">Por favor, selecione o status de usuários</span>

@@ -6,6 +6,7 @@ use App\Lib\Sessao;
 use App\Models\DAO\UsuarioDAO;
 use App\Models\DAO\DepartamentoDAO;
 use App\Models\Entidades\Usuario;
+use App\Services\UsuarioService;
 use App\Models\Validacao\UsuarioValidador;
 
 class UsuarioController extends Controller
@@ -33,7 +34,6 @@ class UsuarioController extends Controller
         Sessao::limpaMensagem();
     }
 
-
     public function salvar()
     {
         $usuario = new Usuario();
@@ -54,16 +54,56 @@ class UsuarioController extends Controller
 
         if ($usuarioDAO->verificaEmail($_POST['email'])) {
             Sessao::gravaMensagem("Email existente");
-            //  $this->redirect('/usuario/cadastro');
+            $this->redirect('/usuario/cadastro');
         }
 
-        if ($usuarioDAO->salvar($usuario)) {
+        if ($usuarioId = $usuarioDAO->salvar($usuario)) {
+
+            //$to = $usuario->setEmail($_POST['email']);
+            $to = "vendas2@fabmed.com.br";
+			$valida = md5($to);
+          
+			$subject = "Cadastro no Sistema de Ocorrencias"; // assunto
+			$message = "Validacao de cadastro " . "\r\n";
+           // $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/valida_cadastro.php?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";
+            $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to&v3=$usuarioId> SO - Click aqui para validar seu cadastro </a>";          
+            $headers = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n"; //formato
+			//$headers .= 'To: Carlos Andre <programadorfsaba@gmail.com>' . "\r\n"; //
+			$headers .= 'From:< noreply@sistemadevnogueira.online>' . "\r\n"; //email de envio
+			//$headers .= 'From:< contato@sistemaocorrencia.com.br>' . "\r\n"; //email de envio
+			//$headers .= 'CC:<' . $emailUser . '>' . "\r\n"; //email com copia
+			$headers .= 'Reply-To: < suporte@sistemadevnogueira.online>' . "\r\n"; //email para resposta
+			mail($to, $subject, $message, $headers);
+
             $this->redirect('/usuario/sucesso');
         } else {
             Sessao::gravaMensagem("Erro ao gravar");
         }
     }
 
+    public function validausuario()
+    {        
+        $to = "programadorfsaba@gmail.com";
+			$valida = md5($to);
+			//$valida = sha1($to);
+        $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";          
+                   
+        $valida  = $_GET["v"];
+        $email  = $_GET['v2'];
+        $codigo  = $_GET['v3'];
+        
+        if ($valida == "" || $email == "" ) {           
+            Sessao::gravaMensagem("nao foi possivel ativar o cadastro");
+            $this->redirect('/login');           
+        }else {
+            $usuarioService = new UsuarioService();
+            $usuario        = $usuarioService->validacadastro($codigo,$valida,$email); 
+            $this->redirect('/login/sucesso');
+        
+        }
+        
+    }
     public function edicao($params)
     {
 
@@ -91,6 +131,11 @@ class UsuarioController extends Controller
 
     public function atualizar()
     {
+        $usuarioDAO = new UsuarioDAO();
+        $usuario = $usuarioDAO->listar($_POST['id']);
+        $email = $usuario->getEmail();
+        
+        $usuarioService = new UsuarioService();
         $usuario = new Usuario();
         $usuario->setId($_POST['id']);
         $usuario->setNome($_POST['nome']);
@@ -115,21 +160,40 @@ class UsuarioController extends Controller
 
         $usuarioDAO = new UsuarioDAO();
 
-        if ($usuarioDAO->verificaEmail($_POST['email'])) {
-            Sessao::gravaMensagem("Email existente");
-            $this->redirect('/usuario/cadastro');
+        if ($_POST['email'] !=  $email) {
+            if($usuarioDAO->verificaEmail($_POST['email'])){
+                
+                Sessao::gravaMensagem("Email existente");
+                $this->redirect('/usuario/edicao/' . $_POST['id']);
+            }
         }
-
-        $usuarioDAO->atualizar($usuario);
+        
+       if( $usuarioDAO->atualizar($usuario)){
+         //$to = $usuario->setEmail($_POST['email']);
+         $to = "vendas2@fabmed.com.br";
+         $valida = md5($to);
+       
+         $subject = "Cadastro no Sistema de Ocorrencias"; // assunto
+         $message = "Validacao de cadastro " . "\r\n";
+        // $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/valida_cadastro.php?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";
+         $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";          
+         $headers = 'MIME-Version: 1.0' . "\r\n";
+         $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n"; //formato
+         //$headers .= 'To: Carlos Andre <programadorfsaba@gmail.com>' . "\r\n"; //
+         $headers .= 'From:< noreply@sistemadevnogueira.online>' . "\r\n"; //email de envio
+         //$headers .= 'From:< contato@sistemaocorrencia.com.br>' . "\r\n"; //email de envio
+         //$headers .= 'CC:<' . $emailUser . '>' . "\r\n"; //email com copia
+         $headers .= 'Reply-To: < suporte@sistemadevnogueira.online>' . "\r\n"; //email para resposta
+         var_dump($message);
+         mail($to, $subject, $message, $headers);
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
         Sessao::limpaErro();
 
         $this->redirect('/usuario');
+       }
     }
-
-
 
     public function exclusao($params)
     {

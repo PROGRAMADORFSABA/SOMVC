@@ -29,6 +29,34 @@ class UsuarioDAO extends BaseDAO
         }
     }
 
+    public function validacadastro($codigo, $email,$valida)
+    {
+        $resultado = $this->select(
+            "SELECT id, nome, nivel, email, status, dataCadastro, valida, dica, senha, fk_idInstituicao
+                FROM usuarios
+                where valida ='$email' AND id ='$codigo' AND email ='$valida'" );           
+        $dado = $resultado->fetch();
+        
+        if ($dado) {
+            $usuario = new Usuario();
+            $usuario->setId($dado['id']);
+            $usuario->setNome($dado['nome']);
+            $usuario->setNivel($dado['nivel']);
+            $usuario->setEmail($dado['email']);
+            $usuario->setId_dep($dado['id_dep']);
+            $usuario->setStatus($dado['status']);
+            $usuario->setDataCadastro($dado['dataCadastro']);
+            $usuario->setValida($dado['valida']);
+            $usuario->setDica($dado['dica']);
+            $usuario->setSenha($dado['senha']);
+            $usuario->setFk_Instituicao($dado['fk_idInstituicao']);
+            $usuario->getDepartamento()->setId($dado['idDep']);
+            $usuario->getDepartamento()->setNome($dado['nomeDep']);
+            return $usuario;
+        }
+
+    }
+
     public function listar($id = null)
     {
         if ($id) {

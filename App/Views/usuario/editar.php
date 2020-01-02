@@ -57,12 +57,12 @@
                     <div class="col-lg-4">
                         <label for="status">Status do Usuario</label>
                         <div class="input-group">
-                            <select class="form-control" name="status" id="status">
+                            <select class="form-control" name="status" id="status" disabled>
                                 <option value="">Selecione o Status</option>
                                 <option value="<?php echo $viewVar['usuario']->getStatus(); ?>" <?php echo ($viewVar['usuario']->getStatus() == $viewVar['usuario']->getStatus()) ? "selected" : ""; ?>>
                                     <?php echo $viewVar['usuario']->getStatus(); ?> </option>
                                 <option value="A">1 - Ativo</option>
-                                <option value="D">2 - Desativado</option>
+                                <option value="D" selected>2 - Desativado</option>
                             </select>
                         </div>
                     </div>
