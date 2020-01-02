@@ -1,7 +1,7 @@
 <?php
  namespace App\Models\Entidades;
-
- use DateTime;
+ 
+use DateTime;
 
  class Contrato{
 /*
@@ -14,6 +14,7 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
     private $ctrDataVencimento;     
     private $ctrValor;
     private $ctrStatus;
+    private $contratoStatus;
     private $ctrObservacao;
     private $ctrAnexo;
     private $ctrDataCadastro;
@@ -170,8 +171,23 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
                 return $this->ctrStatus;
         }
 
-        public function setCtrStatus($ctrStatus)        {
+        public function setCtrStatus( $ctrStatus)        {
                 $this->ctrStatus = $ctrStatus;
+                return $this;
+        }
+                
+         /**
+         * Set the value of contratoStatus
+         *
+         * @return  self
+         */ 
+        public function getContratosStatus()
+        {
+                return $this->contratoStatus;
+        }
+
+        public function setContratosStatus(ContratoStatus $contratoStatus)        {
+                $this->contratoStatus = $contratoStatus;
                 return $this;
         }
                 

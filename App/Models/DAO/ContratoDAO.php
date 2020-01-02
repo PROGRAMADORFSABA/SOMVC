@@ -3,6 +3,7 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Contrato;
+use App\Models\Entidades\ContratoStatus;
 use App\Models\Entidades\Edital;
 use App\Models\Entidades\Usuario;
 use App\Models\Entidades\Instituicao;
@@ -19,7 +20,8 @@ class ContratoDAO extends BaseDAO
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
-		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";
+        INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+        INNER JOIN contratoStatus ctrSt ON ctrSt.stctr_id = ctr.ctr_status";
             if($ctrId) 
             {    
                 $SQL.= " WHERE ctr.ctr_id = $ctrId";
@@ -82,6 +84,9 @@ class ContratoDAO extends BaseDAO
         $contrato->setUsuario(new Usuario());
         $contrato->getUsuario()->setId($dado['id']);
         $contrato->getUsuario()->setNome($dado['nome']);
+        $contrato->setContratoStatus(new ContratoStatus());
+        $contrato->getcontratoStatus()->setStEdtId($dado['stedt_id']);;
+        $contrato->getcontratoStatus()->setStEdtNome($dado['stedt_nome']);
 
                 $lista[] = $contrato;
             }
@@ -311,7 +316,8 @@ class ContratoDAO extends BaseDAO
 		INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
         INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
-        INNER JOIN usuarios u ON u.id = ctr.ctr_usuario "; 
+        INNER JOIN usuarios u ON u.id = ctr.ctr_usuario 
+        INNER JOIN contratoStatus ctrSt ON ctrSt.stctr_id = ctr.ctr_status "; 
         $where = Array();
 		if( $codCliente ){ $where[] = " c.licitacaoCliente_cod = {$codCliente}"; }
 		if( $representante ){ $where[] = " r.codRepresentante = {$representante}"; }

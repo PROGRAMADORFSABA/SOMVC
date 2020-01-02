@@ -89,7 +89,7 @@
                     Pesquisa de coluna individual
                 </h3>
                 <?php if ($Sessao::retornaMensagem()) { ?>
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-success" role="alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <?php echo $Sessao::retornaMensagem(); ?>
                     </div>
@@ -154,33 +154,29 @@
             <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_3">
                 <thead>
                     <tr>
-                    <th>CÓDIGO</th>
+                        <th>CLIENTE</th>
                         <th>NUMERO</th>
-                        <th>PROPOSTA</th>
                         <th>MODALIDADE</th>
                         <th>TIPO</th>
                         <th>GARANTIA</th>
                         <th>STATUS</th>
-                        <th>CLIENTE</th>
-                        <th>USUARIO</th>
                         <th>DATA</th>
                         <th>HORA</th>
+                        <th>PROPOSTA</th>
                         <th>ACOES</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>CÓDIGO</th>
+                        <th>CLIENTE</th>
                         <th>NUMERO</th>
-                        <th>PROPOSTA</th>
                         <th>MODALIDADE</th>
                         <th>TIPO</th>
                         <th>GARANTIA</th>
                         <th>STATUS</th>
-                        <th>CLIENTE</th>
-                        <th>USUARIO</th>
                         <th>DATA</th>
                         <th>HORA</th>
+                        <th>PROPOSTA</th>
                         <th>ACOES</th>
                     </tr>
                 </tfoot>
@@ -191,17 +187,15 @@
                         foreach ($dados as $edital) {
                             ?>
                             <tr>
-                                <td><?php echo $edital->getEdtId(); ?></td>
+                                <td><?php echo $edital->getClienteLicitacao()->getRazaoSocial(); ?></td>
                                 <td><?php echo $edital->getEdtNumero(); ?></td>
-                                <td><?php echo $edital->getEdtProposta(); ?></td>
                                 <td><?php echo $edital->getEdtModalidade(); ?></td>
                                 <td><?php echo $edital->getEdtTipo(); ?></td>
                                 <td><?php echo $edital->getEdtGarantia(); ?></td>
-                                <td><?php echo $edital->getEdtStatus(); ?></td>
-                                <td><?php echo $edital->getClienteLicitacao()->getNomeFantasia(); ?></td>
-                                <td><?php echo $edital->getUsuario()->getNome(); ?></td>
-                                <td><?php echo $edital->getEdtDataCadastro()->format('d-m-Y'); ?></td>
+                                <td><?php echo $edital->getEditalStatus()->getStEdtNome(); ?></td>
+                                <td><?php echo $edital->getEdtDataCadastro()->format('d/m/Y'); ?></td>
                                 <td><?php echo $edital->getEdtHora()->format('H:m:s'); ?></td>
+                                <td><?php echo $edital->getEdtProposta(); ?></td>
                                 <td>
                                     <span class="dropdown">
                                         <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true"><i class="la la-ellipsis-h"></i></a>

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Lib\Sessao;
 use App\Models\Validacao\ContratoValidador;
 use App\Models\Entidades\Contrato;
+use App\Models\Entidades\ContratoStatus;
 use App\Models\Entidades\Usuario;
 use App\Models\Entidades\Edital;
 use App\Models\Entidades\Representante;

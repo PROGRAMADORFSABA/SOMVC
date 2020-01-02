@@ -43,7 +43,7 @@ class PedidoService
                 Sessao::gravaMensagem("cadastro realizado com sucesso!.  <br> Pedido Numero: ".$codPedido);
                 Sessao::limpaFormulario();
                 return $codPedido;
-            }catch(\Exception $pe){
+            }catch(\Exception $e){
                  $emailService = new EmailService();
                 $emailService->emailSuporte($e);
                 //var_dump($e);
@@ -74,7 +74,8 @@ class PedidoService
                 return true;
             }catch(\Exception $e){
                  $emailService = new EmailService();
-                $emailService->emailSuporte($e);
+                 $tela = "Alteracao Pedido - Codigo ".$$pedido->getCodControle();
+                $emailService->emailSuporte($e, $tela);
                 $transacao->rollBack(); 
               //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);

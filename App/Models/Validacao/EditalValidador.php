@@ -11,15 +11,19 @@ class EditalValidador{
     {
         $resultadoValidacao = new ResultadoValidacao();
 
-       /* if(empty($edital->getCidNome()))
+        if(empty($edital->getEdtValor()))
         {
-            $resultadoValidacao->addErro('cidNome',"Nome: Cide campo não pode ser vazio");
+            $resultadoValidacao->addErro('valor',"Valor: O campo não pode ser vazio");
         }
-        if(empty($edital->getEstado()))
+        if(empty($edital->getEdtModalidade()))
         {
-            $resultadoValidacao->addErro('estado',"UF: Este campo não pode ser vazio");
+            $resultadoValidacao->addErro('modalidade',"Modalidade: Este campo não pode ser vazio");
         }
-        */
+        if(empty($edital->getEdtTipo()))
+        {
+            $resultadoValidacao->addErro('tipo',"tipo: Este campo não pode ser vazio");
+        }       
+        
         return $resultadoValidacao;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models\DAO;
 use App\Models\Entidades\EditalStatus;
 use App\Models\Entidades\Usuario;
 use App\Models\Entidades\Instituicao;
+use Exception;
 
 class EditalStatusDAO extends BaseDAO
 {     
@@ -38,7 +39,6 @@ class EditalStatusDAO extends BaseDAO
             }else {
                 $SQL .= " ORDER BY stedt.stedt_nome ";
             }
-
             $resultado = $this->select($SQL);
             $dados = $resultado->fetchAll();
             
@@ -60,6 +60,7 @@ class EditalStatusDAO extends BaseDAO
                 
                 $lista[] = $editalStatus;
             }
+            
             return $lista;        
                
     }
@@ -74,19 +75,19 @@ class EditalStatusDAO extends BaseDAO
             $stEdtObservacao               = $editalStatus->getStEdtObservacao();
             $stEdtUsuario                  = $editalStatus->getStEdtUsuario()->getId();           
             $stEdtInstituicao              = $editalStatus->getStEdtInstituicao()->getInst_Id();
-            $stEdtDataAltercacao           = $editalStatus->getStEdtDataAltercacao()->format('Y-m-d h:m:s');
+            $stEdtDataAltercacao           = $editalStatus->getStEdtDataAlteracao()->format('Y-m-d h:m:s');
             $stEdtDataCadastro             = $editalStatus->getStEdtDataCadastro()->format('Y-m-d h:m:s');
             
             return $this->insert(
                 'editalStatus',
                 ":nome, :observacao, :usuario, :instituicao, :datacadastro, :dataalteracao",
                 [
-                    ':nome' => $stEdtNome,
-                    ':observacao' => $stEdtObservacao,
-                    ':usuario' => $stEdtUsuario,
-                    ':instituicao' => $stEdtInstituicao,
-                    ':datacadastro' => $stEdtDataCadastro,
-                    ':dataalteracao' => $stEdtDataAltercacao
+                    ':nome'             => $stEdtNome,
+                    ':observacao'       => $stEdtObservacao,
+                    ':usuario'          => $stEdtUsuario,
+                    ':instituicao'      => $stEdtInstituicao,
+                    ':datacadastro'     => $stEdtDataCadastro,
+                    ':dataalteracao'    => $stEdtDataAltercacao
                     ]
                 );
                      
@@ -101,7 +102,7 @@ class EditalStatusDAO extends BaseDAO
         try {
             
             $stEdtId                       = $editalStatus->getStEdtId();
-            $stEdtDataAltercacao           = $editalStatus->getStEdtDataAltercacao()->format('Y-m-d h:m:s');
+            $stEdtDataAltercacao           = $editalStatus->getStEdtDataAlteracao()->format('Y-m-d h:m:s');
             $stEdtDataCadastro             = $editalStatus->getStEdtDataCadastro()->format('Y-m-d h:m:s');
             $stEdtNome                     = $editalStatus->getStEdtNome();
             $stEdtObservacao               = $editalStatus->getStEdtObservacao();
@@ -113,13 +114,13 @@ class EditalStatusDAO extends BaseDAO
                 "stedt_nome= :nome, stedt_observacao= :observacao, stedt_usuario= :usuario, stedt_instituicao= :instituicao,  
                 stedt_datacadastro= :datacadastro, stedt_dataalteracao= :dataalteracao",
                 [
-                    ':edtId' => $stEdtId,
-                    ':nome' => $stEdtNome,
-                    ':observacao' => $stEdtObservacao,
-                    ':usuario' => $stEdtUsuario,
-                    ':instituicao' => $stEdtInstituicao,
-                    ':datacadastro' => $stEdtDataCadastro,
-                    ':dataalteracao' => $stEdtDataCadastro, 
+                    ':edtId'            => $stEdtId,
+                    ':nome'             => $stEdtNome,
+                    ':observacao'       => $stEdtObservacao,
+                    ':usuario'          => $stEdtUsuario,
+                    ':instituicao'      => $stEdtInstituicao,
+                    ':datacadastro'     => $stEdtDataCadastro,
+                    ':dataalteracao'    => $stEdtDataCadastro, 
                 ],
                 "stedt_id = :edtId"
                 );

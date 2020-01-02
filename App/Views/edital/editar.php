@@ -26,7 +26,7 @@
                     <a href="http://<?php echo APP_HOST; ?>/cliente/cadastro" id="cadastroCliente"  name="cadastroCliente" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">
                             <i class="la la-plus"></i>Novo Cliente</a>                     
                         <input type="text" class="form-control" placeholder="Cliente - autocomplete" id="clienteLicitacao-autocomplete" name="clienteLicitacao-autocomplete" value="<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial()  ." - ". $viewVar['edital']->getClienteLicitacao()->getNomeFantasia(); ?>" required>
-                        <input type="hidden" id="cliente" name="cliente" value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
+                        <input type="text" id="cliente" name="cliente" value=<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>>  
 
                       <span class="form-text text-muted">Por favor insira o cliente do Edital</span>  
                       </div>                    
@@ -61,20 +61,18 @@
                         </select>
                         <span class="form-text text-muted">Por favor Garantia</span>
                     </div>  
+                   
                     <div class="col-lg-2">
-                        <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status" required>
-                            <option value="">Selecione o Status</option>
-                            <option value="<?php echo $viewVar['edital']->getEdtStatus(); ?>" <?php echo ($viewVar['edital']->getEdtStatus() == $viewVar['edital']->getEdtStatus()) ? "selected" : ""; ?>>
-                                    <?php echo $viewVar['edital']->getEdtStatus(); ?> </option>
-                                <option value="Em Analise">Em Analise</option>
-                                <option value="Ganha">Ganha</option>
-                                <option value="Concorrendo">Concorrendo</option>
-                                <option value="Em Montagem">Em Montagem</option>
-                                <option value="Perdida">Perdida</option>
-                        </select>
-                        <span class="form-text text-muted">Por favor insira o Status</span>
-                    </div>
+                        <label for="status">status</label>
+                        <select class="form-control" id="status" name="status" required>
+                                <option value="">Selecione o status</option>
+                                <?php foreach ($viewVar['listarEditalStatus'] as $editalStatus) : ?>
+                                    <option value="<?php echo $editalStatus->getStEdtId(); ?>" <?php echo ($viewVar['edital']->getEditalStatus()->getStEdtId() == $editalStatus->getStEdtId()) ? "selected" : ""; ?>>
+                                        <?php echo $editalStatus->getStEdtNome(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        <span class="form-text text-muted">Por favor insira o status</span>
+                    </div>                     
                     <div class="col-lg-3">
                         <label for="representante">Representante</label>
                         <select class="form-control" id="representante" name="representante" required>
@@ -130,9 +128,11 @@
                         <label for="anexo" class="">Anexo:</label>
                         <input type="file" name="anexo" id="anexo" value="<?php echo $Sessao::retornaValorFormulario('anexo'); ?>">
                         <input type="hidden" name="anexoAlt" id="anexoAlt" value="<?php echo $viewVar['edital']->getEdtAnexo(); ?>">
+                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/public/assets/media/anexos/<?php echo $viewVar['edital']->getEdtAnexo(); ?>" 
+                        target="_blank" title="Click para Visualizar Anexo" class="btn btn-info btn-sm"><i class="la la-chain"></i> Anexo</a>
                         <span class="form-text text-muted">Selecione o arquivo</span>
                     </div>
-                </div>
+                </div>                
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label for="observacao" class="">Observacao do Edital:</label>
@@ -146,15 +146,28 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <input type="checkbox" id="enviarEmail" name="enviarEmail" value="1" checked>
+                    <label>Deseja enviar Email?</label>
+                    <input type="text" class="form-control" title="Digite o endereco de e-mail" placeholder="email separado por virgula" id="email" name="email" disabled value="<?php echo $Sessao::retornaValorFormulario('email'); ?>">
+                </div>
+            </div>           
             <div class="kt-portlet__foot">
                 <div class="kt-form__actions">
                     <div class="row">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
-                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Salvar</button>
-                            <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                            <button type="submit" class="btn btn-outline-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
+                            <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>
+                    <br>
+                    <h5  class="" name="informacao" id="informacao" >
+                        <p><strong><em>Cadastrado em: <?php echo $viewVar['edital']->getEdtDataCadastro()->format('d/m/Y H:m:s'); ?>
+                         - Ultima Alteracao em: <?php echo $viewVar['edital']->getEdtDataAlteracao()->format('d/m/Y H:m:s')  ?>
+                        Por: <?php echo $viewVar['edital']->getUsuario()->getNome() ; ?>
+                            </em></strong></p></h5>
                 </div>
             </div>
         </div>

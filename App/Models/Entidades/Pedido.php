@@ -157,7 +157,7 @@ class Pedido{
      */ 
     public function getDataAlteracao()
     {
-        return $this->dataAlteracao;
+        return new DateTime($this->dataAlteracao);
     }
 
     /**

@@ -78,6 +78,8 @@
                         <label class="">Anexo:</label>
                         <input type="file" name="anexo" id="anexo" value="<?php echo  $viewVar['pedido']->getAnexo(); ?>">
                         <input type="hidden" class="form-control" id="anexoAlt"  readonly="readonly" name="anexoAlt" value="<?php echo $viewVar['pedido']->getAnexo(); ?>">
+                        <a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/public/assets/media/anexos/<?php echo $viewVar['pedido']->getAnexo(); ?>" 
+                        target="_blank" title="Click para Visualizar Anexo" class="btn btn-info btn-sm"><i class="la la-chain"></i> Anexo</a>
                         <span class="form-text text-muted">Selecione o arquivo</span>
                     </div>
                 </div>
@@ -89,7 +91,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-lg-12">
-                    <input type="checkbox" id="enviarEmail" name="enviarEmail" value="1" >
+                    <input type="checkbox" id="enviarEmail" name="enviarEmail" value="1" checked>
                     <label>Deseja enviar Email?</label>
                     <input type="text" class="form-control" title="Digite o endereco de e-mail" placeholder="email separado por virgula" id="email" name="email" disabled value="<?php echo $Sessao::retornaValorFormulario('email'); ?>">
                 </div>
@@ -104,9 +106,11 @@
                         </div>
                     </div>
                     <br>
-                        <label  class="" name="informacao" id="informacao" >
-                            Cadastrado em: <?php echo $viewVar['pedido']->getDataCadastro()->format('d/m/Y H:m:s'); ?></label>
-                            - Usuario: <?php echo $viewVar['pedido']->getUsuario()->getNome(); ?> </label>
+                        <h5  class="" name="informacao" id="informacao" >
+                        <p><strong><em>Cadastrado em: <?php echo $viewVar['pedido']->getDataCadastro()->format('d/m/Y H:m:s'); ?>
+                         - Ultima Alteracao em: <?php echo $viewVar['pedido']->getDataAlteracao()->format('d/m/Y H:m:s')  ?>
+                        Por: <?php echo $viewVar['pedido']->getUsuario()->getNome() ; ?>
+                            </em></strong></p></h5>
                 </div>
             </div>
         </div>

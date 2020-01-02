@@ -22,9 +22,10 @@ class EditalStatusService
     
     public function salvar(EditalStatus $editalStatus)
     {
-        $transacao = new Transacao();
-        $editalValidador = new EditalValidador();
-        $resultadoValidacao = $editalValidador->validar($editalStatus);
+        $transacao              = new Transacao();
+        $editalStatusValidador  = new EditalStatusValidador();
+        $resultadoValidacao     = new ResultadoValidacao();
+        $resultadoValidacao     = $editalStatusValidador->validar($editalStatus);
         
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
@@ -49,9 +50,10 @@ class EditalStatusService
 
     public function Editar(EditalStatus $editalStatus)
     {   
-        $transacao = new Transacao();
-        $editalValidador = new EditalValidador();
-        $resultadoValidacao = $editalValidador->validar($editalStatus);
+        $transacao              = new Transacao();
+        $editalStatusValidador  = new EditalStatusValidador();
+        $resultadoValidacao     = new ResultadoValidacao();
+        $resultadoValidacao     = $editalStatusValidador->validar($editalStatus);
         
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();

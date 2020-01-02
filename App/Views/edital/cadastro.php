@@ -16,7 +16,6 @@
         <input type="hidden" class="form-control" name="edtUsuario" id="edtUsuario" value="<?php echo $_SESSION['id']; ?>" required>
             <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" value="<?php echo $dataAtual; ?>" required>
         <div class="kt-portlet__body">
-            <input type="hidden" class="form-control" name="idCliente" id="idCliente" required>
             <div class="kt-portlet__body">
             
                 <div class="form-group">
@@ -27,7 +26,7 @@
                         <input type="text" name="clienteLicitacaoAutocomplete" id="clienteLicitacao-autocomplete" class="form-control" required placeholder="Cliente - autocomplete"
                         value="<?php echo $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(); ?>" > 
                         
-                        <input type="hidden" id="cliente" name="cliente" 
+                        <input type="text" id="cliente" name="cliente" 
                         value="<?php echo $viewVar['edital']->getClienteLicitacao()->getCodCliente(); ?>">  
                     </div>
                       <span class="form-text text-muted">Por favor insira o cliente</span>                       
@@ -94,7 +93,7 @@
                     </div>
                     <div class="col-lg-2">
                         <label for="valor" class="">Valor da Proposta:</label>
-                        <input type="text" class="form-control" placeholder="Digite o valor da Proposta" id="valor" name="valor" value="<?php echo $Sessao::retornaValorFormulario('valor'); ?>" >
+                        <input type="text" class="form-control" placeholder="Digite o valor da Proposta" id="valor" name="valor" value="<?php echo $Sessao::retornaValorFormulario('valor'); ?>" required>
                         <span class="form-text text-muted">Digite o valor da Proposta</span>
                     </div>
                     <div class="col-lg-2">
@@ -142,8 +141,8 @@
                     <div class="row">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
-                            <button type="submit" class="btn btn-primary btn-elevate btn-pill btn-elevate-air">Salvar</button>
-                            <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                            <button type="submit" class="btn btn-outline-success btn-elevate btn-pill btn-elevate-air">Salvar</button>
+                            <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>
                 </div>

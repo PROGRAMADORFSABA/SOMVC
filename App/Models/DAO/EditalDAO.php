@@ -3,10 +3,12 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Edital;
+use App\Models\Entidades\EditalStatus;
 use App\Models\Entidades\Usuario;
 use App\Models\Entidades\Instituicao;
 use App\Models\Entidades\Representante;
 use App\Models\Entidades\ClienteLicitacao;
+
 /*
 edt_id, edt_numero, edt_dataabertura, edt_hora, edt_dataresultado,  edt_proposta, edt_modalidade, 
 edt_tipo, edt_garantia, edt_valor, edt_tatus, edt_analise, edt_observacao, edt_anexo, 
@@ -21,7 +23,9 @@ class EditalDAO extends BaseDAO
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
-		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";
+        INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+        INNER JOIN editalStatus edtSt ON edtSt.stedt_id = edt.edt_status ";
+        
             if($edtId) 
             {    
                 $SQL.= " WHERE edt.edt_id = $edtId";
@@ -56,6 +60,7 @@ class EditalDAO extends BaseDAO
                 $edital->getClienteLicitacao()->setCodCliente($dado['licitacaoCliente_cod']);
                 $edital->getClienteLicitacao()->setNomeFantasia($dado['nomefantasia']);
                 $edital->getClienteLicitacao()->setRazaoSocial($dado['razaosocial']);
+                $edital->getClienteLicitacao()->setTipoCliente($dado['tipo']);
                 $edital->getClienteLicitacao()->setCnpj($dado['CNPJ']);
                 $edital->getClienteLicitacao()->setTrocaMarca($dado['trocamarca']);
                 $edital->setInstituicao(new Instituicao());
@@ -64,6 +69,9 @@ class EditalDAO extends BaseDAO
                 $edital->setUsuario(new Usuario());
                 $edital->getUsuario()->setId($dado['id']);
                 $edital->getUsuario()->setNome($dado['nome']);
+                $edital->setEditalStatus(new EditalStatus());
+                $edital->getEditalStatus()->setStEdtId($dado['stedt_id']);;
+                $edital->getEditalStatus()->setStEdtNome($dado['stedt_nome']);
                 
                 $lista[] = $edital;
             }
@@ -120,7 +128,10 @@ class EditalDAO extends BaseDAO
                 $edital->setUsuario(new Usuario());
                 $edital->getUsuario()->setId($dado['id']);
                 $edital->getUsuario()->setNome($dado['nome']);
-                
+                $edital->setEditalStatus(new EditalStatus());
+                $edital->getEditalStatus()->setStEdtId($dado['stedt_id']);;
+                $edital->getEditalStatus()->setStEdtNome($dado['stedt_nome']);
+
                 $lista[] = $edital;
             }
             return $lista;        
@@ -142,7 +153,8 @@ class EditalDAO extends BaseDAO
 		INNER JOIN cadRepresentante r ON r.codRepresentante = edt.edt_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = edt.edt_cliente
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
-		INNER JOIN usuarios u ON u.id = edt.edt_usuario ";                 
+		INNER JOIN usuarios u ON u.id = edt.edt_usuario 
+        INNER JOIN editalStatus edtSt ON edtSt.stedt_id = edt.edt_status ";       
              $where = Array();
              if( $codCliente ){ $where[] = " edt.edt_cliente = {$codCliente}"; }
              if( $codEdital ){ $where[] = " edt.edt_id = {$codEdital}"; }
@@ -192,14 +204,18 @@ class EditalDAO extends BaseDAO
                 $edital->setUsuario(new Usuario());
                 $edital->getUsuario()->setId($dado['id']);
                 $edital->getUsuario()->setNome($dado['nome']);
-                
+                 $edital->setEditalStatus(new EditalStatus());
+                $edital->getEditalStatus()->setStEdtId($dado['stedt_id']);;
+                $edital->getEditalStatus()->setStEdtNome($dado['stedt_nome']);
+
                 $lista[] = $edital;
             }
             return $lista;        
                 
     }
     
-   /* public function listarPorEdital($edtNome = null)
+   /* 
+    public function listarPorEdital($edtNome = null)
     {
         if($edtNome)
         {
@@ -219,8 +235,8 @@ class EditalDAO extends BaseDAO
         try {
             $edtNumero                     = $edital->getEdtNumero();
             $edtDataAbertura               = $edital->getEdtDataAbertura()->format('Y-m-d');
-            $edtHora                       = $edital->getEdtHora()->format('h:m:s');
-            $edtDataResultado              = $edital->getEdtDataResultado()->format('Y-m-d h:m:s');
+            $edtHora                       = $edital->getEdtHora()->format('H:m:s');
+            $edtDataResultado              = $edital->getEdtDataResultado()->format('Y-m-d H:m:s');
             $edtProposta                   = $edital->getEdtProposta();
             $edtModalidade                 = $edital->getEdtModalidade();
             $edtTipo                       = $edital->getEdtTipo();
@@ -236,8 +252,8 @@ class EditalDAO extends BaseDAO
             $edtCliente                    = $edital->getClienteLicitacao()->getCodCliente();
             $edtUsuario                    = $edital->getUsuario()->getId();           
             $edtInstituicao                = $edital->getInstituicao()->getInst_Id();
-            $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d h:m:s');
-            $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d h:m:s');
+            $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d H:m:s');
+            $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d H:m:s');
             $nomeanexo = date('Y-m-d-h:m:s');
           
             if (!$_FILES['anexo']['name'] == "") {
@@ -331,8 +347,8 @@ class EditalDAO extends BaseDAO
             $edtId                         = $edital->getEdtId();
             $edtNumero                     = $edital->getEdtNumero();
             $edtDataAbertura               = $edital->getEdtDataAbertura()->format('Y-m-d');
-            $edtHora                       = $edital->getEdtHora()->format('h:m:s');
-            $edtDataResultado              = $edital->getEdtDataResultado()->format('Y-m-d h:m:s');
+            $edtHora                       = $edital->getEdtHora()->format('H:m:s');
+            $edtDataResultado              = $edital->getEdtDataResultado()->format('Y-m-d H:m:s');
             $edtProposta                   = $edital->getEdtProposta();
             $edtModalidade                 = $edital->getEdtModalidade();
             $edtTipo                       = $edital->getEdtTipo();
@@ -345,11 +361,11 @@ class EditalDAO extends BaseDAO
             $edtAnexo                      = $edital->getEdtAnexo();
             $edtRepresentante              = $edital->getRepresentante()->getCodRepresentante();
             $edtCliente                    = $edital->getClienteLicitacao()->getCodCliente();
-            $edtStatus                    = $edital->getEditalStatus()->getStEdtId();
+            $edtStatus                     = $edital->getEditalStatus()->getStEdtId();
             $edtUsuario                    = $edital->getUsuario()->getId();           
             $edtInstituicao                = $edital->getInstituicao()->getInst_Id();
-            $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d h:m:s');
-            $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d h:m:s');
+            $edtDataCadastro               = $edital->getEdtDataCadastro()->format('Y-m-d H:m:s');
+            $edtDataAlteracao              = $edital->getEdtDataAlteracao()->format('Y-m-d H:m:s');
             $nomeanexo = date('Y-m-d-h:m:s');
            
             if (!$_FILES['anexo']['name'] == "") {
@@ -373,8 +389,8 @@ class EditalDAO extends BaseDAO
             return $this->update(
                 'edital',
                 "edt_numero= :edtNumero, edt_dataabertura= :edtDataAbertura, edt_hora= :edtHora, edt_dataresultado= :edtDataAbertura,  edt_proposta= :edtProposta, edt_modalidade= :edtModalidade, 
-edt_tipo= :edtTipo, edt_garantia= :edtGarantia, edt_valor= :edtValor, edt_status= :edtStatus, edt_analise= :edtAnalise, edt_observacao= :edtObservacao, edt_anexo= :edtAnexo, 
-edt_representante= :edtRepresentante, edt_cliente= :edtCliente, edt_usuario= :edtUsuario, edt_instituicao= :edtInstituicao, edt_datacadastro= :edtDataCadastro, edt_dataalteracao=:edtDataAlteracao",
+    edt_tipo= :edtTipo, edt_garantia= :edtGarantia, edt_valor= :edtValor, edt_status= :edtStatus, edt_analise= :edtAnalise, edt_observacao= :edtObservacao, edt_anexo= :edtAnexo, 
+    edt_representante= :edtRepresentante, edt_cliente= :edtCliente, edt_usuario= :edtUsuario, edt_instituicao= :edtInstituicao, edt_datacadastro= :edtDataCadastro, edt_dataalteracao=:edtDataAlteracao",
                 [
                     ':edtId' => $edtId,
                     ':edtNumero' => $edtNumero,
@@ -400,7 +416,7 @@ edt_representante= :edtRepresentante, edt_cliente= :edtCliente, edt_usuario= :ed
                 "edt_id = :edtId"
                 );
         } catch (\Exception $e) {
-            throw new \Exception("Erro na gravação de dados. ".$e, 500);
+            throw new \Exception("Erro na gravação de dados.", 500);
         }
     }
 

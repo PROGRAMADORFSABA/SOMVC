@@ -37,8 +37,8 @@
                     <h4><i class="flaticon-warning"></i> Deseja realmente excluir o edital: <?php echo $viewVar['edital']->getEdtNumero() ." Cliente ". $viewVar['edital']->getClienteLicitacao()->getRazaoSocial(). "  ".$contrato. " ".$notificacao; ?> </h4>
                     </div>                    
                     <div class="panel-footer"> 
-                        <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
-                        <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                        <button type="submit" class="btn btn-outline-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
+                        <a href="http://<?php echo APP_HOST; ?>/edital" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                     </div>
                 </div>
             </form>

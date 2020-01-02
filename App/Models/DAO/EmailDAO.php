@@ -3,6 +3,7 @@
 namespace App\Models\DAO;
 
 use App\Models\Entidades\Pedido;
+use App\Models\Entidades\Edital;
 use App\Models\Entidades\Sugestoes;
 use App\Models\Entidades\Notificacao;
 
@@ -65,12 +66,83 @@ class EmailDAO extends BaseDAO
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-       //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+       //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
        $headers .= 'Reply-To: <nuvem@fabmed.com.br; vendas2@fabmed.com.br; >' . "\r\n"; //email para resposta
 
        mail($to, $subject, $message, $headers);
    }
-    public  function emailSugestoes(Sugestoes $sugestoes, $subject)
+    
+   public  function emailEdital(Edital $edital, $email, $subject)
+   {
+       $codigo          = $edital->getEdtId();           
+       $razaoSocialCliente = $edital->getClienteLicitacao()->getRazaoSocial();
+       $nomeStatus         = $edital->getEditalStatus()->getStEdtNome();          
+       $nomeUsuario        = $edital->getUsuario()->getNome();  
+       $codUsuario         = $edital->getUsuario()->getId();
+       $tipoCliente        = $edital->getClienteLicitacao()->getTipoCliente();
+       $anexos             = $edital->getEdtAnexo();
+       $numeroPregao       = $edital->getEdtNumero();
+       $modalidede         = $edital->getEdtModalidade();
+       $representante      = $edital->getRepresentante()->getNomeRepresentante();
+       $dataAbertura       = $edital->getEdtDataAbertura()->format('d/m/Y').' - ' .$edital->getEdtHora()->format('H:m:s');
+       $observacao         = $edital->getEdtObservacao();
+       $tipo               = $edital->getEdtTipo();
+       $analise            = $edital->getEdtAnalise();
+       $valor              = $edital->getEdtValor();   
+       $codStatus          = $edital->getEditalStatus()->getStEdtId();           
+   
+       $dadosCadastro .= "
+                    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
+                            <tr> <td>Codigo</td> <td> $codigo  </td>  </tr>
+                            <tr> <td>Cliente</td> <td> $razaoSocialCliente  </td>  </tr>
+                            <tr> <td>Status</td> <td>$nomeStatus</td></tr>
+                            <tr> <td>Data e Hora</td> <td>$dataAbertura</td></tr>
+                            <tr> <td>Pregao</td> <td>$numeroPregao</td></tr>
+                            <tr> <td>Modalidade</td> <td>$modalidede</td> </tr>
+                            <tr> <td>Tipo</td><td> $tipo </td></tr>
+                            <tr> <td>Representante</td> <td>$representante</td> </tr>
+                            <tr> <td>Valor</td> <td>R$$valor</td> </tr>
+                            <tr> <td>Observacao</td><td> $observacao </td></tr>
+                            <tr> <td>Analise</td><td> $analise </td></tr>
+                    </table>";
+       
+       if($subject == 1){
+           $subject = "Cadastro do Edital";
+           if( $tipoCliente == 'Municipal'){// AND $tipoCliente == 'Municipal'){
+               $to .= 'posvenda@fabmed.com.br';
+            }else{
+                if( $codUsuario != 30 AND $tipoCliente != 'Municipal'){// AND $tipoCliente == 'Municipal'){
+                    $to .= 'atendimento@fabmed.feira.br';
+                }                
+            }
+        }else{
+            $subject = "Alteração de Edital";
+            $to .= 'licitacao2@fabmed.com.br, sac@fabmed.com.br';
+            if( $codStatus == 5 || $codStatus == 3){
+            }else if( $codStatus == 6 AND $tipoCliente != 'Municipal'){
+                $to .= 'atendimento@fabmed.feira.br';
+            }
+        }
+        $arrayEmail = array();
+        if( sizeof( $arrayEmail ) ){
+            $arrayEmail[] = $email;
+            $to .= ', '.implode( ',',$arrayEmail );
+        }               
+      
+       $subject .= " - Codigo: " . $codigo . "  - Cliente: ".$razaoSocialCliente;
+       $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/edital".$codigo." > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
+       $headers = 'MIME-Version: 1.0' . "\r\n";
+       $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
+       $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
+       //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
+       $headers .= 'Reply-To: <nuvem@fabmed.com.br,vendas2@fabmed.com.br; >' . "\r\n"; //email para resposta
+         mail($to, $subject, $message, $headers);
+   }
+
+   public  function emailSugestoes(Sugestoes $sugestoes, $subject)
     {
         $codSugestoes       = $sugestoes->getSugId();           
         $status             = $sugestoes->getSugStatus();
@@ -98,12 +170,13 @@ class EmailDAO extends BaseDAO
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-       //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+       //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
        $headers .= 'Reply-To: <nuvem@fabmed.com.br, vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
 
       // mail($to, $subject, $message, $headers);
    }
-    public  function emailNotificacao(Notificacao $notificacao, $subject)
+    
+   public  function emailNotificacao(Notificacao $notificacao, $subject)
    {
        $codNotificacao     = $notificacao->getNtf_cod();           
        $status             = $notificacao->getNtf_status();
@@ -145,26 +218,29 @@ class EmailDAO extends BaseDAO
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-       //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
+       //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
        $headers .= 'Reply-To: <nuvem@fabmed.com.br, vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
-        var_dump($dadosCadastro);
-     // mail($to, $subject, $message, $headers);
-   }
-    public  function emailSuporte($erro)
-   {
-        $to = 'nuvem@fabmed.com.br, vendas2@fabmed.com.br';
        
-       $subject = " Erro no sistema ";
-       $message = "Ola, <br><br> favor verificar o erro ocorrido no sistema. <br><br> " . "\r\n";
+      mail($to, $subject, $message, $headers);
+   }
+    public  function emailSuporte($erro, $tela)
+   {
+    $dadosCadastro .= "
+    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
+            <tr> <td>Descricao do erro </td> <td> $erro  </td>  </tr>
+    </table>";
+
+        $to = 'nuvem@fabmed.com.br, vendas2@fabmed.com.br';       
+       $subject = " Erro no sistema ('.$tela.') ";
+       $message = "Ola , <br><br> favor verificar o erro ocorrido no sistema com o usuario(a) ". $_SESSION['nome']." - E-mail".$_SESSION['email'] ."<br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-      // $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
-       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $erro. "</p></h3>";
+       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
-       //$headers .= 'CC:< programadorfsaba@gmail.com>' . "\r\n"; //email com copia
-      // $headers .= 'Reply-To: <nuvem@fabmed.com.br;vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
-
+       //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
+       $headers .= 'Reply-To:'. $_SESSION['nome'].' < '.$_SESSION['email'] .' > '. "\r\n"; //email para resposta
+       
        mail($to, $subject, $message, $headers);
    }
    
