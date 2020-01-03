@@ -34,7 +34,7 @@ class UsuarioDAO extends BaseDAO
         $resultado = $this->select(
             "SELECT id, nome, nivel, email, status, dataCadastro, valida, dica, senha, fk_idInstituicao
                 FROM usuarios
-                where valida ='$email' AND id ='$codigo' AND email ='$valida'" );           
+                where valida ='$valida' AND id ='$codigo' AND email ='$email'" );           
         $dado = $resultado->fetch();
         
         if ($dado) {
@@ -171,21 +171,20 @@ class UsuarioDAO extends BaseDAO
     public  function atualizar(Usuario $usuario)
     {
         try {
-
+            
             $id             = $usuario->getId();
             $nome           = $usuario->getNome();
             $email          = $usuario->getEmail();
-           // $senha        = $usuario->getSenha();
+            // $senha        = $usuario->getSenha();
            // $pwd          = sha1($senha);
-            $nivel          = $usuario->getNivel();
-            $idDep          = $usuario->getId_dep();
-            $status         = $usuario->getStatus();
-            $fk_instituicao  = $usuario->getFk_Instituicao();
-          //  $valida        = $usuario->getValida();
-            //$validamd5    = sha1($valida);
-            $dica           = $usuario->getDica();
-
-            
+           $nivel          = $usuario->getNivel();
+           $idDep          = $usuario->getId_dep();
+           $status         = $usuario->getStatus();
+           $fk_instituicao  = $usuario->getFk_Instituicao();
+           //  $valida        = $usuario->getValida();
+           //$validamd5    = sha1($valida);
+           $dica           = $usuario->getDica();
+         
             return $this->update(
                 'usuarios',
                 "nome = :nome, email =:email, nivel =:nivel, id_dep =:idDep,
@@ -195,16 +194,17 @@ class UsuarioDAO extends BaseDAO
                     ':nome' => $nome,
                     ':email' => $email,
                    // ':senha' => $pwd,
-                    ':nivel' => $nivel,
-                    ':idDep' => $idDep,
-                    ':status' => $status,
+                   ':nivel' => $nivel,
+                   ':idDep' => $idDep,
+                   ':status' => $status,
                     ':fk_instituicao' => $fk_instituicao,
-                  //  ':valida' => $validamd5,
+                    //  ':valida' => $validamd5,
                     ':dica' => $dica,
                 ],
                 "id = :id"
             );
         } catch (\Exception $e) {
+            echo 'teste atualizar';
             throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }

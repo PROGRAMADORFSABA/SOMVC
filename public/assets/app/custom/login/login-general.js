@@ -73,7 +73,7 @@ var KTLoginGeneral = function() {
             e.preventDefault();
             var btn = $(this);
             var form = $(this).closest('form');           
-
+            alert('test');
             form.validate({
                 rules: {
                     email: {
@@ -93,7 +93,7 @@ var KTLoginGeneral = function() {
             btn.addClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', true);
 
             form.ajaxSubmit({
-                url: '',
+                url: 'http://localhost/SOMVC/login/autenticar',
                 success: function(response, status, xhr, $form) {
                 	// similate 2s delay
                 	setTimeout(function() {
@@ -124,7 +124,7 @@ var KTLoginGeneral = function() {
                     password: {
                         required: true
                     },
-                    rpassword: {
+                    password: {
                         required: true
                     },
                     agree: {

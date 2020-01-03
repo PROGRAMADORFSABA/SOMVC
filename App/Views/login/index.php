@@ -9,6 +9,12 @@
 									<img src="http://<?php echo APP_HOST; ?>/public/assets/media/logos/devaction-logo-login.png">
 								</a>
 							</div>
+							<?php if ($Sessao::retornaMensagem()) { ?>
+								<div class="alert alert-warning" role="alert">
+									<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+									<?php echo $Sessao::retornaMensagem(); ?>
+								</div>
+							<?php } ?>
 							<?php if ($Sessao::retornaErro()) { ?>
 								<div class="alert alert-warning" role="alert">
 									<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -23,10 +29,10 @@
 								</div>
 								<form class="kt-form" action="http://<?php echo APP_HOST; ?>/login/autenticar" method="post" id="form_cadastro">
 									<div class="input-group">
-										<input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
+										<input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off" required>
 									</div>
 									<div class="input-group">
-										<input class="form-control" type="password" placeholder="Password" name="password">
+										<input class="form-control" type="password" placeholder="Password" name="password" required>
 									</div>
 									<div class="row kt-login__extra">
 										<div class="col">

@@ -1,5 +1,5 @@
 <!DOCTYPE html5>
-<html lang="en">
+<html lang="pt-br">
 
 <?php
 date_default_timezone_set('America/Bahia');

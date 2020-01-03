@@ -146,22 +146,24 @@ class EmailDAO extends BaseDAO
    {
        $codigo              = $usuario->getId();           
        $nome                = $usuario->getNome();
-       $email               = $usuario->getEmail();
+      // $email               = $usuario->getEmail();
        $status              = $usuario->getStatus();          
-   
+       
+       $valida = sha1($email);
+       $to = $email;
        $dadosCadastro .= "
                     <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
                             <tr> <td>Codigo</td> <td> $codigo  </td>  </tr>
                             <tr> <td>Nome</td> <td> $nome  </td>  </tr>
                             <tr> <td>Status</td> <td>$status</td></tr>
-                            <tr> <td>Email e Hora</td> <td>$email</td></tr>
+                            <tr> <td>Email</td> <td>$email</td></tr>
                     </table>";
        
        if($subject == 1){
-           $subject = "Cadastro ";
+           $subject = "Cadastro de Usuario";
            
         }else{
-            $subject = "Alteração de Edital";           
+            $subject = "Alteração de Usuario";           
         }
         $arrayEmail = array();
         if( sizeof( $arrayEmail ) ){
@@ -171,7 +173,7 @@ class EmailDAO extends BaseDAO
       
        $subject .= " - Codigo: " . $codigo . "  - nome: ".$nome;
        $message = "Ola, <br><br> " .$nome.  "  efetuou ". $subject  . " <br><br> " . "\r\n";
-       $message .= "<a href=http://www.coisavirtual.com.br/usuario/edicao".$codigo." > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";       
+       $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/?v=$valida&v2=$email&v3=$codigo> Click aqui para validar seu cadastro </a>";      
        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";

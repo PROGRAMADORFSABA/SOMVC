@@ -49,7 +49,7 @@ class LoginDAO extends BaseDAO
                 $login->setFk_Instituicao($dado['fk_idInstituicao']);
                 $login->getInstituicao()->setInst_Id($dado['inst_id']);   
                 
-                return $login;      
+                return $login;     
             }           
         }   
             return false;

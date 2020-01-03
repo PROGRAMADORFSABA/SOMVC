@@ -203,7 +203,7 @@ class NotificacaoController extends Controller
        if($codNotificacao = $notificacaoService->salvar($notificacao)){
            $notificacao->setNtf_cod($codNotificacao);
            $notificacao = $notificacaoService->listar($notificacao)[0];
-           var_dump($notificacao);
+           //var_dump($notificacao);
             $emailService = new EmailService();
             $subject = 1;        
             $emailService->emailNotificacao($notificacao,$subject);

@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Lib\Sessao;
-use App\Models\DAO\UsuarioDAO;
 use App\Models\DAO\DepartamentoDAO;
 use App\Models\Entidades\Usuario;
 use App\Services\UsuarioService;
@@ -16,9 +15,9 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        $usuarioDAO = new UsuarioDAO();
+        $usuarioService = new UsuarioService();
 
-        self::setViewParam('listaUsuarios', $usuarioDAO->listar());
+        self::setViewParam('listaUsuarios', $usuarioService->listar());
 
         $this->render('/usuario/index');
 
@@ -53,16 +52,14 @@ class UsuarioController extends Controller
 
         Sessao::gravaFormulario($_POST);
 
-        $usuarioDAO = new UsuarioDAO();
-
-        if ($usuarioDAO->verificaEmail($_POST['email'])) {
+        if ($usuarioService->verificaEmail($_POST['email'])) {
             Sessao::gravaMensagem("Email existente");
             $this->redirect('/usuario/cadastro');
         }
 
-        if ($usuarioId = $usuarioDAO->salvar($usuario)) {
-            $usuario->setId($usuarioId);
-            $usuarioId = $usuarioService->listar($usuario);
+        if ($usuarioId = $usuarioService->salvar($usuario)) {
+           // $usuario->setId($usuarioId);
+            $usuarioId = $usuarioService->listar($usuarioId);
             $email = $_POST['email'];               
             $emailService = new EmailService();
             $subject = 1;
@@ -133,12 +130,12 @@ class UsuarioController extends Controller
             Sessao::gravaMensagem("Nenhum Cadastro Selecionado");
             $this->redirect('/usuario');
         }
-        $usuarioDAO = new UsuarioDAO();
+        $usuarioService = new UsuarioService();
 
-        $usuario = $usuarioDAO->listar($id);
+        $usuario = $usuarioService->listar($id);
 
         if (!$usuario) {
-            Sessao::gravaMensagem("Usuario inexistente");
+            Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/usuario');
         }
 
@@ -153,11 +150,11 @@ class UsuarioController extends Controller
     public function atualizar()
     {
        
-        $usuarioDAO = new UsuarioDAO();
-        $usuario = $usuarioDAO->listar($_POST['id']);
-        $email = "teste";//$usuario->getEmail();
-        
         $usuarioService = new UsuarioService();
+        
+        $usuario = $usuarioService->listar($_POST['id']);
+        $email = $usuario->getEmail();
+        
         $usuario = new Usuario();
         $usuario->setId($_POST['id']);
         $usuario->setNome($_POST['nome']);
@@ -178,47 +175,51 @@ class UsuarioController extends Controller
         if ($resultadoValidacao->getErros()) {
             Sessao::gravaErro($resultadoValidacao->getErros());
             $this->redirect('/usuario/edicao/' . $_POST['id']);
-        }
+        }      
 
-        $usuarioDAO = new UsuarioDAO();
-
-        if ($_POST['email'] !=  $email) {
-            if($usuarioDAO->verificaEmail($_POST['email'])){
-                
+        if ($_POST['email'] !=  $email) {            
+            if($usuarioService->verificaEmail($_POST['email'])){                
                 Sessao::gravaMensagem("Email existente");
                 $this->redirect('/usuario/edicao/' . $_POST['id']);
             }
-        }
+        }      
+        $atualizar = $usuarioService->atualizar($usuario);
         
-       if( $usuarioDAO->atualizar($usuario)){
-        $email = $_POST['email'];               
-        $emailService = new EmailService();
-        $subject = 2;
-        $emailService->emailUsuario($usuario,$email, $subject);
-         //$to = $usuario->setEmail($_POST['email']);
-         $to = "vendas2@fabmed.com.br";
-         $valida = md5($to);
-       
-         $subject = "Cadastro no Sistema de Ocorrencias"; // assunto
-         $message = "Validacao de cadastro " . "\r\n";
-        // $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/valida_cadastro.php?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";
-         $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";          
-         $headers = 'MIME-Version: 1.0' . "\r\n";
-         $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n"; //formato
-         //$headers .= 'To: Carlos Andre <programadorfsaba@gmail.com>' . "\r\n"; //
-         $headers .= 'From:< noreply@sistemadevnogueira.online>' . "\r\n"; //email de envio
-         //$headers .= 'From:< contato@sistemaocorrencia.com.br>' . "\r\n"; //email de envio
-         //$headers .= 'CC:<' . $emailUser . '>' . "\r\n"; //email com copia
-         $headers .= 'Reply-To: < suporte@sistemadevnogueira.online>' . "\r\n"; //email para resposta
-         var_dump($message);
-         mail($to, $subject, $message, $headers);
+        if( $atualizar > 0){
+           
+            $email = $_POST['email'];               
+            $emailService = new EmailService();
+            $subject = 2;
+            $emailService->emailUsuario($usuario,$email, $subject);
+            //$to = $usuario->setEmail($_POST['email']);
+            $to = "vendas2@fabmed.com.br";
+            $valida = md5($to);
+        
+            $subject = "Cadastro no Sistema de Ocorrencias"; // assunto
+            $message = "Validacao de cadastro " . "\r\n";
+            // $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/valida_cadastro.php?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";
+            $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";          
+            $headers = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n"; //formato
+            //$headers .= 'To: Carlos Andre <programadorfsaba@gmail.com>' . "\r\n"; //
+            $headers .= 'From:< noreply@sistemadevnogueira.online>' . "\r\n"; //email de envio
+            //$headers .= 'From:< contato@sistemaocorrencia.com.br>' . "\r\n"; //email de envio
+            //$headers .= 'CC:<' . $emailUser . '>' . "\r\n"; //email com copia
+            $headers .= 'Reply-To: < suporte@sistemadevnogueira.online>' . "\r\n"; //email para resposta
+            var_dump($message);
+            mail($to, $subject, $message, $headers);
 
-        Sessao::limpaFormulario();
-        Sessao::limpaMensagem();
-        Sessao::limpaErro();
-
-        $this->redirect('/usuario');
-       }
+            $this->redirect('/usuario');
+            Sessao::limpaFormulario();
+            Sessao::limpaMensagem();
+            Sessao::limpaErro();           
+       } else if ($atualizar == 0) {
+            Sessao::gravaMensagem("nenhuma alteração indetificada");
+            $this->redirect('/usuario');
+        }else {       
+            Sessao::gravaMensagem("erro na atualizacao");
+            $this->redirect('/usuario/edicao/' . $_POST['id']);
+        }
     }
 
     public function exclusao($params)
@@ -229,12 +230,12 @@ class UsuarioController extends Controller
             Sessao::gravaMensagem("Nenhum Cadastro Selecionado");
             $this->redirect('/usuario');
         }
-        $usuarioDAO = new UsuarioDAO();
+        $usuarioService = new UsuarioService();
 
-        $usuario = $usuarioDAO->listar($id);
+        $usuario = $usuarioService->listar($id);
 
         if (!$usuario) {
-            Sessao::gravaMensagem("Usuario inexistente");
+            Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/usuario');
         }
 
@@ -246,17 +247,15 @@ class UsuarioController extends Controller
 
     public function excluir()
     {
-        $sla = new Sla();
-        $sla->setId($_POST['id']);
+        $usuario = new Usuario();
+        $usuario->setId($_POST['id']);
 
-        $usuarioDAO = new UsuarioDAO();
+        $usuarioService = new UsuarioService();
 
-        if (!$usuarioDAO->excluir($usuario)) {
-            Sessao::gravaMensagem("Usuario inexistente");
+        if (!$usuarioService->excluir($usuario)) {
+            Sessao::gravaMensagem("Cadastro inexistente");
             $this->redirect('/usuario');
         }
-
-        Sessao::gravaMensagem("Usuario excluido com sucesso!");
 
         $this->redirect('/usuario');
     }

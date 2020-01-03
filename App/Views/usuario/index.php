@@ -12,7 +12,7 @@
                     Pesquisa de coluna individual
                 </h3>
                 <?php if ($Sessao::retornaMensagem()) { ?>
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-success" role="alert">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <?php echo $Sessao::retornaMensagem(); ?>
                     </div>
@@ -72,13 +72,14 @@
         </div>
         <div class="kt-portlet__body">
             <!--begin: Datatable -->
-            <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_3">
+            <table class="table table-striped table-bordered table-hover table-checkable" id="kt_table_3">
                 <thead>
                     <tr>
                         <th>CÓDIGO ID</th>
                         <th>Nome</th>
                         <th>EMAIL</th>
                         <th>NIVEL</th>
+                        <th>STATUS</th>
                         <th>DEPARTAMENTO</th>
                         <th>Acoes</th>
                     </tr>                    
@@ -89,6 +90,7 @@
                         <th>Nome</th>
                         <th>EMAIL</th>
                         <th>NIVEL</th>
+                        <th>STATUS</th>
                         <th>DEPARTAMENTO</th>
                         <th>Acoes</th>
                     </tr>
@@ -102,6 +104,7 @@
                             <td><?php echo $usuario->getNome(); ?></td>
                             <td><?php echo $usuario->getEmail(); ?></td>
                             <td><?php echo $usuario->getNivel(); ?></td>                            
+                            <td><?php echo $usuario->getStatus(); ?></td>                            
                             <td><?php echo $usuario->getDepartamento()->getNome(); ?></td>                            
                             <td>
                                 <span class="dropdown">

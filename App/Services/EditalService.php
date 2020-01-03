@@ -149,7 +149,7 @@ class EditalService
             $tela = "Exclusao Edital - Codigo ".$edital->getEdtId();
             $emailService->emailSuporte($e, $tela);
             $transacao->rollBack();
-            throw new \Exception(["Erro ao excluir a empresa"]);            
+            throw new \Exception(["Erro ao excluir cadastro"]);            
             return false;
         }
     }

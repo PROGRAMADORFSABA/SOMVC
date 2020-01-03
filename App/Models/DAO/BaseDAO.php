@@ -45,11 +45,11 @@ abstract class BaseDAO
             {
                 $where = " WHERE $where ";
             }
-            
+         
             $stmt = $this->conexao->prepare("UPDATE $table SET $cols $where");
-           //var_dump($values);
+          // var_dump($cols);
             $stmt->execute($values);
-
+  
             return $stmt->rowCount();
         }else{
             return false;

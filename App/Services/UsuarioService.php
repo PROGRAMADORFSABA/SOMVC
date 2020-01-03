@@ -8,8 +8,6 @@ use App\Lib\Exportar;
 
 use App\Models\DAO\UsuarioDAO;
 
-
-
 use App\Models\Validacao\UsuarioValidador;
 use App\Models\Validacao\ResultadoValidacao;
 use App\Models\Entidades\Usuario;
@@ -22,6 +20,11 @@ class UsuarioService
     {
         $usuarioDAO = new UsuarioDAO();
         return $usuarioDAO->listar($idUsuario);
+    }
+    public function verificaEmail($email)
+    {
+        $usuarioDAO = new UsuarioDAO();
+        return $usuarioDAO->verificaEmail($email);
     }
    
     public function validacadastro($codigo,$email,$valida)
@@ -49,11 +52,11 @@ class UsuarioService
         return $usuarioDAO->listarEstadosVinculadas($usuario);
     }*/
 
-    /*public function salvar(Usuario $usuario)
+    public function salvar(Usuario $usuario)
     {
         $transacao = new Transacao();
-        $usuarioValidadorInserir = new UsuarioValidadorInserir();
-        $resultadoValidacao = $usuarioValidadorInserir->validar($usuario);
+        $usuarioValidador = new UsuarioValidador();
+        $resultadoValidacao = $usuarioValidador->validar($usuario);
 
         if ($resultadoValidacao->getErros()) {
             Sessao::limpaErro();
@@ -62,9 +65,9 @@ class UsuarioService
             try{
                 $transacao->beginTransaction();
                 $usuarioDAO = new UsuarioDAO();            
-                $usuarioDAO->salvar($usuario);
+                $codUsuario = $usuarioDAO->salvar($usuario);
                 $transacao->commit(); 
-                Sessao::gravaMensagem("cadastro realizado com sucesso!.");
+                Sessao::gravaMensagem("Cadastro realizado com sucesso! <br> <br> Codigo: ".$codUsuario);
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
@@ -73,9 +76,9 @@ class UsuarioService
                 return false;
             }
         }
-    }*/
+    }
 
-    public function Editar(Usuario $usuario)
+    public function atualizar(Usuario $usuario)
     {
         $transacao              = new Transacao();
         $usuarioValidador       = new UsuarioValidador();
@@ -94,8 +97,7 @@ class UsuarioService
                 Sessao::gravaMensagem("cadastro alterado com sucesso! <br> <br>  Codigo ".$usuario->getId());
                 Sessao::limpaFormulario();
                 return true;
-            }catch(\Exception $e){
-                var_dump("editar usuario ".$e);
+            }catch(\Exception $e){                
                 $transacao->rollBack(); 
                 //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar alterar. ");
@@ -103,12 +105,9 @@ class UsuarioService
             }
         }
 
-
-
-
     }
 
-    /*public function excluir(Usuario $usuario)
+    public function excluir(Usuario $usuario)
     {
         try {
 
@@ -116,25 +115,17 @@ class UsuarioService
             $transacao->beginTransaction();
             
             $usuarioDAO = new UsuarioDAO();
-            $vagas = $usuarioDAO->listarEstadosVinculadas($usuario);
 
-            if (isset($vagas)) {                
-                $vagaDAO = new EstadoDAO();
-                foreach ($vagas as $vaga) {                    
-                    $vagaDAO->excluirComRelacionamentos($vaga);          
-                }
-            }
-            
             $usuarioDAO->excluir($usuario);
             $transacao->commit();            
             
             Sessao::limpaMensagem();
-            Sessao::gravaMensagem("Usuario Excluida com Sucesso!");
+            Sessao::gravaMensagem("Cadastro Excluida com Sucesso!");
             return true;
         } catch (\Exception $e) {
             $transacao->rollBack();
-            throw new \Exception(["Erro ao excluir a empresa"]);            
+            throw new \Exception(["Erro ao excluir Cadastro!"]);            
             return false;
         }
-    }*/
+    }
 }

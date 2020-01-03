@@ -1,7 +1,7 @@
 					<!-- begin:: Footer -->
 					<div class="kt-footer kt-grid__item kt-grid kt-grid--desktop kt-grid--ver-desktop">
 						<div class="kt-footer__copyright">
-							2019&nbsp;&copy;&nbsp;<a href="http://www.devAction.com.br" target="_blank" class="kt-link">Copyright Desenvolvido por DevAction</a>
+						<?php echo date('Y') ?>&nbsp;&copy;&nbsp;<a href="http://www.devAction.com.br" target="_blank" class="kt-link">Copyright Desenvolvido por DevAction</a>
 						</div>
 
 						<div id="timefooter" name="timefooter"></div>
