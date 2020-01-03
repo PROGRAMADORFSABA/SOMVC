@@ -13,7 +13,7 @@ use App\Models\Entidades\Sugestoes;
 use App\Models\Entidades\Pedido;
 use App\Models\Entidades\Edital;
 use App\Models\Entidades\Notificacao;
-
+use App\Models\Entidades\Usuario;
 
 class EmailService
 {
@@ -21,6 +21,12 @@ class EmailService
     {
         $emailDAO = new EmailDAO();
         return $emailDAO->email($pedido, $email, $subject);
+       
+    }
+    public function emailUsuario(Usuario $usuario, $email, $subject)
+    {
+        $emailDAO = new EmailDAO();
+        return $emailDAO->emailUsuario($usuario, $email, $subject);
        
     }
     

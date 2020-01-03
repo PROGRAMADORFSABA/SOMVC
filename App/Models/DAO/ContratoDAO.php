@@ -85,8 +85,8 @@ class ContratoDAO extends BaseDAO
         $contrato->getUsuario()->setId($dado['id']);
         $contrato->getUsuario()->setNome($dado['nome']);
         $contrato->setContratoStatus(new ContratoStatus());
-        $contrato->getcontratoStatus()->setStEdtId($dado['stedt_id']);;
-        $contrato->getcontratoStatus()->setStEdtNome($dado['stedt_nome']);
+        $contrato->getContratoStatus()->setStEdtId($dado['stedt_id']);;
+        $contrato->getContratoStatus()->setStEdtNome($dado['stedt_nome']);
 
                 $lista[] = $contrato;
             }

@@ -13,6 +13,10 @@ class LoginController extends Controller
     { 
         $this->renderLogin('/login/sucesso');
     }
+    public function erro()
+    { 
+        $this->renderLogin('/login/sucesso');
+    }
     public function index()
     { 
         $this->renderLogin('/login/index');

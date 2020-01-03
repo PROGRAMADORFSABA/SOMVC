@@ -52,6 +52,7 @@ class UsuarioDAO extends BaseDAO
             $usuario->setFk_Instituicao($dado['fk_idInstituicao']);
             $usuario->getDepartamento()->setId($dado['idDep']);
             $usuario->getDepartamento()->setNome($dado['nomeDep']);
+            
             return $usuario;
         }
 
@@ -172,17 +173,17 @@ class UsuarioDAO extends BaseDAO
         try {
 
             $id             = $usuario->getId();
-            $nome          = $usuario->getNome();
-            $email      = $usuario->getEmail();
-           // $senha      = $usuario->getSenha();
-           // $pwd        = sha1($senha);
-            $nivel      = $usuario->getNivel();
-            $idDep      = $usuario->getId_dep();
-            $status      = $usuario->getStatus();
+            $nome           = $usuario->getNome();
+            $email          = $usuario->getEmail();
+           // $senha        = $usuario->getSenha();
+           // $pwd          = sha1($senha);
+            $nivel          = $usuario->getNivel();
+            $idDep          = $usuario->getId_dep();
+            $status         = $usuario->getStatus();
             $fk_instituicao  = $usuario->getFk_Instituicao();
           //  $valida        = $usuario->getValida();
-            //$validamd5 = sha1($valida);
-            $dica        = $usuario->getDica();
+            //$validamd5    = sha1($valida);
+            $dica           = $usuario->getDica();
 
             
             return $this->update(
@@ -200,6 +201,32 @@ class UsuarioDAO extends BaseDAO
                     ':fk_instituicao' => $fk_instituicao,
                   //  ':valida' => $validamd5,
                     ':dica' => $dica,
+                ],
+                "id = :id"
+            );
+        } catch (\Exception $e) {
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
+        }
+    }
+
+    public  function ativarcadastro(Usuario $usuario)
+    {
+        try {
+
+            $id             = $usuario->getId();            
+            $email          = $usuario->getEmail();
+            $status         = $usuario->getStatus();          
+            $valida        = $usuario->getValida();            
+            
+            return $this->update(
+                'usuarios',
+                "valida = :valida, email =:email,
+                status =:status",
+                [
+                    ':id' => $id,
+                    ':valida' => $valida,
+                    ':email' => $email,
+                    ':status' => $status,
                 ],
                 "id = :id"
             );

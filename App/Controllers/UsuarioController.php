@@ -7,6 +7,8 @@ use App\Models\DAO\UsuarioDAO;
 use App\Models\DAO\DepartamentoDAO;
 use App\Models\Entidades\Usuario;
 use App\Services\UsuarioService;
+use App\Services\EmailService;
+
 use App\Models\Validacao\UsuarioValidador;
 
 class UsuarioController extends Controller
@@ -37,6 +39,7 @@ class UsuarioController extends Controller
     public function salvar()
     {
         $usuario = new Usuario();
+        $usuarioService = new UsuarioService();
         $usuario->setNome($_POST['nome']);
         $usuario->setNivel($_POST['nivel']);
         $usuario->setEmail($_POST['email']);
@@ -58,6 +61,12 @@ class UsuarioController extends Controller
         }
 
         if ($usuarioId = $usuarioDAO->salvar($usuario)) {
+            $usuario->setId($usuarioId);
+            $usuarioId = $usuarioService->listar($usuario);
+            $email = $_POST['email'];               
+            $emailService = new EmailService();
+            $subject = 1;
+            $emailService->emailUsuario($usuario,$email, $subject);
 
             //$to = $usuario->setEmail($_POST['email']);
             $to = "vendas2@fabmed.com.br";
@@ -65,15 +74,15 @@ class UsuarioController extends Controller
           
 			$subject = "Cadastro no Sistema de Ocorrencias"; // assunto
 			$message = "Validacao de cadastro " . "\r\n";
-           // $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/valida_cadastro.php?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";
-            $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to&v3=$usuarioId> SO - Click aqui para validar seu cadastro </a>";          
+            $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/?v=$valida&v2=$to&v3=$usuarioId> Click aqui para validar seu cadastro </a>";
+            $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to&v3=$usuarioId> Click aqui para validar seu cadastro </a>";          
             $headers = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n"; //formato
 			//$headers .= 'To: Carlos Andre <programadorfsaba@gmail.com>' . "\r\n"; //
-			$headers .= 'From:< noreply@sistemadevnogueira.online>' . "\r\n"; //email de envio
+			$headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
 			//$headers .= 'From:< contato@sistemaocorrencia.com.br>' . "\r\n"; //email de envio
 			//$headers .= 'CC:<' . $emailUser . '>' . "\r\n"; //email com copia
-			$headers .= 'Reply-To: < suporte@sistemadevnogueira.online>' . "\r\n"; //email para resposta
+			$headers .= 'Reply-To: < suporte@devaction.com.br>' . "\r\n"; //email para resposta
 			mail($to, $subject, $message, $headers);
 
             $this->redirect('/usuario/sucesso');
@@ -85,22 +94,34 @@ class UsuarioController extends Controller
     public function validausuario()
     {        
         $to = "programadorfsaba@gmail.com";
-			$valida = md5($to);
-			//$valida = sha1($to);
-        $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";          
+            $valida = md5($to);
+            $usuarioId = 25;
+        $message .= "<a href=http://localhost/SOMVC/usuario/validausuario/?v=$valida&v2=$to> SO - Click aqui para validar seu cadastro </a>";
+        $message .= "<a href=http://www.coisavirtual.com.br/usuario/validaUsuario/?v=$valida&v2=$to&v3=$usuarioId> Click aqui para validar seu cadastro </a>";          
                    
-        $valida  = $_GET["v"];
+        $valida  = $_GET['v'];
         $email  = $_GET['v2'];
         $codigo  = $_GET['v3'];
         
-        if ($valida == "" || $email == "" ) {           
-            Sessao::gravaMensagem("nao foi possivel ativar o cadastro");
-            $this->redirect('/login');           
+        if ($valida == "" || $email == "" ) {               
+            $this->redirect('/mensagem/erro');          
         }else {
             $usuarioService = new UsuarioService();
-            $usuario        = $usuarioService->validacadastro($codigo,$valida,$email); 
-            $this->redirect('/login/sucesso');
-        
+            $usuarioService->validacadastro($codigo,$valida,$email); 
+            $usuario = new Usuario();
+            $usuario->setId($codigo);
+            $usuario->setValida($valida);
+            $usuario->setEmail($email);
+            $usuario->setStatus("Ativo");
+            
+            echo $message;
+           
+            if($usuarioService->ativarcadastro($usuario)){
+
+                $this->redirect('/mensagem/sucesso');
+            }else{
+                $this->redirect('/mensagem/erro');  
+            }
         }
         
     }
@@ -131,9 +152,10 @@ class UsuarioController extends Controller
 
     public function atualizar()
     {
+       
         $usuarioDAO = new UsuarioDAO();
         $usuario = $usuarioDAO->listar($_POST['id']);
-        $email = $usuario->getEmail();
+        $email = "teste";//$usuario->getEmail();
         
         $usuarioService = new UsuarioService();
         $usuario = new Usuario();
@@ -169,6 +191,10 @@ class UsuarioController extends Controller
         }
         
        if( $usuarioDAO->atualizar($usuario)){
+        $email = $_POST['email'];               
+        $emailService = new EmailService();
+        $subject = 2;
+        $emailService->emailUsuario($usuario,$email, $subject);
          //$to = $usuario->setEmail($_POST['email']);
          $to = "vendas2@fabmed.com.br";
          $valida = md5($to);
