@@ -47,6 +47,18 @@
                         <label for="numero">Contrato:</label>
                         <input type="text" class="form-control" title="Digite o numero da Contrato" placeholder="Contrato" id="contrato" name="contrato" value="<?php echo $Sessao::retornaValorFormulario('contrato'); ?>">
                     </div>
+                    <div class="col-lg-2">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status" name="status" required>
+                                <option value="">Selecione o Status</option>
+                                <?php foreach ($viewVar['listarContratoStatus'] as $contratoStatus) : ?>
+                                    <option value="<?php echo $contratoStatus->getStCtrId(); ?>" <?php echo ($Sessao::retornaValorFormulario('status') == $contratoStatus->getStCtrId()) ? "selected" : ""; ?>>
+                                        <?php echo $contratoStatus->getStCtrNome(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        <span class="form-text text-muted">Por favor insira o Status</span>
+                    </div>    
+
                     <div class="col-lg-3">
                         <div class="form-group"><label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
@@ -189,7 +201,7 @@
                                 <td><?php echo $contrato->getClienteLicitacao()->getRazaoSocial(); ?></td>
                                 <td><?php echo $contrato->getClienteLicitacao()->getTipoCliente(); ?></td>
                                 <td><?php echo $contrato->getCtrNumero(); ?></td>
-                                <td><?php echo $contrato->getCtrStatus(); ?></td>
+                                <td><?php echo $contrato->getContratoStatus()->getStCtrNome(); ?></td>
                                 <td><?php echo $contrato->getCtrDataVencimento()->format('d/m/Y'); ?></td>
                                 <td><?php echo $contrato->getCtrValor(); ?></td>
                                 <td><?php echo $contrato->getUsuario()->getNome(); ?></td>

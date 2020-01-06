@@ -25,17 +25,16 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-lg-3">
-                        <label for="codRepresentante">Representante</label>
-                        <select class="form-control" id="codRepresentante" name="codRepresentante" >
-                                <option value="">Selecione o Representante</option>
-                                <?php foreach ($viewVar['listarRepresentantes'] as $representante) : ?>
-                                    <option value="<?php echo $representante->getRepresentante()->getCodRepresentante(); ?>" <?php echo ($Sessao::retornaValorFormulario('codRepresentante') == $representante->getRepresentante()->getCodRepresentante()) ? "selected" : ""; ?>>
-                                        <?php echo $representante->getRepresentante()->getNomeRepresentante(); ?></option>
+            <div class="col-lg-2">
+                        <label for="status">Status</label>
+                        <select class="form-control" id="status" name="status" required>
+                                <option value="">Selecione o Status</option>
+                                <?php foreach ($viewVar['listarEditalStatus'] as $editalStatus) : ?>
+                                    <option value="<?php echo $editalStatus->getStEdtId(); ?>" <?php echo ($Sessao::retornaValorFormulario('status') == $editalStatus->getStEdtId()) ? "selected" : ""; ?>>
+                                        <?php echo $editalStatus->getStEdtNome(); ?></option>
                                 <?php endforeach; ?>
                             </select>
-                        <span class="form-text text-muted">Por favor insira o Representante</span>
-            </div>   
+                        <span class="form-text text-muted">Por favor insira o Status</span>   
             </div>   
             
                 <div class="form-group row">

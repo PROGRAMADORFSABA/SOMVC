@@ -13,21 +13,7 @@
     private $stCtrUsuario;
     private $stCtrInstituicao;
 
-                 /**
-         * Set the value of stCtrInstituicao
-         *
-         * @return  self
-         */ 
-        public function setStCtrInstituicao()
-        {
-                return $this->stCtrInstituicao;
-        }
-
-        public function getStCtrInstituicao($stCtrInstituicao)        {
-                $this->stCtrInstituicao = $stCtrInstituicao;
-                return $this;
-        }
-         
+        
          /**
          * Set the value of stCtrObservacao
          *
@@ -117,6 +103,20 @@
         public function setStCtrUsuario(Usuario $stCtrUsuario) {
                 $this->stCtrUsuario = $stCtrUsuario;
         }
+         /**
+         * Set the value of stCtrInstituicao
+         *
+         * @return  self
+         */ 
+        public function setStCtrInstituicao(Instituicao $stCtrInstituicao)
+        {
+                $this->stCtrInstituicao = $stCtrInstituicao;               
+        }
+
+        public function getStCtrInstituicao()        {
+                return $this->stCtrInstituicao;
+        }
+         
  }
 
 ?>

@@ -181,14 +181,13 @@ ctr_prazopagamento, ctr_prazopagamento, ctr_instituicao, ctr_datacadastro, ctr_d
          *
          * @return  self
          */ 
-        public function getContratosStatus()
+        public function getContratoStatus()
         {
                 return $this->contratoStatus;
         }
 
-        public function setContratosStatus(ContratoStatus $contratoStatus)        {
-                $this->contratoStatus = $contratoStatus;
-                return $this;
+        public function setContratoStatus(ContratoStatus $contratoStatus)        {
+                $this->contratoStatus = $contratoStatus;                
         }
                 
         /**

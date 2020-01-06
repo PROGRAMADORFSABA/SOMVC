@@ -104,6 +104,7 @@ class EditalStatusController extends Controller
         $instituicaoService  = new InstituicaoService();
         $usuarioService     = new UsuarioService();
         $editalStatus       = new EditalStatus();
+        $editalStatus->setStEdtId($editalStatusId);
         
         if(Sessao::existeFormulario()) { 
             $instituicaoId  = Sessao::retornaValorFormulario('instituicao');
@@ -116,7 +117,7 @@ class EditalStatusController extends Controller
             
         }else{                       
             $editalStatusService = new EditalStatusService();
-            $editalStatus        = $editalStatusService->listar($editalStatusId)[0]; 
+            $editalStatus        = $editalStatusService->listar($editalStatus)[0]; 
         }        
 
         if (!$editalStatus) {

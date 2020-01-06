@@ -204,19 +204,19 @@ class EditalController extends Controller
 
     public function atualizar()
     {       
-        $edital = new Edital();
-        $editalStatus = new EditalStatus();
-        $editalStatusService     = new EditalStatusService();    
+        $edital                   = new Edital();
+        $editalStatus             = new EditalStatus();
+        $editalStatusService      = new EditalStatusService();    
         $clienteLicitacaoService  = new ClienteLicitacaoService();        
-        $usuarioService          = new UsuarioService();        
-        $representanteService    = new RepresentanteService();        
-        $instituicaoService      = new InstituicaoService();        
-        $clienteLicitacao        = $clienteLicitacaoService->listar($_POST['cliente']);
-        $editalStatus->setStEdtId($_POST['status']);
-        $status                  = $editalStatusService->listar($editalStatus)[0];
-        $usuario                 = $usuarioService->listar($_POST['edtUsuario']);
-        $instituicao             =   $instituicaoService->listar($_POST['fk_instituicao']);
-        $representante           = $representanteService->listar($_POST['representante'])[0];
+        $usuarioService           = new UsuarioService();        
+        $representanteService     = new RepresentanteService();        
+        $instituicaoService       = new InstituicaoService();        
+        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
+        $editalStatus->setStCtrId($_POST['status']);
+        $status                   = $editalStatusService->listar($editalStatus)[0];
+        $usuario                  = $usuarioService->listar($_POST['edtUsuario']);
+        $instituicao              =   $instituicaoService->listar($_POST['fk_instituicao']);
+        $representante            = $representanteService->listar($_POST['representante'])[0];
        
         $edital->setEdtId($_POST['codigo']);        
         $edital->setEdtProposta($_POST['proposta']);        

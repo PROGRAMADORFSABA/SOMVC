@@ -11,6 +11,7 @@ use App\Models\Entidades\Edital;
 use App\Models\Entidades\Representante;
 use App\Models\Entidades\ClienteLicitacao;
 use App\Services\ContratoService;
+use App\Services\ContratoStatusService;
 use App\Services\UsuarioService;
 use App\Services\EditalService;
 use App\Services\InstituicaoService;
@@ -29,7 +30,6 @@ class ContratoController extends Controller
         {
            // $contrato->setEdital(new Edital());
             $contrato->setCodEdital($editalId);
-           
             self::setViewParam('listaContratos', $contratoService->listarDinamico($contrato));
             $this->render('/contrato/index');
         }
@@ -109,10 +109,12 @@ class ContratoController extends Controller
 
     public function cadastro()
     {
-        $representanteService = new RepresentanteService();
-        $clienteLicitacaoService = new ClienteLicitacaoService();
-        $editalService = new EditalService();   
-        $contrato = new Contrato();
+        $representanteService       = new RepresentanteService();
+        $clienteLicitacaoService    = new ClienteLicitacaoService();
+        $editalService              = new EditalService();   
+        $contratoStatusService      = new ContratoStatusService();   
+        $contrato                   = new Contrato();
+        $contratoStatus            = new ContratoStatus();
         
         if(Sessao::existeFormulario()) { 
             
@@ -133,9 +135,9 @@ class ContratoController extends Controller
             $contrato->setRepresentante(new Representante());
         }
        if( $teste = Sessao::retornaValorFormulario('teste')){
-           var_dump($teste);
            self::setViewParam('listarTestes', $clienteLicitacaoService->listar($teste)); 
         }
+        self::setViewParam('listarContratoStatus', $contratoStatusService->listar($contratoStatus));
         $this->setViewParam('contrato',$contrato);        
         $this->render('/contrato/cadastro');
         Sessao::limpaFormulario();
@@ -207,10 +209,14 @@ class ContratoController extends Controller
         */
         $contratoId = $params[0];
         
-        $contratoService = new ContratoService();
-        $representanteService = new RepresentanteService();
-        $clienteLicitacaoService = new ClienteLicitacaoService();
+        $contratoService            = new ContratoService();
+        $contratoStatusService      = new ContratoStatusService();
+        $representanteService       = new RepresentanteService();
+        $clienteLicitacaoService    = new ClienteLicitacaoService();
         $contrato = new Edital();
+        $contratoStatus = new ContratoStatus();
+
+        self::setViewParam('listarContratoStatus', $contratoStatusService->listar($contratoStatus));
         if(Sessao::existeFormulario()) { 
             $clienteId = Sessao::retornaValorFormulario('cliente');
             $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
@@ -239,16 +245,22 @@ class ContratoController extends Controller
 
     public function atualizar()
     {             
-        $clienteLicitacaoService  = new ClienteLicitacaoService();        
-        $usuarioService = new UsuarioService();        
-        $representanteService = new RepresentanteService();        
-        $instituicaoService = new InstituicaoService();        
-        $editalService = new EditalService();        
-        $clienteLicitacao         = $clienteLicitacaoService->listar($_POST['cliente']);
-        $usuario        = $usuarioService->listar($_POST['ctrUsuario']);
-        $instituicao     =   $instituicaoService->listar($_POST['fk_instituicao']);
-        $representante    = $representanteService->listar($_POST['representante'])[0];
-        $edital    = $editalService->listar($_POST['numeroLicitacao'])[0];
+        $clienteLicitacaoService    = new ClienteLicitacaoService();        
+        $usuarioService             = new UsuarioService();        
+        $contratoStatus             = new contratoStatus();        
+        $representanteService       = new RepresentanteService();        
+        $instituicaoService         = new InstituicaoService();        
+        $editalService              = new EditalService();       
+        $contratoStatusService      = new ContratoStatusService();       
+        
+        
+        $contratoStatus->setStCtrId($_POST['status']);
+        $status                 = $contratoStatusService->listar($contratoStatus)[0];
+        $clienteLicitacao       = $clienteLicitacaoService->listar($_POST['cliente']);
+        $usuario                = $usuarioService->listar($_POST['ctrUsuario']);
+        $instituicao            =   $instituicaoService->listar($_POST['fk_instituicao']);
+        $representante          = $representanteService->listar($_POST['representante'])[0];
+        $edital                 = $editalService->listar($_POST['numeroLicitacao'])[0];
  
         $contrato = new Contrato();
         $contrato->setCtrId($_POST['codigo']);        
@@ -268,6 +280,7 @@ class ContratoController extends Controller
         $contrato->setInstituicao($instituicao);
         $contrato->setRepresentante($representante);
         $contrato->setUsuario($usuario);
+        $contrato->setContratoStatus($status);
         $anexo =  $_POST['anexo'];
         if($anexo == ""){
             $contrato->setCtrAnexo($_POST['anexoAlt']);                    

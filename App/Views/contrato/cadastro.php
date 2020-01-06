@@ -46,15 +46,16 @@
                         <label for="prazoPagamento" >Prazo de Pagamento:</label>
                         <input type="text" class="form-control" placeholder="Digite o Prazo de Pagamento" id="prazoPagamento" name="prazoPagamento" value="<?php $Sessao::retornaValorFormulario('prazoPagamento');?>" required>
                         <span class="form-text text-muted">Digite oPrazo de Pagamento</span>
-                    </div>
+                    </div>                    
                     <div class="col-lg-3">
                         <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status" required>
-                            <option value="">Selecione o Status</option>
-                                <option value="PENDENTE">PENDENTE</option>
-                                <option value="LANCADO">LANCADO</option>
-                                <option value="VENCIDO">VENCIDO</option>
-                        </select>
+                        <select class="form-control" id="statusa" name="statusa" required>
+                                <option value="">Selecione o Status</option>
+                                <?php foreach ($viewVar['listarContratoStatus'] as $contratoStatus) : ?>
+                                    <option value="<?php echo $contratoStatus->getStCtrId(); ?>" <?php echo ($Sessao::retornaValorFormulario('status') == $contratoStatus->getStCtrId()) ? "selected" : ""; ?>>
+                                        <?php echo $contratoStatus->getStCtrNome(); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>
             </div>

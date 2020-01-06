@@ -46,19 +46,18 @@
                         <input type="text" class="form-control" placeholder="Digite o Prazo de Pagamento" id="prazoPagamento" name="prazoPagamento" value="<?php echo $viewVar['contrato']->getCtrPrazoPagamento(); ?>" required>
                             </select>
                             <span class="form-text text-muted">Por favor insira o Prazo de Pagamento</span>
-                    </div>                    
-                    <div class="col-lg-3">
-                        <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status" required>
-                            <option value="">Selecione o Status</option>
-                            <option value="<?php echo $viewVar['contrato']->getCtrStatus(); ?>" <?php echo ($viewVar['contrato']->getCtrStatus() == $viewVar['contrato']->getCtrStatus()) ? "selected" : ""; ?>>
-                                    <?php echo $viewVar['contrato']->getCtrStatus(); ?> </option>
-                                <option value="PENDENTE">PENDENTE</option>
-                                <option value="LANCADO">LANCADO</option>
-                                <option value="VENCIDO">VENCIDO</option>
-                        </select>
-                        <span class="form-text text-muted">Por favor insira o Status</span>
                     </div>
+                    <div class="col-lg-3">
+                            <label for="status">status</label>
+                            <select class="form-control" id="status" name="status" required>
+                                    <option value="">Selecione o status</option>
+                                    <?php foreach ($viewVar['listarContratoStatus'] as $contratoStatus) : ?>
+                                        <option value="<?php echo $contratoStatus->getStCtrId(); ?>" <?php echo ($viewVar['contrato']->getContratoStatus()->getStCtrId() == $contratoStatus->getStCtrId()) ? "selected" : ""; ?>>
+                                            <?php echo $contratoStatus->getStCtrNome(); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <span class="form-text text-muted">Por favor insira o status</span>
+                    </div>  
                                          
             </div>
                 <div class="form-group row"> 

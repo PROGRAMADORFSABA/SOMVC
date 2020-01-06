@@ -22,7 +22,8 @@ class ContratoDAO extends BaseDAO
         INNER JOIN instituicao i ON i.inst_id = edt.edt_instituicao
         INNER JOIN usuarios u ON u.id = edt.edt_usuario 
         INNER JOIN contratoStatus ctrSt ON ctrSt.stctr_id = ctr.ctr_status";
-            if($ctrId) 
+         
+         if($ctrId) 
             {    
                 $SQL.= " WHERE ctr.ctr_id = $ctrId";
             }         
@@ -85,8 +86,8 @@ class ContratoDAO extends BaseDAO
         $contrato->getUsuario()->setId($dado['id']);
         $contrato->getUsuario()->setNome($dado['nome']);
         $contrato->setContratoStatus(new ContratoStatus());
-        $contrato->getContratoStatus()->setStEdtId($dado['stedt_id']);;
-        $contrato->getContratoStatus()->setStEdtNome($dado['stedt_nome']);
+        $contrato->getContratoStatus()->setStCtrId($dado['stctr_id']);;
+        $contrato->getContratoStatus()->setStCtrNome($dado['stctr_nome']);
 
                 $lista[] = $contrato;
             }
@@ -101,7 +102,8 @@ class ContratoDAO extends BaseDAO
 		INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
         INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
-		INNER JOIN usuarios u ON u.id = ctr.ctr_usuario";
+        INNER JOIN usuarios u ON u.id = ctr.ctr_usuario
+        INNER JOIN contratoStatus ctrSt ON ctrSt.stctr_id = ctr.ctr_status";
             if($ctrId) 
             {    
                 $SQL.= " WHERE ctr.ctr_id = $ctrId";
@@ -164,6 +166,9 @@ class ContratoDAO extends BaseDAO
         $contrato->setUsuario(new Usuario());
         $contrato->getUsuario()->setId($dado['id']);
         $contrato->getUsuario()->setNome($dado['nome']);
+        $contrato->setContratoStatus(new ContratoStatus());
+        $contrato->getContratoStatus()->setStCtrId($dado['stctr_id']);;
+        $contrato->getContratoStatus()->setStCtrNome($dado['stctr_nome']);
 
                 $lista[] = $contrato;
             }
@@ -178,7 +183,8 @@ class ContratoDAO extends BaseDAO
 		INNER JOIN cadRepresentante r ON r.codRepresentante = ctr.ctr_representante
         INNER JOIN clienteLicitacao c ON c.licitacaoCliente_cod = ctr.ctr_clientelicitacao
         INNER JOIN instituicao i ON i.inst_id = ctr.ctr_instituicao
-		INNER JOIN usuarios u ON u.id = ctr.ctr_usuario";
+        INNER JOIN usuarios u ON u.id = ctr.ctr_usuario
+        INNER JOIN contratoStatus ctrSt ON ctrSt.stctr_id = ctr.ctr_status";
             if($ctrId) 
             {    
                 $SQL.= " WHERE ctr.ctr_id = $ctrId";
@@ -240,7 +246,9 @@ class ContratoDAO extends BaseDAO
         $contrato->getInstituicao()->setInst_Nome($dado['inst_nome']);                    
         $contrato->setUsuario(new Usuario());
         $contrato->getUsuario()->setId($dado['id']);
-        $contrato->getUsuario()->setNome($dado['nome']);
+        $contrato->getUsuario()->setNome($dado['nome']);$contrato->setContratoStatus(new ContratoStatus());
+        $contrato->getContratoStatus()->setStCtrId($dado['stctr_id']);;
+        $contrato->getContratoStatus()->setStCtrNome($dado['stctr_nome']);
 
                 $lista[] = $contrato;
             }
@@ -384,6 +392,9 @@ class ContratoDAO extends BaseDAO
                 $contrato->setUsuario(new Usuario());
                 $contrato->getUsuario()->setId($dado['id']);
                 $contrato->getUsuario()->setNome($dado['nome']);
+                $contrato->setContratoStatus(new ContratoStatus());
+        $contrato->getContratoStatus()->setStCtrId($dado['stctr_id']);;
+        $contrato->getContratoStatus()->setStCtrNome($dado['stctr_nome']);
                 
                 $lista[] = $contrato;
             }
@@ -473,8 +484,8 @@ class ContratoDAO extends BaseDAO
             $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
             $ctrDataVencimento             = $contrato->getCtrDataVencimento()->format('Y-m-d');
             $ctrValor                    = $contrato->getCtrValor();
-           // $ctrValor                      = str_replace(",", ".", $valorAtual);
-            $ctrStatus                     = $contrato->getCtrStatus();
+           // $ctrValor                      = str_replace(",", ".", $valorAtual);           
+            $ctrStatus                     = $contrato->getContratoStatus()->getCtrStatus();
             $ctrObservacao                 = $contrato->getCtrObservacao();
             $ctrAnexo                      = $contrato->getCtrAnexo();
             $ctrClienteLicitacao           = $contrato->getClienteLicitacao()->getCodCliente();
@@ -555,11 +566,11 @@ class ContratoDAO extends BaseDAO
             $ctrNumero                     = $contrato->getCtrNumero();
             $ctrDataInicio                 = $contrato->getCtrDataInicio()->format('Y-m-d');
             $ctrDataVencimento             = $contrato->getCtrDataVencimento()->format('Y-m-d');
-            $ctrValor                    = $contrato->getCtrValor();
+            $ctrValor                      = $contrato->getCtrValor();
            // $ctrValor                      = str_replace(',','.', str_replace(".", "", $valorAtual));
             //str_replace(',','.', str_replace('.','', $_POST['txtSalario']))
            // var_dump($ctrValor);
-            $ctrStatus                     = $contrato->getCtrStatus();
+            $ctrStatus                     = $contrato->getContratoStatus()->getCtrStatus();
             $ctrObservacao                 = $contrato->getCtrObservacao();
             $ctrAnexo                      = $contrato->getCtrAnexo();
             $ctrClienteLicitacao           = $contrato->getClienteLicitacao()->getCodCliente();
