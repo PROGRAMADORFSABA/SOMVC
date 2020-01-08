@@ -12,6 +12,7 @@ class EmailDAO extends BaseDAO
 {    
     public  function email(Pedido $pedido, $email, $subject)
    {
+   
        $codPedido          = $pedido->getCodControle();           
        $codStatus          = $pedido->getStatus()->getCodStatus();           
        $nomeStatus         = $pedido->getStatus()->getNome();           
@@ -20,16 +21,18 @@ class EmailDAO extends BaseDAO
        $tipoCliente        = $pedido->getClienteLicitacao()->getTipoCliente();
        $razaoSocialCliente = $pedido->getClienteLicitacao()->getRazaoSocial();
        $anexos             = $pedido->getAnexo();
+       $data               = $pedido->getDataCadastro()->format('d/m/Y h:m:s');
        $numeroPregao       = $pedido->getNumeroLicitacao();
        $numeroAf           = $pedido->getNumeroAf();
        $observacao         = $pedido->getObservacao();
        $valorPedidoAtual   = $pedido->getValorPedido();   
-   
+      
        $dadosCadastro .= "
                     <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
                             <tr> <td>Codigo</td> <td> $codPedido  </td>  </tr>
                             <tr> <td>Cliente</td> <td> $razaoSocialCliente  </td>  </tr>
                             <tr> <td>Status</td> <td>$nomeStatus</td></tr>
+                            <tr> <td>Data</td> <td>$data </td></tr>
                             <tr> <td>Pregao</td> <td>$numeroPregao</td></tr>
                             <tr> <td>Numero</td> <td>$numeroAf</td> </tr>
                             <tr> <td>Valor</td> <td>R$$valorPedidoAtual</td> </tr>
@@ -68,8 +71,8 @@ class EmailDAO extends BaseDAO
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
        //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
-       $headers .= 'Reply-To: <nuvem@fabmed.com.br; vendas2@fabmed.com.br; >' . "\r\n"; //email para resposta
-
+       $headers .= 'Reply-To: <nuvem@fabmed.com.br, vendas2@fabmed.com.br; >' . "\r\n"; //email para resposta
+     
        mail($to, $subject, $message, $headers);
    }
     

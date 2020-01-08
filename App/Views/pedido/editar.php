@@ -13,10 +13,11 @@
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/atualizar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="hidden" class="form-control" name="codControle" id="codControle" value="<?php echo $viewVar['pedido']->getCodControle(); ?>" required >
+        <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro"  value="<?php echo $viewVar['pedido']->getDataCadastro()->format('d/m/Y H:m:s'); ?>" required >
         <input type="hidden" class="form-control" name="usuario" id="usuario" value="<?php echo $_SESSION['id']; ?>" required>
         <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
+        <input type="hidden" class="form-control" name="dataAlteracao" id="dataAlteracao" readonly="readonly" value="<?php echo $dataAtual; ?>" required>
         <div class="kt-portlet__body">
-            <input type="hidden" class="form-control" name="dataCadastro" id="dataCadastro" readonly="readonly" value="<?php echo $dataAtual; ?>" required>
             <div class="kt-portlet__body">
                 <div class="form-group">
                         <label for="cadastroCliente" class="">CADASTRO DO CLIENTE</label>                    

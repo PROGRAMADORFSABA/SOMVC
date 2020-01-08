@@ -46,8 +46,7 @@ abstract class BaseDAO
                 $where = " WHERE $where ";
             }
          
-            $stmt = $this->conexao->prepare("UPDATE $table SET $cols $where");
-           var_dump($cols);
+            $stmt = $this->conexao->prepare("UPDATE $table SET $cols $where");           
             $stmt->execute($values);
   
             return $stmt->rowCount();
@@ -59,11 +58,7 @@ abstract class BaseDAO
     public function delete($table, $where=null) 
     {
         if(!empty($table))
-        {
-            /*
-                DELETE usuario WHERE id = 1
-            */
-
+        {           
             if($where)
             {
                 $where = " WHERE $where ";

@@ -232,7 +232,7 @@ class PedidoController extends Controller
             $pedido->setInstituicao($instituicao);  
             
             $pedido->setCodControle(Sessao::retornaValorFormulario('codControle'));          
-            $pedido->setDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));            
+          //  $pedido->setDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));            
             $pedido->setNumeroLicitacao(Sessao::retornaValorFormulario('numeroPregao'));
             $pedido->setNumeroAf(Sessao::retornaValorFormulario('numeroAf'));
             $pedido->setValorPedido(Sessao::retornaValorFormulario('valorPedido'));
@@ -251,7 +251,7 @@ class PedidoController extends Controller
             $this->redirect('/pedido');
         }
         self::setViewParam('pedido', $pedido);
-       $this->render('/pedido/editar');
+        $this->render('/pedido/editar');
         Sessao::limpaMensagem();
     }
 
@@ -298,8 +298,10 @@ class PedidoController extends Controller
            $this->redirect('/pedido/edicao/' . $_POST['codControle']);
         }
         $pedidoService = new PedidoService();
-        if ($pedidoService->Editar($pedido)) {
+        if ($pedidoService->Editar($pedido)) {  
             if(isset($_POST['enviarEmail'])){  
+                $pedido->setCodControle($_POST['codControle']);
+                $pedido = $pedidoService->listar($pedido)[0];      
                 $email = $_POST['email'];               
                 $emailService = new EmailService();
                 $subject = 2;
