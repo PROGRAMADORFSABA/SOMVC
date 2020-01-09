@@ -55,7 +55,6 @@ $(document).on("click", "#andre", function () {
 });
 
 
-
 $('#frmCadastro').submit(function(){
 	var tabela = $("#tabela").val();		
 	if(document.getElementById("tabela").checked == true){

@@ -32,6 +32,12 @@ class TesteController extends Controller
 
         Sessao::limpaMensagem();
     }
+
+    public function logistica()
+    {
+        $this->render('/teste/logistica');
+    }
+
     public function teste($params)
     {
         $id = $params[0];

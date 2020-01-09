@@ -46,6 +46,7 @@ class PermissaoController extends Controller
         Sessao::limpaFormulario();
     }
 
+    
     public function cadastro()
     {
         $sugestoes      = new Sugestoes();
@@ -75,6 +76,7 @@ class PermissaoController extends Controller
             $sugestoes->setUsuario(new Usuario());
             $sugestoes->setInstituicao(new Instituicao());          
         }
+
         $this->setViewParam('sugestoes',$sugestoes); 
         $this->render('/permissao/cadastro');
         Sessao::limpaFormulario();
@@ -83,9 +85,27 @@ class PermissaoController extends Controller
     }
     public function salvar()
     {
-        $test = $_POST['tabela3'];
         $Dados = filter_input_array(INPUT_POST);
-        var_dump( $Dados);
+        if (!empty($Dados['submit'])) {
+            unset($Dados['submit']);//destruir a variavel
+          // var_dump($Dados);
+            if ($Dados) {
+                echo ' dados 1 <br>';
+                } else {
+                    echo ' dados 0 <br> ';
+            }
+           
+            } 
+            $listaDizeres = $_POST['tabela'];
+
+        foreach ($listaDizeres as $export_dizeres) {
+            if ($export_dizeres) {
+                echo ' dados '. $export_dizeres.'<br>';           
+                } else {
+                    echo ' dados false <br>';
+            }
+        }
+       
      /*   if(filter_input(INPUT_SERVER, 'REQUEST_METHOD')=='POST') {
             $s = array();
             foreach ($_POST as $chave => $valor) {

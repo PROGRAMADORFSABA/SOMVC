@@ -23,7 +23,7 @@ class App
         define('APP_HOST'       , $_SERVER['HTTP_HOST'] . "/SOMVC");
         define('PATH'           , realpath('./'));
         define('TITLE'          , "Aplicação Administrativa ");
-        define('DB_HOST'        , "localhost:3309;charset=utf8");
+        define('DB_HOST'        , "localhost:3306;charset=utf8");
         define('DB_USER'        , "root");
         define('DB_PASSWORD'    , "root");
         define('DB_NAME'        , "fabmed");
@@ -54,7 +54,7 @@ class App
 
         $this->url();
     }
-
+    
     public function run()
     {
         if ($this->controller) {
@@ -63,22 +63,22 @@ class App
         } else {
             $this->controllerName = "HomeController";
         }
-
+        
         $this->controllerFile   = $this->controllerName . '.php';
-        $this->action           = preg_replace('/[^a-zA-Z]/i', '', $this->action);
-
+        $this->action           = preg_replace('/[^a-zA-Z]/i', '', $this->action);       
+        
         if (!$this->controller) {
             $this->controller = new HomeController($this);
             $this->controller->index();
         }
-
+        
         if (!file_exists(PATH . '/App/Controllers/' . $this->controllerFile)) {
             throw new Exception("Página não encontrada.", 404);
         }
-
+        
         $nomeClasse     = "\\App\\Controllers\\" . $this->controllerName;
         $objetoController = new $nomeClasse($this);
-               
+        
         if (!class_exists($nomeClasse)) {
             throw new Exception("Erro na aplicação ", 500);
         }

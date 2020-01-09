@@ -14,11 +14,11 @@ class ContratoStatusDAO extends BaseDAO
         
         $stCtrCodigo        = $contratoStatus->getStCtrId();      
         $stCtrNome          = $contratoStatus->getStCtrNome();
-        /*$proposta           = $contratoStatus->getEdtProposta();
-        $numeroLicitacao    = $contratoStatus->getEdtNumero();
-        $status             = $contratoStatus->getEdtStatus();
-        $modalidade         = $contratoStatus->getEdtModalidade();
-        $representante      = $contratoStatus->getEdtRepresentante();*/
+        /*$proposta         = $contratoStatus->getCtrProposta();
+        $numeroLicitacao    = $contratoStatus->getCtrNumero();
+        $status             = $contratoStatus->getCtrStatus();
+        $modalidade         = $contratoStatus->getCtrModalidade();
+        $representante      = $contratoStatus->getCtrRepresentante();*/
 
         $SQL = " SELECT * 
 		FROM contratoStatus stctr
@@ -28,11 +28,11 @@ class ContratoStatusDAO extends BaseDAO
              $where = Array();
              if( $stCtrCodigo ){ $where[] = " stctr.stctr_id = {$stCtrCodigo}"; }
              if( $stCtrNome ){ $where[] = " stctr.stctr_nome = '{$stCtrNome}'"; }
-            /* if( $proposta ){ $where[] = " stedt.edt_proposta = '{$proposta}'"; }
-             if( $status ){ $where[] = " stedt.edt_status = '{$status}'"; }
+            /* if( $proposta ){ $where[] = " stctr.ctr_proposta = '{$proposta}'"; }
+             if( $status ){ $where[] = " stctr.ctr_status = '{$status}'"; }
              if( $representante ){ $where[] = " r.codRepresentante = {$representante}"; }
-             if( $modalidade ){ $where[] = " stedt.edt_modalidade = '{$modalidade}'"; }
-             if( $numeroLicitacao ){ $where[] = " stedt.edt_numero = '{$numeroLicitacao}'"; } */  
+             if( $modalidade ){ $where[] = " stctr.ctr_modalidade = '{$modalidade}'"; }
+             if( $numeroLicitacao ){ $where[] = " stctr.ctr_numero = '{$numeroLicitacao}'"; } */  
           
           if( sizeof( $where ) ){
               $SQL .= ' WHERE '.implode( ' AND ',$where ); 
@@ -81,12 +81,12 @@ class ContratoStatusDAO extends BaseDAO
                 'contratoStatus',
                 ":nome, :observacao, :usuario, :instituicao, :datacadastro, :dataalteracao",
                 [
-                    ':nome'             => $stEdtNome,
-                    ':observacao'       => $stEdtObservacao,
-                    ':usuario'          => $stEdtUsuario,
-                    ':instituicao'      => $stEdtInstituicao,
-                    ':datacadastro'     => $stEdtDataCadastro,
-                    ':dataalteracao'    => $stEdtDataAltercacao
+                    ':nome'             => $stCtrNome,
+                    ':observacao'       => $stCtrObservacao,
+                    ':usuario'          => $stCtrUsuario,
+                    ':instituicao'      => $stCtrInstituicao,
+                    ':datacadastro'     => $stCtrDataCadastro,
+                    ':dataalteracao'    => $stCtrDataAltercacao
                     ]
                 );
                      
@@ -131,8 +131,8 @@ class ContratoStatusDAO extends BaseDAO
     public function excluir(ContratoStatus $contratoStatus)
     {
         try {
-            $edtId = $contratoStatus->getStEdtId();            
-            $this->delete('contratoStatus', "stctr_id = $edtId");
+            $ctrId = $contratoStatus->getStCtrId();            
+            $this->delete('contratoStatus', "stctr_id = $ctrId");
         } catch (Exception $e) {
             throw new \Exception("Erro ao excluir Cadastro", 500);
         }
