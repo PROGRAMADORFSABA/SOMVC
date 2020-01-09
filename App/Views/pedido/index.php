@@ -206,11 +206,13 @@
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Alterar pedido" class="btn btn-info btn-sm"><i class="la la-edit"></i> Alterar</a>
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/exclusao/<?php echo $pedido->getCodControle(); ?>" title="Excluir" class="btn btn-info btn-sm"><i class="la la-trash"></i> Excluir</a>
 									<a class="dropdown-item" data-codstatus="<?php echo $pedido->getCodControle(); ?>"  data-toggle="modal" data-target="#kt_select2_modal" title="Alterar Status" class="btn btn-info btn-sm"><i class="la la-leaf"></i> Status</a>
+									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/visualisar/<?php echo $pedido->getCodControle(); ?>" title="Visualisar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Visualisar</a>
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Relatorios" class="btn btn-info btn-sm"><i class="la la-print"></i> Relatorio</a>
 									<a class="dropdown-item" href="http://<?php echo APP_HOST; ?>/public/assets/media/anexos/<?php echo $pedido->getAnexo(); ?>" target="_blank" title="Visualizar Anexo" class="btn btn-info btn-sm"><i class="la la-chain"></i> Anexo</a>
 								</div>
 							</span>
 							<a href="http://<?php echo APP_HOST; ?>/pedido/edicao/<?php echo $pedido->getCodControle(); ?>" title="Editar" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-edit"></i></a>
+							<a href="http://<?php echo APP_HOST; ?>/pedido/visualisar/<?php echo $pedido->getCodControle(); ?>" title="Visualisar" class="btn btn-clean btn-icon btn-icon-md"><i class="la la-leaf"></i> </a>
 							<a href="http://<?php echo APP_HOST; ?>/pedido/exclusao/<?php echo $pedido->getCodControle(); ?>" title="Excluir" class="btn btn-sm btn-clean btn-icon btn-icon-md"><i class="la la-trash"></i></a>
 						</td>
 

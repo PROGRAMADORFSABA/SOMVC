@@ -57,6 +57,31 @@ class PedidoController extends Controller
         Sessao::limpaMensagem();
         Sessao::limpaFormulario();
     }
+    public function visualisar($params)
+    {
+            $codControle = $params[0];
+            
+            $pedido = new Pedido();
+            $pedidoService           = new PedidoService();
+            $usuarioService          = new UsuarioService();
+            $statusService           = new StatusService();
+            $instituicaoService      = new InstituicaoService();
+            $clienteLicitacaoService = new ClienteLicitacaoService();        
+            $representanteService    = new RepresentanteService();
+
+            $pedido->setCodControle($codControle);
+            $pedido = $pedidoService->listar($pedido)[0];
+            self::setViewParam('listaStatus', $statusService->listar());
+            self::setViewParam('listaRepresentantes', $representanteService->listar());
+    
+        if (!$pedido) {
+            Sessao::gravaMensagem("Pedido inexistente");
+            $this->redirect('/pedido');
+        }
+        self::setViewParam('pedido', $pedido);
+        $this->render('/pedido/visualisar');
+        Sessao::limpaMensagem();
+    }
 
     public function teste()
     {        

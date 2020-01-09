@@ -10,9 +10,9 @@ use App\Models\Entidades\Notificacao;
 
 class EmailDAO extends BaseDAO
 {    
-    public  function email(Pedido $pedido, $email, $subject)
+    public  function email(Pedido $pedido, $email, $subject, $mensagem = null)
    {
-   
+    
        $codPedido          = $pedido->getCodControle();           
        $codStatus          = $pedido->getStatus()->getCodStatus();           
        $nomeStatus         = $pedido->getStatus()->getNome();           
@@ -48,32 +48,45 @@ class EmailDAO extends BaseDAO
                     $to .= 'atendimento@fabmed.feira.br';
                 }                
             }
-        }else{
+        }else if($subject == 2){
             $subject = "Alteração de Pedido";
             $to .= 'licitacao2@fabmed.com.br, sac@fabmed.com.br';
             if( $codStatus == 5 || $codStatus == 3){
             }else if( $codStatus == 6 AND $tipoCliente != 'Municipal'){
                 $to .= 'atendimento@fabmed.feira.br';
             }
+        }else if($subject == 3){
+            $subject = "envio do email do Pedido";            
         }
         $arrayEmail = array();
         $arrayEmail[] = $email;
         if( sizeof( $arrayEmail ) ){
             $to .= ', '.implode( ',',$arrayEmail );
-        }        
-      
+        } 
+        $hora = date('H:m:s'); 
+        if (  $hora >= 12 &&  $hora <= 18 ) {
+            $saudacao = " Boa Tarde!";
+        }else if (  $hora  >= 00 &&  $hora  < 12 ){
+            $saudacao = " Bom Dia!";
+        }else{
+            $saudacao = " Boa Noite!";
+        }
+              
+         
        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
-       $message = "Ola, <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . " no sistema <br><br> " . "\r\n";
+       $message = $saudacao.", <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . "<br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
-       $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br><br> " . "\r\n";
+       $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br> " . "\r\n";
+       //$message .= "<p align='justify widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p>";
+       $message .= "<p align='center widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p>";
        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
        //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
-       $headers .= 'Reply-To: <nuvem@fabmed.com.br, vendas2@fabmed.com.br; >' . "\r\n"; //email para resposta
-     
-       mail($to, $subject, $message, $headers);
+       $headers .= 'Reply-To: <nuvem@fabmed.com.br,vendas2@fabmed.com.br>' . "\r\n"; //email para resposta
+     var_dump($message);
+    //   mail($to, $subject, $message, $headers);
    }
     
    public  function emailEdital(Edital $edital, $email, $subject)

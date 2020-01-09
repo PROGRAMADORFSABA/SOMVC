@@ -17,10 +17,10 @@ use App\Models\Entidades\Usuario;
 
 class EmailService
 {
-    public function email(Pedido $pedido, $email, $subject)
-    {
+    public function email(Pedido $pedido, $email, $subject, $mensagem = null)
+    {        
         $emailDAO = new EmailDAO();
-        return $emailDAO->email($pedido, $email, $subject);
+        return $emailDAO->email($pedido, $email, $subject, $mensagem);
        
     }
     public function emailUsuario(Usuario $usuario, $email, $subject)
