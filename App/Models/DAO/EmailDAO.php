@@ -26,17 +26,17 @@ class EmailDAO extends BaseDAO
        $numeroAf           = $pedido->getNumeroAf();
        $observacao         = $pedido->getObservacao();
        $valorPedidoAtual   = $pedido->getValorPedido();   
-      
+     
        $dadosCadastro .= "
-                    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
-                            <tr> <td>Codigo</td> <td> $codPedido  </td>  </tr>
-                            <tr> <td>Cliente</td> <td> $razaoSocialCliente  </td>  </tr>
-                            <tr> <td>Status</td> <td>$nomeStatus</td></tr>
-                            <tr> <td>Data</td> <td>$data </td></tr>
-                            <tr> <td>Pregao</td> <td>$numeroPregao</td></tr>
-                            <tr> <td>Numero</td> <td>$numeroAf</td> </tr>
-                            <tr> <td>Valor</td> <td>R$$valorPedidoAtual</td> </tr>
-                            <tr> <td>Observacao</td><td> $observacao </td></tr>
+                    <table style='width:50%' border='1px' cellspacing='0' cellpadding='2'>     
+                            <tr> <td><b>Codigo</b></td><td>$codPedido</td></tr>
+                            <tr> <td><b>Cliente</b></td><td> $razaoSocialCliente</td></tr>
+                            <tr> <td><b>Status</b></td><td>$nomeStatus</td></tr>
+                            <tr> <td><b>Data</b></td><td>$data </td></tr>
+                            <tr> <td><b>Pregao</b></td><td>$numeroPregao</td></tr>
+                            <tr> <td><b>Numero</b></td><td>$numeroAf</td></tr>
+                            <tr> <td><b>Valor</b></td><td>R$$valorPedidoAtual</td></tr>
+                            <tr> <td><b>Observacao</b></td><td><pre>$observacao</pre></td></tr>
                     </table>";
        
        if($subject == 1){
@@ -63,30 +63,28 @@ class EmailDAO extends BaseDAO
         if( sizeof( $arrayEmail ) ){
             $to .= ', '.implode( ',',$arrayEmail );
         } 
-        $hora = date('H:m:s'); 
+        $hora = date('H'); 
         if (  $hora >= 12 &&  $hora <= 18 ) {
             $saudacao = " Boa Tarde!";
         }else if (  $hora  >= 00 &&  $hora  < 12 ){
             $saudacao = " Bom Dia!";
         }else{
             $saudacao = " Boa Noite!";
-        }
-              
-         
+        }            
+
        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
-       $message = $saudacao.", <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . "<br><br> " . "\r\n";
+       $message = $saudacao.", <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . "<br> " . "\r\n";
+       $message .= "<p align='justify widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p><br>";
        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br> " . "\r\n";
-       //$message .= "<p align='justify widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p>";
-       $message .= "<p align='center widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p>";
-       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
+       $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p>";
        $headers = 'MIME-Version: 1.0' . "\r\n";
        $headers .= 'content-type: text/html; charset=iso-8859-1' . "\r\n";
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
        //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
-       $headers .= 'Reply-To: <nuvem@fabmed.com.br,vendas2@fabmed.com.br>' . "\r\n"; //email para resposta
-     var_dump($message);
-    //   mail($to, $subject, $message, $headers);
+       $headers .= 'Reply-To: < nuvem@fabmed.com.br,vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
+      // var_dump( $headers);
+     mail($to, $subject, $message, $headers);
    }
     
    public  function emailEdital(Edital $edital, $email, $subject)
@@ -109,7 +107,7 @@ class EmailDAO extends BaseDAO
        $codStatus          = $edital->getEditalStatus()->getStEdtId();           
    
        $dadosCadastro .= "
-                    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
+                    <table style='width:50% ' border='1px solid black'  >     
                             <tr> <td>Codigo</td> <td> $codigo  </td>  </tr>
                             <tr> <td>Cliente</td> <td> $razaoSocialCliente  </td>  </tr>
                             <tr> <td>Status</td> <td>$nomeStatus</td></tr>
@@ -168,7 +166,7 @@ class EmailDAO extends BaseDAO
        $valida = sha1($email);
        $to = $email;
        $dadosCadastro .= "
-                    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
+                    <table style='width:50% ' border='1px cellspacing='0' cellpadding='2' solid black'  >     
                             <tr> <td>Codigo</td> <td> $codigo  </td>  </tr>
                             <tr> <td>Nome</td> <td> $nome  </td>  </tr>
                             <tr> <td>Status</td> <td>$status</td></tr>
@@ -247,7 +245,7 @@ class EmailDAO extends BaseDAO
        $observacao         = $notificacao->getNtf_observacao(); 
         
     $dadosCadastro .= "
-    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' border='1px solid black' border-collapse='collapse' >     
+    <table border='1px solid black' cellspacing='0' cellpadding='2' border-collapse='collapse' >     
         <tr> <td>Codigo</td> <td> $codNotificacao  </td>  </tr>
         <tr> <td>Cliente</td> <td> $nomeCliente  </td>  </tr>
         <tr> <td>Status</td> <td>$status</td></tr>
@@ -283,7 +281,7 @@ class EmailDAO extends BaseDAO
     public  function emailSuporte($erro, $tela)
    {
     $dadosCadastro .= "
-    <table class='table table-striped- table-bordered table-hover table-checkable' id='kt_table_3' style='width:50% ' border='1px solid black'  >     
+    <table style='width:50% ' border='1px cellspacing='0' cellpadding='2' solid black'  >     
             <tr> <td>Descricao do erro </td> <td> $erro  </td>  </tr>
     </table>";
 

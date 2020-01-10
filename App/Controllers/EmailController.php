@@ -37,7 +37,7 @@ class EmailController extends Controller
         $this->redirect('/pedido');   
     }else {
         Sessao::gravaMensagem("Error no envio do Email!");
-       // $this->redirect('/pedido/visualisar/' . $_POST['codControle']);
+        $this->redirect('/pedido/visualisar/' . $_POST['codControle']);
     }
     Sessao::limpaMensagem();   
 

@@ -49,7 +49,7 @@ class LoginController extends Controller
             
             echo $_SESSION['id']." - " . $_SESSION['nome']. " - ". $_SESSION['email']." - ".$_SESSION['senha']." - ". $_SESSION['idInstituicao'] ; 
             
-            Sessao::gravaMensagem($_SESSION['nome'].", desconetado com sucesso!");
+           // Sessao::gravaMensagem($_SESSION['nome'].", desconetado com sucesso!");
             date_default_timezone_set("Brazil/East");
             $tempolimite = 3600;// duracao da sessao 1:00H
             $_SESSION['registro'] = time(); // armazena o momento em que autenticado ou atualiza a pagina//
