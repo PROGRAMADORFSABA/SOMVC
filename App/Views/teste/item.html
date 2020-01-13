@@ -1,0 +1,16 @@
+<tr>
+    <th> {id} </th>
+    <th> {nome} </th>
+    <th> {usuario} </th>
+    <th> {data} </th>
+    <th> <a href='index.php?class=PessoaForm&method=edit&id={id}'>
+                    <img src='images/edit.svg'  style='width:17px'>
+                Editar</a>  </th>
+    <th> <a href='index.php?class=PessoaList&method=delete&id={id}'>
+                    <img src='assets/media/logos/remove.svg'  style='width:17px'> 
+                Excluir</a> </th>
+    <th> {acoes}  </th>
+    <th>
+            <a class="dropdown-item" href="http://{APP_HOST}/teste/edicao/{id}" title="Editar" class="btn btn-info btn-sm"><i class="la la-edit"></i> Editar</a>
+    </th>             
+</tr>

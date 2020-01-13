@@ -34,10 +34,10 @@ class EmailController extends Controller
     $subject = 3;
     if($emailService->email($pedido,$email, $subject, $mensagem)){
         Sessao::gravaMensagem("Email enviado com sucesso!");
-        $this->redirect('/pedido');   
+    //    $this->redirect('/pedido');   
     }else {
         Sessao::gravaMensagem("Error no envio do Email!");
-        $this->redirect('/pedido/visualisar/' . $_POST['codControle']);
+    //    $this->redirect('/pedido/visualisar/' . $_POST['codControle']);
     }
     Sessao::limpaMensagem();   
 

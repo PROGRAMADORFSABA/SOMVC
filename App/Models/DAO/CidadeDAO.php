@@ -12,7 +12,7 @@ class CidadeDAO extends BaseDAO
     {        
         $SQL = " SELECT * 
                 FROM cidade c
-                INNER JOIN estado e ON e.estid = cidestado 
+                INNER JOIN estado e ON e.estid = c.cidestado 
                 INNER JOIN usuarios u ON u.id = c.cidusuario ";
             if($cidId) 
             {    

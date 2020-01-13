@@ -74,7 +74,7 @@ class EmailDAO extends BaseDAO
 
        $subject .= " - Codigo: " . $codPedido . "  - Cliente: ".$razaoSocialCliente;
        $message = $saudacao.", <br><br> " .$nomeUsuario.  "  efetuou ". $subject  . "<br> " . "\r\n";
-       $message .= "<p align='justify widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p><br>";
+       //$message .= "<p align='justify widher:80%;'><h3><pre>" . $mensagem. "</pre></h3></p><br>";
        $message .= "<a href=http://www.coisavirtual.com.br/pedido > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br/public/assets/media/anexos/".$anexos."> Click aqui para visualisar o anexo</a> <br> " . "\r\n";
        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p>";
@@ -83,8 +83,13 @@ class EmailDAO extends BaseDAO
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
        //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
        $headers .= 'Reply-To: < nuvem@fabmed.com.br,vendas2@fabmed.com.br >' . "\r\n"; //email para resposta
-      // var_dump( $headers);
-     mail($to, $subject, $message, $headers);
+      
+       $mensagem1 = "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict. dtd'>
+       <html><head><title >".$subject."</title><style type=' text/css'>body{width:98%;height:auto; text-align:left;margin:0px;padding:1%;}h1 {font-size:320%;color:#008;font-family:impact;} p{font-family:arial;}</style></ head>
+       <body><p align=justify>Olá <b>".$saudacao."</b>,<br> obrigado por <b>".$dadosCadastro."</b> no nosso <b>".$mensagem."</b></p>.</body> </html>";
+      
+       var_dump( $mensagem1);
+    // mail($to, $subject, $message, $headers);
    }
     
    public  function emailEdital(Edital $edital, $email, $subject)

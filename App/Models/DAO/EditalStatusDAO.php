@@ -59,8 +59,8 @@ class EditalStatusDAO extends BaseDAO
                 $editalStatus->getStEdtUsuario()->setNome($dado['nome']);
                 
                 $lista[] = $editalStatus;
-            }
-            
+            }           
+
             return $lista;        
                
     }

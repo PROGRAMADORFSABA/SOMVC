@@ -10,12 +10,15 @@ use App\Models\DAO\ClienteDAO;
 use App\Models\DAO\RepresentanteDAO;
 use App\Models\Entidades\Pedido;
 use App\Models\Entidades\Teste;
+use App\Models\Entidades\EditalStatus;
 use App\Services\TesteService;
 use App\Models\Validacao\PedidoValidador;
+use App\Services\EditalStatusService;
+use Exception;
 
 class TesteController extends Controller
 {
-
+    private $html;
     public function index($params)
     {
         $id = $params[0];
@@ -36,6 +39,55 @@ class TesteController extends Controller
     public function logistica()
     {
         $this->render('/teste/logistica');
+    }
+    public function __construct()
+    {
+        $this->html = file_get_contents('App/Views/teste/pessoa.php');
+    }
+    
+    public function pessoa()
+    {
+        $editalStatusService = new EditalStatusService();
+        $editalStatus = new EditalStatus();      
+        
+       if($_POST){
+           $editalStatus->setStEdtId($_POST['codStatus']);           
+           $editalStatus->setStEdtNome($_POST['nome']);                   
+        }        
+       // $pessoas = $editalStatusService->listar($editalStatus);
+        if($pessoas = $editalStatusService->listar($editalStatus)){ 
+            $items = "";
+            $hos = APP_HOST;
+            foreach ($pessoas as $pessoa)
+            {  
+                $item = file_get_contents('App/Views/teste/item.html'); 
+                $item = str_replace( '{id}',    $pessoa->getStEdtId(), $item);
+                $item = str_replace( '{nome}',    $pessoa->getStEdtNome(), $item);
+                $item = str_replace( '{usuario}',    $pessoa->getStEdtUsuario()->getNome(), $item);
+                $item = str_replace( '{data}',    $pessoa->getStEdtDataCadastro()->format('d/m/Y H:m'), $item);
+                $teste = "<a class='dropdown-item' href=http://".APP_HOST."/teste/edicao/".$pessoa->getStEdtId()." title='Editar' class='btn btn-sm btn-clean btn-icon btn-icon-md'><i class='la la-edit'></i></a> ";
+                $item = str_replace( '{APP_HOST}',    APP_HOST, $item);
+                $item = str_replace( '{acoes}',    "
+                <a  href=http://".APP_HOST."/teste/edicao/".$pessoa->getStEdtId()." title='Editar' class='btn btn-sm btn-clean btn-icon btn-icon-md'><i class='la la-edit'></i></a>
+                <a  href=http://".APP_HOST."/teste/excluir/".$pessoa->getStEdtId()." title='Excluir' class='btn btn-sm btn-clean btn-icon btn-icon-md'><i class='la la-trash'></i></a> 
+                <span class='dropdown'>
+                <a href='#' class='btn btn-sm btn-clean btn-icon btn-icon-md' data-toggle='dropdown' aria-expanded='true'><i class='la la-ellipsis-h'></i></a>
+                <div class='dropdown-menu dropdown-menu-right'>
+                    <a class='dropdown-item' href=http://".APP_HOST."/teste/edicao/".$pessoa->getStEdtId()." title='Editar' class='btn btn-sm btn-clean btn-icon btn-icon-md'><i class='la la-edit'></i></a>
+                    <a class='dropdown-item' href=http://".APP_HOST."/teste/excluir/".$pessoa->getStEdtId()." title='Excluir' class='btn btn-sm btn-clean btn-icon btn-icon-md'><i class='la la-trash'></i></a>
+                    <a class='dropdown-item' href=http://".APP_HOST."/teste/excluir/".$pessoa->getStEdtId()." title='Excluir' class='btn btn-sm btn-clean btn-icon btn-icon-md'><i class='la la-trash'></i></a>
+                </div>
+                    </span>  ", $item);
+                
+                $items .= $item;
+            }                
+            // $item = str_replace('{itens}', $items, $item);                  
+        }
+        $list = file_get_contents('App/Views/teste/pessoa.php');
+        $list = str_replace('{items}',   $items, $list);
+        
+        print $list;
+        $this->render('/teste/pessoa');
     }
 
     public function teste($params)
@@ -167,14 +219,16 @@ class TesteController extends Controller
     }
     public function edicao($params)
     {
-        $codControle = $params[0];
-        if (!$codControle) {
+        $editalStatus = new EditalStatus();
+        $codigo = $editalStatus->setStEdtId($params[0]);
+        
+        if (!$codigo) {
             Sessao::gravaMensagem("Nenhum Cadastro Selecionado");
-            $this->redirect('/pedido');
+            $this->redirect('/teste');
         }
-        $pedidoDAO = new PedidoDAO();
+        $editalStatusService = new EditalStatusService();
 
-        $pedido = $pedidoDAO->listar($codControle);
+        $pedido = $editalStatusService->listar($codigo);
 
         if (!$pedido) {
             Sessao::gravaMensagem("Pedido inexistente");
@@ -188,8 +242,9 @@ class TesteController extends Controller
         $representanteDAO = new RepresentanteDAO();
         self::setViewParam('listaRepresentantes', $representanteDAO->listar());
 
-        self::setViewParam('pedido', $pedido);
-        $this->render('/pedido/editar');
+        self::setViewParam('editalStatus', $editalStatus);
+        
+       // $this->render('/pedido/editar');
 
         Sessao::limpaMensagem();
     }
