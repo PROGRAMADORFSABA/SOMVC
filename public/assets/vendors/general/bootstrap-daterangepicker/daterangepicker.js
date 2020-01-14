@@ -83,7 +83,7 @@
         this.callback = function() { };
 
         //some state information
-        this.isShowing = false;
+        this.isPagina = false;
         this.leftCalendar = {};
         this.rightCalendar = {};
 
@@ -474,7 +474,7 @@
                     this.startDate.minute(Math.floor(this.startDate.minute() / this.timePickerIncrement) * this.timePickerIncrement);
             }
 
-            if (!this.isShowing)
+            if (!this.isPagina)
                 this.updateElement();
 
             this.updateMonthsInView();
@@ -506,7 +506,7 @@
 
             this.container.find('.drp-selected').html(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
 
-            if (!this.isShowing)
+            if (!this.isPagina)
                 this.updateElement();
 
             this.updateMonthsInView();
@@ -1073,7 +1073,7 @@
         },
 
         show: function(e) {
-            if (this.isShowing) return;
+            if (this.isPagina) return;
 
             // Create a click proxy that is private to this instance of datepicker, for unbinding
             this._outsideClickProxy = $.proxy(function(e) { this.outsideClick(e); }, this);
@@ -1099,11 +1099,11 @@
             this.container.show();
             this.move();
             this.element.trigger('show.daterangepicker', this);
-            this.isShowing = true;
+            this.isPagina = true;
         },
 
         hide: function(e) {
-            if (!this.isShowing) return;
+            if (!this.isPagina) return;
 
             //incomplete date selection, revert to last values
             if (!this.endDate) {
@@ -1122,11 +1122,11 @@
             $(window).off('.daterangepicker');
             this.container.hide();
             this.element.trigger('hide.daterangepicker', this);
-            this.isShowing = false;
+            this.isPagina = false;
         },
 
         toggle: function(e) {
-            if (this.isShowing) {
+            if (this.isPagina) {
                 this.hide();
             } else {
                 this.show();

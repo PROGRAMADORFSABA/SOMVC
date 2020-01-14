@@ -6777,7 +6777,7 @@
     FADE: 'fade',
     HIDE: 'hide',
     SHOW: 'show',
-    SHOWING: 'showing'
+    Pagina: 'Pagina'
   };
   var DefaultType$7 = {
     animation: 'boolean',
@@ -6824,7 +6824,7 @@
       }
 
       var complete = function complete() {
-        _this._element.classList.remove(ClassName$a.SHOWING);
+        _this._element.classList.remove(ClassName$a.Pagina);
 
         _this._element.classList.add(ClassName$a.SHOW);
 
@@ -6837,7 +6837,7 @@
 
       this._element.classList.remove(ClassName$a.HIDE);
 
-      this._element.classList.add(ClassName$a.SHOWING);
+      this._element.classList.add(ClassName$a.Pagina);
 
       if (this._config.animation) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);

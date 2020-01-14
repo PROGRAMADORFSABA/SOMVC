@@ -162,7 +162,7 @@ class PedidoDAO extends BaseDAO
               if( sizeof( $where ) ){
                  $SQL .= ' WHERE '.implode( ' AND ',$where );
                 }else {
-                    $SQL .= " WHERE s.nome  not in  ('ATENDIDO','CANCELADO') ";
+                    $SQL .= " WHERE s.nome  not in  ('ATENDIDO','CANCELADO') ORDER BY c.razaosocial desc ";
                 }
           $resultado = $this->select($SQL);
          

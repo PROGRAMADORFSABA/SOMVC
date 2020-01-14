@@ -1,5 +1,5 @@
 
-
+/*
 $(document).ready(function(){
 	document.getElementById('frmCadastro').addEventListener('submit', function(){ // CRIA EM EVENTO QUE É DISPARADO QUANDO O ELEMENTO DE ID 'form' FOR 'submetido/enviado'.
 	var inputs = this.getElementsByTagName('input'); // PEGA TODOS OS INPUTS PRESENTES NESSE ELEMENTO
@@ -31,7 +31,7 @@ $(document).ready(function(){
 		}
 	});
 });
-
+*/
 if(document.getElementById("enviarEmail").checked == true){
 	document.getElementById("email").disabled = false;
 }
@@ -45,16 +45,9 @@ $(document).on("click", "#enviarEmail", function () {
 	}
 });
 
-$(document).on("click", "#andre", function () {
-	var chek1 = document.getElementById("andre");		
-	if(chek1.checked == true){	
-		document.getElementById("teste").disabled = true;	
-		$('#teste').val('clicado');
-		alert('teste');
-	}
-});
-
-
+var Cliente = document.getElementById('status').options[document.getElementById('status').selectedIndex].innerText; 
+alert(Cliente);
+/*
 $('#frmCadastro').submit(function(){
 	var tabela = $("#tabela").val();		
 	if(document.getElementById("tabela").checked == true){
@@ -86,11 +79,11 @@ $('#frmCadastro').submit(function(){
 
 				   }else{
 					alert("Erro ao salvar");		//Informa o erro
-						}*/
+				
 					}
 				});
 
 		return false;//Evita que a página seja atualizada
 	});
 
- 
+ */

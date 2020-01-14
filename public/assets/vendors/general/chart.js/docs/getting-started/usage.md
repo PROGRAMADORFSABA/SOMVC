@@ -19,7 +19,7 @@ var ctx = "myChart";
 
 Once you have the element or context, you're ready to instantiate a pre-defined chart-type or create your own!
 
-The following example instantiates a bar chart showing the number of votes for different colors and the y-axis starting at 0.
+The following example instantiates a bar chart Pagina the number of votes for different colors and the y-axis starting at 0.
 
 ```html
 <canvas id="myChart" width="400" height="400"></canvas>

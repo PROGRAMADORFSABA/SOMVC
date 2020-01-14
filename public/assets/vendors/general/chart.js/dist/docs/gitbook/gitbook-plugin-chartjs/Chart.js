@@ -7864,7 +7864,7 @@ module.exports = function(Chart) {
 				minSize.height = me.maxHeight; // fill all the height
 			}
 
-			// Are we showing a title for the scale?
+			// Are we Pagina a title for the scale?
 			if (scaleLabelOpts.display && display) {
 				if (isHorizontal) {
 					minSize.height += scaleLabelFontSize;
@@ -7873,7 +7873,7 @@ module.exports = function(Chart) {
 				}
 			}
 
-			// Don't bother fitting the ticks if we are not showing them
+			// Don't bother fitting the ticks if we are not Pagina them
 			if (tickOpts.display && display) {
 				var largestTextWidth = helpers.longestText(me.ctx, tickFont.font, me.ticks, me.longestTextCache);
 				var tallestLabelHeightInLines = helpers.numberOfLabelLines(me.ticks);

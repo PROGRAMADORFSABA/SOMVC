@@ -12,7 +12,7 @@ it's like the Wild West up in here!
 - Incorrect usage of the word "meridian" will be deprecated. It should
   be "meridiem".
 - `showWidgetOnAddonClick`'s current behavior is not intuitive. Clicking
-  the input addon should _toggle_ the widget instead of showing it.
+  the input addon should _toggle_ the widget instead of Pagina it.
 
 ## 0.5.2 - 2016-01-02
 ### Added

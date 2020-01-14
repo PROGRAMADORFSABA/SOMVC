@@ -4660,7 +4660,7 @@ a.close.disabled {
   border-radius: 0.25rem; }
   .toast:not(:last-child) {
     margin-bottom: 0.75rem; }
-  .toast.showing {
+  .toast.Pagina {
     opacity: 1; }
   .toast.show {
     display: block;

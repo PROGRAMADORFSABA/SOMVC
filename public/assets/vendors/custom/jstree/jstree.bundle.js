@@ -3561,7 +3561,7 @@
 		/**
 		 * refreshes the tree - all nodes are reloaded with calls to `load_node`.
 		 * @name refresh()
-		 * @param {Boolean} skip_loading an option to skip showing the loading indicator
+		 * @param {Boolean} skip_loading an option to skip Pagina the loading indicator
 		 * @param {Mixed} forget_state if set to `true` state will not be reapplied, if set to a function (receiving the current state as argument) the result of that function will be used as state
 		 * @trigger refresh.jstree
 		 */

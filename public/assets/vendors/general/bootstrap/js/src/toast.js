@@ -32,7 +32,7 @@ const ClassName = {
   FADE    : 'fade',
   HIDE    : 'hide',
   SHOW    : 'show',
-  SHOWING : 'showing'
+  Pagina : 'Pagina'
 }
 
 const DefaultType = {
@@ -89,7 +89,7 @@ class Toast {
     }
 
     const complete = () => {
-      this._element.classList.remove(ClassName.SHOWING)
+      this._element.classList.remove(ClassName.Pagina)
       this._element.classList.add(ClassName.SHOW)
 
       $(this._element).trigger(Event.SHOWN)
@@ -100,7 +100,7 @@ class Toast {
     }
 
     this._element.classList.remove(ClassName.HIDE)
-    this._element.classList.add(ClassName.SHOWING)
+    this._element.classList.add(ClassName.Pagina)
     if (this._config.animation) {
       const transitionDuration = Util.getTransitionDurationFromElement(this._element)
 

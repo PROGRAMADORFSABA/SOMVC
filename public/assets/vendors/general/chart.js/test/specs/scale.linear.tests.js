@@ -846,7 +846,7 @@ describe('Linear Scale', function() {
 		expect(yScale.width).toBeCloseToPixel(30 + 6); // plus lineSpace
 		expect(yScale.height).toBeCloseToPixel(452);
 
-		// Extra size when scale label showing
+		// Extra size when scale label Pagina
 		xScale.options.scaleLabel.display = true;
 		yScale.options.scaleLabel.display = true;
 		chart.update();

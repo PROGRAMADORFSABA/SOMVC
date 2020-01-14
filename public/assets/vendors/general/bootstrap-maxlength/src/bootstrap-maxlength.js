@@ -122,7 +122,7 @@
       }
 
       /**
-       * Return true if the indicator should be showing up.
+       * Return true if the indicator should be Pagina up.
        *
        * @param input
        * @param thereshold

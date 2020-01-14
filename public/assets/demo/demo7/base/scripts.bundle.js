@@ -5325,7 +5325,7 @@ $(document).ready(function() {
 							select: 'Select page size',
 							all: 'all',
 						},
-						info: 'Showing {{start}} - {{end}} of {{total}}',
+						info: 'Pagina {{start}} - {{end}} of {{total}}',
 					},
 				},
 			},

@@ -588,6 +588,7 @@
 <script src="http://<?php echo APP_HOST; ?>/public/js/autocomplete-produto.js"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/js/clientefalta-autocomplete.js"></script>
 <script src="http://<?php echo APP_HOST; ?>/public/js/atualizahora.js" type="text/javascript"></script>
+<script src="http://<?php echo APP_HOST; ?>/public/js/funcoes.js" type="text/javascript"></script>
 <!--end::Global App Bundle -->
 </body>
 

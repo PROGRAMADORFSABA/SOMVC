@@ -614,7 +614,7 @@
 * Fixed url and email validation to not use trimmed values
 * Fixed creditcard validation to accept only digits and dashes ("asdf" is not a valid creditcard number)
 * Allow both button and input elements for cancel buttons (via class="cancel")
-* Fixed #2215: Fixed message display to call unhighlight as part of showing and hiding messages, no more visual side-effects while checking an element and extracted validator.checkForm to validate a form without UI sideeffects
+* Fixed #2215: Fixed message display to call unhighlight as part of Pagina and hiding messages, no more visual side-effects while checking an element and extracted validator.checkForm to validate a form without UI sideeffects
 * Rewrote custom selectors (:blank, :filled, :unchecked) with functions for compatibility with AIR
 
 1.2.1

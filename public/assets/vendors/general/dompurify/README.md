@@ -190,7 +190,7 @@ var dirty = document.createElement('a');
 dirty.setAttribute('href', 'javascript:alert(1)');
 var clean = DOMPurify.sanitize(dirty, {IN_PLACE: true}); // see https://github.com/cure53/DOMPurify/issues/288 for more info
 ```
-There is even [more examples here](https://github.com/cure53/DOMPurify/tree/master/demos#what-is-this), showing how you can run, customize and configure DOMPurify to fit your needs.
+There is even [more examples here](https://github.com/cure53/DOMPurify/tree/master/demos#what-is-this), Pagina how you can run, customize and configure DOMPurify to fit your needs.
 
 ## Persistent Configuration
 

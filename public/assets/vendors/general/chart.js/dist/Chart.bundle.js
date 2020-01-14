@@ -11997,7 +11997,7 @@ module.exports = Element.extend({
 			minSize.height = me.maxHeight; // fill all the height
 		}
 
-		// Are we showing a title for the scale?
+		// Are we Pagina a title for the scale?
 		if (scaleLabelOpts.display && display) {
 			var scaleLabelLineHeight = parseLineHeight(scaleLabelOpts);
 			var scaleLabelPadding = helpers.options.toPadding(scaleLabelOpts.padding);
@@ -12010,7 +12010,7 @@ module.exports = Element.extend({
 			}
 		}
 
-		// Don't bother fitting the ticks if we are not showing them
+		// Don't bother fitting the ticks if we are not Pagina them
 		if (tickOpts.display && display) {
 			var largestTextWidth = helpers.longestText(me.ctx, tickFont.font, labels, me.longestTextCache);
 			var tallestLabelHeightInLines = helpers.numberOfLabelLines(labels);

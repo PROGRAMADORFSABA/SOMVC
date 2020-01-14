@@ -139,7 +139,7 @@
       };
       this.active_field = false;
       this.mouse_on_container = false;
-      this.results_showing = false;
+      this.results_Pagina = false;
       this.result_highlighted = null;
       this.result_single_selected = null;
       this.allow_single_deselect = (this.options.allow_single_deselect != null) && (this.form_field.options[0] != null) && this.form_field.options[0].text === "" ? this.options.allow_single_deselect : false;
@@ -271,13 +271,13 @@
       this.result_clear_highlight();
       this.result_single_selected = null;
       this.results_build();
-      if (this.results_showing) {
+      if (this.results_Pagina) {
         return this.winnow_results();
       }
     };
 
     AbstractChosen.prototype.results_toggle = function() {
-      if (this.results_showing) {
+      if (this.results_Pagina) {
         return this.results_hide();
       } else {
         return this.results_show();
@@ -285,7 +285,7 @@
     };
 
     AbstractChosen.prototype.results_search = function(evt) {
-      if (this.results_showing) {
+      if (this.results_Pagina) {
         return this.winnow_results();
       } else {
         return this.results_show();
@@ -387,7 +387,7 @@
 
     AbstractChosen.prototype.choices_click = function(evt) {
       evt.preventDefault();
-      if (!(this.results_showing || this.is_disabled)) {
+      if (!(this.results_Pagina || this.is_disabled)) {
         return this.results_show();
       }
     };
@@ -408,12 +408,12 @@
           break;
         case 13:
           evt.preventDefault();
-          if (this.results_showing) {
+          if (this.results_Pagina) {
             return this.result_select(evt);
           }
           break;
         case 27:
-          if (this.results_showing) {
+          if (this.results_Pagina) {
             this.results_hide();
           }
           return true;
@@ -645,7 +645,7 @@
 
     Chosen.prototype.container_mousedown = function(evt) {
       if (!this.is_disabled) {
-        if (evt && evt.type === "mousedown" && !this.results_showing) {
+        if (evt && evt.type === "mousedown" && !this.results_Pagina) {
           evt.preventDefault();
         }
         if (!((evt != null) && ($(evt.target)).hasClass("search-choice-close"))) {
@@ -774,10 +774,10 @@
         return false;
       }
       this.container.addClass("chosen-with-drop");
-      this.form_field_jq.trigger("chosen:showing_dropdown", {
+      this.form_field_jq.trigger("chosen:Pagina_dropdown", {
         chosen: this
       });
-      this.results_showing = true;
+      this.results_Pagina = true;
       this.search_field.focus();
       this.search_field.val(this.search_field.val());
       return this.winnow_results();
@@ -788,14 +788,14 @@
     };
 
     Chosen.prototype.results_hide = function() {
-      if (this.results_showing) {
+      if (this.results_Pagina) {
         this.result_clear_highlight();
         this.container.removeClass("chosen-with-drop");
         this.form_field_jq.trigger("chosen:hiding_dropdown", {
           chosen: this
         });
       }
-      return this.results_showing = false;
+      return this.results_Pagina = false;
     };
 
     Chosen.prototype.set_tab_index = function(el) {
@@ -988,7 +988,7 @@
         this.form_field.options[result_data.options_index].selected = false;
         this.selected_option_count = null;
         this.result_clear_highlight();
-        if (this.results_showing) {
+        if (this.results_Pagina) {
           this.winnow_results();
         }
         this.form_field_jq.trigger("change", {
@@ -1044,7 +1044,7 @@
     Chosen.prototype.keydown_arrow = function() {
       var next_sib;
 
-      if (this.results_showing && this.result_highlight) {
+      if (this.results_Pagina && this.result_highlight) {
         next_sib = this.result_highlight.nextAll("li.active-result").first();
         if (next_sib) {
           return this.result_do_highlight(next_sib);
@@ -1057,7 +1057,7 @@
     Chosen.prototype.keyup_arrow = function() {
       var prev_sibs;
 
-      if (!this.results_showing && !this.is_multiple) {
+      if (!this.results_Pagina && !this.is_multiple) {
         return this.results_show();
       } else if (this.result_highlight) {
         prev_sibs = this.result_highlight.prevAll("li.active-result");
@@ -1111,7 +1111,7 @@
           this.backstroke_length = this.search_field.val().length;
           break;
         case 9:
-          if (this.results_showing && !this.is_multiple) {
+          if (this.results_Pagina && !this.is_multiple) {
             this.result_select(evt);
           }
           this.mouse_on_container = false;

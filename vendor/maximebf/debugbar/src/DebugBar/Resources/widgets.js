@@ -252,7 +252,7 @@ if (typeof(PhpDebugBar) == 'undefined') {
 
     /**
      * An extension of KVListWidget where the data represents a list
-     * of variables whose contents are HTML; this is useful for showing
+     * of variables whose contents are HTML; this is useful for Pagina
      * variable output from VarDumper's HtmlDumper.
      *
      * Options:

@@ -10,7 +10,7 @@ The indicator badge shows up on focusing on the element, and disappears when the
 
 ## Configurable options
 
- * **alwaysShow**: if true the threshold will be ignored and the remaining length indication will be always showing up while typing or on focus on the input. Default: false.
+ * **alwaysShow**: if true the threshold will be ignored and the remaining length indication will be always Pagina up while typing or on focus on the input. Default: false.
  * **threshold**: this is a number indicating how many chars are left to start displaying the indications. Default: 10.
  * **warningClass**: it's the class of the element with the indicator. By default is the bootstrap "label label-success" but can be changed to anything you'd like.
  * **limitReachedClass**: it's the class the element gets when the limit is reached. Default is "label label-important label-danger" (to support Bootstrap 2 and 3).
