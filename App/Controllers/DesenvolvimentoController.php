@@ -36,6 +36,9 @@ class DesenvolvimentoController extends Controller
         Sessao::limpaMensagem();
     }
 
+    public function contato(){
+        $this->render('/desenvolvimento/contato');
+    }
     public function logistica()
     {
         $this->render('/desenvolvimento/logistica');
@@ -140,8 +143,8 @@ class DesenvolvimentoController extends Controller
 
         $pedidoDAO = new PedidoDAO();
 
-        self::setViewParam('listaPedido', $pedidoDAO->listarTeste1($pedido));
-        if ($pedidoDAO->listarTeste1($pedido) == false) {
+        self::setViewParam('listaPedido', $pedidoDAO->listarTeste($pedido));
+        if ($pedidoDAO->listarTeste($pedido) == false) {
             Sessao::gravaMensagem("Nenhum Cadastro Localizado!");
         }
         $this->render('/pedido/desenvolvimento');
