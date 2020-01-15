@@ -134,7 +134,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 		});
 	};
 	var initTable1 = function() {
-		var table = $('#kt_table_cliente_2');
+		var table = $('#kt_table_cliente_22');
 
 		// begin first table
 		table.DataTable({
@@ -191,7 +191,7 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 	};
 	
 	var initTable3 = function() {
-		var table = $('#kt_table_3');
+		var table = $('#kt_table_33');
 
 		// begin first table
 		table.DataTable({

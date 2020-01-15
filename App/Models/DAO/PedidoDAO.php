@@ -138,7 +138,7 @@ class PedidoDAO extends BaseDAO
         $tipo               = $pedido->getTipoCliente();
         
             $SQL =
-                "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
+                "SELECT con.codControle,con.dataFechamento,con.dataCadastro,con.fk_idInstituicao,con.dataAlteracao,con.valorPedido,con.anexo, con.numeroAf, con.numeroPedidoERP, con.numeroPregao,con.observacao,con.codCliente as idCliente,con.codRepresentante as idRepresentante, con.codStatus as idStatus
                 ,c.licitacaoCliente_cod,c.tipo,c.razaosocial, c.nomefaNtasia,c.CNPJ
                 ,r.codRepresentante,r.nomeRepresentante,r.statusRepresentante
                 ,i.inst_id,i.inst_nome,s.codStatus,s.nome as nomeStatus,
@@ -175,6 +175,7 @@ class PedidoDAO extends BaseDAO
                     //date_format($date, 'Y-m-d H:i:s');
                     $pedido->setNumeroLicitacao($dado['numeroPregao']);
                     $pedido->setNumeroAf($dado['numeroAf']);
+                    $pedido->setNumeroPedidoERP($dado['numeroPedidoERP']);
                     $pedido->setValorPedido(number_format($dado['valorPedido'], 2, ',', '.'));
                     $pedido->setCodStatus($dado['idStatus']);
                     $pedido->setSomaPedido($dado['valorPedido']);
@@ -306,6 +307,7 @@ class PedidoDAO extends BaseDAO
         try {
             $numeroLicitacao    = $pedido->getNumeroLicitacao();
             $numeroAf           = $pedido->getNumeroAf();
+            $numeroPedidoERP    = $pedido->getNumeroPedidoERP();
            // $valorPedido       = $pedido->getValorPedido();
             $valorPedido        =str_replace(',','.', str_replace(".", "", $pedido->getValorPedido())); 
             $codStatus          = $pedido->getCodStatus();
@@ -340,11 +342,12 @@ class PedidoDAO extends BaseDAO
             
             return $this->insert(
                 'controlePedido',
-                " :numeroPregao, :numeroAf, :valorPedido, :codStatus, :codCliente, :codRepresentante, :fk_idUsuarioPed,
+                " :numeroPregao, :numeroAf, :numeroPedidoERP, :valorPedido, :codStatus, :codCliente, :codRepresentante, :fk_idUsuarioPed,
                 :dataCadastro, :fk_idInstituicao , :dataAlteracao, :observacao, :anexo",
                 [
                     ':numeroPregao' => $numeroLicitacao,
                     ':numeroAf' => $numeroAf,
+                    ':numeroPedidoERP' => $numeroPedidoERP,
                     ':valorPedido' => $valorPedido,
                     ':codStatus' => $codStatus,
                     ':codCliente' => $codCliente,
@@ -366,10 +369,11 @@ class PedidoDAO extends BaseDAO
 
     public  function atualizar(Pedido $pedido)
     {
-        try {
+        try {            
             $codControle        = $pedido->getCodControle();
             $numeroLicitacao    = $pedido->getNumeroLicitacao();
             $numeroAf           = $pedido->getNumeroAf();
+            $numeroPedidoERP    = $pedido->getNumeroPedidoERP();
             $valorPedido        = str_replace(',','.', str_replace(".", "", $pedido->getValorPedido())); 
             $codStatus          = $pedido->getStatus()->getCodStatus();
             $codCliente         = $pedido->getClienteLicitacao()->getCodCliente();
@@ -401,16 +405,17 @@ class PedidoDAO extends BaseDAO
                 $anexo = "sem_anexo1.png";
                 }
             }
-
+           
             return $this->update(
                 'controlePedido',
-                "numeroPregao= :numeroPregao, numeroAf=:numeroAf, valorPedido=:valorPedido, codStatus=:codStatus, 
+                "numeroPregao= :numeroPregao, numeroAf=:numeroAf, numeroPedidoERP=:numeroPedidoERP, valorPedido=:valorPedido, codStatus=:codStatus, 
                 codCliente=:codCliente, codRepresentante=:codRepresentante, fk_idUsuarioPed=:codUsuario, 
                 fk_idInstituicao=:fk_instituicao , dataAlteracao=:dataAlteracao, observacao=:observacao, anexo=:anexo",
                 [
                     ':codControle' => $codControle,
                     ':numeroPregao' => $numeroLicitacao,
                     ':numeroAf' => $numeroAf,
+                    ':numeroPedidoERP' => $numeroPedidoERP,
                     ':valorPedido' => $valorPedido,
                     ':codStatus' => $codStatus,
                     ':codCliente' => $codCliente,
@@ -423,10 +428,10 @@ class PedidoDAO extends BaseDAO
                 ],
                 "codControle = :codControle"
             );
-          
+           
         } catch (\Exception $e) {
-            var_dump("teste ".$e);
-            throw new \Exception("Erro na gravação de dados. ", 500);
+           // var_dump("teste ".$e);
+            throw new \Exception("Erro na gravação de dados. ".$e, 500);
         }
     }
 

@@ -10,6 +10,7 @@ class Pedido{
     private $dataCadastro;
     private $numeroLicitacao;
     private $numeroAF;
+    private $numeroPedidoERP;
     private $valorPedido;
     private $codStatus;
     private $codCliente;
@@ -395,6 +396,26 @@ class Pedido{
     public function setCodRepresentante($codRepresentante)
     {
         $this->codRepresentante = $codRepresentante;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of numeroPedidoERP
+     */ 
+    public function getNumeroPedidoERP()
+    {
+        return $this->numeroPedidoERP;
+    }
+
+    /**
+     * Set the value of numeroPedidoERP
+     *
+     * @return  self
+     */ 
+    public function setNumeroPedidoERP($numeroPedidoERP)
+    {
+        $this->numeroPedidoERP = $numeroPedidoERP;
 
         return $this;
     }

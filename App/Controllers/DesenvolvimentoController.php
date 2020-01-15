@@ -45,7 +45,7 @@ class DesenvolvimentoController extends Controller
     }
     public function __construct()
     {
-        $this->html = file_get_contents('App/Views/desenvolvimento/pessoa.php');
+       // $this->html = file_get_contents('App/Views/desenvolvimento/pessoa.php');
     }
     
     public function pessoa()

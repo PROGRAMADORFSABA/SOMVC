@@ -24,6 +24,7 @@ class EmailDAO extends BaseDAO
        $data               = $pedido->getDataCadastro()->format('d/m/Y h:m:s');
        $numeroPregao       = $pedido->getNumeroLicitacao();
        $numeroAf           = $pedido->getNumeroAf();
+       $numeroPedidoERP    = $pedido->getNumeroPedidoERP();
        $observacao         = $pedido->getObservacao();
        $valorPedidoAtual   = $pedido->getValorPedido();   
      
@@ -34,7 +35,8 @@ class EmailDAO extends BaseDAO
                             <tr> <td><b>Status</b></td><td>$nomeStatus</td></tr>
                             <tr> <td><b>Data</b></td><td>$data </td></tr>
                             <tr> <td><b>Pregao</b></td><td>$numeroPregao</td></tr>
-                            <tr> <td><b>Numero</b></td><td>$numeroAf</td></tr>
+                            <tr> <td><b>Numero AFM</b></td><td>$numeroAf</td></tr>
+                            <tr> <td><b>Numero</b></td><td>$numeroPedidoERP</td></tr>
                             <tr> <td><b>Valor</b></td><td>R$$valorPedidoAtual</td></tr>
                             <tr> <td><b>Observacao</b></td><td><pre>$observacao</pre></td></tr>
                     </table>";
@@ -292,7 +294,7 @@ class EmailDAO extends BaseDAO
 
         $to = 'nuvem@fabmed.com.br, vendas2@fabmed.com.br';       
        $subject = " Erro no sistema ('.$tela.') ";
-       $message = "Ola , <br><br> favor verificar o erro ocorrido no sistema com o usuario(a) ". $_SESSION['nome']." - E-mail".$_SESSION['email'] ."<br><br> " . "\r\n";
+       $message = "Ola , <br><br> favor verificar o erro ocorrido no sistema com o usuario(a) ". $_SESSION['nome']." - E-mail ".$_SESSION['email'] ."<br><br> " . "\r\n";
        $message .= "<a href=http://www.coisavirtual.com.br > Click aqui para acessar o sistema</a> <br><br> " . "\r\n";
        $message .= "<h3 class='kt-portlet__head-title'><p class='text-danger'>" . $dadosCadastro. "</p></h3>";
        $headers = 'MIME-Version: 1.0' . "\r\n";
@@ -300,7 +302,7 @@ class EmailDAO extends BaseDAO
        $headers .= 'From:< noreply@devaction.com.br>' . "\r\n"; //email de envio
        //$headers .= 'CC:< nuvem@fabmed.com.br>' . "\r\n"; //email com copia
        $headers .= 'Reply-To:'. $_SESSION['nome'].' < '.$_SESSION['email'] .' > '. "\r\n"; //email para resposta
-       
+      
        mail($to, $subject, $message, $headers);
    }
    

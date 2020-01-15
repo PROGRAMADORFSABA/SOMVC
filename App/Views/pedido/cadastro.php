@@ -10,6 +10,12 @@
             <?php } ?>
         </div>
     <?php } ?>
+    <?php if ($Sessao::retornaMensagem()) { ?>
+    <div class="alert alert-warning" role="alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php echo $Sessao::retornaMensagem(); ?>
+    </div>
+    <?php } ?>
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/pedido/salvar" method="post" id="form_cadastro" enctype="multipart/form-data">
         <input type="text" class="form-control" name="fk_instituicao" id="fk_instituicao" value="<?php echo $_SESSION['inst_id']; ?>" required>
@@ -31,20 +37,25 @@
                       <span class="form-text text-muted">Por favor insira o cliente do Pedido</span>                       
             </div>            
                 <div class="form-group row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <label>Numero da Licitacao:</label>
                         <input type="text" class="form-control" placeholder="Digite numero da licitacao" id="numeroPregao" name="numeroPregao" value="<?php echo $Sessao::retornaValorFormulario('numeroPregao'); ?>" required>
                         <span class="form-text text-muted">Digite o numero da licitacao</span>
                     </div>
-                    <div class="col-lg-4">
-                        <label class="">Numero do Pedido:</label>
-                        <input type="text" class="form-control" placeholder="Digite o numero do pedido" id="numeroAf" name="numeroAf" value="<?php echo $Sessao::retornaValorFormulario('numeroAf'); ?>" required>
-                        <span class="form-text text-muted">Digite o numero do pedido</span>
+                    <div class="col-lg-3">
+                        <label class="">Numero do AFM:</label>
+                        <input type="text" class="form-control" placeholder="Digite o numero do AFM" id="numeroAf" name="numeroAf" value="<?php echo $Sessao::retornaValorFormulario('numeroAf'); ?>" required>
+                        <span class="form-text text-muted">Digite o numero do AFM</span>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <label class="">Valor do pedido:</label>
                         <input type="text" class="form-control" placeholder="Digite o valor do pedido" id="valorPedido" name="valorPedido" value="<?php echo $Sessao::retornaValorFormulario('valorPedido'); ?>" required>
                         <span class="form-text text-muted">Digite o valor do pedido</span>
+                    </div>
+                    <div class="col-lg-3">
+                        <label class="">Numero do pedido:</label>
+                        <input type="number" class="form-control" placeholder="Digite o Numero do pedido" title="este campo se refere ao numero do pedido gerado no ERP" id="numeroPedidoERP" name="numeroPedidoERP" value="<?php echo $Sessao::retornaValorFormulario('numeroPedidoERP'); ?>" >
+                        <span class="form-text text-muted">Digite o Numeto do pedido</span>
                     </div>
 
                 </div>
@@ -98,8 +109,8 @@
                     <div class="row">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-8">
-                        <button type="submit" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Gravar</button>
-                            <a href="http://<?php echo APP_HOST; ?>/pedido" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
+                        <button type="submit" class="btn btn-outline-success btn-elevate btn-pill btn-elevate-air">Gravar</button>
+                            <a href="http://<?php echo APP_HOST; ?>/pedido" class="btn btn-outline-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                         </div>
                     </div>
                 </div>

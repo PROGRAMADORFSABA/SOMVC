@@ -171,14 +171,10 @@ class SugestoesController extends Controller
         
         $usuarioService       = new UsuarioService();        
         $sugestoesService     = new SugestoesService();        
-        $instituicaoService   = new InstituicaoService();        
+        $instituicaoService   = new InstituicaoService(); 
         
-        $instituicaoId  = Sessao::retornaValorFormulario('instituicao');
-       // var_dump($instituicaoId);
-        $instituicao    = $instituicaoService->listar($instituicaoId);
-        
-        $usuarioId      = Sessao::retornaValorFormulario('usuario');
-        $usuario        = $usuarioService->listar($usuarioId)[0];
+        $instituicao    = $instituicaoService->listar($_POST['instituicao']);        
+        $usuario        = $usuarioService->listar($_POST['usuario']);
         $sugestoes->setSugId($_POST['codigo']);
         $sugestoes->setSugDescricao($_POST['descricao']);
         $sugestoes->setSugStatus($_POST['status']);

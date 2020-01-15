@@ -16,7 +16,6 @@ class ClienteLicitacaoService
     {
         public function listar($codCliente = null)
         {
-           
             $clienteLicitacaoDAO = new ClienteLicitacaoDAO();
             return $clienteLicitacaoDAO->listar($codCliente);
            

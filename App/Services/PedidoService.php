@@ -74,7 +74,7 @@ class PedidoService
                 return true;
             }catch(\Exception $e){
                  $emailService = new EmailService();
-                 $tela = "Alteracao Pedido - Codigo ".$$pedido->getCodControle();
+                 $tela = "Alteracao Pedido - Codigo ". $pedido->getCodControle();
                 $emailService->emailSuporte($e, $tela);
                 $transacao->rollBack(); 
               //var_dump($e);

@@ -9,6 +9,7 @@ class RepresentanteDAO extends BaseDAO
 {
     public function listar($representanteiD = null)
     {
+        
         $SQL = "SELECT * FROM cadRepresentante ";
         if($representanteiD){
             $SQL.= " WHERE codRepresentante = $representanteiD";

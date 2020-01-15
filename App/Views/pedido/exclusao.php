@@ -22,7 +22,7 @@
                     <h4><i class="flaticon-warning"></i> Deseja realmente excluir o pedido: <?php echo $viewVar['pedido']->getCodControle() ." Cliente ". $viewVar['pedido']->getClienteLicitacao()->getRazaoSocial(); ?> </h4>
                     </div>
                     <div class="panel-footer"> 
-                        <button type="submit" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
+                        <button type="submit" class="btn btn-outline-danger btn-elevate btn-pill btn-elevate-air">Excluir</button>
                         <a href="http://<?php echo APP_HOST; ?>/pedido" class="btn btn-info btn-elevate btn-pill btn-elevate-air">Voltar</a>
                     </div>
                 </div>
