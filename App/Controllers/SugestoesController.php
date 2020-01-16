@@ -62,7 +62,8 @@ class SugestoesController extends Controller
             
             $sugestoes->setInstituicao($instituicao);              
             $sugestoes->setUsuario($usuario);     
-            $sugestoes->setSugDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));                       
+            $sugestoes->setSugDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));  
+            $sugestoes->setSugAssunto(Sessao::retornaValorFormulario('assunto'));                     
             $sugestoes->setSugTipo(Sessao::retornaValorFormulario('tipo'));                       
             $sugestoes->setSugDescricao(Sessao::retornaValorFormulario('descricao'));
             $sugestoes->setSugStatus(Sessao::retornaValorFormulario('status'));
@@ -89,6 +90,7 @@ class SugestoesController extends Controller
         
         $sugestoes->setSugDescricao($_POST['descricao']);
         $sugestoes->setSugStatus($_POST['status']);
+        $sugestoes->setSugAssunto($_POST['assunto']);
         $sugestoes->setSugTipo($_POST['tipo']);
         $sugestoes->setSugAnexo($_POST['anexo']);
         $sugestoes->setSugDataCadastro($_POST['dataCadastro']);
@@ -144,6 +146,7 @@ class SugestoesController extends Controller
             
             $sugestoes->setInstituicao($instituicao);              
             $sugestoes->setUsuario($usuario);     
+            $sugestoes->setSugAssunto(Sessao::retornaValorFormulario('assunto'));                       
             $sugestoes->setSugId(Sessao::retornaValorFormulario('codigo'));                       
             $sugestoes->setSugDataCadastro(Sessao::retornaValorFormulario('dataCadastro'));                       
             $sugestoes->setSugTipo(Sessao::retornaValorFormulario('tipo'));                       
@@ -176,6 +179,7 @@ class SugestoesController extends Controller
         $instituicao    = $instituicaoService->listar($_POST['instituicao']);        
         $usuario        = $usuarioService->listar($_POST['usuario']);
         $sugestoes->setSugId($_POST['codigo']);
+        $sugestoes->setSugAssunto($_POST['assunto']);
         $sugestoes->setSugDescricao($_POST['descricao']);
         $sugestoes->setSugStatus($_POST['status']);
         $sugestoes->setSugTipo($_POST['tipo']);

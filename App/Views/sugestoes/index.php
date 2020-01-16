@@ -139,6 +139,7 @@
                 <thead>
                     <tr>
                         <th>CÓDIGO</th>
+                        <th>ASSUNTO</th>
                         <th>TIPO</th>
                         <th>STATUS</th>
                         <th>USUARIO</th>
@@ -149,9 +150,9 @@
                 <tfoot>
                     <tr>
                         <th>CÓDIGO</th>
+                        <th>ASSUNTO</th>
                         <th>TIPO</th>
                         <th>STATUS</th>
-
                         <th>USUARIO</th>
                         <th>DATA</th>
                         <th>ACOES</th>
@@ -165,6 +166,7 @@
                             ?>
                     <tr>
                         <td><?php echo $sugestoes->getSugId(); ?></td>
+                        <td><?php echo $sugestoes->getSugAssunto(); ?></td>
                         <td><?php echo $sugestoes->getSugTipo(); ?></td>
                         <td><?php echo $sugestoes->getSugStatus(); ?></td>
                         <td><?php echo $sugestoes->getUsuario()->getNome(); ?></td>

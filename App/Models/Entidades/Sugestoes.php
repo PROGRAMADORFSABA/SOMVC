@@ -8,6 +8,7 @@ class Sugestoes
 //sug_id, sug_tipo, sug_descricao, sug_status, sug_anexo, sug_datacadastro, sug_dataalteracao ,sug_instituicao, sug_usuario
     private $sugId;
     private $sugTipo;
+    private $sugAssunto;
     private $sugDescricao;
     private $sugStatus;
     private $sugAnexo;
@@ -235,6 +236,26 @@ class Sugestoes
     public function setCodInstituicao($codInstituicao)
     {
         $this->codInstituicao = $codInstituicao;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sugAssunto
+     */ 
+    public function getSugAssunto()
+    {
+        return $this->sugAssunto;
+    }
+
+    /**
+     * Set the value of sugAssunto
+     *
+     * @return  self
+     */ 
+    public function setSugAssunto($sugAssunto)
+    {
+        $this->sugAssunto = $sugAssunto;
 
         return $this;
     }

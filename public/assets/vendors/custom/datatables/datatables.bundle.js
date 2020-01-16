@@ -9984,7 +9984,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"aaSorting": false,
+		"aaSorting": [[0,1,2,3,4,5,6,7,8,'asc']],
 		//"aaSorting": [[0,'asc']],
 	
 	

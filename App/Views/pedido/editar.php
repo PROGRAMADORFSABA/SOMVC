@@ -91,8 +91,8 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="form-group"><label for="status">Status</label>
-                            <select class="form-control" name="status" required>
+                        <div class="form-group"><label for="codStatus">Status</label>
+                            <select class="form-control" name="codStatus" required>
                                 <option value="">Selecione o status</option>
                                 <?php foreach ($viewVar['listaStatus'] as $status) : ?>
                                 <option value="<?php echo $status->getCodStatus(); ?>"

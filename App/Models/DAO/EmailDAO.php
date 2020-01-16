@@ -208,13 +208,21 @@ class EmailDAO extends BaseDAO
     {
         $codSugestoes       = $sugestoes->getSugId();           
         $status             = $sugestoes->getSugStatus();
+        $assunto             = $sugestoes->getSugAssunto();
         $tipo               = $sugestoes->getSugTipo();
         $nomeUsuario        = $sugestoes->getUsuario()->getNome();
         $anexos             = $sugestoes->getSugAnexo();
         $descricao          = $sugestoes->getSugDescricao(); 
         
-        $dadosCadastro = "Codigo: ".$codSugestoes." <br>"."Tipo: ".$tipo
-        ." <br>"."Status: ".$status." <br>"."Descricao: ".$descricao." <br>";
+        $dadosCadastro .= "
+        <table style='width:50% ' border='1px cellspacing='0' cellpadding='2' solid black'  >     
+                <tr> <td>Codigo</td> <td> $codSugestoes  </td>  </tr>
+                <tr> <td>Assunto</td> <td> $assunto  </td>  </tr>
+                <tr> <td>Tipo</td> <td> $tipo  </td>  </tr>
+                <tr> <td>Status</td> <td>$status</td></tr>
+                <tr> <td>Descricao</td> <td>$descricao</td></tr>
+        </table>";
+       
         
         if($subject == 1){
             $subject = "Cadastro de Sugestoes";

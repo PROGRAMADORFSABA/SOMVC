@@ -41,9 +41,10 @@ class SugestoesService
                 Sessao::gravaMensagem("cadastro realizado com sucesso!. <br><br> Sugestoes Numero: ".$codSugestoes);
                 Sessao::limpaFormulario();
                 return $codSugestoes;
-            }catch(\Exception $e){
+            }catch(\Exception $e){              
+                $tela = " Cadastro de Sugestoes ";
                 $emailService = new EmailService();
-                $emailService->emailSuporte($e);
+               $emailService->emailSuporte($e,$tela);
                 $transacao->rollBack(); 
                 Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);
                return false;
@@ -71,8 +72,9 @@ class SugestoesService
                 Sessao::limpaFormulario();
                 return true;
             }catch(\Exception $e){
+                $tela = " Altercação de Sugestoes ";
                 $emailService = new EmailService();
-                $emailService->emailSuporte($e);
+               $emailService->emailSuporte($e,$tela);
                 $transacao->rollBack(); 
               //var_dump($e);
                 Sessao::gravaMensagem("Erro ao tentar alterar. ".$e);
@@ -98,8 +100,9 @@ class SugestoesService
             Sessao::gravaMensagem("Sugestoes Excluida com Sucesso!");
             return true;
         } catch (\Exception $e) {
+            $tela = " Exclusao de Sugestoes ";
             $emailService = new EmailService();
-            $emailService->emailSuporte($e);
+           $emailService->emailSuporte($e,$tela);
             $transacao->rollBack();
             throw new \Exception(["Erro ao excluir a empresa"]);            
             return false;

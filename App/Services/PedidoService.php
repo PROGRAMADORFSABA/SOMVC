@@ -44,8 +44,9 @@ class PedidoService
                 Sessao::limpaFormulario();
                 return $codPedido;
             }catch(\Exception $e){
+                $tela = " Ateração de Pedido ";
                  $emailService = new EmailService();
-                $emailService->emailSuporte($e);
+                $emailService->emailSuporte($e,$tela);
                 //var_dump($e);
                 $transacao->rollBack(); 
                 Sessao::gravaMensagem("Erro ao tentar cadastrar. ".$e);

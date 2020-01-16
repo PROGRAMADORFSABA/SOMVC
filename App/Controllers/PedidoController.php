@@ -123,14 +123,20 @@ class PedidoController extends Controller
         self::setViewParam('listaStatus', $statusDAO->listar());        
         $clienteLicitacaoService = new ClienteLicitacaoService();
         $representanteService   = new RepresentanteService();        
-        $usuadioService   = new UsuarioService();        
+        $usuadioService   = new UsuarioService();   
+        $statusService            = new StatusService();       
            
         if(Sessao::existeFormulario()) {
             $clienteId = Sessao::retornaValorFormulario('cliente');
             $clienteLicitacao = $clienteLicitacaoService->listar($clienteId);
             $pedido->setClienteLicitacao($clienteLicitacao);
+
+            $statusId = Sessao::retornaValorFormulario('codStatus');
+            $status = $statusService->listar($statusId);
+            $pedido->setStatus($status);
             
             $representanteId = Sessao::retornaValorFormulario('representante');            
+            var_dump($representanteId);
             $representante = $representanteService->listar($representanteId)[0];
             $pedido->setRepresentante($representante);     
             
@@ -143,11 +149,9 @@ class PedidoController extends Controller
             $pedido->setNumeroAf(Sessao::retornaValorFormulario('numeroAf'));
             $pedido->setNumeroPedidoERP(Sessao::retornaValorFormulario('numeroPedidoERP'));
             $pedido->setValorPedido(Sessao::retornaValorFormulario('valorPedido'));
-            $pedido->setCodStatus(Sessao::retornaValorFormulario('codStatus'));
             $pedido->setCodCliente(Sessao::retornaValorFormulario('codCliente'));
             $pedido->setAnexo(Sessao::retornaValorFormulario('anexo'));
             $pedido->setObservacao(Sessao::retornaValorFormulario('observacao'));
-            //$pedido->setCodRepresentante(Sessao::retornaValorFormulario('representante'));
             $pedido->setFk_Instituicao(Sessao::retornaValorFormulario('fk_instituicao'));
             $pedido->setDataFechamento(Sessao::retornaValorFormulario('dataFechamento'));
             $pedido->setDataAlteracao(Sessao::retornaValorFormulario('dataAlteracao'));
@@ -176,7 +180,7 @@ class PedidoController extends Controller
         $instituicao              = $instituicaoService->listar($_POST['fk_instituicao']);
         $representante            = $representanteService->listar($_POST['representante'])[0];
         $status                   = $statusService->listar($_POST['codStatus']);
-        var_dump($status);
+     
         $pedido = new Pedido();
 
         $pedido->setDataCadastro($_POST['dataCadastro']);
@@ -254,7 +258,7 @@ class PedidoController extends Controller
             $usuario = $usuarioService->listar($usuarioId);
             $pedido->setUsuario($usuario);  
             
-            $statusId = Sessao::retornaValorFormulario('status');
+            $statusId = Sessao::retornaValorFormulario('codStatus');
             $status = $statusService->listar($statusId);
             $pedido->setStatus($status);  
             
@@ -268,7 +272,7 @@ class PedidoController extends Controller
             $pedido->setNumeroAf(Sessao::retornaValorFormulario('numeroAf'));
             $pedido->setNumeroPedidoERP(Sessao::retornaValorFormulario('numeroPedidoERP'));
             $pedido->setValorPedido(Sessao::retornaValorFormulario('valorPedido'));
-            $pedido->setCodStatus(Sessao::retornaValorFormulario('codStatus'));
+            //$pedido->setCodStatus(Sessao::retornaValorFormulario('codStatus'));
             $pedido->setCodCliente(Sessao::retornaValorFormulario('codCliente'));
             $pedido->setAnexo(Sessao::retornaValorFormulario('anexo'));
             $pedido->setObservacao(Sessao::retornaValorFormulario('observacao'));            
@@ -300,8 +304,8 @@ class PedidoController extends Controller
         $usuario              = $usuarioService->listar($_POST['usuario']);
         $instituicao          = $instituicaoService->listar($_POST['fk_instituicao']);
         $representante        = $representanteService->listar($_POST['representante'])[0];
-        $status               = $statusService->listar($_POST['status']);
-      
+        var_dump($_POST['codStatus']);
+        $status               = $statusService->listar($_POST['codStatus']);
         $pedido->setCodControle($_POST['codControle']);
         $pedido->setNumeroLicitacao($_POST['numeroPregao']);
         $pedido->setNumeroAf($_POST['numeroAf']);

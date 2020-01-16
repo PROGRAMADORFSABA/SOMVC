@@ -20,7 +20,7 @@ class SugestoesDAO extends BaseDAO
         $instituicao    = $sugestoes->getCodInstituicao();
         
         $SQL =
-                "SELECT sg.sug_id, sg.sug_tipo, sg.sug_descricao, sg.sug_status, sg.sug_anexo, sg.sug_datacadastro, sg.sug_dataalteracao,
+                "SELECT sg.sug_id, sg.sug_tipo, sg.sug_descricao, sg.sug_assunto, sg.sug_status, sg.sug_anexo, sg.sug_datacadastro, sg.sug_dataalteracao,
                 u.id, u.nome,u.nivel, u.email, u.status, u.id_dep,
                 i.inst_id, i.inst_codigo, i.inst_nome, i.inst_nomeFantasia,
                 d.id as idDep, d.nome as nomeDep
@@ -50,6 +50,7 @@ class SugestoesDAO extends BaseDAO
                     $sugestoes = new Sugestoes();
                     $sugestoes->setSugId($dado['sug_id']);
                     $sugestoes->setSugTipo($dado['sug_tipo']);
+                    $sugestoes->setSugAssunto($dado['sug_assunto']);
                     $sugestoes->setSugDescricao($dado['sug_descricao']);
                     $sugestoes->setSugAnexo($dado['sug_anexo']);
                     $sugestoes->setSugStatus($dado['sug_status']);
@@ -79,6 +80,7 @@ class SugestoesDAO extends BaseDAO
                 $tipo           = $sugestoes->getSugTipo();
                 $status         = $sugestoes->getSugStatus();
                 $descricao      = $sugestoes->getSugDescricao();
+                $assunto        = $sugestoes->getSugAssunto();
                 $dataCadastro   = $sugestoes->getSugDataCadastro()->format('Y-m-d H:m:s');;
                 $usuario        = $sugestoes->getUsuario()->getId();
                 $instituicao    = $sugestoes->getInstituicao()->getInst_Id();
@@ -102,10 +104,11 @@ class SugestoesDAO extends BaseDAO
             }
             return $this->insert(
                 'sugestoes',
-                " :sug_tipo, :sug_descricao, :sug_status, :sug_anexo, :sug_datacadastro, :sug_instituicao, :sug_usuario",
+                " :sug_tipo, :sug_descricao, :sug_status, :sug_assunto, :sug_anexo, :sug_datacadastro, :sug_instituicao, :sug_usuario",
                 [
                     ':sug_tipo' => $tipo,
                     ':sug_descricao' => $descricao,
+                    ':sug_assunto,' => $assunto,
                     ':sug_status' => $status,
                     ':sug_anexo' => $anexo,
                     ':sug_datacadastro' => $dataCadastro,
@@ -126,6 +129,7 @@ class SugestoesDAO extends BaseDAO
             $codSugestao    = $sugestoes->getSugId();
             $tipo           = $sugestoes->getSugTipo();
             $status         = $sugestoes->getSugStatus();
+            $assunto         = $sugestoes->getSugAssunto();
             $descricao      = $sugestoes->getSugDescricao();
             $dataCadastro   = $sugestoes->getSugDataCadastro()->format('Y-m-d H:m:s');;
             $usuario        = $sugestoes->getUsuario()->getId();
@@ -155,6 +159,7 @@ class SugestoesDAO extends BaseDAO
                 'sugestoes',
                 "sug_tipo= :tipo, 
                 sug_descricao=:descricao, 
+                sug_assunto,=:assunto, 
                 sug_status=:status, 
                 sug_anexo=:anexo, 
                 sug_datacadastro=:dataCadastro, 
@@ -163,6 +168,7 @@ class SugestoesDAO extends BaseDAO
                 [
                     ':codSugestao' => $codSugestao,
                     ':tipo' => $tipo,
+                    ':assunto' => $assunto,
                     ':descricao' => $descricao,
                     ':status' => $status,
                     ':anexo' => $anexo,
@@ -174,7 +180,7 @@ class SugestoesDAO extends BaseDAO
             );
           
         } catch (\Exception $e) {
-            var_dump("teste ".$e);
+           // var_dump("teste ".$e);
             throw new \Exception("Erro na gravação de dados. ", 500);
         }
    

@@ -309,8 +309,8 @@ class PedidoDAO extends BaseDAO
             $numeroAf           = $pedido->getNumeroAf();
             $numeroPedidoERP    = $pedido->getNumeroPedidoERP();
            // $valorPedido       = $pedido->getValorPedido();
-            $valorPedido        =str_replace(',','.', str_replace(".", "", $pedido->getValorPedido())); 
-            $codStatus          = $pedido->getCodStatus();
+            $valorPedido        = str_replace(',','.', str_replace(".", "", $pedido->getValorPedido())); 
+            $codStatus          = $pedido->getStatus()->getCodStatus();
             $codCliente         = $pedido->getClienteLicitacao()->getCodCliente();
             $codRepresentante   = $pedido->getRepresentante()->getCodRepresentante();
             $codUsuario         = $pedido->getUsuario()->getId();

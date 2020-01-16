@@ -29,6 +29,7 @@ class ClienteLicitacaoDAO extends  BaseDAO
                 $clienteLicitacao->setTrocaMarca($dado['trocamarca']);
                 $clienteLicitacao->setTipoCliente($dado['tipo']);
                 // $clienteLicitacao->setDataCadastro($dado['dataCadastro']);                             
+                
                 return $clienteLicitacao;
             }
             //var_dump($clienteLicitacao);
