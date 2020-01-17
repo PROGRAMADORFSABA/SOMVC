@@ -23,8 +23,10 @@
                     <td>teste</td>
                 </tr>
             </thead>
-            <tbody>                       
+            <tbody>  
+                               
                 {items}         
+                   
             </tbody>
         </table>
 

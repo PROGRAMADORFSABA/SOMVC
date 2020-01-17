@@ -61,7 +61,7 @@ $dataAtual = date('Y-m-d H:i:s');
 	<!--end:: Global Mandatory Vendors -->
 
 	<!--begin:: Global Optional Vendors -->
-	<link href="http://<?php echo APP_HOST; ?>/public/assets/" rel="stylesheet" type="text/css" />
+	<!-- link href="http://<?php echo APP_HOST; ?>/public/assets/" rel="stylesheet" type="text/css" /-->
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/tether/dist/css/tether.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
 	<link href="http://<?php echo APP_HOST; ?>/public/assets/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />

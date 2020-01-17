@@ -1,6 +1,10 @@
-<!DOCTYPE html>
 
-<html lang="pt">
+<!DOCTYPE html5>
+<html lang="pt-br">
+
+<?php
+date_default_timezone_set('America/Bahia');
+?>
 
 <!-- begin::Head -->
 

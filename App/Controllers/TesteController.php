@@ -88,7 +88,7 @@ class TesteController extends Controller
         
         print $list;
         $this->render('/teste/pessoa');
-    }
+    }    
 
     public function teste($params)
     {
@@ -106,8 +106,6 @@ class TesteController extends Controller
 
         Sessao::limpaMensagem();
     }
-   
-
 
     public function autoComplete($params)
     {

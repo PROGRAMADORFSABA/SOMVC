@@ -47,9 +47,9 @@ $(document).on("click", "#btnAdicionarPedido", function () {
 });
 function tproduto(numeroNota, numeroPedido, valor) {
 	$('#kt_table_3').append('<tr>' +
-		'<td>' + numeroPedido + ' <input type="hidden" value="" name="pedidos[]"></td>' +
-		'<td>' + numeroNota + ' <input type="hidden" value="" name="pedidos[]"></td>' +
-		'<td>R$' + valor + ' <input type="hidden" value="" name="pedidos[]"></td>' +
+		'<td>' + numeroPedido + ' 	<input type="hidden" value="'+ numeroPedido +'" name="pedidos[]"></td>' +
+		'<td>' + numeroNota + ' 	<input type="hidden" value="'+ numeroNota +'" name="pedidos[]"></td>' +
+		'<td>R$' + valor + ' 		<input type="hidden" value="'+ valor +'" name="pedidos[]"></td>' +
 		'<td><a class="btn btn-outline-danger btn-sm  btn-elevate btn-pill btn-elevate-air" id="removePedido" onClick="app.removePedido(this,' + numeroNota + ')">excluir</td>' +
 		'</tr>');
 	$("#numeroPedido").val('');

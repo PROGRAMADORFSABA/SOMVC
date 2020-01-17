@@ -39,10 +39,24 @@ class DesenvolvimentoController extends Controller
     public function contato(){
         $this->render('/desenvolvimento/contato');
     }
+    public function exporteBD(){
+        
+        $this->render('/desenvolvimento/exporteBD');
+    }
+    public function conexaoBD(){
+
+        $this->render('/desenvolvimento/conexaoBD');
+    }
     public function logistica()
     {
         $this->render('/desenvolvimento/logistica');
     }
+
+    public function logisticateste(){
+        var_dump($_POST['pedidos']);
+       // $this->render('/desenvolvimento/logistica');
+    }
+
     public function __construct()
     {
        // $this->html = file_get_contents('App/Views/desenvolvimento/pessoa.php');
@@ -90,7 +104,7 @@ class DesenvolvimentoController extends Controller
         $list = str_replace('{items}',   $items, $list);
         
         print $list;
-        $this->render('/desenvolvimento/pessoa');
+      //  $this->render('/desenvolvimento/pessoa');
     }
 
     public function teste($params)
