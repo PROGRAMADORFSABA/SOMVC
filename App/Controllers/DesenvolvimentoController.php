@@ -43,9 +43,11 @@ class DesenvolvimentoController extends Controller
         
         $this->render('/desenvolvimento/exporteBD');
     }
-    public function conexaoBD(){
-
-        $this->render('/desenvolvimento/conexaoBD');
+    public function conexaoBD()
+    {
+        Sessao::gravaMensagem("Exportacao realizado com sucesso!");
+       // $this->render('/desenvolvimento/exporteBD');
+        //$this->render('/desenvolvimento/conexaoBD');
     }
     public function logistica()
     {
