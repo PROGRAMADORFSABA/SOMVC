@@ -18,6 +18,7 @@ use Exception;
 
 class DesenvolvimentoController extends Controller
 {
+    
     private $html;
     public function index($params)
     {
@@ -39,15 +40,30 @@ class DesenvolvimentoController extends Controller
     public function contato(){
         $this->render('/desenvolvimento/contato');
     }
-    public function exporteBD(){
-        
+    public function exporteBD()
+    {      
         $this->render('/desenvolvimento/exporteBD');
     }
+    
     public function conexaoBD()
     {
-        Sessao::gravaMensagem("Exportacao realizado com sucesso!");
-       // $this->render('/desenvolvimento/exporteBD');
-        //$this->render('/desenvolvimento/conexaoBD');
+        $servidor = filter_input(INPUT_POST, 'servidor', FILTER_SANITIZE_STRING);
+        $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
+        $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
+        $dbname = filter_input(INPUT_POST, 'dbname', FILTER_SANITIZE_STRING);
+        
+        $testeService = new TesteService();  
+      $andre =   $testeService->exportarBD($servidor,$usuario,$senha,$dbname);
+      if($andre){
+          //$this->render('desenvolvimento/index');
+          Sessao::gravaMensagem("Exportacao realizado com sucesso!");
+          var_dump( $andre);      
+        }else{
+            $this->render('desenvolvimento/index');
+            Sessao::gravaMensagem("Error na Exportacao!");         
+        }
+     
+      Sessao::limpaMensagem();
     }
     public function logistica()
     {
@@ -124,9 +140,7 @@ class DesenvolvimentoController extends Controller
         $this->render('/desenvolvimento/desenvolvimento');
 
         Sessao::limpaMensagem();
-    }
-   
-
+    }  
 
     public function autoComplete($params)
     {
@@ -190,16 +204,13 @@ class DesenvolvimentoController extends Controller
             $teste->setClientes($id); 
         }
 
-
-
         $idCliente = Sessao::retornaValorFormulario('clientes');
         $testeDAO1 = new TesteDAO();
         $cliente = $testeDAO1->listar($idCliente)[0];
-        $pedido->getCliente($cliente);
-       
+        $pedido->getCliente($cliente);       
 
         $this->setViewParam('teste',$teste);
-       $this->render('/desenvolvimento/cadastro');
+        $this->render('/desenvolvimento/cadastro');
 
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();

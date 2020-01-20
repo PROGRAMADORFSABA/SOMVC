@@ -2,16 +2,13 @@
  include_once("conexaoBD.php");
 
  $result_tabela = "SHOW TABLES";
-        $resultado_tabela = mysqli_query($conn, $result_tabela);
-        include_once("conexaoBD.php");
+        $resultado_tabela = mysqli_query($conn, $result_tabela);       
         while($resultado = mysqli_fetch_row($resultado_tabela)){
             $tabelas[] = $resultado[0];
          }
       
         try		{
-			//$DB_con = new PDO("mysql:host=". $servidor .";dbname=". $dbname.";charset=utf8", $usuario, $senha,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-			//$DB_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                  
+			
             $result = "";
             foreach($tabelas as $tabela){
           //      print_r( $tabela)."<br>";
@@ -69,15 +66,17 @@
             }
             //echo $result;
             
-            //Criar o diretório de backup
-            $diretorio = 'C:/Users/carlo/Downloads/';
+            //Criar o diretório de backup Downloads
+             $diretorio = 'public/assets/media/anexos/backup/';
+            
             if(!is_dir($diretorio)){
                 mkdir($diretorio, 0777, true);
                 chmod($diretorio, 0777);
             }
             
             //Nome do arquivo de backup
-            $data = date('Y-m-d-h-i-s');
+           // $data = date('Y-m-d-h-i-s');
+            $data = date('l');
             $nome_arquivo = $diretorio."db_backup_".$data;
             
             $handle = fopen($nome_arquivo.'.sql', 'w+');
@@ -98,9 +97,12 @@
                 header("Content-Transfer-Encoding: binary");
                 header("Content-Length: " . filesize($download));
                 readfile($download);
-                Sessao::gravaMensagem("<span style='color: green'>Exportado BD com sucesso</span>");
+               // Sessao::gravaMensagem("<span style='color: green'>Exportado BD com sucesso</span>");
+               header('Location: ../');
+               echo " <span style='color: green'>Exportado BD com sucesso</span> ";
             }else{
-                Sessao::gravaMensagem("<span style='color: red'>Erro ao exportar o BD</span>");
+               // Sessao::gravaMensagem("<span style='color: red'>Erro ao exportar o BD</span>");
+               echo "<span style='color: red'>Erro ao exportar o BD</span>";
             }
         }
 		catch(PDOException $e)		{

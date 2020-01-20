@@ -7,10 +7,18 @@
 
         //Criar a conexao com BD
         $conn = mysqli_connect($servidor,$usuario,$senha,$dbname);
-       
-        include_once("exporteBDSQL.php");
-
-        header("Location: exporteBD.php");
-        //header("Location: http://" . APP_HOST ."/exporteBD.php");
+       if ($conn) {           
+           // include_once("exporteBDSQL.php");
+    
+            header('Location:' .APP_HOST.'/Desenvolvimento/exporteBD.php');
+            //header("Location: http://" . APP_HOST ."/exporteBD.php");
+        } else {
+            echo " nao foi possivel estabelecer a conexao!";
+            //header("Location: exporteBD.php");
+            header('Location: ' . APP_HOST . '/Desenvolvimento/exporteBD');   
+        }
+        header("Location:" . APP_HOST . "desenvolvimento/exporteBD.php");
+       echo " teste redirect ";
+    
         
        

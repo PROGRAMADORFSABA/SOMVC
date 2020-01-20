@@ -42,4 +42,28 @@
 		}
 		return $clientes;
 	}
+        public function exportarBD($servidor,$usuario,$senha,$dbname)
+    {
+        
+        try {
+
+            $transacao = new Transacao();
+            $transacao->beginTransaction();
+            
+            $testeDAO = new TesteDAO();
+                                   
+           // $testeDAO->exportarBD($servidor,$usuario,$senha,$dbname);
+            $transacao->commit();            
+            
+            Sessao::limpaMensagem();
+           // Sessao::gravaMensagem("Exportado com Sucesso!");
+            return true;
+        } catch (\Exception $e) {
+            $emailService = new EmailService();
+            $emailService->emailSuporte($e);
+            $transacao->rollBack();
+            throw new \Exception(["Erro ao Exportar"]);            
+            return false;
+        }
+    }
 }
