@@ -13,24 +13,23 @@
     
     class TesteService
     {
-        public function listar($idTeste = null)
-        {
-            $testeDAO = new TesteDAO();
-            return $testeDAO->listar1($idTeste);
-        }
+    public function listar($idTeste = null)
+    {
+        $testeDAO = new TesteDAO();
+        return $testeDAO->listar1($idTeste);
+    }
 
 
-        public function autoComplete(Teste $teste)
-        {
-            $testeDAO = new TesteDAO();
-            $busca = $testeDAO->listarPorNomeFantasia($teste);           
-            $exportar = new Exportar();
-            return $exportar->exportarJSON($busca);
-        }
-       
-        
-        public function listaClientes($arrayClientes)
-        {
+    public function autoComplete(Teste $teste)
+    {
+        $testeDAO = new TesteDAO();
+        $busca = $testeDAO->listarPorNomeFantasia($teste);           
+        $exportar = new Exportar();
+        return $exportar->exportarJSON($busca);
+    }
+    
+    public function listaClientes($arrayClientes)
+    {
 		$testeDAO = new TesteDAO();
 		$clientes = [];
         
@@ -41,10 +40,10 @@
 			}
 		}
 		return $clientes;
-	}
-        public function exportarBD($servidor,$usuario,$senha,$dbname)
-    {
-        
+    }
+    
+    public function importarBD($servidor,$usuario,$senha,$dbname,$arquivo)
+    {        
         try {
 
             $transacao = new Transacao();
@@ -52,7 +51,30 @@
             
             $testeDAO = new TesteDAO();
                                    
-           // $testeDAO->exportarBD($servidor,$usuario,$senha,$dbname);
+           return $testeDAO->importarBD($servidor,$usuario,$senha,$dbname);
+            $transacao->commit();            
+            
+            Sessao::limpaMensagem();
+           // Sessao::gravaMensagem("Importado com Sucesso!");
+            return true;
+        } catch (\Exception $e) {
+            $emailService = new EmailService();
+            $emailService->emailSuporte($e);
+            $transacao->rollBack();
+            throw new \Exception(["Erro ao Exportar"]);            
+            return false;
+        }
+    }
+    public function exportarBD($servidor,$usuario,$senha,$dbname)
+    {        
+        try {
+
+            $transacao = new Transacao();
+            $transacao->beginTransaction();
+            
+            $testeDAO = new TesteDAO();
+                                   
+           return $testeDAO->exportarBD($servidor,$usuario,$senha,$dbname,$arquivo = null);
             $transacao->commit();            
             
             Sessao::limpaMensagem();

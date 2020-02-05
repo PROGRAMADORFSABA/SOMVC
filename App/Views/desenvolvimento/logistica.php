@@ -21,6 +21,8 @@
     <!--begin::Form-->
     <form class="kt-form kt-form--label-right" action="http://<?php echo APP_HOST; ?>/desenvolvimento/logisticateste" method="post" id="form_cadastro"
         enctype="multipart/form-data">
+        <input type="hidden" class="form-control" name="fk_instituicao" id="fk_instituicao"
+            value="<?php echo $_SESSION['inst_id']; ?>" required>
         <div class="kt-portlet__body">
             <div class="kt-portlet__body">
                 <div class="form-group">
@@ -31,7 +33,7 @@
                     <div>
                         <input type="text" name="cliente-Autocomplete" id="cliente-Autocomplete" class="form-control"
                             required placeholder="Cliente - autocomplete" value="<?php  ?>">
-                        <input type="hidden" id="cliente" name="cliente" value=<?php   ?>>
+                        <input type="text" id="cliente" name="cliente" value=<?php   ?>>
                     </div>
                     <span class="form-text text-muted">Por favor insira o cliente do Contrato</span>
                 </div>

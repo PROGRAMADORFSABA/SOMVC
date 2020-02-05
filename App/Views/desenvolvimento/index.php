@@ -1,4 +1,10 @@
 <center>
+<?php if ($Sessao::retornaMensagem()) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo $Sessao::retornaMensagem(); ?>
+                </div>
+                <?php } ?>
 <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
     <div class="card-header">Header</div>
     <div class="card-body">

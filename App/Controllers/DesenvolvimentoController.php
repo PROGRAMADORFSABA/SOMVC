@@ -43,35 +43,54 @@ class DesenvolvimentoController extends Controller
     public function exporteBD()
     {      
         $this->render('/desenvolvimento/exporteBD');
+        
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
     }
     
     public function conexaoBD()
     {
-        $servidor = filter_input(INPUT_POST, 'servidor', FILTER_SANITIZE_STRING);
-        $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
-        $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
-        $dbname = filter_input(INPUT_POST, 'dbname', FILTER_SANITIZE_STRING);
         
+       if(!empty($_POST)){
+           $arquivo = $_FILES['arquivo']['tmp_name'];
+           $servidor = filter_input(INPUT_POST, 'servidor', FILTER_SANITIZE_STRING);
+           $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_STRING);
+           $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
+           $dbname = filter_input(INPUT_POST, 'dbname', FILTER_SANITIZE_STRING);
+                      
+        }else{            
+            $servidor = DB_HOST;
+            $usuario = DB_USER;
+            $senha = DB_PASSWORD;
+            $dbname = DB_NAME;
+       }
         $testeService = new TesteService();  
-      $andre =   $testeService->exportarBD($servidor,$usuario,$senha,$dbname);
-      if($andre){
-          //$this->render('desenvolvimento/index');
-          Sessao::gravaMensagem("Exportacao realizado com sucesso!");
-          var_dump( $andre);      
+            $execurcao =  $testeService->exportarBD($servidor,$usuario,$senha,$dbname, $arquivo = null);
+        if($execurcao){          
+            Sessao::gravaMensagem("Exportacao realizado com sucesso!");             
+           $this->render('/desenvolvimento/exporteBD');
         }else{
-            $this->render('desenvolvimento/index');
             Sessao::gravaMensagem("Error na Exportacao!");         
+            $this->render('/desenvolvimento/exporteBD');
         }
-     
-      Sessao::limpaMensagem();
+        Sessao::limpaFormulario();
+        Sessao::limpaMensagem();
+        Sessao::limpaErro();
+        
     }
     public function logistica()
     {
         $this->render('/desenvolvimento/logistica');
     }
 
-    public function logisticateste(){
+    public function logisticateste()
+    {
         var_dump($_POST['pedidos']);
+        
+        foreach($_POST['pedidos'] as $pedido){
+            echo $pedido."<br>";
+        }
        // $this->render('/desenvolvimento/logistica');
     }
 

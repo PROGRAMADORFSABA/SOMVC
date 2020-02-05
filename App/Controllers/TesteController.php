@@ -323,4 +323,12 @@ class TesteController extends Controller
 
         $this->redirect('/pedido');
     }
+    public function transportadora()
+    {      
+        $this->render('/teste/transportadora');
+    }
+    public function formabas()
+    {      
+        $this->render('/teste/formabas');
+    }
 }

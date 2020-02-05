@@ -16,8 +16,8 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
 
-    if ( h >= 12 && h <= 18 ) {
-        document.getElementById('andreteste').innerHTML = " Boa Tarde! ";
+    if ( h >= 12 && h <= 18 ) {       
+        document.getElementById('andreteste').innerHTML = " Boa Tarde! "; 
     }else if ( h >= 00 && h < 12 ){
         document.getElementById('andreteste').innerHTML = " Bom Dia! ";
     }else{
@@ -30,3 +30,16 @@ function startTime() {
     }, 500);
 }
 startTime();
+
+//pegando a url atual
+var url_atual = window.location.href;
+//verifican o horario para exportacao do bando de dados
+if(h == 18 ){
+    exportarBD();
+}
+function exportarBD(){
+    $.ajax({
+        url: url_atual +'desenvolvimento/conexaoBD'
+        //url: 'http://localhost/SOMVC/desenvolvimento/conexaoBD'
+    });
+    }

@@ -8,8 +8,6 @@ use App\Models\Entidades\Pedido;
 
 class TesteDAO extends BaseDAO
 {
-
-
     public function listarTeste($codControle = null)
     {
        //  $codControle    = $pedido->getCodControle();
@@ -563,25 +561,40 @@ class TesteDAO extends BaseDAO
             $codControle = $pedido->getCodControle();
 
             return $this->delete('controlePedido', "codControle = $codControle");
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
             throw new \Exception("Erro ao deletar", 500);
         }
     }
 
-    public function exportarBD($servidor,$usuario,$senha,$dbname)
+    public function exportarBD($servidor,$usuario,$senha,$dbname,$arquivo = null)
     {
         try{
             $conn = mysqli_connect($servidor,$usuario,$senha,$dbname);
-            if($conn){
-                $this->exportar($conn);
+            if($arquivo){
+                return $this->importar($conn, $arquivo);
+            }else{
+                return $this->exportar($conn);
             }
-        } catch (Exception $e) {
-
-            throw new \Exception("erro conectar", 500);
+        } catch (\Exception $e) {
+            throw new \Exception("erro exportar ", 500);            
         }               
     }
    
+    public function importar($conn,$arquivo)
+    {
+        //Ler os dados do arquivo e converter em string
+        $dados = file_get_contents($arquivo);
+       if($dados){           
+           //Executar as query do backup
+           mysqli_multi_query($conn, $dados);
+           
+           return true;
+        }else{
+            return false;
+        }
+    }
+    
     public function exportar($conn)
     {
         if ($conn) {                
@@ -594,7 +607,6 @@ class TesteDAO extends BaseDAO
             try	{                
                 $result = "";
                 foreach($tabelas as $tabela){
-              //      print_r( $tabela)."<br>";
                     //Pesquisar o nome das colunas
                     $result_colunas = "SELECT * FROM ".$tabela;
                     $resultado_colunas = mysqli_query($conn, $result_colunas);
@@ -659,46 +671,48 @@ class TesteDAO extends BaseDAO
                 
                 //Nome do arquivo de backup
                // $data = date('Y-m-d-h-i-s');
-                $data = date('l');
+                $data = date('l-H');
                 $nome_arquivo = $diretorio."db_backup_".$data;
                 
                 $handle = fopen($nome_arquivo.'.sql', 'w+');
                 fwrite($handle, $result);
                 fclose($handle);
+                   
                 
                 //Montar o link do arquivo
                 $download = $nome_arquivo . ".sql";
-                
                 //Adicionar o header para download
                 if(file_exists($download)){
                     header("Pragma: public");
                     header("Expires: 0");
                     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
                     header("Cache-Control: private", false);
-                    header("Content-Type: application/force-download");
-                    header("Content-Disposition: attachment; filename=\"" . basename($download) . "\";");
-                    header("Content-Transfer-Encoding: binary");
+                    //header("Content-Type: application/force-download");
+                    //header("Content-Disposition: attachment; filename=\"" . basename($download) . "\";");
+                    /*header("Content-Transfer-Encoding: binary");
                     header("Content-Length: " . filesize($download));
-                    readfile($download);
-                   // Sessao::gravaMensagem("<span style='color: green'>Exportado BD com sucesso</span>");
-                   header('Location: ../');
-                   echo " <span style='color: green'>Exportado BD com sucesso</span> ";
+                    readfile($download);*/
+                    // Sessao::gravaMensagem("<span style='color: green'>Exportado BD com sucesso</span>");
+                   // header('Location: ../');
+                   //echo " <span style='color: green'>Exportado BD com sucesso</span> ";
+                   return true;
                 }else{
-                   // Sessao::gravaMensagem("<span style='color: red'>Erro ao exportar o BD</span>");
-                   echo "<span style='color: red'>Erro ao exportar o BD</span>";
+                    // Sessao::gravaMensagem("<span style='color: red'>Erro ao exportar o BD</span>");
+                  //  echo "<span style='color: red'>Erro ao exportar o BD</span>";
+                    //$this->render('desenvolvimento/index');
+                    return false;
                 }
             }
-            catch(PDOException $e)		{
+            catch(\PDOException $e)		{
                 echo $e->getMessage();
+                return false; 
             }
-            return true;
             //mysql_query("SET NAMES 'utf8'");
-        
-    } else {
-        echo " Erro na exportação de dados.";
-        return false; 
-    }
+        } else {            
+            return false; 
+        }
 
     }
+    
 
 }
