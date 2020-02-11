@@ -34,7 +34,7 @@
                 <div class="form-group row">
                     <div class="col-lg-6">
                         <label class="">Assunto:</label>
-                        <input type="number" class="form-control" placeholder="Digite o Assunto"
+                        <input type="text" class="form-control" placeholder="Digite o Assunto"
                             title="este campo se refere o Assunto" id="assunto" name="assunto"
                             value="<?php echo $viewVar['sugestoes']->getSugAssunto(); ?>">
                         <span class="form-text text-muted">Digite o Assunto</span>

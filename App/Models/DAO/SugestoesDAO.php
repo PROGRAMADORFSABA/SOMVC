@@ -108,7 +108,7 @@ class SugestoesDAO extends BaseDAO
                 [
                     ':sug_tipo' => $tipo,
                     ':sug_descricao' => $descricao,
-                    ':sug_assunto,' => $assunto,
+                    ':sug_assunto' => $assunto,
                     ':sug_status' => $status,
                     ':sug_anexo' => $anexo,
                     ':sug_datacadastro' => $dataCadastro,
@@ -154,12 +154,12 @@ class SugestoesDAO extends BaseDAO
                 $anexo = "sem_anexo1.png";
                 }
             }
-//sug_id, sug_tipo, sug_descricao, sug_status, sug_anexo, sug_datacadastro, sug_dataalteracao ,sug_instituicao, sug_usuario
+
             return $this->update(
                 'sugestoes',
                 "sug_tipo= :tipo, 
                 sug_descricao=:descricao, 
-                sug_assunto,=:assunto, 
+                sug_assunto=:assunto, 
                 sug_status=:status, 
                 sug_anexo=:anexo, 
                 sug_datacadastro=:dataCadastro, 

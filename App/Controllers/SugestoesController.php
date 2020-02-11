@@ -175,9 +175,9 @@ class SugestoesController extends Controller
         $usuarioService       = new UsuarioService();        
         $sugestoesService     = new SugestoesService();        
         $instituicaoService   = new InstituicaoService(); 
+        $instituicao          = $instituicaoService->listar($_POST['instituicao']);        
+        $usuario              = $usuarioService->listar($_POST['usuario']);
         
-        $instituicao    = $instituicaoService->listar($_POST['instituicao']);        
-        $usuario        = $usuarioService->listar($_POST['usuario']);
         $sugestoes->setSugId($_POST['codigo']);
         $sugestoes->setSugAssunto($_POST['assunto']);
         $sugestoes->setSugDescricao($_POST['descricao']);
