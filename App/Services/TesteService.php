@@ -65,7 +65,7 @@
             return false;
         }
     }
-    public function exportarBD($servidor,$usuario,$senha,$dbname)
+    public function exportarBD($servidor,$usuario,$senha,$dbname,$arquivo = null)
     {        
         try {
 

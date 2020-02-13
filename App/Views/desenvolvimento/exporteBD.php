@@ -35,10 +35,10 @@
                         <span class="form-text text-muted">Digite o senha</span>
         </div>
         <div class="col-lg-3">
-                        <label for="bdname">Banco de Dados:</label>
+                        <label for="dbname">Banco de Dados:</label>
                         <input type="text" class="form-control" placeholder="Digite banco de dados"
-                            id="bdname" name="bdname"
-                            value="<?php echo  DB_PASSWORD  ?>" required>
+                            id="dbname" name="dbname"
+                            value="<?php echo  DB_NAME  ?>" required>
                         <span class="form-text text-muted">Digite o banco de dados</span>
         </div>
             

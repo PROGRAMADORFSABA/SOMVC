@@ -570,7 +570,9 @@ class TesteDAO extends BaseDAO
     public function exportarBD($servidor,$usuario,$senha,$dbname,$arquivo = null)
     {
         try{
+            
             $conn = mysqli_connect($servidor,$usuario,$senha,$dbname);
+           
             if($arquivo){
                 return $this->importar($conn, $arquivo);
             }else{
@@ -603,7 +605,7 @@ class TesteDAO extends BaseDAO
             while($resultado = mysqli_fetch_row($resultado_tabela)){
                 $tabelas[] = $resultado[0];
              }
-          
+            
             try	{                
                 $result = "";
                 foreach($tabelas as $tabela){
@@ -707,6 +709,7 @@ class TesteDAO extends BaseDAO
                 echo $e->getMessage();
                 return false; 
             }
+            
             //mysql_query("SET NAMES 'utf8'");
         } else {            
             return false; 

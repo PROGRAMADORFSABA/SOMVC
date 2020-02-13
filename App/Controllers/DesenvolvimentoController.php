@@ -64,7 +64,9 @@ class DesenvolvimentoController extends Controller
             $usuario = DB_USER;
             $senha = DB_PASSWORD;
             $dbname = DB_NAME;
+           
        }
+       
         $testeService = new TesteService();  
             $execurcao =  $testeService->exportarBD($servidor,$usuario,$senha,$dbname, $arquivo = null);
         if($execurcao){          
@@ -72,7 +74,7 @@ class DesenvolvimentoController extends Controller
            $this->render('/desenvolvimento/exporteBD');
         }else{
             Sessao::gravaMensagem("Error na Exportacao!");         
-            $this->render('/desenvolvimento/exporteBD');
+           $this->render('/desenvolvimento/exporteBD');
         }
         Sessao::limpaFormulario();
         Sessao::limpaMensagem();
